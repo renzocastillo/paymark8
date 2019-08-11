@@ -49,9 +49,15 @@
         </nav>
         <div class="container-fluid">
             <div class="row carousel">
-                <img src="https://quaira.com/wp-content/uploads/2019/02/pexels-photo-1181675.jpeg"/>
-                <img src="https://quaira.com/wp-content/uploads/2019/07/Portada900-2-compressor-1.png"/>
-                <img src="https://quaira.com/wp-content/uploads/2019/02/pexels-photo-247791-1.png"/>
+                @if(CRUDBooster::getSetting('slider_1'))
+                    <img src="{{CRUDBooster::getSetting('slider_1') }}"/>
+                @endif
+                @if(CRUDBooster::getSetting('slider_2'))
+                    <img src="{{CRUDBooster::getSetting('slider_2') }}"/>
+                @endif
+                @if(CRUDBooster::getSetting('slider_3'))
+                    <img src="{{CRUDBooster::getSetting('slider_3') }}"/>
+                @endif
             </div>
         </div>
         <div class="container top3">
