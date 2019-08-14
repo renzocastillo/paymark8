@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', 'WelcomeController@getview')->name('welcome');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@getview')->name('welcome');
+//Route::get('/', function () {
+   // return view('welcome');
+//});
 Route::get('/admin/configuraciones/save-setting','AdminCmsSettingsController@postSaveSetting')->name('save-setting');
 Route::get('/admin/configuraciones/delete-file-setting','AdminCmsSettingsController@getDeleteFileSetting')->name('delete-file-setting');

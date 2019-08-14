@@ -60,6 +60,13 @@
                 @endif
             </div>
         </div>
+        <div>
+        <div class="row multiple-carousel">
+        @foreach($empresas as $empresa)
+            <img src="{{$empresa->logo}}"/>
+        @endforeach
+        </div>
+        </div>
         <div class="container top3">
             <div class="row justify-content-center align-items-center">
                     <div class="col-sm-12">
