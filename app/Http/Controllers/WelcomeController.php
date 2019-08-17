@@ -12,7 +12,8 @@ class WelcomeController extends Controller
   public function getview() {
         $empresas=DB::table('empresas')->get();
         $anuncios=DB::table('anuncios')->get(); 
-        $data=array("empresas"=>$empresas,"anuncios"=>$anuncios); 
+        $video=DB::table('videos')->latest()->first(); 
+        $data=array("empresas"=>$empresas,"anuncios"=>$anuncios,"video"=>$video); 
         return view('welcome',$data);
   }
 }

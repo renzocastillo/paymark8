@@ -70,9 +70,9 @@
         <div class="container top3">
             <div class="row justify-content-center align-items-center">
                     <div class="col-sm-12">
-                        <div align="center" class="embed-responsive embed-responsive-16by9">
+                        <div align="center" class="embed-responsive embed-responsive-16by9">                   
                             <video controls class="embed-responsive-item">
-                                <source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4">
+                                <source src="{{$video->url}}" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -80,83 +80,12 @@
         </div>
         <div class="container-fluid top3">
             <div class="row">
-                <div class="col-sm-12 col-lg-3">
-                    <div class="thumbnail">
-                        <div class="caption text-center" onclick="location.href='https://flow.microsoft.com/en-us/connectors/shared_slack/slack/'">
-                        <div class="position-relative">
-                            <img src="https://az818438.vo.msecnd.net/icons/slack.png" style="width:72px;height:72px;" />
-                        </div>
-                        <h4 id="thumbnail-label"><a href="https://flow.microsoft.com/en-us/connectors/shared_slack/slack/" target="_blank">Microsoft Slack</a></h4>
-                        <p><i class="fas fa-sign-in-alt"></i> &nbsp;Auditor</p>
-                        <div class="thumbnail-description smaller">Slack is a team communication tool, that brings together all of your team communications in one place, instantly searchable and available wherever you go.</div>
-                        </div>
-                        <div class="caption card-footer text-center">
-                        <ul class="list-inline">
-                            <li><i class="people lighter"></i>&nbsp;7 Active Users</li>
-                            <li></li>
-                            <li><i class="fas fa-sign-in-alt"></i> </li>
-                        </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3">
-                        <div class="thumbnail">
-                            <div class="caption text-center" onclick="location.href='https://flow.microsoft.com/en-us/connectors/shared_slack/slack/'">
-                            <div class="position-relative">
-                                <img src="https://az818438.vo.msecnd.net/icons/slack.png" style="width:72px;height:72px;" />
-                            </div>
-                            <h4 id="thumbnail-label"><a href="https://flow.microsoft.com/en-us/connectors/shared_slack/slack/" target="_blank">Microsoft Slack</a></h4>
-                            <p><i class="fas fa-sign-in-alt"></i> &nbsp;Auditor</p>
-                            <div class="thumbnail-description smaller">Slack is a team communication tool, that brings together all of your team communications in one place, instantly searchable and available wherever you go.</div>
-                            </div>
-                            <div class="caption card-footer text-center">
-                            <ul class="list-inline">
-                                <li><i class="people lighter"></i>&nbsp;7 Active Users</li>
-                                <li></li>
-                                <li><i class="fas fa-sign-in-alt"></i> </li>
-                            </ul>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-sm-12 col-lg-3">
-                        <div class="thumbnail">
-                            <div class="caption text-center" onclick="location.href='https://flow.microsoft.com/en-us/connectors/shared_slack/slack/'">
-                            <div class="position-relative">
-                                <img src="https://az818438.vo.msecnd.net/icons/slack.png" style="width:72px;height:72px;" />
-                            </div>
-                            <h4 id="thumbnail-label"><a href="https://flow.microsoft.com/en-us/connectors/shared_slack/slack/" target="_blank">Microsoft Slack</a></h4>
-                            <p><i class="fas fa-sign-in-alt"></i> &nbsp;Auditor</p>
-                            <div class="thumbnail-description smaller">Slack is a team communication tool, that brings together all of your team communications in one place, instantly searchable and available wherever you go.</div>
-                            </div>
-                            <div class="caption card-footer text-center">
-                            <ul class="list-inline">
-                                <li><i class="people lighter"></i>&nbsp;7 Active Users</li>
-                                <li></li>
-                                <li><i class="fas fa-sign-in-alt"></i> </li>
-                            </ul>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-sm-12 col-lg-3">
-                        <div class="thumbnail">
-                            <div class="caption text-center" onclick="location.href='https://flow.microsoft.com/en-us/connectors/shared_slack/slack/'">
-                            <div class="position-relative">
-                                <img src="https://az818438.vo.msecnd.net/icons/slack.png" style="width:72px;height:72px;" />
-                            </div>
-                            <h4 id="thumbnail-label"><a href="https://flow.microsoft.com/en-us/connectors/shared_slack/slack/" target="_blank">Microsoft Slack</a></h4>
-                            <p><i class="fas fa-sign-in-alt"></i> &nbsp;Auditor</p>
-                            <div class="thumbnail-description smaller">Slack is a team communication tool, that brings together all of your team communications in one place, instantly searchable and available wherever you go.</div>
-                            </div>
-                            <div class="caption card-footer text-center">
-                            <ul class="list-inline">
-                                <li><i class="people lighter"></i>&nbsp;7 Active Users</li>
-                                <li></li>
-                                <li><i class="fas fa-sign-in-alt"></i> </li>
-                            </ul>
-                            </div>
-                        </div>
-                </div>
-
+            @foreach($anuncios as $anuncio)
+            <a href="{{$anuncio->url}}" target="_blank">
+                <img src="{{$anuncio->imagen}}" style="max-width:300px;">
+            </a>
+            @endforeach
+        
             </div>
         </div>
         <div class="modal fade pg-show-modal" id="anuncio" tabindex="-1" role="dialog" aria-hidden="true"> 
