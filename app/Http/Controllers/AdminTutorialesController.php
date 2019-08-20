@@ -39,8 +39,8 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Titulo','name'=>'titulo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Descripcion','name'=>'descripcion','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Url Video','name'=>'url','type'=>'text','validation'=>'required|url','width'=>'col-sm-10','placeholder'=>'Introduce una dirección web (URL) válida'];
+			$this->form[] = ['label'=>'Descripcion','name'=>'descripcion','type'=>'text','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Url Video','name'=>'html_youtube','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'Entra al video de Youtube, presiona compartir, luego incorporar,luego copiar, y pega aquí'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -207,7 +207,7 @@
 	        | $this->load_css[] = asset("myfile.css");
 	        |
 	        */
-	        $this->load_css = array();
+	        $this->load_css[] = asset("css/backoffice.css");
 	        
 	        
 	    }
@@ -322,8 +322,20 @@
 
 	    }
 
-
-
+		public function getIndex() {
+			//if(CRUDBooster::myPrivilegeId()==3){
+				//First, Add an auth
+				if(!CRUDBooster::isView()) CRUDBooster::redirect(CRUDBooster::adminPath(),trans('crudbooster.denied_access'));
+				
+				//Create your own query 
+				$data = [];
+				$data['page_title'] = 'Tutoriales';
+				$data['tutoriales'] = DB::table('tutoriales')->orderby('id','desc')->paginate(10);
+				
+				//Create a view. Please use `cbView` method instead of view method from laravel.
+				$this->cbView('modules.tutoriales',$data);
+			//}
+		}
 	    //By the way, you can still create your own method in here... :) 
 
 

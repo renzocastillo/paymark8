@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "03d462974329e3eedf99cbf4224787bf",
+    "content-hash": "9de50db9e387dafe8cb66ee5889df992",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -64,16 +64,16 @@
         },
         {
             "name": "crocodicstudio/crudbooster",
-            "version": "v5.4.19",
+            "version": "dev-custom-5.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/crocodic-studio/crudbooster.git",
-                "reference": "6179c60a6d5ae5b95b82e3598e01ec39b8fdc230"
+                "url": "https://github.com/renzocastillo/crudbooster.git",
+                "reference": "6ee5c654fa3215620fd14ee5cf345ef86d6a3cb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crocodic-studio/crudbooster/zipball/6179c60a6d5ae5b95b82e3598e01ec39b8fdc230",
-                "reference": "6179c60a6d5ae5b95b82e3598e01ec39b8fdc230",
+                "url": "https://api.github.com/repos/renzocastillo/crudbooster/zipball/6ee5c654fa3215620fd14ee5cf345ef86d6a3cb4",
+                "reference": "6ee5c654fa3215620fd14ee5cf345ef86d6a3cb4",
                 "shasum": ""
             },
             "require": {
@@ -92,7 +92,6 @@
                     "crocodicstudio\\crudbooster\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -112,7 +111,10 @@
                 "generator",
                 "laravel"
             ],
-            "time": "2018-12-04T06:32:09+00:00"
+            "support": {
+                "source": "https://github.com/renzocastillo/crudbooster/tree/5.4.0"
+            },
+            "time": "2019-03-12T08:44:33+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -573,16 +575,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.10",
+            "version": "2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec"
+                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
-                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/92dd169c32f6f55ba570c309d83f5209cefb5e23",
+                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23",
                 "shasum": ""
             },
             "require": {
@@ -601,7 +603,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -627,7 +629,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-07-19T20:52:08+00:00"
+            "time": "2019-08-13T17:33:27+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -805,16 +807,16 @@
         },
         {
             "name": "imanghafoori/laravel-heyman",
-            "version": "v2.2.31",
+            "version": "v2.2.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imanghafoori1/laravel-heyman.git",
-                "reference": "91e2696d6d5daa2b5d9216338ec90eea5c925084"
+                "reference": "2a3310078cdcedf34d24a908e12f04606bea17cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imanghafoori1/laravel-heyman/zipball/91e2696d6d5daa2b5d9216338ec90eea5c925084",
-                "reference": "91e2696d6d5daa2b5d9216338ec90eea5c925084",
+                "url": "https://api.github.com/repos/imanghafoori1/laravel-heyman/zipball/2a3310078cdcedf34d24a908e12f04606bea17cc",
+                "reference": "2a3310078cdcedf34d24a908e12f04606bea17cc",
                 "shasum": ""
             },
             "require": {
@@ -877,7 +879,7 @@
                 "laravel5-package",
                 "php"
             ],
-            "time": "2019-07-26T04:10:58+00:00"
+            "time": "2019-08-11T20:52:40+00:00"
         },
         {
             "name": "imanghafoori/laravel-terminator",
@@ -1305,16 +1307,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.46",
+            "version": "v5.5.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "85b2a5218088b0f60bf6e8c3a62891ba275a7269"
+                "reference": "0f538802144a41664f545fd92bbb556000cba115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/85b2a5218088b0f60bf6e8c3a62891ba275a7269",
-                "reference": "85b2a5218088b0f60bf6e8c3a62891ba275a7269",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0f538802144a41664f545fd92bbb556000cba115",
+                "reference": "0f538802144a41664f545fd92bbb556000cba115",
                 "shasum": ""
             },
             "require": {
@@ -1435,20 +1437,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-07-09T14:00:53+00:00"
+            "time": "2019-08-13T14:13:01+00:00"
         },
         {
             "name": "laravel/tinker",
-            "version": "v1.0.9",
+            "version": "v1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "eb0075527fdeeb1cc1d68bd4ca7d50256b30a827"
+                "reference": "ad571aacbac1539c30d480908f9d0c9614eaf1a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/eb0075527fdeeb1cc1d68bd4ca7d50256b30a827",
-                "reference": "eb0075527fdeeb1cc1d68bd4ca7d50256b30a827",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/ad571aacbac1539c30d480908f9d0c9614eaf1a7",
+                "reference": "ad571aacbac1539c30d480908f9d0c9614eaf1a7",
                 "shasum": ""
             },
             "require": {
@@ -1498,7 +1500,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2019-07-29T18:09:25+00:00"
+            "time": "2019-08-07T15:10:45+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1847,16 +1849,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.2.2",
+            "version": "v4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "1bd73cc04c3843ad8d6b0bfc0956026a151fc420"
+                "reference": "e612609022e935f3d0337c1295176505b41188c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1bd73cc04c3843ad8d6b0bfc0956026a151fc420",
-                "reference": "1bd73cc04c3843ad8d6b0bfc0956026a151fc420",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/e612609022e935f3d0337c1295176505b41188c8",
+                "reference": "e612609022e935f3d0337c1295176505b41188c8",
                 "shasum": ""
             },
             "require": {
@@ -1864,7 +1866,7 @@
                 "php": ">=7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.5 || ^7.0"
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -1894,7 +1896,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-05-25T20:07:01+00:00"
+            "time": "2019-08-12T20:17:41+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -4308,16 +4310,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.1",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72"
+                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
-                "reference": "e6828efaba2c9b79f4499dae1d66ef8bfa7b2b72",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/007c053ae6f31bba39dfa19a7726f56e9763bbea",
+                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea",
                 "shasum": ""
             },
             "require": {
@@ -4352,7 +4354,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2019-04-07T13:18:21+00:00"
+            "time": "2019-08-09T12:45:53+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5277,16 +5279,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "234199f4528de6d12aaa58b612e98f7d36adb937"
+                "reference": "06a9a5947f47b3029d76118eb5c22802e5869687"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/234199f4528de6d12aaa58b612e98f7d36adb937",
-                "reference": "234199f4528de6d12aaa58b612e98f7d36adb937",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/06a9a5947f47b3029d76118eb5c22802e5869687",
+                "reference": "06a9a5947f47b3029d76118eb5c22802e5869687",
                 "shasum": ""
             },
             "require": {
@@ -5314,6 +5316,10 @@
             ],
             "authors": [
                 {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
                     "name": "Jeff Welch",
                     "email": "whatthejeff@gmail.com"
                 },
@@ -5322,16 +5328,12 @@
                     "email": "github@wallbash.com"
                 },
                 {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@2bepublished.at"
-                },
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
-                {
                     "name": "Adam Harvey",
                     "email": "aharvey@php.net"
+                },
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
                 }
             ],
             "description": "Provides the functionality to export PHP variables for visualization",
@@ -5340,7 +5342,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2017-04-03T13:19:02+00:00"
+            "time": "2019-08-11T12:43:14+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -5717,7 +5719,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "crocodicstudio/crudbooster": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
