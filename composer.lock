@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/renzocastillo/crudbooster.git",
-                "reference": "6ee5c654fa3215620fd14ee5cf345ef86d6a3cb4"
+                "reference": "747287aa611174f7e4314cfa37ec9070b6726572"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/renzocastillo/crudbooster/zipball/6ee5c654fa3215620fd14ee5cf345ef86d6a3cb4",
-                "reference": "6ee5c654fa3215620fd14ee5cf345ef86d6a3cb4",
+                "url": "https://api.github.com/repos/renzocastillo/crudbooster/zipball/747287aa611174f7e4314cfa37ec9070b6726572",
+                "reference": "747287aa611174f7e4314cfa37ec9070b6726572",
                 "shasum": ""
             },
             "require": {
@@ -112,9 +112,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/renzocastillo/crudbooster/tree/5.4.0"
+                "source": "https://github.com/renzocastillo/crudbooster/tree/custom-5.4"
             },
-            "time": "2019-03-12T08:44:33+00:00"
+            "time": "2019-08-23T01:45:02+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -920,7 +920,7 @@
             "authors": [
                 {
                     "name": "Iman Ghafoori",
-                    "email": "Imanghafoori1@gmail.com"
+                    "email": "imanghafoori1@gmail.com"
                 }
             ],
             "description": "A minimal yet powerful package to give you opportunity to refactor your controllers.",
