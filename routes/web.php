@@ -11,9 +11,9 @@
 |
 */
 Route::get('/', 'WelcomeController@getview')->name('welcome');
-//Route::get('/', function () {
-   // return view('welcome');
-//});
+if(!Request::is('admin/*')) {
+   Route::get('/{user}', 'WelcomeController@getview')->name('welcome');
+}
 Route::get('/admin/configuraciones/save-setting','AdminCmsSettingsController@postSaveSetting')->name('save-setting');
 Route::get('/admin/configuraciones/delete-file-setting','AdminCmsSettingsController@getDeleteFileSetting')->name('delete-file-setting');
 Route::get('/admin/users/change_user_estado/{id}','AdminCmsUsersController@changeUserEstado')->name('change-user-estado');
