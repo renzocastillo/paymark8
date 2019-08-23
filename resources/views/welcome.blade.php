@@ -60,10 +60,12 @@
                 @endif
             </div>
         </div>
+
+<!-- ---- html example --- -->
         <div>
         <div class="row multiple-carousel">
         @foreach($empresas as $empresa)
-            <img src="{{$empresa->logo}}"/>
+        <img src="{{$empresa->logo}}"/>
         @endforeach
         </div>
         </div>
@@ -78,15 +80,22 @@
                     </div>
             </div>
         </div>
-        <div class="container-fluid top3">
-            <div class="row">
-            @foreach($anuncios as $anuncio)
-            <a href="{{$anuncio->url}}" target="_blank">
-                <img src="{{$anuncio->imagen}}" style="max-width:300px;">
-            </a>
-            @endforeach
-        
-            </div>
+        <div class="container-fluid">
+        <div class="row">
+        @foreach($anuncios as $anuncio)
+        <div class="col-sm-12 col-lg-3">  
+        <figure class="snip1529">
+                <img src="{{$anuncio->imagen}}" alt="pr-sample13" />
+                <!-- <figcaption>
+                    <h3>An Abstract Post Heading</h3>
+                    <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
+                </figcaption>-->
+                <div class="hover"><i class="ion-android-open"></i></div>
+                <a href="{{$anuncio->url}}" target="_blank"></a>
+        </figure>
+        </div>   
+        @endforeach
+        </div>
         </div>
         <div class="modal fade pg-show-modal" id="anuncio" tabindex="-1" role="dialog" aria-hidden="true"> 
             <div class="modal-dialog"> 
