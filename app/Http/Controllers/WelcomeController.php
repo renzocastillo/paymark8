@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Session;
-use Request;
+//use Request;
+use Illuminate\Http\Request;
 use DB;
 use CRUDBooster;
 
@@ -28,6 +29,9 @@ class WelcomeController extends Controller
       if(!$reproduccion){
         DB::table('reproducciones')
           ->insert(['cms_users_id'=>$patrocinador->id,'videos_id'=>$video_id,'ipaddress'=>$ipaddress]);
+        return response()->json(['success'=>'Se agregó una nueva reproduccion']);
+      }else{
+        return response()->json(['success'=>'Ya se ha reproducido este video antes']);
       }
     }
   }

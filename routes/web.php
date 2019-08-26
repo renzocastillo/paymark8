@@ -13,6 +13,7 @@
 Route::get('/', 'WelcomeController@getview')->name('welcome');
 if(!Request::is('admin/*')) {
    Route::get('/{user}', 'WelcomeController@getview')->name('welcome');
+   Route::post('/{user}/add_reprod', 'WelcomeController@addReproduccion')->name('add-reproduccion');
 }
 Route::get('/admin/configuraciones/save-setting','AdminCmsSettingsController@postSaveSetting')->name('save-setting');
 Route::get('/admin/configuraciones/delete-file-setting','AdminCmsSettingsController@getDeleteFileSetting')->name('delete-file-setting');

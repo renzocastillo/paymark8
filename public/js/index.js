@@ -88,7 +88,40 @@ function videoStoppedPlaying(event) {
   document.getElementById("played").innerHTML = Math.round(timePlayed)+"";
   // Count as complete only if end of video was reached
   if(timePlayed>=duration && event.type=="ended") {
-    document.getElementById("status").className="complete";
+    var status=document.getElementById("status");
+    if(status.className != "complete"){
+      console.log("el video se ha reproducido");
+      status.className="complete";
+      var video_id=video.dataset.id;
+      console.log(video_id);
+      //var cms_users_id=video.dataset.user;
+      var base_url=window.location.origin;
+      var url=window.location.href;
+      if(url != base_url){
+        console.log("se está usando un enlace de usuario");
+        //console.log(cms_users_id);
+        //INICIAMOS AJAX PARA MANDAR REPRODUCCCION DEL VIDEO A LA DB
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+          }
+        });
+        $.ajax({
+          url:  window.location.href+'/add_reprod',
+          method: 'post',
+          data: {
+             //cms_users_id: cms_users_id,
+             video_id: video_id
+          },
+          success: function(result){
+             console.log(result);
+          },
+          error: function(err) {
+            console.log(err.responseText);
+          }
+        });
+      }
+    }
   }
 }
 
