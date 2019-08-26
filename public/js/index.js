@@ -95,7 +95,7 @@ function videoStoppedPlaying(event) {
       var video_id=video.dataset.id;
       console.log(video_id);
       //var cms_users_id=video.dataset.user;
-      var base_url=window.location.origin;
+      var base_url=window.location.origin+'/';
       var url=window.location.href;
       if(url != base_url){
         console.log("se está usando un enlace de usuario");
