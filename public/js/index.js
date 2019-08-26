@@ -1,3 +1,7 @@
+
+$(window).on('load',function(){
+  $('#anuncio').modal('show');
+});
 $(document).ready(function(){
     $('.carousel').slick({
         arrows:true,
@@ -17,8 +21,6 @@ $(document).ready(function(){
    /* $('body').scroll(function() { 
    		$('#anuncio').css('top', $(this).scrollTop());
 	});*/
-});
-$(document).ready(function(){
   $('.multiple-carousel').slick({  
     dots: true,
     infinite: false,
@@ -56,13 +58,55 @@ $(document).ready(function(){
       // instead of a settings object
     ]
   });
-});    
-
-$(window).on('load',function(){
-    $('#anuncio').modal('show');
 });
+/* INICIA SECCIÓN DE LECTURA DEL VIDEO */
+var video = document.getElementById("video");
 
-// Javascript para efecto en titulos e imagenes. Detect request animation frame
+var timeStarted = -1;
+var timePlayed = 0;
+var duration = 0;
+// If video metadata is laoded get duration
+if(video.readyState > 0)
+  getDuration.call(video);
+//If metadata not loaded, use event to get it
+else
+{
+  video.addEventListener('loadedmetadata', getDuration);
+}
+// remember time user started the video
+function videoStartedPlaying() {
+  timeStarted = new Date().getTime()/1000;
+}
+function videoStoppedPlaying(event) {
+  // Start time less then zero means stop event was fired vidout start event
+  if(timeStarted>0) {
+    var playedFor = new Date().getTime()/1000 - timeStarted;
+    timeStarted = -1;
+    // add the new ammount of seconds played
+    timePlayed+=playedFor;
+  }
+  document.getElementById("played").innerHTML = Math.round(timePlayed)+"";
+  // Count as complete only if end of video was reached
+  if(timePlayed>=duration && event.type=="ended") {
+    document.getElementById("status").className="complete";
+  }
+}
+
+function getDuration() {
+  duration = video.duration;
+  document.getElementById("duration").appendChild(new Text(Math.round(duration)+""));
+  console.log("Duration: ", duration);
+}
+
+video.addEventListener("play", videoStartedPlaying);
+video.addEventListener("playing", videoStartedPlaying);
+
+video.addEventListener("ended", videoStoppedPlaying);
+video.addEventListener("pause", videoStoppedPlaying);
+
+/* TERMINA SECCIÓN DE LECTURA DEL VIDEO */
+
+/* INICIA SECCIÓN Javascript para efecto en titulos e imagenes. Detect request animation frame */
 var scroll = window.requestAnimationFrame ||
              // IE Fallback
              function(callback){ window.setTimeout(callback, 1000/60)};

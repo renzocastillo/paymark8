@@ -67,9 +67,19 @@
             <div class="row justify-content-center align-items-center">         
                 <div class="col-sm-12">
                             <div align="center" class="embed-responsive embed-responsive-16by9" >                   
-                                <video controls class="embed-responsive-item video_actual" data-id="{{$video->id}}">
+                                <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
                                     <source src="{{$video->url}}" type="video/mp4" >
                                 </video>
+                            </div>
+                            <div id="status" class="incomplete">
+                                <span>Play status: </span>
+                                <span class="status complete">COMPLETE</span>
+                                <span class="status incomplete">INCOMPLETE</span>
+                                <br />
+                            </div>
+                            <div>
+                                <span id="played">0</span> seconds out of 
+                                <span id="duration"></span> seconds. (only updates when the video pauses)
                             </div>
                 </div>
             </div>
