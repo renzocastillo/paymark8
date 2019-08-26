@@ -25,7 +25,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
 		$this->col[] = array("label"=>"Correo","name"=>"email");
 		$this->col[] = array("label"=>"N° Reg. Actuales","name"=>"(select count(*) from cms_users p where p.cms_users_id=cms_users.id) as cantidad_reg");
-		$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT cantidad FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
+		$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
 		//$ganacia_reproduccion=DB::table('parametros')->where('name','greprod')->value('content');
 		//$ganacia_registro=DB::table('parametros')->where('name','greg')->value('content');
 		//$monto_pagar=$row->cantidad_reg*$ganacia_registro+$row->cantidad_reprod*$ganacia_reproduccion;
