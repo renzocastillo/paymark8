@@ -5,20 +5,56 @@
     box-shadow: inset 0px -40px 30px -10px;
 }
 
-
-.faded-bottom {
-
-  
-
+.bcolor{
+  background-color:;
+}
+.video{
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.faded img{
-  
-  width: 400px;
-  height: 180px;
-  box-shadow: inset 0px -40px 30px -10px rgba(0,0,0,0.75);
-  
+  /*  Efecto en box con overlay y texto */
+.test {
+ 
+  background-size: cover;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url('../../uploads/imagen3.jpg');  
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+  color:white;
+  font-size: 28px;
+  line-height: 1.5em;
+  text-align: left;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 50px;
+  opacity: 0;
+  transform: scaleY(1.2) translateY(80px);
+  transition:  transform 4s .25s cubic-bezier(0,1,.3,1),
+               opacity .3s .25s ease-out;
+  will-change: transform, opacity;
 }
+.test.is-visible{
+  opacity: 1;
+  transform: scaleY(1) translateY(0px);
+}
+  /*  Inner Shadow en imagen principal */
+.box {
+  position: relative;
+  z-index: 0;
+
+}
+.box-shadow {
+  box-shadow: 0 -50px 30px -15px #eda80a inset;
+}
+.box-shadow img {
+  display: block;
+  position: relative;
+  z-index: -1;
+  max-width: 100%;
+  height: auto;
+}
+
 
 .slick-prev:before, .slick-next:before{
     color:#9e9e9e;
@@ -71,7 +107,7 @@ nav.navbar{
 
 .top1{ margin-top:10px;}
 .top2{ margin-top:20px;}
-.top3{ margin-top:30px;}
+.topn100{ margin-top:-100px;}
 .top4{ margin-top:40px;}
 
   .navbar-default {
@@ -318,28 +354,7 @@ nav.navbar{
 
 
 
-.test {
-  width: 500px;
-  height: 300px;
-  background-size: cover;
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url('../../uploads/imagen3.jpg');  
-  color:white;
-  font-size: 28px;
-  line-height: 1.5em;
-  text-align: left;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 50px;
-  opacity: 0;
-  transform: scaleY(1.2) translateY(80px);
-  transition:  transform 4s .25s cubic-bezier(0,1,.3,1),
-               opacity .3s .25s ease-out;
-  will-change: transform, opacity;
-}
-.test.is-visible{
-  opacity: 1;
-  transform: scaleY(1) translateY(0px);
-}
+
 
 /* Sección del Footer */
 

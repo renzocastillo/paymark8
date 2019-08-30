@@ -62,12 +62,21 @@
             </div>
         
         </div>
+      <!--
+        <div class="box">
+            <div class="box-shadow">
+                    @if(CRUDBooster::getSetting('slider_1'))
+                            <img src="{{CRUDBooster::getSetting('slider_1') }}"/>
+                    @endif
+            </div>
+        </div>
+        -->
 
 <!-- ---- html example --- -->
-        <div class="container top3">
-            <div class="row justify-content-center align-items-center">         
+       
+        <div class="row justify-content-center align-items-center topn100 bcolor">         
                 <div class="col-sm-12">
-                            <div align="center" class="embed-responsive embed-responsive-16by9" >                   
+                            <div align="center" class="embed-responsive embed-responsive-16by9 video" >                   
                                 <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
                                     <source src="{{$video->url}}" type="video/mp4" >
                                 </video>
@@ -83,21 +92,15 @@
                                 <span id="duration"></span> seconds. (only updates when the video pauses)
                             </div>
                 </div>
-            </div>
         </div>
+        
         <div class="row" style="margin-top: 100px;">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="test show-on-scroll">
                     <p>¿Cómo ser parte de PayMark? Conoce más a cerca de nosotros y empieza a ganar compartiendo.</p>
                     <button type="button" class="btn btn-warning">Warning</button>
-                </div>
-           
-            </div>   
-            <div class="col-sm-6">
-                <div class="test show-on-scroll">
-                    <p>Regístrate y genera tu link. Empieza a compartir y gana dinero con nosotros.</p>
-                </div>
-            </div>  
+                </div>           
+            </div>            
         </div>
         <div class="container-fluid">
         <div class="row" style="margin-top: 50px; margin-bottom: 50px">
