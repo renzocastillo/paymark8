@@ -5,7 +5,7 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminVideosController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminOficinaController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -25,23 +25,25 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "videos";
+			$this->table = "cms_users";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"id","name"=>"id"];
-			$this->col[] = ["label"=>"Fecha Creación","name"=>"created_at"];
+			$this->col[] = ["label"=>"Imagen","name"=>"imagen","image"=>true];
+			$this->col[] = ["label"=>"Url","name"=>"url"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Subir video','name'=>'url','type'=>'upload','validation'=>'required|min:1','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Imagen','name'=>'imagen','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','validation'=>'required|url','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Url","name"=>"url","type"=>"text","required"=>TRUE,"validation"=>"required|url","placeholder"=>"Introduce una dirección web (URL) válida"];
+			//$this->form[] = ["label"=>"Imagen","name"=>"imagen","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Url","name"=>"url","type"=>"text","required"=>TRUE,"validation"=>"required|url","placeholder"=>"Please enter a valid URL"];
 			# OLD END FORM
 
 			/* 
@@ -128,9 +130,37 @@
 	        | ---------------------------------------------------------------------- 
 	        | @label, @count, @icon, @color 
 	        |
-	        */
-	        $this->index_statistic = array();
+			*/
+			$ganancia_x_vista=DB::table('parametros')->where('name','gvista')->value('content');
+			$ganancia_x_afiliaciones=DB::table('parametros')->where('name','gafiliacion')->value('content');
+			$pago_minimo=DB::table('parametros')->where('name','pmin')->value('content');
+			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
+			$vistas_totales=DB::table('reproducciones')->where('cms_users_id')->count();
+			$id=CRUDBooster::myId();
+			$user=DB::table('cms_users')->where('id',$id)->first();
+			$afiliaciones_actuales=$user->afiliaciones_actuales;
+			$vistas_actuales=$user->vistas_actuales;
+			$ganancia_total_actual=($ganancia_x_vista*$vistas_actuales)+($ganancia_x_afiliaciones*$afiliaciones_actuales);
+			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
+			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
+			$capacidad_de_retiro=$capacidad_de_vistas >= $vistas_actuales ? $vistas_actuales*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones : $capacidad_de_vistas*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
+			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
+			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista;
+			$ganancia_x_vistas_actuales=$vistas_actuales*$ganancia_x_vista;
+			$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
+			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest();
+			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
+			$vistas_actuales_reales=DB::table('reproducciones')->where('cms_users_id',CRUDBooster::myId())->where('created_at','>',$fecha_solicitud)->count();
+			$vistas_a_favor=$vistas_actuales-$vistas_actuales_reales;
+			$dolares_x_efectuarse=$ganancia_x_vista*$vistas_a_favor;
 
+	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->sum('monto'),'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Capacidad de Retiro','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Dólares por Ganar','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
 
 
 	        /*
@@ -200,7 +230,7 @@
 	        | $this->load_css[] = asset("myfile.css");
 	        |
 	        */
-	        $this->load_css = array();
+	        $this->load_css[] = asset("css/backoffice.css");
 	        
 	        
 	    }
@@ -314,7 +344,13 @@
 	        //Your code here
 
 	    }
-
+		public function getIndex(){
+			$data['page_title']= 'Oficina';
+			$data['dolares_x_pagar']=$dolares_x_ganar;
+			$data['capacidad_de_retiro']=$capacidad_de_retiro;
+			$data['monto_total']=$monto_total;
+			$this->cbView('modules.oficina',$data);
+		}
 
 
 	    //By the way, you can still create your own method in here... :) 

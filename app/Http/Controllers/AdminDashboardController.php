@@ -317,7 +317,35 @@
 
 	    }
 		public function getIndex(){
+			$id=CRUDBooster::myId();
+			$user=DB::table('cms_users')->where('id',$id)->first();
+			$ganancia_x_vista=DB::table('parametros')->where('name','greprod')->value('content');
+			$ganacia_afiliaciones=DB::table('parametros')->where('name','greg')->value('content');
+			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
+			$pago_minimo=DB::table('parametros')->where('name','pmin')->value('content');
+			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest();
+			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
+			$afiliaciones_actuales=$user->afiliaciones_actuales;
+			$vistas_actuales=$user->vistas_actuales;
+			$monto_total=$ganancia_x_vista*$vistas_actuales+$ganacia_afiliaciones*$afiliaciones_actuales;
+			//sacamos el residuo de la division: Ejemplo 13 vistas entre 10 -> residuo=3
+			$residuo=$vistas_actuales%$vistas_x_afiliacion;
+			//sacamos el cociente de la division: Ejemplo 13 vistas entre 10 -> cociente=1
+			$cociente=intdiv($vistas_actuales,$vistas_x_afiliacion);
+			//si no hay residuo entonces el cociente se toma exacto , sino se le aumenta uno. Ejemplo 13 vistas entre 10 da 1 pero se requieren 2 registros(1+1)
+			$afiliaciones_requeridas=$residuo == 0 ? $cociente : $cociente+1;
+			//$capacidad_de_vistas_a_favor=$afiliaciones_actuales >= $afiliaciones_requeridas ? $afiliaciones_actuales*$vistas_x_afiliacion-$vistas_actuales : $afiliaciones_requeridas*$vistas_x_afiliacion-$vistas_actuales;
+			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
+			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
+			$capacidad_de_retiro=$capacidad_de_vistas >= $vistas_actuales ? $vistas_actuales*$ganancia_x_vista+$afiliaciones_actuales*$ganacia_afiliaciones : $capacidad_de_vistas*$ganancia_x_vista+$afiliaciones_actuales*$ganacia_afiliaciones;
+			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
+			//$capacidad_de_vistas_a_favor=$capacidad_de_vistas-$vistas_actuales;
+			//$capacidad_de_vistas_a_favor= $capacidad_de_vistas_a_favor >0 ? $capacidad_de_vistas_a_favor  :_0;
+			//$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista;
 			$data['page_title']= 'Mi resumen';
+			$data['vistas_actuales']=$vistas_actuales;
+			$data['capacidad_de_retiro']=$capacidad_de_retiro;
+			$data['monto_total']=$monto_total;
 			$this->cbView('modules.user_dashboard',$data);
 		}
 

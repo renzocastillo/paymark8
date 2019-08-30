@@ -20,25 +20,24 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	
 		# START COLUMNS DO NOT REMOVE THIS LINE
 		$this->col = array();
-		$this->col[] = array("label"=>"N°", "name"=>"id");
+		//$this->col[] = array("label"=>"N°", "name"=>"id");
 		$this->col[] = array("label"=>"Nombre","name"=>"name");
 		$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
-		$this->col[] = array("label"=>"Correo","name"=>"email");
-		$this->col[] = array("label"=>"N° Reg. Actuales","name"=>"(select count(*) from cms_users p where p.cms_users_id=cms_users.id) as cantidad_reg");
-		$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
-		//$ganacia_reproduccion=DB::table('parametros')->where('name','greprod')->value('content');
-		//$ganacia_registro=DB::table('parametros')->where('name','greg')->value('content');
-		//$monto_pagar=$row->cantidad_reg*$ganacia_registro+$row->cantidad_reprod*$ganacia_reproduccion;
-		//$monto_pagar= empty($monto_pagar) ? 'Ninguno' : $monto_pagar;
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
+		}
+		//$this->col[] = array("label"=>"Correo","name"=>"email");
+		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
+		if(CRUDBooster::myPrivilegeId()==2){
+			$this->col[] = array("label"=>"N° Reg. Actuales","name"=>"(select count(*) from cms_users p where p.cms_users_id=cms_users.id) as cantidad_reg");
+		$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
 			$this->col[] = array("label"=>"Monto a Pagar", "name"=>"(SELECT IFNULL( (select monto from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc),0)) as monto");
 			$this->col[] = array("label"=>"Estado Depósito","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? $row->estado_solicitud : "Sin solicitar"');
 			$this->col[] = array("label"=>"Fecha Solicitud","name"=>"(select created_at from solicitudes_de_pago where cms_users_id=id order by solicitudes_de_pago.id desc limit 1) as fecha_solicitud","callback_php"=>'$row->fecha_solicitud ? $row->fecha_solicitud : "Ninguna"');
 			$this->col[] = array("label"=>"Patrocinador","name"=>"cms_users_id","join"=>"cms_users,name");
+			$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);	
+			//$this->col[] = array("label"=>"Tipo","name"=>"id_cms_privileges","join"=>"cms_privileges,name");	
 		}
-		//$this->col[] = array("label"=>"Tipo","name"=>"id_cms_privileges","join"=>"cms_privileges,name");
-		$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);		
 		# END COLUMNS DO NOT REMOVE THIS LINE
 
 		# START FORM DO NOT REMOVE THIS LINE
@@ -64,16 +63,17 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 								$('a[href=\"#pagar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-warning' title='Marcar el monto como pagado' href='javascript:;' onclick='pagado_popup();'>pagar </button>\");
 							});
 							function activado_popup(e){
-								console.log('hi');
+								console.log('script de activacion');
 								var row=$(event.target).parent().parent().prevAll().toArray();
 								var users= [];
 								$.each(row,function(i,val){
 									users.push(val.innerHTML);
 								});
 								var length=users.length;
-								var nombre=users[length-3];
-								//console.log(users[length-1].value);
-								var id= users[length-2];
+								var nombre=users[length-2];
+								var html= $.parseHTML(users[length-1]);
+								var id=$(html).val();
+								console.log(id);
 								var return_url= encodeURIComponent($(location).attr('href'));  
 								console.log(return_url);
 								swal({	
@@ -98,9 +98,11 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 									users.push(val.innerHTML);
 								});
 								var length=users.length;
-								var nombre=users[length-3];
+								var nombre=users[length-2];
 								var estado=pagado=2;
-								var id= users[length-2];
+								var html= $.parseHTML(users[length-1]);
+								var id=$(html).val();
+								console.log(id);
 								var return_url= encodeURIComponent($(location).attr('href'));  
 								console.log(return_url);
 								swal({	
@@ -118,6 +120,24 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 								)
 							};
 							";
+		if(CRUDBooster::myPrivilegeId()==3){
+			$id=CRUDBooster::myId();
+			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
+			$user=DB::table('cms_users')->where('id',$id)->first();	
+			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest();
+			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
+			$vistas_actuales=$user->vistas_actuales;
+			$afiliaciones_actuales=$user->afiliaciones_actuales;
+			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
+			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
+			$vistas_por_efectuar=$capacidad_de_vistas-$vistas_actuales;
+			$vistas_por_efectuar= $vistas_por_efectuar >= 0 ? $vistas_por_efectuar : 0;
+			$this->index_statistic[] = ['label'=>'N° Vistas Totales','count'=>DB::table('reproducciones')->where('cms_users_id',$id)->count(),'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° Actual de Vistas','count'=>$vistas_actuales,'icon'=>'fa fa-bars','color'=>'green','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° Actual de Afiliaciones ','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'red','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° Usuarios sin Afiliarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-users','color'=>'red','width'=>'col-sm-2'];					
+			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-users','color'=>'aqua','width'=>'col-sm-2'];					
+		}
 	}
 
 	public function getProfile() {			

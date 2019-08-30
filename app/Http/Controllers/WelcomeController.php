@@ -29,6 +29,10 @@ class WelcomeController extends Controller
       if(!$reproduccion){
         DB::table('reproducciones')
           ->insert(['cms_users_id'=>$patrocinador->id,'videos_id'=>$video_id,'ipaddress'=>$ipaddress]);
+        //ahora aumentamos la cantidad de vistas actuales del usuario en uno
+        DB::table('cms_users')
+          ->where('id',$patrocinador->id)
+          ->increment('vistas_actuales',1);
         return response()->json(['success'=>'Se agregó una nueva reproduccion']);
       }else{
         return response()->json(['success'=>'Ya se ha reproducido este video antes']);
