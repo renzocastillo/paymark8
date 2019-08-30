@@ -14,15 +14,15 @@
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
-			$this->button_table_action = true;
-			$this->button_bulk_action = true;
+			$this->button_table_action = false;
+			$this->button_bulk_action = false;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
 			$this->button_show = true;
-			$this->button_filter = true;
+			$this->button_filter = false;
 			$this->button_import = false;
 			$this->button_export = false;
 			$this->table = "solicitudes_de_pago";
@@ -30,10 +30,13 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[]= ["label"=>"Fecha Pago", "name"=>"updated_at" , "callback_php"=>'$row->updated_at ? date("d/m/y",strtotime($row->updated_at)) : "Pendiente"'];
+			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
+			$this->col[] = ["label"=>"Afiliados","name"=>"afiliados"];
+			$this->col[] = ["label"=>"Vistas","name"=>"vistas"];
 			$this->col[] = ["label"=>"Monto","name"=>"monto"];
-			$this->col[] = ["label"=>"Users Id","name"=>"cms_users_id","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Estados Id","name"=>"estados_id","join"=>"estados,nombre"];
-			$this->col[] = ["label"=>"Fecha Solicitud","name"=>"created_at"];
+			$this->col[] = ["label"=>"Estado","name"=>"estados_id","join"=>"estados,nombre"];
+			//$this->col[] = ["label"=>"Users Id","name"=>"cms_users_id","join"=>"cms_users,name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -76,7 +79,8 @@
 	        | @showIf 	   = If condition when action show. Use field alias. e.g : [id] == 1
 	        | 
 	        */
-	        $this->addaction = array();
+			//$this->addaction = array();
+			//$this->addaction[] = ['label'=>'Pagar','icon'=>'fa fa-rocket','color'=>'info','url'=>'#generar-pedido'];
 
 
 	        /* 
