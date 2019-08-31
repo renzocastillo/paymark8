@@ -32,21 +32,75 @@
                 <ul class="nav navbar-nav navbar-left">
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{{CRUDBooster::myName() ? CRUDBooster::adminpath('') : CRUDBooster::adminpath('login')}}">
-                        <i class="fas fa-sign-in-alt"></i> 
-                        @if(CRUDBooster::myName())
-                            Sesión Iniciada: {{CRUDBooster::myName()}}
-                        @else
-                            Iniciar Sesión
-                        @endif
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{CRUDBooster::myName() ? CRUDBooster::adminpath('') : CRUDBooster::adminpath('login')}}">
+                            
+                            @if(CRUDBooster::myName())
+                            
+                                Sesión Iniciada: {{CRUDBooster::myName()}}
+                            
+                            @else
+                                <i class="fas fa-sign-in-alt"></i> 
+                                Iniciar Sesión
+                            
+                            @endif
+                        </a>
+                    </li>         
+                    <li>
+                        
+                        <a href=""  data-toggle="modal" data-target="#modalRegistro">Registrarse</a>       
+                    </li>
                 </ul>
               </div>
               <!--/.nav-collapse -->
             </div>
-            <!--/.container-fluid -->
+        <!--/.Modal de Formulario de Registro -->
+        
+        <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <form action="{{route('register')}}" >
+                <div class="modal-content">
+                    <div class="modal-header text-center pb-4">
+                        <h3 class="modal-title w-100 black-text font-weight-bold" id="myModalLabel"><strong>SIGN</strong>
+                         <a class="blue-text font-weight-bold"><strong> UP</strong></a></h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user grey-text"></i> Nombre y Apellido:</label>
+                            <input type="text" class="form-control" id="name" placeholder="Nombre y Apellido" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp"><i class="fas fa-phone grey-text"></i> Celular:</label>
+                            <input type="text" class="form-control" id="whatsapp" placeholder="Ej. 51969922331" name="whatsapp">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope grey-text"></i> Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        </div>
+                        <div class="form-group">         
+                            <label for="password"><i class="fas fa-lock prefix grey-text"></i> Contraseña:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Ingresar Contraseña" name="password">
+                        </div>
+                        <div class="form-group">         
+                            <label for="pass2"><i class="fas fa-lock prefix grey-text"></i> Repetir contraseña:</label>
+                            <input type="password" class="form-control" id="pass2" placeholder="Repetir contraseña" name="pass2">
+                        </div>
+                                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-primary btn-lg btn-block" data-dismiss="modal">Registrarse</button>
+                    </div>
+            
+                </div>
+            </form>
+            </div>
+        </div>
+          
+
+        <!--/.container-fluid -->
         </nav>
         <div class="container-fluid">
             <div class="row carousel">
@@ -72,11 +126,11 @@
         </div>
         -->
 
-<!-- ---- html example --- -->
+
        
-        <div class="row justify-content-center align-items-center topn100 bcolor">         
+        <div class="row secvideo">         
                 <div class="col-sm-12">
-                            <div align="center" class="embed-responsive embed-responsive-16by9 video" >                   
+                            <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
                                 <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
                                     <source src="{{$video->url}}" type="video/mp4" >
                                 </video>
@@ -92,16 +146,14 @@
                                 <span id="duration"></span> seconds. (only updates when the video pauses)
                             </div>
                 </div>
+                <div class="col-sm-12">                      
+                    <div class="test show-on-scroll">
+                        <p>¿Cómo ser parte de PayMark? Conoce más a cerca de nosotros y empieza a ganar compartiendo.</p>
+                        <button type="button" class="btn btn-warning">Warning</button>
+                    </div>                        
+                </div>
         </div>
-        
-        <div class="row" style="margin-top: 100px;">
-            <div class="col-sm-12">
-                <div class="test show-on-scroll">
-                    <p>¿Cómo ser parte de PayMark? Conoce más a cerca de nosotros y empieza a ganar compartiendo.</p>
-                    <button type="button" class="btn btn-warning">Warning</button>
-                </div>           
-            </div>            
-        </div>
+ 
         <div class="container-fluid">
         <div class="row" style="margin-top: 50px; margin-bottom: 50px">
         @foreach($anuncios as $anuncio)
@@ -119,13 +171,14 @@
         @endforeach
         </div>
         </div>       
-  
+ 
+ 
         <div class="row multiple-carousel">
         @foreach($empresas as $empresa)
         <img src="{{$empresa->logo}}"/>
         @endforeach
         </div>       
-        
+        -->
 <!-- Sección A cerca de la empresa -->
 <section id="featured">
     <div class="container">
