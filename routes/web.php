@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'WelcomeController@getview')->name('welcome');
+Route::get('/registrarme', 'AdminCmsUsersController@registerUser')->name('register');
 if(!Request::is('admin/*')) {
    Route::get('/{user}', 'WelcomeController@getview')->name('welcome');
    Route::post('/{user}/add_reprod', 'WelcomeController@addReproduccion')->name('add-reproduccion');
