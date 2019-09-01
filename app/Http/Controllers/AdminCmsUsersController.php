@@ -203,16 +203,21 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	}
 	public function validarSlug($slug){
 		$pointer=strlen($slug)+1;
-		$consulta=DB::table('cms_users')
+		$slug_numerado=DB::table('cms_users')
 					->select(DB::raw('substring(slug,'.$pointer.') as recorte'))
 					->where('slug','LIKE',$slug.'%')
 					->where('id_cms_privileges',3)
 					->havingRaw("recorte REGEXP '^[0-9]+$'")
 					->latest()
 					->first();
-		if(count($consulta)){
-			$numero=(int)$consulta->recorte;
+		if(count($slug_numerado)){
+			$numero=(int)$slug_numerado->recorte;
 			$slug=$slug.($numero+1);
+		}else{
+			$slug_existe=DB::table('cms_users')->where('slug','LIKE',$slug)->exists();
+			if($slug_existe){
+				$slug=$slug.'1';
+			}
 		}
 		return $slug;
 	}
