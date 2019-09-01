@@ -1,6 +1,11 @@
 @extends('crudbooster::admin_template')
 @section('content')
 <div class="container">
+  @if(app('request')->input('paypal_complete'))
+  <div class="alert alert-warning">
+      <strong>Pago concretado!</strong> Dentro de las próximas horas te llegará un correo confirmando tu activación.
+  </div>
+  @endif
     <div class="row">
       <div class="col-sm-12 col-lg-4 col-lg-push-4">
           <div class="iframe-container">
@@ -44,10 +49,10 @@
     @else
         <div class="row flyer info">
             <div class="col-lg-6 col-lg-push-1 col-sm-12">
-                    <h3> Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}&nbsp;</h3>
+              <h3> Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}&nbsp;</h3>      
             </div>
             <div class="col-lg-5 col-sm-12">
-                    <a title="Paga y actívate" class="btn btn-default" data-toggle="modal" href="#pagar"  ><i class="fa fa-rocket"></i> Pagar Ahora</a>
+                {!! CRUDBooster::getSetting('boton_paypal') !!}
             </div>
         </div>  
     @endif
@@ -55,24 +60,5 @@
 <br>
 <div class="container">
 
-</div>
-<div id="pagar" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-      
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-              <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-      
-        </div>
 </div>
 @endsection
