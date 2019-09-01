@@ -138,7 +138,33 @@ video.addEventListener("ended", videoStoppedPlaying);
 video.addEventListener("pause", videoStoppedPlaying);
 
 /* TERMINA SECCIÓN DE LECTURA DEL VIDEO */
+/* INICIA SECCION DE VALIDAR EL REGISTRO */
+$("#register_form").validate({
+  rules: {
+      password: { 
+        required: true,
+           minlength: 6,
+           maxlength: 10,
 
+      } , 
+
+          cfmPassword: { 
+           equalTo: "#password",
+            minlength: 6,
+            maxlength: 10
+      }
+
+
+  },
+messages:{
+password: { 
+        required:"el password es requerido"
+
+      }
+}
+
+});
+/* TERRMINA SECCIÓN DE VALIDAR EL REGISTRO */
 /* INICIA SECCIÓN Javascript para efecto en titulos e imagenes. Detect request animation frame */
 var scroll = window.requestAnimationFrame ||
              // IE Fallback

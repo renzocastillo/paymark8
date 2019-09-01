@@ -12,6 +12,10 @@
         <link rel="stylesheet" type="text/css" href="{{asset("css/slick.css")}}"/>
         <link rel="stylesheet" type="text/css" href="{{asset("css/slick-theme.css")}}"/>
         <link rel="stylesheet" type="text/css" href="{{asset("css/style.css")}}"/>
+        <script src="{{asset("js/app.js")}}"></script>
+        <script type="text/javascript" src="{{asset("js/jquery.validate.min.js")}}"></script>
+        <script type="text/javascript" src="{{asset("js/localization/messages_es_PE.js")}}"></script>
+        <script type="text/javascript" src="{{asset("js/slick.min.js")}}"></script>
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -58,7 +62,8 @@
         
         <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-            <form action="{{route('register')}}" >
+            <form id="register_form" action="{{route('register')}}" method="POST">
+                {{ csrf_field() }}
                 <div class="modal-content">
                     <div class="modal-header text-center pb-4">
                         <h3 class="modal-title w-100 black-text font-weight-bold" id="myModalLabel"><strong>SIGN</strong>
@@ -86,12 +91,12 @@
                         </div>
                         <div class="form-group">         
                             <label for="pass2"><i class="fas fa-lock prefix grey-text"></i> Repetir contraseña:</label>
-                            <input type="password" class="form-control" id="pass2" placeholder="Repetir contraseña" name="pass2">
+                            <input type="password" class="form-control" id="cfmPassword" placeholder="Repetir contraseña" name="cfmPassword">
                         </div>
-                                
+                        <input type="hidden" name="patrocinador" value="{{$patrocinador->id}}">      
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn-primary btn-lg btn-block" data-dismiss="modal">Registrarse</button>
+                        <button type="submit" class="btn-primary btn-lg btn-block">Registrarse</button>
                     </div>
             
                 </div>
@@ -296,10 +301,6 @@
             </div>             
         </div>
 
-        <script src="{{asset("js/app.js")}}"></script>
-        <script type="text/javascript" src="{{asset("js/slick.min.js")}}"></script>
-        <script type="text/javascript" src="{{asset("js/index.js")}}"></script>
     </body>
-    
-
+    <script type="text/javascript" src="{{asset("js/index.js")}}"></script>
 </html>

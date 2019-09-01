@@ -186,30 +186,32 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		
 		CRUDBooster::redirect(urldecode($request['return_url']),"Pago registrado con éxito","success");	
 	}
-	public function registerUser(Request $request){
+	public function registerUser(){
+		$request=Request::all();
 		$name=$request['name'];
 		$whatsapp=$request['whatsapp'];
 		$email=$request['email'];
 		$password=bcrypt($request['password']);
 		$patrocinador=$request['patrocinador'];
+		//$patrocinador=$request['patrocinador'] ? $request['patrocinador'] : NULL ;
 		$slug=$this->makeSlug($name);
 		DB::table('cms_users')
-			->insert(['name'=>$name, 'email'=>$email,'password'=>$password, 'id_cms_privileges'=>3,'created_at'=>now(),'slug'=>$slug,'whatsapp'=>$whatsapp]);
+			->insert(['name'=>$name, 'email'=>$email,'password'=>$password, 'id_cms_privileges'=>3,'created_at'=>now(),'slug'=>$slug,'whatsapp'=>$whatsapp,'cms_users_id'=>$patrocinador]);
 		
-		$url = CRUDBooster::adminpath('/login');
+		$url = CRUDBooster::adminpath('login');
 		return redirect($url)->with('message', 'Gracias por Registrarte! Inicia sesión para comenzar');
-		//CRUDBooster::redirect(CRUDBooster::adminpath('/login'),trans('crudbooster.not_logged_in'),"success");
 	}
 	public function validarSlug($slug){
 		$pointer=strlen($slug)+1;
-		$slug_similar=DB::table($this->table)
-						->select('substring(slug,'.$pointer.') as recorte')
-						->where('slug','LIKE',$slug.'%')
-						->where('cms_privileges',3)
-						->havingRaw('recorte',"REGEXP '^[0-9]+$")
-						->latest();
-		if(count($slug_similar)){
-			$numero=int($slug_similar->recorte);
+		$consulta=DB::table('cms_users')
+					->select(DB::raw('substring(slug,'.$pointer.') as recorte'))
+					->where('slug','LIKE',$slug.'%')
+					->where('id_cms_privileges',3)
+					->havingRaw("recorte REGEXP '^[0-9]+$'")
+					->latest()
+					->first();
+		if(count($consulta)){
+			$numero=(int)$consulta->recorte;
 			$slug=$slug.($numero+1);
 		}
 		return $slug;
