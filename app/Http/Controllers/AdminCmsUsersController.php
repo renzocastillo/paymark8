@@ -224,4 +224,14 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$slug=$this->validarSlug($slug);
 		return $slug;
 	}
+	public function checkEmail(){
+		$request=Request::all();
+		$email=$request['email'];
+		$exists=DB::table('cms_users')->where('email',$email)->exists();
+		if($exists){
+			echo 'false';
+		}else{
+			echo 'true';	
+		}	
+	}
 }

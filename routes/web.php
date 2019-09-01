@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'WelcomeController@getview')->name('welcome');
+Route::get('/check_email', 'AdminCmsUsersController@checkEmail')->name('check_email');
 Route::post('/registrarme', 'AdminCmsUsersController@registerUser')->name('register');
 if(!Request::is('admin/*')) {
    Route::get('/{user}', 'WelcomeController@getview')->name('welcome');

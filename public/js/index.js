@@ -141,28 +141,35 @@ video.addEventListener("pause", videoStoppedPlaying);
 /* INICIA SECCION DE VALIDAR EL REGISTRO */
 $("#register_form").validate({
   rules: {
-      password: { 
-        required: true,
-           minlength: 6,
-           maxlength: 10,
-
-      } , 
-
-          cfmPassword: { 
-           equalTo: "#password",
-            minlength: 6,
-            maxlength: 10
+    email: {
+      required:true,
+      email: true,
+      remote: {
+        url: window.location.origin+'/check_email?email='+$( "#email" ).val(),
+        type: "get"
       }
+    },
+    password: { 
+      required: true,
+      minlength: 6,
+      maxlength: 10,
+    } , 
+    cfmPassword: { 
+      equalTo: "#password",
+      minlength: 6,
+      maxlength: 10
+    }
 
 
   },
-messages:{
-password: { 
-        required:"el password es requerido"
-
-      }
-}
-
+  messages:{
+    password: { 
+      required:"el password es requerido"
+    },
+    email:{
+      remote:"este email ya existe en nuestra plataforma. Por favor ingresa otro"
+    }
+  }
 });
 /* TERRMINA SECCIÓN DE VALIDAR EL REGISTRO */
 /* INICIA SECCIÓN Javascript para efecto en titulos e imagenes. Detect request animation frame */
