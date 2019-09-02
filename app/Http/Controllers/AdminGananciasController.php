@@ -17,7 +17,7 @@
 			$this->button_table_action = false;
 			$this->button_bulk_action = false;
 			$this->button_action_style = "button_icon";
-			$this->button_add = true;
+			$this->button_add = false;
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
@@ -30,20 +30,22 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[]= ["label"=>"Fecha Pago", "name"=>"updated_at" , "callback_php"=>'$row->updated_at ? date("d/m/y",strtotime($row->updated_at)) : "Pendiente"'];
-			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
-			$this->col[] = ["label"=>"Afiliados","name"=>"afiliados"];
-			$this->col[] = ["label"=>"Vistas","name"=>"vistas"];
 			$this->col[] = ["label"=>"Monto","name"=>"monto"];
 			$this->col[] = ["label"=>"Estado","name"=>"estados_id","join"=>"estados,nombre"];
+			$this->col[] = ["label"=>"Vistas","name"=>"vistas"];
+			$this->col[] = ["label"=>"Afiliados","name"=>"afiliados"];
+			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
+			//$this->col[]= ["label"=>"Fecha Pago", "name"=>"updated_at" , "callback_php"=>'$row->updated_at ? date("d/m/y",strtotime($row->updated_at)) : "Pendiente"'];
 			//$this->col[] = ["label"=>"Users Id","name"=>"cms_users_id","join"=>"cms_users,name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Monto','name'=>'monto','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Vistas','name'=>'vistas','type'=>'text','validation'=>'','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Afiliados','name'=>'afiliados','type'=>'text','validation'=>'','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Cms Users Id','name'=>'cms_users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'Estados Id','name'=>'estados_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,id'];
+			$this->form[] = ['label'=>'Estados Id','name'=>'estados_id','type'=>'text','validation'=>'','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -271,9 +273,17 @@
 	    | @id = last insert id
 	    | 
 	    */
-	    public function hook_after_add($id) {        
-	        //Your code here
-
+	    public function hook_after_add($id) {
+			//recuperamos la fila del último registro que acabamos de agregar        
+			$row=DB::table('solicitudes_de_pago')->where('id',$id)->first();
+			//recuperamos al usuario que solicitó el pago
+			$user=DB::table('cms_users')->where('id',$row->cms_users_id)->first();
+			//guardamos en una variable la diferencia entre las vistas cobradas menos las vistas actuales
+			$vistas=$user->vistas_actuales - $row->vistas;
+			//actualizamos al usuario dejando sus afiliaciones en 0 y sus vistas en la diferencia residual calculada antes
+			DB::table('cms_users')
+				->where('id',$user->id)
+				->update(['vistas_actuales'=>$vistas,'afiliaciones_actuales'=>0]);
 	    }
 
 	    /* 
@@ -324,8 +334,6 @@
 	        //Your code here
 
 	    }
-
-
 
 	    //By the way, you can still create your own method in here... :) 
 

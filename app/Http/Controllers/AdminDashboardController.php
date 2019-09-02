@@ -143,7 +143,35 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+	        $this->script_js = "function solicitar_popup(e){
+				console.log('hi');
+				var row=$(event.target).parent().parent().prevAll().toArray();
+				var users= [];
+				$.each(row,function(i,val){
+					users.push(val.innerHTML);
+				});
+				var length=users.length;
+				var estado_pagado=2;
+				var nombre=users[length-2];
+				var html= $.parseHTML(users[length-1]);
+				var id=$(html).val();
+				console.log(id);
+				var return_url= encodeURIComponent($(location).attr('href'));  
+				console.log(return_url);
+				swal({	
+					title: '¿Estás seguro que deseas solicitar tu pago ?',	
+					text: 'Tu pago se hará efectivo en las próximas 24 hrs',
+					type: 'warning', 
+					showCancelButton: true,
+					confirmButtonClass: 'danger',
+					confirmButtonText: '¡Sí!',
+					cancelButtonText: 'No', 
+					closeOnConfirm: false },
+					function(){
+						$('#solicitar_pago').submit();
+					}
+				)
+			};";
 
 
             /*
@@ -337,13 +365,15 @@
 			//$capacidad_de_vistas_a_favor=$afiliaciones_actuales >= $afiliaciones_requeridas ? $afiliaciones_actuales*$vistas_x_afiliacion-$vistas_actuales : $afiliaciones_requeridas*$vistas_x_afiliacion-$vistas_actuales;
 			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
 			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
-			$capacidad_de_retiro=$capacidad_de_vistas >= $vistas_actuales ? $vistas_actuales*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones : $capacidad_de_vistas*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
+			$vistas_x_cobrar= $capacidad_de_vistas >= $vistas_actuales ? $vistas_actuales : $capacidad_de_vistas;
+			$capacidad_de_retiro=$vistas_x_cobrar*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
 			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
 			//$capacidad_de_vistas_a_favor=$capacidad_de_vistas-$vistas_actuales;
 			//$capacidad_de_vistas_a_favor= $capacidad_de_vistas_a_favor >0 ? $capacidad_de_vistas_a_favor  :_0;
 			//$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista;
+			$data['user']= $user;
 			$data['page_title']= 'Mi resumen';
-			$data['vistas_actuales']=$vistas_actuales;
+			$data['vistas_x_cobrar']=$vistas_x_cobrar;
 			$data['capacidad_de_retiro']=$capacidad_de_retiro;
 			$data['monto_total']=$monto_total;
 			$this->cbView('modules.user_dashboard',$data);

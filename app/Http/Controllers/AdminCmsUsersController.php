@@ -180,7 +180,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			DB::table('cms_users')->where('id',$user->cms_users_id)->increment('afiliaciones_actuales',1);
 		}
 		//mandamos un email a la cuenta de correo de este usuario
-		$link=Request::getHost().'/'.$user->slug;
+		$link=url('/'.$user->slug);
 		$data = ['nombre'=>$user->name,'link'=>$link];
 		CRUDBooster::sendEmail(['to'=>$user->email,'data'=>$data,'template'=>'activacion_exitosa']);
 		CRUDBooster::redirect(urldecode($request['return_url']),"Usuario activado con éxito ","success");	

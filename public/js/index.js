@@ -87,18 +87,18 @@ function videoStoppedPlaying(event) {
   }
   document.getElementById("played").innerHTML = Math.round(timePlayed)+"";
   // Count as complete only if end of video was reached
-  if(timePlayed>=duration && event.type=="ended") {
+  if(timePlayed>=Math.round(duration) && event.type=="ended") {
     var status=document.getElementById("status");
     if(status.className != "complete"){
-      console.log("el video se ha reproducido");
+      console.log("se ha visto el visto el video por completo");
       status.className="complete";
       var video_id=video.dataset.id;
-      console.log(video_id);
+      console.log("En la BD este video tiene el id "+video_id);
       //var cms_users_id=video.dataset.user;
       var base_url=window.location.origin+'/';
       var url=window.location.href;
       if(url != base_url){
-        console.log("se está usando un enlace de usuario");
+        console.log("se está usando un enlace de usuario. Se insertará una reproducción en la BD");
         //console.log(cms_users_id);
         //INICIAMOS AJAX PARA MANDAR REPRODUCCCION DEL VIDEO A LA DB
         $.ajaxSetup({
@@ -110,7 +110,6 @@ function videoStoppedPlaying(event) {
           url:  window.location.href+'/add_reprod',
           method: 'post',
           data: {
-             //cms_users_id: cms_users_id,
              video_id: video_id
           },
           success: function(result){
@@ -120,6 +119,8 @@ function videoStoppedPlaying(event) {
             console.log(err.responseText);
           }
         });
+      }else{
+        console.log("Se ha visto el video sin usar un enlace de usuario. No se agregará la reproducción a la BD");
       }
     }
   }

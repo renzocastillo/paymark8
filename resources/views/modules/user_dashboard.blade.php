@@ -25,10 +25,10 @@
         <br>
         <div class="row flyer success">
           <div class="col-lg-5 col-lg-push-1 col-sm-12">
-              <h3> Capacidad de Retiro:&nbsp;&nbsp;<h2>{{isset($capacidad_de_retiro) ? '$ '.$capacidad_de_retiro : '$ 0'}}</h2> &nbsp;&nbsp;</h3>
+              <h3> Capacidad de Retiro:&nbsp;&nbsp;<h2>{{empty($capacidad_de_retiro) ? '$ 0' : '$ '.$capacidad_de_retiro }}</h2> &nbsp;&nbsp;</h3>
           </div>
           <div class="col-lg-5 col-sm-12">
-            <a title="Solicita tu pago por paypal" class="btn btn-default" data-toggle="modal" href="#solicitud_popup"  ><i class="fa fa-rocket"></i> Solicitar pago</a>
+          <a title="Solicita tu pago por paypal" class="btn btn-default {{empty($capacidad_de_retiro) ? 'disabled' : ''}}" data-toggle="modal" onclick="solicitar_popup()" ><i class="fa fa-rocket"></i> Solicitar pago</a>
           </div>
         </div>
         <br>
@@ -40,7 +40,7 @@
         <br>
         <div class="row flyer warning">
           <div class="col-lg-5 col-lg-push-1 col-sm-12">
-              <h3> N° Vistas Actuales :&nbsp;&nbsp;<h2>{{isset($vistas_actuales) ? $vistas_actuales : 0}}</h2> &nbsp;&nbsp;</h3>
+              <h3> N° Vistas Actuales :&nbsp;&nbsp;<h2>{{isset($user->vistas_actuales) ? $user->vistas_actuales : 0}}</h2> &nbsp;&nbsp;</h3>
           </div>
           <div class="col-lg-5 col-sm-12">
             
@@ -59,6 +59,14 @@
 </div>
 <br>
 <div class="container">
-
+  <form id="solicitar_pago" method="post" enctype="multipart/form-data" action={{CRUDBooster::adminpath('ganancias/add-save')}}>
+    {{ csrf_field() }}
+    <input type="hidden" name="return_url" value="{{Request::fullUrl()}}">
+    <input type="hidden" name="cms_users_id" value="{{CRUDBooster::myid()}}">
+    <input type="hidden" name="afiliados" value="{{$user->afiliaciones_actuales }}">
+    <input type="hidden" name="vistas" value="{{$vistas_x_cobrar }}">
+    <input type="hidden" name="monto" value="{{$capacidad_de_retiro }}">
+    <input type="hidden" name="estados_id" value="1">
+  </form> 
 </div>
 @endsection
