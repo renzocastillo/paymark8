@@ -177,7 +177,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		DB::table('cms_users')->where('id',$id)->update(['estado'=>1]);
 		//aumentamos la cantidad de afiliados actuales del patrocinador en 1
 		if($user->cms_users_id){
-			DB:table('cms_users')->where('id',$user->cms_users_id)->increment('afiliados_actuales',1);
+			DB::table('cms_users')->where('id',$user->cms_users_id)->increment('afiliaciones_actuales',1);
 		}
 		//mandamos un email a la cuenta de correo de este usuario
 		$link=Request::getHost().'/'.$user->slug;
