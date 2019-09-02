@@ -171,9 +171,18 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	}
 	public function changeUserEstado($id){
 		$request=Request::all();
-		DB::table('cms_users')
-			->where('id',$id)
-			->update(['estado'=>1]);
+		//recuperamos el usuario de la BD
+		$user=DB::table('cms_users')->where('id',$id)->first();
+		//activamos al usuario en la BD cambiándole su estado
+		DB::table('cms_users')->where('id',$id)->update(['estado'=>1]);
+		//aumentamos la cantidad de afiliados actuales del patrocinador en 1
+		if($user->cms_users_id){
+			DB:table('cms_users')->where('id',$user->cms_users_id)->increment('afiliados_actuales',1);
+		}
+		//mandamos un email a la cuenta de correo de este usuario
+		$link=Request::getHost().'/'.$user->slug;
+		$data = ['nombre'=>$user->name,'link'=>$link];
+		CRUDBooster::sendEmail(['to'=>$user->email,'data'=>$data,'template'=>'activacion_exitosa']);
 		CRUDBooster::redirect(urldecode($request['return_url']),"Usuario activado con éxito ","success");	
 	}
 	public function changeSolicitudEstado($id){
