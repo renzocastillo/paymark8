@@ -23,16 +23,7 @@
     border-radius:10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px;
 }
-.flyer.warning{
-    background-color:#FABC36;
-}
 
-.flyer.info{
-    background-color:#2588F9;
-}
-.flyer.success{
-    background-color:#652C8F;
-}
 .flyer h3{
     display: inline-block;
     color:#fff;
