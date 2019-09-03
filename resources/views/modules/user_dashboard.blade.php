@@ -19,32 +19,32 @@
       <div class="small-box bg-blue">
           <div class="inner">
               <h3> Link</h3>
-              <p><a title="Tu link de afiliacion" href="{{url('/'.CRUDBooster::me()->slug)}}" target="_blank" > <span class="label label-default">{{url('/'.CRUDBooster::me()->slug)}}</span></a></p>
+              <p><a title="Tu link de afiliacion" href="{{url('/'.CRUDBooster::me()->slug)}}" target="_blank" > <span class="badge badge-blue">{{url('/'.CRUDBooster::me()->slug)}}</span></a></p>
           </div>
           <div class="icon">
-            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-code"></i>
         </div>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="small-box bg-aqua">
+      <div class="small-box bg-yellow">
           <div class="inner">
               <h3> {{empty($capacidad_de_retiro) ? '$ 0' : '$ '.$capacidad_de_retiro }}</h3>
-              <p>Capacidad de Retiro&nbsp;&nbsp;<a title="Solicita tu pago por paypal" class="btn btn-default {{empty($capacidad_de_retiro) ? 'disabled' : ''}}" data-toggle="modal" onclick="solicitar_popup()" ><i class="fa fa-rocket"></i>Solicitar Pago</a></p>
+              <p>Capacidad de Retiro&nbsp;&nbsp;<a id="solicitar_pago"  title="Solicita tu pago por paypal" class="btn btn-default {{empty($capacidad_de_retiro) ? 'disabled' : ''}}" data-toggle="modal" onclick="solicitar_popup()" ><i class="fa fa-rocket"></i>Solicitar Pago</a></p>
           </div>
           <div class="icon">
-            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-trophy"></i>
           </div>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="small-box bg-blue">
+      <div class="small-box bg-green">
           <div class="inner">
               <h3>{{isset($monto_total) ? '$ '.$monto_total : '$ 0'}}</h3>
               <p> Ganancia Total</p>
           </div>
           <div class="icon">
-            <i class="fa fa-video-camera"></i>
+            <i class="fa fa-usd"></i>
         </div>
       </div>
     </div>
