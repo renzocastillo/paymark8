@@ -274,16 +274,30 @@
 	    | 
 	    */
 	    public function hook_after_add($id) {
-			//recuperamos la fila del último registro que acabamos de agregar        
+			//recuperamos la ultima solicitud de pago que fue agregada        
 			$row=DB::table('solicitudes_de_pago')->where('id',$id)->first();
+			//obtenemos la cantidad de vistas que se requieren por cada afiliacion
+			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
+			$vistas_cobradas=$row->vistas;
 			//recuperamos al usuario que solicitó el pago
 			$user=DB::table('cms_users')->where('id',$row->cms_users_id)->first();
+			$afiliaciones_actuales=$user->afiliaciones_actuales;
+			$vistas_actuales=$user->vistas_actuales;
 			//guardamos en una variable la diferencia entre las vistas cobradas menos las vistas actuales
-			$vistas=$user->vistas_actuales - $row->vistas;
+			$vistas_a_favor=$user->vistas_actuales - $vistas_cobradas ;
+			//evaluamos si las afiliaciones actuales superan a las requeridas por las vistas. Si es así, generamos la capacidad de vistas a favor
+			//sacamos el residuo de la division: Ejemplo 13 vistas entre 10 -> residuo=3
+			$residuo=$vistas_actuales%$vistas_x_afiliacion;
+			//sacamos el cociente de la division: Ejemplo 13 vistas entre 10 -> cociente=1
+			$cociente=intdiv($vistas_actuales,$vistas_x_afiliacion);
+			//si no hay residuo entonces el cociente se toma exacto , sino se le aumenta uno. Ejemplo 13 vistas entre 10 da 1 pero se requieren 2 registros(1+1)
+			$afiliaciones_requeridas=$residuo == 0 ? $cociente : $cociente+1;
+			$capacidad_de_vistas_a_favor=$afiliaciones_actuales >= $afiliaciones_requeridas ? $afiliaciones_actuales*$vistas_x_afiliacion-$vistas_actuales : 0;
 			//actualizamos al usuario dejando sus afiliaciones en 0 y sus vistas en la diferencia residual calculada antes
 			DB::table('cms_users')
 				->where('id',$user->id)
-				->update(['vistas_actuales'=>$vistas,'afiliaciones_actuales'=>0]);
+				->update(['vistas_actuales'=>$vistas_a_favor,'afiliaciones_actuales'=>0,'capacidad_vistas_a_favor'=>$capacidad_de_vistas_a_favor]);
+			
 	    }
 
 	    /* 
