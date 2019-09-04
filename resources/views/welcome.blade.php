@@ -46,14 +46,12 @@
                             @else
                                 <i class="fas fa-sign-in-alt"></i> 
                                 Iniciar Sesión
-                            
+                                <a href=""  data-toggle="modal" data-target="#modalRegistro">Registrarse</a> 
                             @endif
                         </a>
                     </li>         
-                    <li>
-                        
-                        <a href=""  data-toggle="modal" data-target="#modalRegistro">Registrarse</a>       
-                    </li>
+                    
+    
                 </ul>
               </div>
               <!--/.nav-collapse -->
@@ -130,16 +128,14 @@
             </div>
         </div>
         -->
-
-
-       
-        <div class="row secvideo">         
+       <div class="row secvideo">         
                 <div class="col-sm-12">
                             <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
                                 <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
                                     <source src="{{$video->url}}" type="video/mp4" >
                                 </video>
                             </div>
+                             <!--
                             <div id="status" class="incomplete">
                                 <span>Play status: </span>
                                 <span class="status complete">COMPLETE</span>
@@ -150,21 +146,21 @@
                                 <span id="played">0</span> seconds out of 
                                 <span id="duration"></span> seconds. (only updates when the video pauses)
                             </div>
+                            -->
                 </div>
-                <div class="col-sm-12">                      
-                    <div class="test show-on-scroll">
-                        <p>¿Cómo ser parte de PayMark? Conoce más a cerca de nosotros y empieza a ganar compartiendo.</p>
-                        <button type="button" class="btn btn-warning">Warning</button>
-                    </div>                        
+                <div class="col-sm-12 sectexto">
+                    <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
+                    <button type="button" class="button1">Registrarme</button>
                 </div>
+              
         </div>
- 
+
         <div class="container-fluid">
         <div class="row" style="margin-top: 50px; margin-bottom: 50px">
         @foreach($anuncios as $anuncio)
         <div class="col-sm-12 col-lg-3">  
         <figure class="snip1529">
-                <img src="{{$anuncio->imagen}}" alt="pr-sample13" style="width:350px;height:350px; object-fit:cover;" />
+                <img src="{{$anuncio->imagen}}" alt="pr-sample13" style="width:350px;height:250px; object-fit:cover;" />
                 <!-- <figcaption>
                     <h3>An Abstract Post Heading</h3>
                     <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
@@ -176,14 +172,12 @@
         @endforeach
         </div>
         </div>       
- 
- 
-        <div class="row multiple-carousel">
-        @foreach($empresas as $empresa)
-        <img src="{{$empresa->logo}}"/>
-        @endforeach
-        </div>       
-        -->
+<!-- Sección logos empresas --> 
+<div class="row multiple-carousel">
+@foreach($empresas as $empresa)
+<img src="{{$empresa->logo}}"/>
+@endforeach
+</div>           
 <!-- Sección A cerca de la empresa -->
 <section id="featured">
     <div class="container">
@@ -196,24 +190,31 @@
             <div class="col-sm-6 contenedor">
                 <img src="uploads/img1.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
-            </div>
-            
+            </div>  
             <div class="col-sm-6">
                 <div class="content"><h2>Pixel Facial Cream</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
             </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 100px;">
-            <div class="col-sm-6">
-                <div class="content"> <h2>Pixel Facial Cream</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-            </div>
-            </div>   
+        <div class="row" style="margin-top: 100px;">        
             <div class="col-sm-6">
                 <div class="image"><img src="uploads/imagen2.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
+            </div> 
+            <div class="col-sm-6">
+                <div class="content"> <h2>Pixel Facial Cream</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
+                </div>
             </div>  
+        </div>
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-sm-12">                      
+                        <div class="test show-on-scroll">
+                            <p>Empieza a ganar con PayMark8</p>
+                            <button type="button" class="btn btn-primary">REGISTRARME</button>
+                        </div>                        
+            </div>
         </div>
         
 
