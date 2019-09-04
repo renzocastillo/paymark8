@@ -148,7 +148,7 @@
 			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista;
 			$ganancia_x_vistas_actuales=$vistas_actuales*$ganancia_x_vista;
 			$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
-			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest();
+			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest()->first();
 			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
 			$vistas_actuales_reales=DB::table('reproducciones')->where('cms_users_id',CRUDBooster::myId())->where('created_at','>',$fecha_solicitud)->count();
 			$vistas_a_favor=$vistas_actuales-$vistas_actuales_reales;

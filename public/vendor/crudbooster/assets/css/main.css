@@ -47,10 +47,18 @@
 	}
 
 	
-
+  .login-page{
+    padding-top: 50px;
+  }
 	.login-box-body {
       box-shadow: 0px 0px 25px #999999;
-	}
+      border-radius:6px;
+      background-color:#fff !important;
+  }
+  .login-box-body button{
+    border-radius:6px !important;
+    background-color:#4070FA;
+  }
 	/*
  * Skin: Custom
  * ----------
@@ -256,3 +264,5 @@
     box-shadow:0 5px 20px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.10);
     border:none;
   }
+
+  
