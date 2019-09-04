@@ -133,11 +133,11 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
 			$vistas_por_efectuar=$capacidad_de_vistas-$vistas_actuales;
 			$vistas_por_efectuar= $vistas_por_efectuar >= 0 ? $vistas_por_efectuar : 0;
-			$this->index_statistic[] = ['label'=>'N° Vistas Totales','count'=>DB::table('reproducciones')->where('cms_users_id',$id)->count(),'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-2'];
-			$this->index_statistic[] = ['label'=>'N° Actual de Vistas','count'=>$vistas_actuales,'icon'=>'fa fa-bars','color'=>'green','width'=>'col-sm-2'];
-			$this->index_statistic[] = ['label'=>'N° Actual de Afiliaciones ','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'red','width'=>'col-sm-2'];
-			$this->index_statistic[] = ['label'=>'N° Usuarios sin Afiliarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-users','color'=>'red','width'=>'col-sm-2'];					
-			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-users','color'=>'aqua','width'=>'col-sm-2'];					
+			$this->index_statistic[] = ['label'=>'N° Vistas Totales','count'=>DB::table('reproducciones')->where('cms_users_id',$id)->count(),'icon'=>'fa fa-line-chart','color'=>'aqua','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° Actual de Vistas','count'=>$vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° Actual de Afiliaciones ','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'green','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° Usuarios sin Afiliarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'red','width'=>'col-sm-2'];					
+			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'yellow','width'=>'col-sm-2'];					
 		}
 	}
 
@@ -180,7 +180,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			DB::table('cms_users')->where('id',$user->cms_users_id)->increment('afiliaciones_actuales',1);
 		}
 		//mandamos un email a la cuenta de correo de este usuario
-		$link=Request::getHost().'/'.$user->slug;
+		$link=url('/'.$user->slug);
 		$data = ['nombre'=>$user->name,'link'=>$link];
 		CRUDBooster::sendEmail(['to'=>$user->email,'data'=>$data,'template'=>'activacion_exitosa']);
 		CRUDBooster::redirect(urldecode($request['return_url']),"Usuario activado con éxito ","success");	

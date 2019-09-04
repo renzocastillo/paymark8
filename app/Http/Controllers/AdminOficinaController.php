@@ -148,19 +148,19 @@
 			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista;
 			$ganancia_x_vistas_actuales=$vistas_actuales*$ganancia_x_vista;
 			$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
-			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest();
+			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest()->first();
 			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
 			$vistas_actuales_reales=DB::table('reproducciones')->where('cms_users_id',CRUDBooster::myId())->where('created_at','>',$fecha_solicitud)->count();
 			$vistas_a_favor=$vistas_actuales-$vistas_actuales_reales;
 			$dolares_x_efectuarse=$ganancia_x_vista*$vistas_a_favor;
 
-	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->sum('monto'),'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
-			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
-			$this->index_statistic[] = ['label'=>'Capacidad de Retiro','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
-			$this->index_statistic[] = ['label'=>'Dólares por Ganar','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
-			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
-			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
-			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-bars','color'=>'red','width'=>'col-sm-3'];
+	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'green','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Capacidad de Retiro','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'yellow','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Dólares por Ganar','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'aqua','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'red','width'=>'col-sm-3'];
+			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'green','width'=>'col-sm-3'];
 
 
 	        /*

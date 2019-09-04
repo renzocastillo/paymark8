@@ -17,7 +17,7 @@
 			$this->button_table_action = false;
 			$this->button_bulk_action = false;
 			$this->button_action_style = "button_icon";
-			$this->button_add = true;
+			$this->button_add = false;
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
@@ -30,20 +30,22 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[]= ["label"=>"Fecha Pago", "name"=>"updated_at" , "callback_php"=>'$row->updated_at ? date("d/m/y",strtotime($row->updated_at)) : "Pendiente"'];
-			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
-			$this->col[] = ["label"=>"Afiliados","name"=>"afiliados"];
-			$this->col[] = ["label"=>"Vistas","name"=>"vistas"];
 			$this->col[] = ["label"=>"Monto","name"=>"monto"];
 			$this->col[] = ["label"=>"Estado","name"=>"estados_id","join"=>"estados,nombre"];
+			$this->col[] = ["label"=>"Vistas","name"=>"vistas"];
+			$this->col[] = ["label"=>"Afiliados","name"=>"afiliados"];
+			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
+			//$this->col[]= ["label"=>"Fecha Pago", "name"=>"updated_at" , "callback_php"=>'$row->updated_at ? date("d/m/y",strtotime($row->updated_at)) : "Pendiente"'];
 			//$this->col[] = ["label"=>"Users Id","name"=>"cms_users_id","join"=>"cms_users,name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Monto','name'=>'monto','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Vistas','name'=>'vistas','type'=>'text','validation'=>'','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Afiliados','name'=>'afiliados','type'=>'text','validation'=>'','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Cms Users Id','name'=>'cms_users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'Estados Id','name'=>'estados_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'estados,id'];
+			$this->form[] = ['label'=>'Estados Id','name'=>'estados_id','type'=>'text','validation'=>'','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -271,9 +273,31 @@
 	    | @id = last insert id
 	    | 
 	    */
-	    public function hook_after_add($id) {        
-	        //Your code here
-
+	    public function hook_after_add($id) {
+			//recuperamos la ultima solicitud de pago que fue agregada        
+			$row=DB::table('solicitudes_de_pago')->where('id',$id)->first();
+			//obtenemos la cantidad de vistas que se requieren por cada afiliacion
+			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
+			$vistas_cobradas=$row->vistas;
+			//recuperamos al usuario que solicitó el pago
+			$user=DB::table('cms_users')->where('id',$row->cms_users_id)->first();
+			$afiliaciones_actuales=$user->afiliaciones_actuales;
+			$vistas_actuales=$user->vistas_actuales;
+			//guardamos en una variable la diferencia entre las vistas cobradas menos las vistas actuales
+			$vistas_a_favor=$user->vistas_actuales - $vistas_cobradas ;
+			//evaluamos si las afiliaciones actuales superan a las requeridas por las vistas. Si es así, generamos la capacidad de vistas a favor
+			//sacamos el residuo de la division: Ejemplo 13 vistas entre 10 -> residuo=3
+			$residuo=$vistas_actuales%$vistas_x_afiliacion;
+			//sacamos el cociente de la division: Ejemplo 13 vistas entre 10 -> cociente=1
+			$cociente=intdiv($vistas_actuales,$vistas_x_afiliacion);
+			//si no hay residuo entonces el cociente se toma exacto , sino se le aumenta uno. Ejemplo 13 vistas entre 10 da 1 pero se requieren 2 registros(1+1)
+			$afiliaciones_requeridas=$residuo == 0 ? $cociente : $cociente+1;
+			$capacidad_de_vistas_a_favor=$afiliaciones_actuales >= $afiliaciones_requeridas ? $afiliaciones_actuales*$vistas_x_afiliacion-$vistas_actuales : 0;
+			//actualizamos al usuario dejando sus afiliaciones en 0 y sus vistas en la diferencia residual calculada antes
+			DB::table('cms_users')
+				->where('id',$user->id)
+				->update(['vistas_actuales'=>$vistas_a_favor,'afiliaciones_actuales'=>0,'capacidad_vistas_a_favor'=>$capacidad_de_vistas_a_favor]);
+			
 	    }
 
 	    /* 
@@ -324,8 +348,6 @@
 	        //Your code here
 
 	    }
-
-
 
 	    //By the way, you can still create your own method in here... :) 
 

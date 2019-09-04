@@ -5,7 +5,7 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminContactoController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -17,33 +17,36 @@
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = true;
+			$this->button_add = false;
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
-			$this->button_show = true;
+			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "cms_users";
+			$this->table = "cms_settings";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Imagen","name"=>"imagen","image"=>true];
-			$this->col[] = ["label"=>"Url","name"=>"url"];
+			$this->col[] = ["label"=>"Configuración","name"=>"label"];
+			$this->col[] = ["label"=>"Valor","name"=>"content"];
+			$this->col[] = ["label"=>"Descripcion","name"=>"helper"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Imagen','name'=>'imagen','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','validation'=>'required|url','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
+			$this->form[] = ['label'=>'Configuracion','name'=>'label','type'=>'text','validation'=>'required|min:1|max:255','readonly'=>true,'width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Valor','name'=>'content','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
+			//$this->form[] = ["label"=>"Titulo","name"=>"titulo","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Contenido","name"=>"contenido","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Url","name"=>"url","type"=>"text","required"=>TRUE,"validation"=>"required|url","placeholder"=>"Introduce una dirección web (URL) válida"];
 			//$this->form[] = ["label"=>"Imagen","name"=>"imagen","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Url","name"=>"url","type"=>"text","required"=>TRUE,"validation"=>"required|url","placeholder"=>"Please enter a valid URL"];
 			# OLD END FORM
 
 			/* 
@@ -143,35 +146,7 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = "function solicitar_popup(e){
-				console.log('hi');
-				var row=$(event.target).parent().parent().prevAll().toArray();
-				var users= [];
-				$.each(row,function(i,val){
-					users.push(val.innerHTML);
-				});
-				var length=users.length;
-				var estado_pagado=2;
-				var nombre=users[length-2];
-				var html= $.parseHTML(users[length-1]);
-				var id=$(html).val();
-				console.log(id);
-				var return_url= encodeURIComponent($(location).attr('href'));  
-				console.log(return_url);
-				swal({	
-					title: '¿Estás seguro que deseas solicitar tu pago ?',	
-					text: 'Tu pago se hará efectivo en las próximas 24 hrs',
-					type: 'warning', 
-					showCancelButton: true,
-					confirmButtonClass: 'danger',
-					confirmButtonText: '¡Sí!',
-					cancelButtonText: 'No', 
-					closeOnConfirm: false },
-					function(){
-						$('#solicitar_pago').submit();
-					}
-				)
-			};";
+	        $this->script_js = NULL;
 
 
             /*
@@ -230,7 +205,7 @@
 	        | $this->load_css[] = asset("myfile.css");
 	        |
 	        */
-	        $this->load_css[] = asset("css/backoffice.css");
+	        $this->load_css = array();
 	        
 	        
 	    }
@@ -344,31 +319,17 @@
 	        //Your code here
 
 	    }
+
 		public function getIndex(){
-			$id=CRUDBooster::myId();
-			$user=DB::table('cms_users')->where('id',$id)->first();
-			$ganancia_x_vista=DB::table('parametros')->where('name','gvista')->value('content');
-			$ganancia_x_afiliaciones=DB::table('parametros')->where('name','gafiliacion')->value('content');
-			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
-			$pago_minimo=DB::table('parametros')->where('name','pmin')->value('content');
-			$afiliaciones_actuales=$user->afiliaciones_actuales;
-			$vistas_actuales=$user->vistas_actuales;
-			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
-			$monto_total=$ganancia_x_vista*$vistas_actuales+$ganancia_x_afiliaciones*$afiliaciones_actuales;
-			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
-			$vistas_x_cobrar= $vistas_actuales <= $capacidad_de_vistas ? $vistas_actuales : $capacidad_de_vistas;
-			$capacidad_de_retiro=$vistas_x_cobrar*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
-			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
-
-			$data['user']= $user;
-			$data['page_title']= 'Mi resumen';
-			$data['vistas_x_cobrar']=$vistas_x_cobrar;
-			$data['capacidad_de_retiro']=$capacidad_de_retiro;
-			$data['monto_total']=$monto_total;
-			$this->cbView('modules.user_dashboard',$data);
+			if (! CRUDBooster::myPrivilegeId()==3) {
+				CRUDBooster::insertLog(trans("crudbooster.log_try_view", ['name' => 'Setting', 'module' => 'Setting']));
+				CRUDBooster::redirect(CRUDBooster::adminPath(), trans('crudbooster.denied_access'));
+			}
+	
+			$data['page_title'] = "Atención al Cliente";
+			$data['datos_de_contacto']=DB::table('cms_settings')->where('group_setting','contacto')->get();
+			$this->cbView('modules.contacto', $data);
 		}
-
-
 	    //By the way, you can still create your own method in here... :) 
 
 
