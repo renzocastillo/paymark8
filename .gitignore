@@ -16,3 +16,4 @@ yarn-error.log
 *.example
 public/uploads
 public/vendor/crudbooster
+!/public/vendor/crudbooster/assets/css/main.css
