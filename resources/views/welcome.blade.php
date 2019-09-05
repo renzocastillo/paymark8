@@ -149,7 +149,7 @@
                 </div>
                 <div class="col-sm-12 sectexto">
                     <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
-                    <button type="button" class="button1">Registrarme</button>
+                    <button type="button" class="button1">REGISTRARME</button>
                 </div>
               
         </div>
@@ -185,18 +185,17 @@
     <div class="container">
     	<div class="row">
             <div class="col-sm-12">
-                <div class="titulo show-on-scroll"><span>¿Qué es Paymark?</span></div>
+                <div class="titulo show-on-scroll text-center"><span>¿QUIÉNES SOMOS?</span></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 contenedor">
+            <div class="col-sm-6">
                 <img src="uploads/1.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
             </div>  
             <div class="col-sm-6">
-                <div class="content"><h2>Pixel Facial Cream</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-            </div>
             </div>
         </div>
         <div class="row">        
@@ -205,23 +204,18 @@
                 <div class="overlay show-on-scroll"></div>
             </div> 
             <div class="col-sm-6">
-                <div class="content"> <h2>Pixel Facial Cream</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-                </div>
             </div>  
         </div>
         <div class="row">
             <div class="col-sm-12">                      
-                        <div class="test show-on-scroll">
-                            <p>Empieza a ganar con PayMark8</p>
-                            <button type="button" class="btn btn-primary">REGISTRARME</button>
-                        </div>                        
+                <div class="test show-on-scroll">
+                    <p>Empieza a ganar con PayMark8</p>
+                    <button type="button" class="button1">REGISTRARME</button>
+                </div>                        
             </div>
         </div>
-        
-
     </div>
- 
 </section>
 
 <footer class="footer-distributed">
