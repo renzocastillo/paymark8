@@ -4,10 +4,12 @@ $(window).on('load',function(){
 });
 $(document).ready(function(){
     $('.carousel').slick({
-        arrows:true,
+        arrows:false,
+        autoplay: true,
         infinite: true,
         speed: 300,
         slidesToShow: 1,
+  
         responsive: [
             {
               breakpoint: 1024,
@@ -22,8 +24,8 @@ $(document).ready(function(){
    		$('#anuncio').css('top', $(this).scrollTop());
 	});*/
   $('.multiple-carousel').slick({  
-    dots: true,
-    infinite: false,
+    dots: false,
+    infinite: true,
     speed: 300,
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -49,7 +51,7 @@ $(document).ready(function(){
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1
         }
       }
@@ -85,7 +87,7 @@ function videoStoppedPlaying(event) {
     // add the new ammount of seconds played
     timePlayed+=playedFor;
   }
-  document.getElementById("played").innerHTML = Math.round(timePlayed)+"";
+  //document.getElementById("played").innerHTML = Math.round(timePlayed)+"";
   // Count as complete only if end of video was reached
   if(timePlayed>=Math.round(duration) && event.type=="ended") {
     var status=document.getElementById("status");
@@ -128,7 +130,7 @@ function videoStoppedPlaying(event) {
 
 function getDuration() {
   duration = video.duration;
-  document.getElementById("duration").appendChild(new Text(Math.round(duration)+""));
+  //document.getElementById("duration").appendChild(new Text(Math.round(duration)+""));
   console.log("Duration: ", duration);
 }
 

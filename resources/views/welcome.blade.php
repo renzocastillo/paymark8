@@ -29,7 +29,6 @@
                 </button>
                     <a class="navbar-brand" href="http://disputebills.com">
                         <img src="{{ CRUDBooster::getSetting('logo') }}">
-                        {{CRUDBooster::getSetting('appname') }}
                     </a>
               </div>
               <div id="navbar7" class="navbar-collapse collapse">
@@ -128,7 +127,7 @@
             </div>
         </div>
         -->
-       <div class="row secvideo">         
+        <div class="row secvideo">         
                 <div class="col-sm-12">
                             <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
                                 <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
@@ -154,41 +153,44 @@
                 </div>
               
         </div>
-
+        <!-- Sección logos empresas --> 
         <div class="container-fluid">
-        <div class="row" style="margin-top: 50px; margin-bottom: 50px">
-        @foreach($anuncios as $anuncio)
-        <div class="col-sm-12 col-lg-3">  
-        <figure class="snip1529">
-                <img src="{{$anuncio->imagen}}" alt="pr-sample13" style="width:350px;height:250px; object-fit:cover;" />
-                <!-- <figcaption>
-                    <h3>An Abstract Post Heading</h3>
-                    <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
-                </figcaption>-->
-                <div class="hover"><i class="ion-android-open"></i></div>
-                <a href="{{$anuncio->url}}" target="_blank"></a>
-        </figure>
-        </div>   
-        @endforeach
-        </div>
+                <div class="row multiple-carousel">
+                @foreach($empresas as $empresa)
+                <img src="{{$empresa->logo}}"/>
+                @endforeach
+                </div> 
+        </div>     
+        <div class="container-fluid anuncios">
+            <h2 class="text-center">Anúnciate aquí</h2>
+            <div class="row" >
+            @foreach($anuncios as $anuncio)
+            <div class="col-sm-12 col-lg-3">  
+            <figure class="snip1529">
+                    <img src="{{$anuncio->imagen}}" alt="pr-sample13" style="width:350px;height:250px; object-fit:cover;" />
+                    <!-- <figcaption>
+                        <h3>An Abstract Post Heading</h3>
+                        <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
+                    </figcaption>-->
+                    <div class="hover"><i class="ion-android-open"></i></div>
+                    <a href="{{$anuncio->url}}" target="_blank"></a>
+            </figure>
+            </div>   
+            @endforeach
+            </div>
         </div>       
-<!-- Sección logos empresas --> 
-<div class="row multiple-carousel">
-@foreach($empresas as $empresa)
-<img src="{{$empresa->logo}}"/>
-@endforeach
-</div>           
-<!-- Sección A cerca de la empresa -->
+     
+<!-- Sección Acerca de la empresa -->
 <section id="featured">
     <div class="container">
     	<div class="row">
             <div class="col-sm-12">
-                <div class="titulo show-on-scroll"><span>A cerca de Nosotros</span></div>
+                <div class="titulo show-on-scroll"><span>¿Qué es Paymark?</span></div>
             </div>
         </div>
-        <div class="row" style="margin-top: 100px;">
+        <div class="row">
             <div class="col-sm-6 contenedor">
-                <img src="uploads/img1.jpg" class="inline-photo">
+                <img src="uploads/1.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
             </div>  
             <div class="col-sm-6">
@@ -197,9 +199,9 @@
             </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 100px;">        
+        <div class="row">        
             <div class="col-sm-6">
-                <div class="image"><img src="uploads/imagen2.jpg" class="inline-photo show-on-scroll"></div>
+                <div class="image"><img src="uploads/2.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
             </div> 
             <div class="col-sm-6">
@@ -208,7 +210,7 @@
                 </div>
             </div>  
         </div>
-        <div class="row" style="margin-top: 100px;">
+        <div class="row">
             <div class="col-sm-12">                      
                         <div class="test show-on-scroll">
                             <p>Empieza a ganar con PayMark8</p>
@@ -222,82 +224,51 @@
  
 </section>
 
-<footer class="footer-distributed" style="margin-top: 100px;">
-
+<footer class="footer-distributed">
         <div class="footer-left">
-
-            <h3>Company<span>logo</span></h3>
-
-            <p class="footer-links">
-                <a href="#" class="link-1">Home</a>
-                
-                <a href="#">Blog</a>
-            
-                <a href="#">Pricing</a>
-            
-                <a href="#">About</a>
-                
-                <a href="#">Faq</a>
-                
-                <a href="#">Contact</a>
-            </p>
-
-            <p class="footer-company-name">Company Name © 2015</p>
+            <img class="footer-brand" src="{{ CRUDBooster::getSetting('logo') }}">
         </div>
-
         <div class="footer-center">
-
             <div>
                 <i class="fa fa-map-marker"></i>
-                <p><span>444 S. Cedros Ave</span> Solana Beach, California</p>
+                <p>{{CRUDBooster::getSetting('direccion')}}</p>
             </div>
-
             <div>
                 <i class="fa fa-phone"></i>
-                <p>+1.555.555.5555</p>
+                <p>{{CRUDBooster::getSetting('whatsapp')}}</p>
             </div>
-
             <div>
                 <i class="fa fa-envelope"></i>
-                <p><a href="mailto:support@company.com">support@company.com</a></p>
+                <p><a href="mailto:{{CRUDBooster::getSetting('correo')}}">{{CRUDBooster::getSetting('correo')}}</a></p>
             </div>
-
         </div>
-
         <div class="footer-right">
-
-            <p class="footer-company-about">
-                <span>About the company</span>
-                Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-            </p>
-
             <div class="footer-icons">
-
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
-
+                <a href="{{CRUDBooster::getSetting('facebook') }}" target="_blank" ><i class="fab fa-facebook"></i></a>
+                <a href="{{CRUDBooster::getSetting('instagram') }}"target="_blank" ><i class="fab fa-instagram"></i></a>
             </div>
-
+            <p class="footer-company-about">
+                <span>{{CRUDBooster::getSetting('appname') }}</span>
+               Paymark - Todos los derechos Reservados.
+               <br>
+               Plataforma Digital Desarrollada por <a href="https://www.quaira.com" target="_blank">www.quaira.com</a>
+            </p>
         </div>
-
 </footer>
 
 <div class="modal fade pg-show-modal" id="anuncio" tabindex="-1" role="dialog" aria-hidden="true"> 
-            <div class="modal-dialog"> 
+            <div class="modal-dialog modal-sm"> 
                 <div class="modal-content"> 
                     <div class="modal-header"> 
-                        <h4 class="modal-title">Cuida el medio ambiente !</h4> 
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                         
                     </div>                     
                     <div class="modal-body"> 
-                        <p>En BCJ nos enfocamos en el cuidado del medio ambiente. Si quieres unirte a nosotros y nuestras campañas ecologistas escíbenos a unete@bcj.com</p> 
+                        <img class="img-responsive" src="{{CRUDBooster::getSetting('imagen_popup') }}"/>
                     </div>                     
-                    <div class="modal-footer"> 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                         
-                        <button type="button" class="btn btn-primary">Save changes</button>                         
-                    </div>                     
+                    <!--<div class="modal-footer"> 
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No,gracias</button>                         
+                        <button type="button" class="btn btn-primary">Saber más</button>                         
+                    </div> -->                   
                 </div>                 
             </div>             
         </div>
