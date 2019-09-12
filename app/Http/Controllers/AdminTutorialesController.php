@@ -31,9 +31,8 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Titulo","name"=>"titulo"];
-			$this->col[] = ["label"=>"Contenido","name"=>"contenido"];
-			$this->col[] = ["label"=>"Url","name"=>"url"];
-			$this->col[] = ["label"=>"Imagen","name"=>"imagen","image"=>true];
+			$this->col[] = ["label"=>"Contenido","name"=>"descripcion"];
+			$this->col[] = ["label"=>"Url","name"=>"html_youtube"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
