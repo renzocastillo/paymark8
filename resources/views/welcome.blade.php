@@ -115,13 +115,13 @@
                     </div>
                 @endif
                 @if(CRUDBooster::getSetting('slider_2'))
-                    <div class="elem">
-                        <img src="{{CRUDBooster::getSetting('slider_2') }}"/>
+                    <div class="picture" style=" background-image: url('{{CRUDBooster::getSetting('slider_2')}}'); ">
+                        <div class="overlay"></div>
                     </div>
                 @endif
                 @if(CRUDBooster::getSetting('slider_3'))
-                    <div class="elem">
-                        <img src="{{CRUDBooster::getSetting('slider_3') }}"/>
+                    <div class="picture" style=" background-image: url('{{CRUDBooster::getSetting('slider_3')}}'); ">
+                        <div class="overlay"></div>
                     </div>
                 @endif
             </div>

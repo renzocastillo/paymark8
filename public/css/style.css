@@ -17,10 +17,6 @@
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   
 }
-#video{
-  padding: 2px;
-  background-color:#515152;
-}
 
 .top1{ margin-top:10px;}
 .top2{ margin-top:20px;}
@@ -670,7 +666,7 @@ span.status.incomplete {
 .overlay{
   width: 100%;
   height: 100%;
-  background-color:#0808e3a1;
+  background-color:#0808e36e;
 }
 
 .picture{
