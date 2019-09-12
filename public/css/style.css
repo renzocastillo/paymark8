@@ -649,7 +649,7 @@ span.status.incomplete {
 .fixed-header{
   position:absolute;
   top:14vh;
-  font-size:30px;
+  font-size:45px;
   z-index: 10;
   left: 40%;
   color: #fff;
