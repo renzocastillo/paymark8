@@ -15,7 +15,9 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->title_field         = "name";
 		$this->button_action_style = 'button_icon';	
 		$this->button_import 	   = FALSE;	
-		$this->button_export 	   = FALSE;	
+		$this->button_export 	   = FALSE;
+		$this->button_add = false;
+		$this->button_show = false;
 		$this->button_filter = false;
 		if(CRUDBooster::myPrivilegeId()!=1){
 			$this->button_edit=false;
