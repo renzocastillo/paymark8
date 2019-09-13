@@ -240,7 +240,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$names=explode(" ", $name);
 		$nombre=$names[0];
 		$apellido= $names[1] ? substr($names[0],3) : '';
-		$slug=$nombre.$apellido;
+		$slug=strtolower($nombre.$apellido);
 		$slug=$this->validarSlug($slug);
 		return $slug;
 	}
