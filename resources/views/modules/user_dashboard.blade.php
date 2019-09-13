@@ -28,7 +28,20 @@
         </div>
       </div>
     </div>
+  @else
     <div class="col-sm-3">
+      <div class="small-box bg-blue">
+          <div class="inner">
+            {!! CRUDBooster::getSetting('boton_paypal') !!}
+              <p>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-video-camera"></i>
+        </div>
+      </div>
+    </div> 
+  @endif
+  <div class="col-sm-3">
       <div class="small-box bg-yellow">
           <div class="inner">
               <h3> {{empty($capacidad_de_retiro) ? '$ 0' : '$ '.$capacidad_de_retiro }}</h3>
@@ -61,19 +74,6 @@
         </div>
       </div>
     </div>
-  @else
-    <div class="col-sm-3">
-      <div class="small-box bg-blue">
-          <div class="inner">
-            {!! CRUDBooster::getSetting('boton_paypal') !!}
-              <p>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-video-camera"></i>
-        </div>
-      </div>
-    </div> 
-  @endif
   </div>
 <div class="container">
   <form id="solicitar_pago" method="post" enctype="multipart/form-data" action={{CRUDBooster::adminpath('ganancias/add-save')}}>

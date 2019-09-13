@@ -223,7 +223,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 					->havingRaw("recorte REGEXP '^[0-9]+$'")
 					->latest()
 					->first();
-		if(count($slug_numerado)){
+		if(!empty($slug_numerado)){
 			$numero=(int)$slug_numerado->recorte;
 			$slug=$slug.($numero+1);
 		}else{
