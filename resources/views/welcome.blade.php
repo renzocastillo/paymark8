@@ -5,6 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{csrf_token()}}" />
+        <meta name="theme-color" content="#000032">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <title>{{CRUDBooster::getSetting('appname') }}</title>
         <link href="{{asset("css/app.css")}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -105,15 +108,24 @@
         <!--/.container-fluid -->
         </nav>
         <div class="container-fluid">
+            <div class="row">
+                <h2 class="fixed-header">Únete a Paymark</h2>
+            </div>
             <div class="row carousel">
                 @if(CRUDBooster::getSetting('slider_1'))
-                    <img src="{{CRUDBooster::getSetting('slider_1') }}"/>
+                    <div class="picture" style=" background-image: url('{{CRUDBooster::getSetting('slider_1')}}'); ">
+                        <div class="overlay"></div>
+                    </div>
                 @endif
                 @if(CRUDBooster::getSetting('slider_2'))
-                    <img src="{{CRUDBooster::getSetting('slider_2') }}"/>
+                    <div class="picture" style=" background-image: url('{{CRUDBooster::getSetting('slider_2')}}'); ">
+                        <div class="overlay"></div>
+                    </div>
                 @endif
                 @if(CRUDBooster::getSetting('slider_3'))
-                    <img src="{{CRUDBooster::getSetting('slider_3') }}"/>
+                    <div class="picture" style=" background-image: url('{{CRUDBooster::getSetting('slider_3')}}'); ">
+                        <div class="overlay"></div>
+                    </div>
                 @endif
             </div>
         
@@ -127,31 +139,33 @@
             </div>
         </div>
         -->
-        <div class="row secvideo">         
-                <div class="col-sm-12">
-                            <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
-                                <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
-                                    <source src="{{$video->url}}" type="video/mp4" >
-                                </video>
-                            </div>
-                             <!--
-                            <div id="status" class="incomplete">
-                                <span>Play status: </span>
-                                <span class="status complete">COMPLETE</span>
-                                <span class="status incomplete">INCOMPLETE</span>
-                                <br />
-                            </div>
-                            <div>
-                                <span id="played">0</span> seconds out of 
-                                <span id="duration"></span> seconds. (only updates when the video pauses)
-                            </div>
-                            -->
-                </div>
-                <div class="col-sm-12 sectexto">
-                    <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
-                    <button type="button" class="button1">REGISTRARME</button>
-                </div>
-              
+        <div class="container-fluid">
+            <div class="row secvideo">         
+                    <div class="col-sm-12 col-lg-6 col-lg-push-3">
+                                <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
+                                    <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
+                                        <source src="{{$video->url}}" type="video/mp4" >
+                                    </video>
+                                </div>
+                                <!--
+                                <div id="status" class="incomplete">
+                                    <span>Play status: </span>
+                                    <span class="status complete">COMPLETE</span>
+                                    <span class="status incomplete">INCOMPLETE</span>
+                                    <br />
+                                </div>
+                                <div>
+                                    <span id="played">0</span> seconds out of 
+                                    <span id="duration"></span> seconds. (only updates when the video pauses)
+                                </div>
+                                -->
+                    </div>
+                    <div class="col-sm-12 sectexto">
+                        <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
+                        <button type="button" class="button1">REGISTRARME</button>
+                    </div>
+                
+            </div>
         </div>
         <!-- Sección logos empresas --> 
         <div class="container-fluid">
@@ -186,25 +200,37 @@
     	<div class="row">
             <div class="col-sm-12">
                 <div class="titulo show-on-scroll text-center"><span>¿QUIÉNES SOMOS?</span></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <p>Un gran equipo comprometido con brindar una nueva experiencia de compra para nuestros clientes y alcanzar la mayor audiencia referenciados por los mismos. </p>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <img src="uploads/1.jpg" class="inline-photo">
-                <div class="overlay show-on-scroll"></div>
+                <div class="titulo show-on-scroll text-center"><span>¿QUÉ TE OFRECEMOS?</span></div>
+                <p>Una nueva oportunidad de aprovechar tu activo social desde donde estés, a cualquier hora, por compartirnos con más personas, te ayudamos a conseguir ingresos extra.</p>
             </div>  
             <div class="col-sm-6">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
+                <img src="uploads/1.jpg" class="inline-photo">
+                <div class="overlay show-on-scroll"></div>
             </div>
         </div>
         <div class="row">        
             <div class="col-sm-6">
-                <div class="image"><img src="uploads/2.jpg" class="inline-photo show-on-scroll"></div>
-                <div class="overlay show-on-scroll"></div>
+                <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ NOSOTROS?</span></div>
+                <p>Porque no existe plataforma virtual similar, con un sistema de afiliaciones tan efectivo y comprobado, estamos preparados para recibir 50 millones de usuarios, somos una empresa seria y estructurada con un modelo de negocio que ha revolucionado el Marketing en todas sus formas.</p>
             </div> 
             <div class="col-sm-6">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
+                <div class="image"><img src="uploads/2.jpg" class="inline-photo show-on-scroll"></div>
+                <div class="overlay show-on-scroll"></div>
+            </div>  
+        </div>
+        <div class="row">        
+            <div class="col-sm-6">
+                <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN PAYMARK8?</span></div>
+                <p>Junto a nuestro equipo sabemos que tienes la capacidad de hacer muchos amigos, tu activo social es muy valioso y como cliente satisfecho sabes compartir, unimos ambas habilidades y creamos justo el modelo de negocio que te conviene a ti.</p>
+            </div> 
+            <div class="col-sm-6">
+                <div class="image"><img src="uploads/3.jpg" class="inline-photo show-on-scroll"></div>
+                <div class="overlay show-on-scroll"></div>
             </div>  
         </div>
         <div class="row">
@@ -223,10 +249,6 @@
             <img class="footer-brand" src="{{ CRUDBooster::getSetting('logo') }}">
         </div>
         <div class="footer-center">
-            <div>
-                <i class="fa fa-map-marker"></i>
-                <p>{{CRUDBooster::getSetting('direccion')}}</p>
-            </div>
             <div>
                 <i class="fa fa-phone"></i>
                 <p>{{CRUDBooster::getSetting('whatsapp')}}</p>

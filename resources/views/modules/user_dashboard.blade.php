@@ -6,6 +6,7 @@
         <strong>Pago concretado!</strong> Dentro de las próximas horas te llegará un correo confirmando tu activación.
     </div>
   @endif
+  @if(CRUDBooster::getSetting('oficina_video_youtube'))
   <div class="row">
     <div class="col-sm-12 col-lg-4 col-lg-push-4">
         <div class="iframe-container">
@@ -13,6 +14,7 @@
         </div>
     </div>
   </div>
+  @endif
   <div class="row">
   @if(CRUDBooster::me()->estado)
     <div class="col-sm-3">
