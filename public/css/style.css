@@ -218,8 +218,6 @@ nav.navbar{
     font-size: 16px;
     line-height: 1.6em;
     margin: 10px;
-    max-width: 310px;
-    min-width: 250px;
     overflow: hidden;
     position: relative;
     text-align: left;
@@ -235,10 +233,10 @@ nav.navbar{
   }
   
   .snip1529 img {
-    max-width: 100%;
-    vertical-align: top;
-    position: relative;
-   
+    max-height:200px;
+    width:100%; 
+    object-fit: cover;
+    object-position: top;
   }
   
   .snip1529 figcaption {
@@ -266,7 +264,7 @@ nav.navbar{
     left: 0;
     right: 0;
     align-items: center;
-    background-color: rgba(0,0,50, 0.75);
+    background-color: rgba(0, 0, 50, 0.29);
     display: flex;
     font-size: 65px;
     justify-content: center;
