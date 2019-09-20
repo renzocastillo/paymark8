@@ -155,12 +155,12 @@
 			$dolares_x_efectuarse=$ganancia_x_vista*$vistas_a_favor;
 
 	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y afiliaciones hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales: Dólares ganados desde el último cobro hasta la fecha','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'green','width'=>'col-sm-3 col-lg-6 '];
-			$this->index_statistic[] = ['label'=>'Capacidad de Retiro: 01 afiliación por cada 10 vistas y $20 como mínimo.','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'yellow','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Dólares por Ganar: Dólares que ganarías si solo compartes tu link.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'aqua','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'red','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'red','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'green','width'=>'col-sm-2 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales: Dólares ganados desde el último cobro hasta la fecha','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-3 col-lg-6 '];
+			$this->index_statistic[] = ['label'=>'Capacidad de Retiro: 01 afiliación por cada 10 vistas y $20 como mínimo.','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Dólares por Ganar: Dólares que ganarías si solo compartes tu link.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
 
 
 	        /*

@@ -62,10 +62,12 @@
 }
 
 .badge.badge-blue{
-    background-color:#fff;
-    color: #4070FA;
-    padding:5px;
-    font-size: 1.1em;
+    background-color:#4070FA;
+    color: #fff;
+    padding: 8px 15px 8px 15px;
+    font-size: 0.8em;
+    border-radius: 25px;
+    box-shadow: 0px 8px 12px rgba(64,112,250, 0.4);
 }
 
 #solicitar_pago{

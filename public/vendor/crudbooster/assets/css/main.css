@@ -121,6 +121,8 @@
   .custom-skin .content-header>.breadcrumb {
     background-color: white;
     border-radius: 5px;
+    display: none;
+
   }
   .custom-skin .wrapper,
   .custom-skin .main-sidebar,
@@ -229,8 +231,25 @@
     border-color:  #4070FA;
   }
   .custom-skin .small-box{
-    border-radius:6px;
+    border-radius:12px;
     box-shadow:0 5px 20px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.10);
+  }
+  .custom-skin .small-box.bg-white h3{
+    color:#4070FA;
+  }
+  .custom-skin .small-box.bg-white p {
+    font-weight:600;
+    font-size: 14px;
+    color: #8e8b96;
+  }
+  .custom-skin .small-box.bg-white h2 {
+    font-size: 20px;
+  }
+  .custom-skin .small-box.bg-white .icon{
+    color:rgba(226, 236, 239, 0.47);
+  }
+  .custom-skin .bg-white{
+    background-color: #fff !important;
   }
   .custom-skin .bg-red{
     background-color:#fa405a !important;  
@@ -239,13 +258,34 @@
     background-color:#1bb744 !important;
   }
   .custom-skin .bg-aqua{
-   background-color:#4070FA !important;
+    background-color: transparent !important;
+    background: linear-gradient(104deg, rgb(0, 0, 117) 0%, rgb(0, 126, 255) 100%);
   }
   .custom-skin .bg-blue{
-    background-color:#3908ce !important;
+    background-color: transparent !important;
+    background: linear-gradient(104deg, #008fff 0%,  #4070fa 100%);
+  }
+  .custom-skin .small-box.bg-blue{
+    box-shadow:0px 8px 15px rgba(64,112,250, 0.3);
+  }
+ 
+  .custom-skin .bg-grey{
+    background-color:transparent !important;
+    background: linear-gradient(104deg, #d9eaf5 0%, #f5f5f5 100%);
   }
   .custom-skin .bg-yellow{
-    background-color: #ffbc00 !important;
+    background-color: #fff !important;
+  }
+  .custom-skin .small-box.bg-yellow h3{
+    color:#4070FA;
+  }
+  .custom-skin .small-box.bg-yellow p {
+    font-weight:600;
+    font-size: 14px;
+    color: #8e8b96;
+  }
+  .custom-skin .small-box.bg-yellow .icon{
+    color:rgba(226, 236, 239, 0.47);
   }
   .custom-skin .bg-purple{
     background-color: #9e40e6 !important;
@@ -265,4 +305,8 @@
     border:none;
   }
 
-  
+  @media (max-width: 767px){
+    .custom-skin .small-box .icon {
+      display: block;
+    }
+  }
