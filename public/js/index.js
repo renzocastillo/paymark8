@@ -92,7 +92,17 @@ function videoStoppedPlaying(event) {
   // Count as complete only if end of video was reached
   if(timePlayed>=Math.floor(duration) && event.type=="ended" && visto==0) {
     visto=1;
-    console.log("se ha visto el visto el video por completo");
+    video_visto();
+  }
+}
+$('video').bind('play', function (e) {
+  if(visto==0){
+    visto=1;
+    video_visto();
+  }
+});
+function video_visto(){
+  console.log("se ha visto el visto el video por completo");
     var video_id=video.dataset.id;
     console.log("En la BD este video tiene el id "+video_id);
     //var cms_users_id=video.dataset.user;
@@ -123,9 +133,7 @@ function videoStoppedPlaying(event) {
     }else{
       console.log("Se ha visto el video sin usar un enlace de usuario. No se agregará la reproducción a la BD");
     }
-  }
 }
-
 function getDuration() {
   duration = video.duration;
   //document.getElementById("duration").appendChild(new Text(Math.round(duration)+""));
