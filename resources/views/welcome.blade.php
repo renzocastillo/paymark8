@@ -38,22 +38,18 @@
                 <ul class="nav navbar-nav navbar-left">
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                @if(CRUDBooster::myName())
                     <li>
-                        <a href="{{CRUDBooster::myName() ? CRUDBooster::adminpath('') : CRUDBooster::adminpath('login')}}">
-                            
-                            @if(CRUDBooster::myName())
-                            
-                                Sesión Iniciada: {{CRUDBooster::myName()}}
-                            
-                            @else
-                                <i class="fas fa-sign-in-alt"></i> 
-                                Iniciar Sesión
-                                <a href="#modalRegistro"  data-toggle="modal">Registrarse</a> 
-                            @endif
-                        </a>
-                    </li>         
-                    
-    
+                        <a href="{{CRUDBooster::myName() ? CRUDBooster::adminpath('') : CRUDBooster::adminpath('login')}}">Sesión Iniciada: {{CRUDBooster::myName()}}</a>
+                    </li>     
+                @else
+                    <li>
+                        <a href="{{CRUDBooster::myName() ? CRUDBooster::adminpath('') : CRUDBooster::adminpath('login')}}"> Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
+                    </li>
+                    <li>
+                        <a href="#modalRegistro"  data-toggle="modal">Registrarse</a> 
+                    </li>
+                @endif
                 </ul>
               </div>
               <!--/.nav-collapse -->
