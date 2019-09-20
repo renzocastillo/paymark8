@@ -40,7 +40,10 @@
                 <ul class="nav navbar-nav navbar-right">
                 @if(CRUDBooster::myName())
                     <li>
-                        <a href="{{CRUDBooster::myName() ? CRUDBooster::adminpath('') : CRUDBooster::adminpath('login')}}">Sesión Iniciada: {{CRUDBooster::myName()}}</a>
+                        <a href="{{CRUDBooster::adminpath('')}}">Sesión Iniciada: {{CRUDBooster::myName()}}</a>
+                    </li>
+                    <li>
+                        <a href="{{CRUDBooster::adminpath('logout')}}">Cerrar Sesión</a>
                     </li>     
                 @else
                     <li>
