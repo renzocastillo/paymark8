@@ -30,7 +30,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                    <a class="navbar-brand" href="http://disputebills.com">
+                    <a class="navbar-brand" href="{{url('/')}}">
                         <img src="{{ CRUDBooster::getSetting('logo') }}">
                     </a>
               </div>
@@ -48,7 +48,7 @@
                             @else
                                 <i class="fas fa-sign-in-alt"></i> 
                                 Iniciar Sesión
-                                <a href=""  data-toggle="modal" data-target="#modalRegistro">Registrarse</a> 
+                                <a href="#modalRegistro"  data-toggle="modal">Registrarse</a> 
                             @endif
                         </a>
                     </li>         
@@ -78,7 +78,7 @@
                             <input type="text" class="form-control" id="name" placeholder="Nombre y Apellido" name="name">
                         </div>
                         <div class="form-group">
-                            <label for="whatsapp"><i class="fas fa-phone grey-text"></i> Celular:</label>
+                            <label for="whatsapp"><i class="fas fa-phone grey-text"></i> Whatsapp:</label>
                             <input type="text" class="form-control" id="whatsapp" placeholder="Ej. 51969922331" name="whatsapp">
                         </div>
                         <div class="form-group">
@@ -141,30 +141,17 @@
         -->
         <div class="container-fluid">
             <div class="row secvideo">         
-                    <div class="col-sm-12 col-lg-6 col-lg-push-3">
+                    <div class="col-sm-12 col-lg-5 col-lg-offset-2">
                                 <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
                                     <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
                                         <source src="{{$video->url}}" type="video/mp4" >
                                     </video>
                                 </div>
-                                <!--
-                                <div id="status" class="incomplete">
-                                    <span>Play status: </span>
-                                    <span class="status complete">COMPLETE</span>
-                                    <span class="status incomplete">INCOMPLETE</span>
-                                    <br />
-                                </div>
-                                <div>
-                                    <span id="played">0</span> seconds out of 
-                                    <span id="duration"></span> seconds. (only updates when the video pauses)
-                                </div>
-                                -->
                     </div>
-                    <div class="col-sm-12 sectexto">
+                    <div class="col-sm-12 col-lg-3 sectexto ">
                         <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
-                        <button type="button" class="button1">REGISTRARME</button>
+                        <button data-target="#modalRegistro" data-toggle="modal" type="button" class="button1">REGISTRARME</button>
                     </div>
-                
             </div>
         </div>
         <!-- Sección logos empresas --> 
@@ -176,7 +163,7 @@
                 </div> 
         </div>     
         <div class="container-fluid anuncios">
-            <h2 class="text-center">Anúnciate aquí</h2>
+            <h2 class="text-center">Asociados</h2>
             <div class="row" >
             @foreach($anuncios as $anuncio)
             <div class="col-sm-12 col-lg-3">  
@@ -204,31 +191,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿QUÉ TE OFRECEMOS?</span></div>
                 <p>Una nueva oportunidad de aprovechar tu activo social desde donde estés, a cualquier hora, por compartirnos con más personas, te ayudamos a conseguir ingresos extra.</p>
             </div>  
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-lg-4 col-lg-offset-2">
                 <img src="uploads/1.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
             </div>
         </div>
         <div class="row">        
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ NOSOTROS?</span></div>
                 <p>Porque no existe plataforma virtual similar, con un sistema de afiliaciones tan efectivo y comprobado, estamos preparados para recibir 50 millones de usuarios, somos una empresa seria y estructurada con un modelo de negocio que ha revolucionado el Marketing en todas sus formas.</p>
             </div> 
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-lg-4 col-lg-offset-2">
                 <div class="image"><img src="uploads/2.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
             </div>  
         </div>
         <div class="row">        
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN PAYMARK8?</span></div>
                 <p>Junto a nuestro equipo sabemos que tienes la capacidad de hacer muchos amigos, tu activo social es muy valioso y como cliente satisfecho sabes compartir, unimos ambas habilidades y creamos justo el modelo de negocio que te conviene a ti.</p>
             </div> 
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-lg-4 col-lg-offset-2">
                 <div class="image"><img src="uploads/3.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
             </div>  
@@ -237,7 +224,7 @@
             <div class="col-sm-12">                      
                 <div class="test show-on-scroll">
                     <p>Empieza a ganar con PayMark8</p>
-                    <button type="button" class="button1">REGISTRARME</button>
+                    <button type="button" data-toggle="modal" data-target="#modalRegistro" class="button1">REGISTRARME</button>
                 </div>                        
             </div>
         </div>
