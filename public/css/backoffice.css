@@ -70,6 +70,16 @@
     box-shadow: 0px 8px 12px rgba(64,112,250, 0.4);
 }
 
-#solicitar_pago{
+#solicitar_pago.btn-default{
     border-radius: 45px;
+    background-color: #fff;
+    color: #4070FA;
+    box-shadow: 0px 8px 12px rgba(0, 46, 177, 0.4);
+    margin-top: 15px;
+}
+#solicitar_pago.btn-default.disabled{
+    border-radius: 45px;
+    background-color: #f4f4f4;
+    color: #4070FA;
+    border-color: #ddd;
 }

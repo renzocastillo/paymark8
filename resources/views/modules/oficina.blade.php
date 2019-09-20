@@ -17,5 +17,5 @@
             @endforeach
         </div>
 @endif
-@include('crudbooster::statistic_builder.index',['id_cms_statistics'=>2])
+@include('crudbooster::statistic_builder.index',['id_cms_statistics'=>1])
 @endsection
