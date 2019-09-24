@@ -207,7 +207,7 @@
 	        |
 	        */
 	        $this->load_js[]=asset("js/slick.min.js");
-	        
+	        $this->load_js[]=asset("js/backoffice.js");
 	        
 	        
 	        /*
