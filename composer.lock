@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/renzocastillo/crudbooster.git",
-                "reference": "7d5cc9037ea72443cbae1340c23da1d1783a37dc"
+                "reference": "f6e79c298a7222f90e010a267b92415105cb91dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/renzocastillo/crudbooster/zipball/7d5cc9037ea72443cbae1340c23da1d1783a37dc",
-                "reference": "7d5cc9037ea72443cbae1340c23da1d1783a37dc",
+                "url": "https://api.github.com/repos/renzocastillo/crudbooster/zipball/f6e79c298a7222f90e010a267b92415105cb91dc",
+                "reference": "f6e79c298a7222f90e010a267b92415105cb91dc",
                 "shasum": ""
             },
             "require": {
@@ -114,7 +114,7 @@
             "support": {
                 "source": "https://github.com/renzocastillo/crudbooster/tree/custom-5.4"
             },
-            "time": "2019-09-14T18:33:31+00:00"
+            "time": "2019-09-24T00:01:03+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

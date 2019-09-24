@@ -1,3 +1,14 @@
+.brandlogo-image {
+  line-height: .8;
+  margin-left: .8rem;
+  margin-right: .5rem;
+  margin-top: 10px;
+  max-height: 34px;
+  width: auto;
+}
+.main-header .logo .logo-lg{
+  margin-left: -1.5em;
+}
 .select2-dropdown {z-index: 9999 !important}
 
 	.bootstrap-timepicker-minute,.bootstrap-timepicker-hour,.bootstrap-timepicker-meridian,.bootstrap-timepicker-second {
@@ -210,7 +221,7 @@
   }
   .custom-skin .content-wrapper, .right-side {
     min-height: 100%;
-    background-color: #f5f5f5;
+    background:linear-gradient(to bottom, rgb(31, 37, 78), rgb(21, 21, 84));
     z-index: 800;
   }
   .custom-skin .box{
@@ -259,11 +270,11 @@
   }
   .custom-skin .bg-aqua{
     background-color: transparent !important;
-    background: linear-gradient(104deg, rgb(0, 0, 117) 0%, rgb(0, 126, 255) 100%);
+    background: linear-gradient(104deg, rgb(23, 44, 105) 0%, rgb(21, 66, 195) 100%);
   }
   .custom-skin .bg-blue{
     background-color: transparent !important;
-    background: linear-gradient(104deg, #008fff 0%,  #4070fa 100%);
+    background: linear-gradient(104deg, #40bdff 0%,  #0359f7 100%);
   }
   .custom-skin .small-box.bg-blue{
     box-shadow:0px 8px 15px rgba(64,112,250, 0.3);

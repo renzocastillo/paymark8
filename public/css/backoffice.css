@@ -62,14 +62,17 @@
 }
 
 .badge.badge-blue{
-    background-color:#4070FA;
-    color: #fff;
+    background-color:#fff;
+    color: #4070FA;
     padding: 8px 15px 8px 15px;
     font-size: 0.8em;
     border-radius: 25px;
     box-shadow: 0px 8px 12px rgba(64,112,250, 0.4);
 }
-
+#cardborde{
+    border: #6184ff96 5px solid;
+    box-shadow: 0px 8px 12px rgba(0, 114, 255, 0.6);
+}
 #solicitar_pago.btn-default{
     border-radius: 45px;
     background-color: #fff;
