@@ -5,7 +5,13 @@
     box-shadow: inset 0px -40px 30px -10px;
     height: 300px;
 }
-
+.multiple-carousel img{
+  max-height: 50vh;
+  object-fit: cover;
+  object-position: 50% 50%;
+  box-shadow: inset 0px -40px 30px -10px;
+  height: 150px;
+}
 .secvideo{
   /*background-color:#4070fa;*/
   /*background-color:#000032;*/
@@ -80,11 +86,11 @@
     color:#ffffff;
 }
 .slick-prev {
-    left: 10%;
+    left: 1% !important;
     z-index: 1;
 }
 .slick-next {
-    right: 10%;
+    right: 1% !important;
     z-index: 1;
 }
 body {

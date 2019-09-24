@@ -92,3 +92,28 @@
     color: #4070FA;
     border-color: #ddd;
 }
+
+@media (max-width:768px) {
+    .multiple-carousel .slick-slide{
+    }
+}
+.multiple-carousel img{
+    max-height: 50vh;
+    object-fit: cover;
+    object-position: 50% 50%;
+    box-shadow: inset 0px -40px 30px -10px;
+    height: 150px;
+}
+.slick-prev:before, .slick-next:before{
+    color:#fff !important;
+}
+.slick-prev {
+    left: 1% !important;
+    z-index: 1;
+    color:#fff !important;
+}
+.slick-next {
+    right: 1% !important;
+    z-index: 1;
+    color:#fff !important;
+}
