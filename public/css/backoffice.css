@@ -1,4 +1,6 @@
-
+.iframes{
+    text-align:center;
+}
 .iframe-container iframe{
     border: 0;
     left: 0;

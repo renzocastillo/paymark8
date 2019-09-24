@@ -5,7 +5,7 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminTutorialesController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminIframesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -25,21 +25,20 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tutoriales";
+			$this->table = "iframes";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Titulo","name"=>"titulo"];
-			$this->col[] = ["label"=>"Contenido","name"=>"descripcion"];
-			$this->col[] = ["label"=>"Url","name"=>"html_youtube"];
+			$this->col[] = ["label"=>"Titulo","name"=>"title"];
+			$this->col[] = ["label"=>"Código del Iframe","name"=>"html"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Titulo','name'=>'titulo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Descripcion','name'=>'descripcion','type'=>'text','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Url Video','name'=>'html_youtube','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'Entra al video de Youtube, presiona compartir, luego incorporar,luego copiar, y pega aquí'];
+			$this->form[] = ['label'=>'Titulo','name'=>'title','type'=>'text','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Código del Iframe','name'=>'html','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'Entra al video de Youtube, presiona compartir, luego incorporar,luego copiar, y pega aquí'];
+			$this->form[] = ['label'=>'Tipo de Iframe','name'=>'tipos_de_iframe_id','type'=>'select', 'datatable'=>'tipos_de_iframe,nombre','validation'=>'required','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -329,10 +328,15 @@
 				//Create your own query 
 				$data = [];
 				$data['page_title'] = 'Tutoriales';
-				$data['tutoriales'] = DB::table('tutoriales')->orderby('id','desc')->paginate(10);
+				$data['tipo']=Request::get('tipo');
+				$tipos_de_iframe_id=DB::table('tipos_de_iframe')->where('slug',$data['tipo'])->value('id');
+				$data['iframes'] = DB::table('iframes')
+									->where('tipos_de_iframe_id',$tipos_de_iframe_id)
+									->orderby('id','desc')
+									->paginate(10);
 				
 				//Create a view. Please use `cbView` method instead of view method from laravel.
-				$this->cbView('modules.tutoriales',$data);
+				$this->cbView('modules.iframes',$data);
 			//}
 		}
 	    //By the way, you can still create your own method in here... :) 
