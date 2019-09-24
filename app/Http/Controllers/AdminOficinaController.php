@@ -231,7 +231,7 @@
 	        |
 	        */
 	        $this->load_css[] = asset("css/backoffice.css");
-	        
+	        $this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
 	        
 	    }
 

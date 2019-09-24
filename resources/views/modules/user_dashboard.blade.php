@@ -11,7 +11,7 @@
     <div class="col-sm-4 col-lg-12">
       <div class="small-box bg-blue">
           <div class="inner">
-              <h2>Mi Link</h2>
+              <h4>Mi Link</h4>
               <h4><a title="Tu link de afiliacion" href="{{url('/'.CRUDBooster::me()->slug)}}" target="_blank" > <span class="badge badge-blue">{{url('/'.CRUDBooster::me()->slug)}}</span></a></h4>
           </div>
           <div class="icon">
@@ -35,13 +35,13 @@
 </div>
   @if(CRUDBooster::getSetting('oficina_video_youtube'))
   <div class="row">
-    <div class="col-sm-12 col-lg-7">
+    <div class="col-sm-12 col-lg-5">
         <div class="iframe-container">
             {!! CRUDBooster::getSetting('oficina_video_youtube') !!}
         </div>
     </div>
     @endif
-    <div class="col-sm-4 col-lg-5">
+    <div class="col-sm-4 col-lg-5 col-lg-offset-2">
       <div class="container-fluid">
         <div class="row">
           <div id="cardborde" class="small-box bg-blue">
@@ -68,7 +68,7 @@
         <div class="small-box bg-blue">
             <div class="inner">
                 <h3>{{isset($monto_total) ? '$ '.$monto_total : '$ 0'}}</h3>
-                <p> Ganancia Total</p>
+                <h4> Ganancia Total</h4>
             </div>
             <div class="icon">
               <i class="fa fa-trophy"></i>
@@ -79,7 +79,7 @@
         <div class="small-box bg-blue">
             <div class="inner">
                 <h3>{{isset($user->vistas_actuales) ? $user->vistas_actuales : 0}}</h3>
-                <p> N° Vistas Actuales </p>
+                <h4> N° Vistas Actuales </h4>
             </div>
             <div class="icon">
               <i class="fa fa-video-camera"></i>
@@ -89,6 +89,13 @@
     </div>
     </div>
   </div>
+<div class="container-fluid">
+  <div class="row multiple-carousel">
+    @foreach($empresas as $empresa)
+      <img src="{{$empresa->logo}}"/>
+    @endforeach
+  </div> 
+</div>   
 <div class="container">
   <form id="solicitar_pago" method="post" enctype="multipart/form-data" action={{CRUDBooster::adminpath('ganancias/add-save')}}>
     {{ csrf_field() }}
