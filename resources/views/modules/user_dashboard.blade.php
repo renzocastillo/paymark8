@@ -20,7 +20,7 @@
       </div>
     </div>
   @else
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-lg-12">
       <div class="small-box bg-blue">
           <div class="inner">
             {!! CRUDBooster::getSetting('boton_paypal') !!}
