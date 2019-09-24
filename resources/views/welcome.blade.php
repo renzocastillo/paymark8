@@ -157,7 +157,7 @@
         <div class="container-fluid">
                 <div class="row multiple-carousel">
                 @foreach($empresas as $empresa)
-                <img src="{{$empresa->logo}}"/>
+                    <img src="{{url($empresa->logo)}}"/>
                 @endforeach
                 </div> 
         </div>     
