@@ -52,7 +52,7 @@
                       <h4>Capacidad de Retiro&nbsp;&nbsp;</h4>
                     </div>
                     <div class="col-sm-6 col-lg-6 ">
-                      <a id="solicitar_pago"  title="Solicita tu pago por paypal" class="btn btn-default " data-toggle="modal" onclick="solicitar_popup()">
+                      <a id="solicitar_pago"  title="Solicita tu pago por paypal" class="btn btn-default {{empty($capacidad_de_retiro) ? 'disabled' : '' }}" data-toggle="modal" onclick="solicitar_popup()">
                         <i class="fa fa-dollar"></i>
                         Solicitar Pago
                       </a>
