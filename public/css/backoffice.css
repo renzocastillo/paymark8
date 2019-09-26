@@ -2,8 +2,7 @@
     text-align:center;
 }
 .iframes .panel-default,.iframes .panel-footer{
-    background-color:transparent;
-    border:none;
+
 }
 .iframe-container iframe{
     border: 0;

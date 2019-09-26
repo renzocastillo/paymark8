@@ -8,7 +8,7 @@
   @endif
  <div class="row">
   @if(CRUDBooster::me()->estado)
-    <div class="col-sm-4 col-lg-12">
+    <div class="col-sm-4 col-lg-7">
       <div class="small-box bg-blue">
           <div class="inner">
               <h4>Mi Link</h4>
@@ -35,13 +35,13 @@
 </div>
   @if(CRUDBooster::getSetting('oficina_video_youtube'))
   <div class="row">
-    <div class="col-sm-12 col-lg-5">
+    <div class="col-sm-12 col-lg-7">
         <div class="iframe-container">
             {!! CRUDBooster::getSetting('oficina_video_youtube') !!}
         </div>
     </div>
     @endif
-    <div class="col-sm-4 col-lg-5 col-lg-offset-2">
+    <div class="col-sm-4 col-lg-5">
       <div class="container-fluid">
         <div class="row">
           <div id="cardborde" class="small-box bg-blue">
