@@ -14,7 +14,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->primary_key         = 'id';
 		$this->title_field         = "name";
 		$this->button_action_style = 'button_icon';	
-		$this->button_bulk_action = false;
+		$this->button_bulk_action = true;
 		$this->button_import 	   = FALSE;	
 		$this->button_export 	   = FALSE;
 		$this->button_add = false;
