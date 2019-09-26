@@ -2,7 +2,7 @@
     text-align:center;
 }
 .iframes .panel-default,.iframes .panel-footer{
-
+    
 }
 .iframe-container iframe{
     border: 0;
@@ -91,6 +91,25 @@
     color: #4070FA;
     border-color: #ddd;
 }
+#boton_paypal{
+    border-radius: 45px;
+    background-color: #4fce5d;
+    color: #fff;
+    box-shadow: 0px 4px 10px rgba(79,206,93,0.4);
+    margin-top: 15px;
+}
+.payment_btn{
+}
+.payment_btn.disabled{
+    border-radius: 7px;
+    background-color: #4070FA;
+    color: #fff;
+    border-color: #0f48ca;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 15px;
+}
 
 @media (max-width:768px) {
     .multiple-carousel .slick-slide{
@@ -115,4 +134,31 @@
     right: 1% !important;
     z-index: 1;
     color:#fff !important;
+}
+.modal-content{
+    background-color:#000032 ;
+    color:#fff;
+  }
+  
+  .btn-primary{
+    background-color:#4070FA;
+    border-color:#4070FA;
+    border-radius:6px;
+  }
+  
+  .modal-header{
+    border-bottom: 1px solid #000032 ;
+  }
+  
+  .modal-footer{
+    border-top: 1px solid #000032 ;
+  }
+  .close {
+    color: #fff; 
+    opacity: 1;
+    font-size: 30px;
+  }
+#payment_card {
+    background-color: transparent !important;
+    background: linear-gradient(104deg, #89e840 0%, #0b9859 100%);
 }

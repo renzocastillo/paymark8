@@ -20,11 +20,14 @@
       </div>
     </div>
   @else
-    <div class="col-sm-4 col-lg-12">
+    <div class="col-sm-4 col-lg-7">
       <div class="small-box bg-blue">
-          <div class="inner">
-            {!! CRUDBooster::getSetting('boton_paypal') !!}
-              <p>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</p>
+          <div class="inner">          
+              <h4>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</h4>
+              <a id="boton_paypal"  title="pagar" class="btn btn-default" href="#pagar_modal" data-toggle="modal">
+                <i class="fa fa-dollar"></i>
+                 Pagar ahora
+              </a>
           </div>
           <div class="icon">
             <i class="fa fa-video-camera"></i>
@@ -107,5 +110,45 @@
     <input type="hidden" name="monto" value="{{$capacidad_de_retiro }}">
     <input type="hidden" name="estados_id" value="1">
   </form> 
+</div>
+<div class="modal fade pg-show-modal" id="pagar_modal" tabindex="-1" role="dialog" aria-hidden="true"> 
+  <div class="modal-dialog modal-lg"> 
+      <div class="modal-content"> 
+          <div class="modal-header"> 
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                         
+          </div>                     
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12 col-lg-4"> 
+                <div class="small-box bg-blue">
+                  <div class="inner">
+                    <h3>120 USD</h3>
+                    <h4> 10 USD / mes</h4>
+                  </div>
+                  <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">PAGAR</a>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-4">
+                <div id="payment_card" class="small-box bg-blue">
+                    <div class="inner">
+                      <h3>48 USD</h3>
+                      <h4> 4 USD / mes</h4>
+                    </div>
+                    {!! CRUDBooster::getSetting('boton_paypal') !!}
+                </div> 
+              </div>
+              <div class="col-sm-12 col-lg-4">
+                <div class="small-box bg-blue">
+                  <div class="inner">
+                    <h3>120 USD </h3>
+                    <h4> anuales </h4>
+                  </div>
+                  <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">PAGAR</a>
+                </div>
+              </div>
+            </div>
+          </div>                                     
+      </div>                 
+  </div>             
 </div>
 @endsection
