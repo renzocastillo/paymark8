@@ -142,7 +142,7 @@
             <div class="row secvideo">         
                     <div class="col-sm-12 col-lg-5 col-lg-offset-2">
                                 <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
-                                    <video id=video controls="true" preload="yes" playsinline class="embed-responsive-item" data-id="{{$video->id}}">
+                                    <video id=video controls="true" preload="yes" poster="{{url('/uploads/poster.png')}}" playsinline class="embed-responsive-item" data-id="{{$video->id}}">
                                         <source src="{{$video->url}}" type="video/mp4" >
                                     </video>
                                 </div>
