@@ -12,7 +12,15 @@
       <div class="small-box bg-blue">
           <div class="inner">
               <h4>Mi Link</h4>
-              <h4><a title="Tu link de afiliacion" href="{{url('/'.CRUDBooster::me()->slug)}}" target="_blank" > <span class="badge badge-blue">{{url('/'.CRUDBooster::me()->slug)}}</span></a></h4>
+              <h4 id="link_title">
+                <a title="Tu link de afiliacion" href="{{url('/'.CRUDBooster::me()->slug)}}" target="_blank" > 
+                  <span id="link" class="badge badge-blue">
+                    {{url('/'.CRUDBooster::me()->slug)}}
+                    <div class="copied"></div>
+                  </span>
+                </a>
+              </h4>
+              <a class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i class="fa fa-files-o" aria-hidden="true"></i></a>
           </div>
           <div class="icon">
             <i class="fa fa-user"></i>

@@ -69,5 +69,5 @@
             @endforeach
         </ul>
     @endif
-    {{ $iframes->links() }}
+    <!-- {{ $iframes->appends(['tipo' => $tipo])->links() }} -->
 @endsection

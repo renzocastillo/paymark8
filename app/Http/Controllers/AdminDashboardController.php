@@ -171,6 +171,15 @@
 						$('#solicitar_pago').submit();
 					}
 				)
+			};
+			function copy_to_clipboard(){
+				console.log('copiando');
+				var temp=$('<input>');
+				$('#link_title').append(temp);
+				temp.val($('#link').text()).select();
+				document.execCommand('copy');
+				temp.remove();
+				$('.copied').text('link copiado!').show().fadeOut(1200);
 			};";
 
 
