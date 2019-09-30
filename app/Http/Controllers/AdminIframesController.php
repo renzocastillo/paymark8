@@ -333,7 +333,7 @@
 				$data['iframes'] = DB::table('iframes')
 									->where('tipos_de_iframe_id',$tipos_de_iframe_id)
 									->orderby('id','desc')
-									->paginate(10);
+									->simplePaginate(10);
 				
 				//Create a view. Please use `cbView` method instead of view method from laravel.
 				$this->cbView('modules.iframes',$data);
