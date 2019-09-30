@@ -206,7 +206,7 @@
 	        | $this->load_js[] = asset("myfile.js");
 	        |
 	        */
-	        $this->load_js = array();
+	        $this->load_js[] = asset("js/grafica.js");
 	        
 	        
 	        
@@ -231,7 +231,7 @@
 	        |
 	        */
 	        $this->load_css[] = asset("css/backoffice.css");
-	        
+	        $this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
 	        
 	    }
 

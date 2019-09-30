@@ -40,7 +40,7 @@
             @foreach($iframes as $iframe)
                     <li class="col-lg-2 col-sm-12 col-xs-6">
                         <div class="panel panel-default">
-                            <!-- <div class="panel-heading"> {{$iframe->title}}</div> -->
+                            <div class="panel-heading"> {{$iframe->title}}</div>
                             <div class="panel-body">
                                 {!! $iframe->html !!}
                             </div>

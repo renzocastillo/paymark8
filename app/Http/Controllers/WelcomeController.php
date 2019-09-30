@@ -29,7 +29,7 @@ class WelcomeController extends Controller
       if(!$reproduccion){
         if(!empty($patrocinador)){
           DB::table('reproducciones')
-          ->insert(['cms_users_id'=>$patrocinador->id,'videos_id'=>$video_id,'ipaddress'=>$ipaddress]);
+          ->insert(['cms_users_id'=>$patrocinador->id,'videos_id'=>$video_id,'ipaddress'=>$ipaddress,'created_at'=>now()]);
           //ahora aumentamos la cantidad de vistas actuales del usuario en uno
           DB::table('cms_users')
             ->where('id',$patrocinador->id)

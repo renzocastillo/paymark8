@@ -327,8 +327,12 @@
 				
 				//Create your own query 
 				$data = [];
-				$data['page_title'] = 'Tutoriales';
 				$data['tipo']=Request::get('tipo');
+				if($data['tipo'] == 'video'){
+					$data['page_title'] = 'Tutoriales';
+				}else{
+					$data['page_title'] = 'Productos';
+				}
 				$tipos_de_iframe_id=DB::table('tipos_de_iframe')->where('slug',$data['tipo'])->value('id');
 				$data['iframes'] = DB::table('iframes')
 									->where('tipos_de_iframe_id',$tipos_de_iframe_id)

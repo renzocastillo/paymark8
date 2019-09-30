@@ -206,8 +206,8 @@
 	        | $this->load_js[] = asset("myfile.js");
 	        |
 	        */
-	        $this->load_js = array();
-	        
+	        $this->load_js[]=asset("js/slick.min.js");
+	        $this->load_js[]=asset("js/backoffice.js");
 	        
 	        
 	        /*
@@ -230,8 +230,10 @@
 	        | $this->load_css[] = asset("myfile.css");
 	        |
 	        */
-	        $this->load_css[] = asset("css/backoffice.css");
-	        
+			$this->load_css[] = asset("css/backoffice.css");
+			$this->load_css[] = asset("css/slick.css");
+			$this->load_css[] = asset("css/slick-theme.css");
+			$this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
 	        
 	    }
 
@@ -361,10 +363,11 @@
 			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
 
 			$data['user']= $user;
-			$data['page_title']= 'Mi resumen';
+			$data['page_title']= 'Comparte tu link y empieza a ganar';
 			$data['vistas_x_cobrar']=$vistas_x_cobrar;
 			$data['capacidad_de_retiro']=$capacidad_de_retiro;
 			$data['monto_total']=$monto_total;
+			$data['empresas']=DB::table('empresas')->get();
 			$this->cbView('modules.user_dashboard',$data);
 		}
 

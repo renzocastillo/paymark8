@@ -142,14 +142,14 @@
             <div class="row secvideo">         
                     <div class="col-sm-12 col-lg-5 col-lg-offset-2">
                                 <div align="center" class="embed-responsive embed-responsive-16by9  video" >                   
-                                    <video id=video controls class="embed-responsive-item" data-id="{{$video->id}}">
+                                    <video id=video controls="true" preload="yes" poster="{{url('/uploads/poster.png')}}" playsinline class="embed-responsive-item" data-id="{{$video->id}}">
                                         <source src="{{$video->url}}" type="video/mp4" >
                                     </video>
                                 </div>
                     </div>
                     <div class="col-sm-12 col-lg-3 sectexto ">
+                        <button data-target="#modalRegistro" data-toggle="modal" type="button" class="button1">REGISTRARME GRATIS</button>
                         <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
-                        <button data-target="#modalRegistro" data-toggle="modal" type="button" class="button1">REGISTRARME</button>
                     </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
         <div class="container-fluid">
                 <div class="row multiple-carousel">
                 @foreach($empresas as $empresa)
-                <img src="{{$empresa->logo}}"/>
+                    <img src="{{url($empresa->logo)}}"/>
                 @endforeach
                 </div> 
         </div>     
@@ -219,7 +219,7 @@
             <div class="col-sm-12">                      
                 <div class="test show-on-scroll">
                     <p>Empieza a ganar con PayMark8</p>
-                    <button type="button" data-toggle="modal" data-target="#modalRegistro" class="button1">REGISTRARME</button>
+                    <button type="button" data-toggle="modal" data-target="#modalRegistro" class="button1">REGISTRARME GRATIS</button>
                 </div>                        
             </div>
         </div>

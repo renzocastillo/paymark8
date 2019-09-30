@@ -5,7 +5,13 @@
     box-shadow: inset 0px -40px 30px -10px;
     height: 300px;
 }
-
+.multiple-carousel img{
+  max-height: 50vh;
+  object-fit: cover;
+  object-position: 50% 50%;
+  box-shadow: inset 0px -40px 30px -10px;
+  height: 150px;
+}
 .secvideo{
   /*background-color:#4070fa;*/
   /*background-color:#000032;*/
@@ -80,11 +86,11 @@
     color:#ffffff;
 }
 .slick-prev {
-    left: 10%;
+    left: 1% !important;
     z-index: 1;
 }
 .slick-next {
-    right: 10%;
+    right: 1% !important;
     z-index: 1;
 }
 body {
@@ -99,7 +105,7 @@ body {
 }
 nav.navbar{
     margin-bottom: 0px;
-    z-index: 9000;
+    z-index: 1100;
 }
 .navbar-brand>img {
     height: 100%;
@@ -286,7 +292,7 @@ nav.navbar{
 
 /* Global */
 .sectexto{
-  padding-top: 50px;
+  padding-top: 20px;  
   padding-right: 50px;
   padding-left: 50px;
   padding-bottom: 50px;
@@ -296,6 +302,7 @@ nav.navbar{
 .sectexto .texto{
   font-size: 20px;
   color: #fff;
+  padding-top: 15px;
   padding-bottom: 15px; 
   opacity: 0;
   transform: scaleY(1.2) translateY(80px);
@@ -595,12 +602,6 @@ span.status.incomplete {
 #status.incomplete span.status.incomplete {
   display: inline;
 }
-@media (max-width:768px) {
-  .multiple-carousel .slick-slide{
-    /*max-width: 100vw;*/
-    padding:30px;
-  }
-}
 .footer-brand {
   max-width:250px;
 }
@@ -641,6 +642,7 @@ span.status.incomplete {
 .close {
   color: #fff; 
   opacity: 1;
+  font-size: 30px;
 }
 
 #featured .row{
@@ -676,8 +678,10 @@ span.status.incomplete {
   width: 50em;
   height: 35vh;
 }
+.modal.fade{
+  margin-top:60px;
 
-
+}
 @media (min-width: 768px) {
 	.secvideo {
 		padding-bottom: 10vh;
