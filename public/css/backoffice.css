@@ -179,3 +179,7 @@
 	display: none;
 	font-size: 12px;
 }
+#copy_btn{
+    position:relative;
+    z-index:5;
+}

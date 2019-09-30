@@ -20,7 +20,7 @@
                   </span>
                 </a>
               </h4>
-              <a class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+              <a id="copy_btn" class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i class="fa fa-files-o" aria-hidden="true"></i></a>
           </div>
           <div class="icon">
             <i class="fa fa-user"></i>
