@@ -127,29 +127,31 @@
           </div>                     
           <div class="modal-body">
             <div class="row">
-              <div class="col-sm-12 col-lg-4"> 
+              <div class="col-sm-12 col-lg-4 text-center"> 
                 <div class="small-box bg-blue">
                   <div class="inner">
-                    <h3>120 USD</h3>
-                    <h4> 10 USD / mes</h4>
+                    <h3>$10 /mes</h3>
+                    <h4> $120 / anual</h4>
+                    <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                   </div>
                   <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">PAGAR</a>
                 </div>
               </div>
-              <div class="col-sm-12 col-lg-4">
+              <div class="col-sm-12 col-lg-4 text-center">
                 <div id="payment_card" class="small-box bg-blue">
                     <div class="inner">
-                      <h3>48 USD</h3>
-                      <h4> 4 USD / mes</h4>
+                      <h3>$4 /mes</h3>
+                      <h4> $48 / anual (60% dcto)</h4>
+                      <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                     </div>
                     {!! CRUDBooster::getSetting('boton_paypal') !!}
                 </div> 
               </div>
-              <div class="col-sm-12 col-lg-4">
+              <div class="col-sm-12 col-lg-4 text-center">
                 <div class="small-box bg-blue">
                   <div class="inner">
-                    <h3>120 USD </h3>
-                    <h4> anuales </h4>
+                      <h3>$159 / 2 años</h3>
+                      <p> Ganancias ilimitadas, url dos años, servidor de paymark dos años</p>
                   </div>
                   <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">PAGAR</a>
                 </div>

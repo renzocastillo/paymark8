@@ -165,13 +165,15 @@
             <h2 class="text-center">Asociados</h2>
             <div class="row" >
             @foreach($anuncios as $anuncio)
-            <div class="col-sm-12 col-lg-3">  
-            <figure class="snip1529">
-                    <img src="{{$anuncio->imagen}}" class="img-responsive" />
-                    <div class="hover"><i class="ion-android-open"></i></div>
-                    <a href="{{$anuncio->url}}" target="_blank"></a>
-            </figure>
-            </div>   
+                <div class="col-sm-12 col-lg-3">
+                    <a href="{{$anuncio->url}}" target="_blank">  
+                        <figure class="snip1529">
+                                <img src="{{$anuncio->imagen}}" class="img-responsive" />
+                                <div class="hover"><i class="ion-android-open"></i></div>
+                                
+                        </figure>
+                    </a> 
+                </div>  
             @endforeach
             </div>
         </div>       
@@ -242,8 +244,12 @@
         </div>
         <div class="footer-right">
             <div class="footer-icons">
-                <a href="{{CRUDBooster::getSetting('facebook') }}" target="_blank" ><i class="fab fa-facebook"></i></a>
-                <a href="{{CRUDBooster::getSetting('instagram') }}"target="_blank" ><i class="fab fa-instagram"></i></a>
+                @if(!empty(CRUDBooster::getSetting('facebook')))
+                    <a href="{{CRUDBooster::getSetting('facebook') }}" target="_blank" ><i class="fab fa-facebook"></i></a>
+                @endif
+                @if(!empty(CRUDBooster::getSetting('instagram')))
+                    <a href="{{CRUDBooster::getSetting('instagram') }}"target="_blank" ><i class="fab fa-instagram"></i></a>
+                @endif
             </div>
             <p class="footer-company-about">
                 <span>{{CRUDBooster::getSetting('appname') }}</span>
