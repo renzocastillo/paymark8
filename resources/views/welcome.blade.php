@@ -9,6 +9,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <title>{{CRUDBooster::getSetting('appname') }}</title>
+        <link rel="shortcut icon" href="{{ asset(CRUDBooster::getSetting('favicon')) }}">
         <link href="{{asset("css/app.css")}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}" type="text/css" />
