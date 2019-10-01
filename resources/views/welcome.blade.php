@@ -180,9 +180,13 @@
 <section id="featured">
     <div class="container">
     	<div class="row">
-            <div class="col-sm-12">
+        <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿QUIÉNES SOMOS?</span></div>
                 <p>Un gran equipo comprometido con brindar una nueva experiencia de compra para nuestros clientes y alcanzar la mayor audiencia referenciados por los mismos. </p>
+            </div>  
+            <div class="col-sm-6 col-lg-5 col-lg-offset-1">
+                <img src="uploads/4.jpg" class="inline-photo">
+                <div class="overlay show-on-scroll"></div>
             </div>
         </div>
         <div class="row">
@@ -190,7 +194,7 @@
                 <div class="titulo show-on-scroll text-center"><span>¿QUÉ TE OFRECEMOS?</span></div>
                 <p>Una nueva oportunidad de aprovechar tu activo social desde donde estés, a cualquier hora, por compartirnos con más personas, te ayudamos a conseguir ingresos extra.</p>
             </div>  
-            <div class="col-sm-6 col-lg-4 col-lg-offset-2">
+            <div class="col-sm-6 col-lg-5 col-lg-offset-1">
                 <img src="uploads/1.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
             </div>
@@ -200,7 +204,7 @@
                 <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ NOSOTROS?</span></div>
                 <p>Porque no existe plataforma virtual similar, con un sistema de afiliaciones tan efectivo y comprobado, estamos preparados para recibir 50 millones de usuarios, somos una empresa seria y estructurada con un modelo de negocio que ha revolucionado el Marketing en todas sus formas.</p>
             </div> 
-            <div class="col-sm-6 col-lg-4 col-lg-offset-2">
+            <div class="col-sm-6 col-lg-5 col-lg-offset-1">
                 <div class="image"><img src="uploads/2.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
             </div>  
@@ -210,7 +214,8 @@
                 <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN PAYMARK8?</span></div>
                 <p>Junto a nuestro equipo sabemos que tienes la capacidad de hacer muchos amigos, tu activo social es muy valioso y como cliente satisfecho sabes compartir, unimos ambas habilidades y creamos justo el modelo de negocio que te conviene a ti.</p>
             </div> 
-            <div class="col-sm-6 col-lg-4 col-lg-offset-2">
+            <div class="col-sm-6 col-lg-5 col-lg-offset-1">
+
                 <div class="image"><img src="uploads/3.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
             </div>  
