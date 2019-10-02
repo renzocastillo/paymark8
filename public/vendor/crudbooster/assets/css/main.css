@@ -125,9 +125,15 @@
     .custom-skin .main-header .navbar .dropdown-menu li a {
       color: #fff;
     }
+    .custom-skin .main-header .navbar-custom-menu a.btn-danger{
+      background-color: red;
+    }
     .custom-skin .main-header .navbar .dropdown-menu li a:hover {
       background: #000032;
     }
+  }
+  .custom-skin .main-header .navbar-custom-menu a.btn-default[title="Lock Screen"]{
+    display:none;
   }
   .custom-skin .main-header .logo {
     background-color: #000032;
