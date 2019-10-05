@@ -5,11 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{csrf_token()}}" />
+        <meta name="mobile-web-app-capable" content="yes">
         <meta name="theme-color" content="#000032">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <title>{{CRUDBooster::getSetting('appname') }}</title>
-        <link rel="shortcut icon" href="{{ asset(CRUDBooster::getSetting('favicon')) }}">
+        <link rel="apple-touch-icon" sizes="32x32" href="{{ asset(CRUDBooster::getSetting('favicon')) }}">
+        <link rel="icon" sizes="32x32" href="{{ asset(CRUDBooster::getSetting('favicon')) }}">
         <link href="{{asset("css/app.css")}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}" type="text/css" />
