@@ -109,7 +109,7 @@
   </div> 
 </div>   
 <div class="container">
-  <form id="solicitar_pago" method="post" enctype="multipart/form-data" action={{CRUDBooster::adminpath('ganancias/add-save')}}>
+  <form id="solicitar_pago_form" method="post" enctype="multipart/form-data" action={{CRUDBooster::adminpath('ganancias/add-save')}}>
     {{ csrf_field() }}
     <input type="hidden" name="return_url" value="{{Request::fullUrl()}}">
     <input type="hidden" name="cms_users_id" value="{{CRUDBooster::myid()}}">

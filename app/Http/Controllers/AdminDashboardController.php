@@ -144,22 +144,11 @@
 	        |
 	        */
 	        $this->script_js = "function solicitar_popup(e){
-				console.log('hi');
-				var row=$(event.target).parent().parent().prevAll().toArray();
-				var users= [];
-				$.each(row,function(i,val){
-					users.push(val.innerHTML);
-				});
-				var length=users.length;
-				var estado_pagado=2;
-				var nombre=users[length-2];
-				var html= $.parseHTML(users[length-1]);
-				var id=$(html).val();
-				console.log(id);
+				console.log('aqui pesh');
 				var return_url= encodeURIComponent($(location).attr('href'));  
 				console.log(return_url);
 				swal({	
-					title: '¿Estás seguro que deseas solicitar tu pago ?',	
+					title: '¿Estás seguro que quieres solicitar tu pago ?',	
 					text: 'Tu pago se hará efectivo en las próximas 24 hrs',
 					type: 'warning', 
 					showCancelButton: true,
@@ -168,7 +157,7 @@
 					cancelButtonText: 'No', 
 					closeOnConfirm: false },
 					function(){
-						$('#solicitar_pago').submit();
+						$('#solicitar_pago_form').submit();
 					}
 				)
 			};

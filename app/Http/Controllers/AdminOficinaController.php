@@ -145,7 +145,7 @@
 			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
 			$capacidad_de_retiro=$capacidad_de_vistas >= $vistas_actuales ? $vistas_actuales*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones : $capacidad_de_vistas*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
 			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
-			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista;
+			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales) > 0 ? ($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista : 0;
 			$ganancia_x_vistas_actuales=$vistas_actuales*$ganancia_x_vista;
 			$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
 			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest()->first();
@@ -154,10 +154,10 @@
 			$vistas_a_favor=$vistas_actuales-$vistas_actuales_reales;
 			$dolares_x_efectuarse=$ganancia_x_vista*$vistas_a_favor;
 
-	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y afiliaciones hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales: Dólares ganados desde el último cobro hasta la fecha','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-3 col-lg-6 '];
+	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares cobrados por vistas y afiliaciones hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->where('estados_id',2)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales: Dólares acumulados desde la última solicitud de pago hasta la fecha','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-3 col-lg-6 '];
 			$this->index_statistic[] = ['label'=>'Capacidad de Retiro: 01 afiliación por cada 10 vistas y $20 como mínimo.','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Dólares por Ganar: Dólares que ganarías si solo compartes tu link.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Dólares por Ganar: Dólares que ganarías si sólo compartes tu link.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
