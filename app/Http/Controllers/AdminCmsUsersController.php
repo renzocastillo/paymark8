@@ -142,8 +142,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$vistas_por_efectuar= $vistas_por_efectuar >= 0 ? $vistas_por_efectuar : 0;
 			$this->index_statistic[] = ['label'=>'N° Vistas Totales','count'=>DB::table('reproducciones')->where('cms_users_id',$id)->count(),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-2'];
 			$this->index_statistic[] = ['label'=>'N° Actual de Vistas','count'=>$vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-2'];
-			$this->index_statistic[] = ['label'=>'N° Actual de Afiliaciones ','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-2'];
-			$this->index_statistic[] = ['label'=>'N° Usuarios sin Afiliarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
+			$this->index_statistic[] = ['label'=>'N° Actual de Linkers afiliados','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° de Linkers sin Activarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
 			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
 		}
 

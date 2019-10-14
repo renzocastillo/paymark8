@@ -361,7 +361,7 @@
 			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
 
 			$data['user']= $user;
-			$data['page_title']= 'Comparte tu link y empieza a ganar';
+			$data['page_title']= 'Comparte tu link y empieza a ganar Ahora!';
 			$data['vistas_x_cobrar']=$vistas_x_cobrar;
 			$data['capacidad_de_retiro']=$capacidad_de_retiro;
 			$data['monto_total']=$monto_total;

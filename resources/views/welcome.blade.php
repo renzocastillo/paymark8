@@ -75,6 +75,11 @@
                         </button>
                         </div>
                     <div class="modal-body">
+                        @if (isset($patrocinador->id))
+                            <p class="text-center">Tu Linker patrocinador es: {{$patrocinador->name}}</p>
+                        @else
+                            <p class="text-center">Tu patrocinador es: PAYMARK </p>
+                        @endif
                         <div class="form-group">
                             <label for="name"><i class="fas fa-user grey-text"></i> Nombre y Apellido:</label>
                             <input type="text" class="form-control" id="name" placeholder="Nombre y Apellido" name="name">
@@ -200,7 +205,7 @@
                 <p>Una nueva oportunidad de aprovechar tu activo social desde donde estés, a cualquier hora, por compartirnos con más personas, te ayudamos a conseguir ingresos extra.</p>
             </div>  
             <div class="col-sm-6 col-lg-5 col-lg-offset-1">
-                <img src="uploads/1.jpg" class="inline-photo">
+                <img src="uploads/5.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
             </div>
         </div>
@@ -263,7 +268,7 @@
                 <span>{{CRUDBooster::getSetting('appname') }}</span>
                Paymark - Todos los derechos Reservados.
                <br>
-               Plataforma Digital Desarrollada por <a href="https://www.quaira.com" target="_blank">www.quaira.com</a>
+               <!--Plataforma Digital Desarrollada por <a href="https://www.quaira.com" target="_blank">www.quaira.com</a>--> 
             </p>
         </div>
 </footer>
