@@ -153,22 +153,13 @@
 			$vistas_actuales_reales=DB::table('reproducciones')->where('cms_users_id',CRUDBooster::myId())->where('created_at','>',$fecha_solicitud)->count();
 			$vistas_a_favor=$vistas_actuales-$vistas_actuales_reales;
 			$dolares_x_efectuarse=$ganancia_x_vista*$vistas_a_favor;
-
-<<<<<<< Updated upstream
-	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares cobrados por vistas y afiliaciones hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->where('estados_id',2)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Afiliaciones Actuales: Dólares acumulados desde la última solicitud de pago hasta la fecha','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-3 col-lg-6 '];
-			$this->index_statistic[] = ['label'=>'Capacidad de Retiro: 01 afiliación por cada 10 vistas y $20 como mínimo.','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Dólares por Ganar: Dólares que ganarías si sólo compartes tu link.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancia por Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-=======
-	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y linkers afiliados hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			
+	        $this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y linkers afiliados hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->where('estados_id',2)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancias por Vistas y Linkers afiliados actuales: Dólares ganados desde el último cobro hasta la fecha.','count'=>' $'.$ganancia_total_actual,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-3 col-lg-6 '];
 			$this->index_statistic[] = ['label'=>'Capacidad de Retiro: 01 Linker afiliado por cada 10 vistas y $20 como mínimo.','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Dólares por Ganar: dólares que ganarías si sólo compartes tu link sin necesidad de afiliar ni un Linker más.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link.','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancia por linkers afiliados actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
->>>>>>> Stashed changes
 			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
 
 
