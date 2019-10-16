@@ -162,6 +162,9 @@
     background-color: transparent !important;
     background: linear-gradient(104deg, #89e840 0%, #0b9859 100%);
 }
+#payment_card button{
+    margin: 0px 0px 15px;
+}
 #link_title{
     display:inline;
     padding-right: 7px;

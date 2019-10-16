@@ -144,8 +144,7 @@
                       <h4> $48 / anual (60% dcto)</h4>
                       <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                     </div>
-                    {!! CRUDBooster::getSetting('boton_paypal') !!}
-                    <br>              
+                    {!! CRUDBooster::getSetting('boton_paypal') !!}           
                 </div> 
               </div>
               <div class="col-sm-12 col-lg-4 text-center">
