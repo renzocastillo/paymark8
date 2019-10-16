@@ -266,8 +266,11 @@
             </div>
             <p class="footer-company-about">
                 <span>{{CRUDBooster::getSetting('appname') }}</span>
-               Paymark - Todos los derechos Reservados.
                <br>
+               <h5 class="text-justify">Cada compra realizada a través de esta plataforma digital, a cualquiera de nuestros proveedores, será en beneficio de PayMark8.com que recibirá una comisión a través del programa de afiliados y los enlaces con los que contamos, esta plataforma tiene como finalidad aportar valor a la comunidad y sobre todo ayudarte en el proceso de creación del proyecto de mayor alcance de tu audiencia en Línea.</h5>
+               <br>
+               <br>
+               Paymark - Todos los derechos Reservados.
                <!--Plataforma Digital Desarrollada por <a href="https://www.quaira.com" target="_blank">www.quaira.com</a>--> 
             </p>
         </div>
