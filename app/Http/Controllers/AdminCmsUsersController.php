@@ -68,7 +68,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->script_js =  "
 							$( document ).ready(function() {
 								$('a[href=\"#activar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-warning' title='Activar al usuario' href='javascript:;' onclick='activado_popup();'>activar </button>\");
-								$('a[href=\"#pagar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-warning' title='Marcar el monto como pagado' href='javascript:;' onclick='pagado_popup();'>pagar </button>\");
+								$('a[href=\"#pagar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-info' title='Marcar el monto como pagado' href='javascript:;' onclick='pagado_popup();'>marcar pagado </button>\");
 							});
 							function activado_popup(e){
 								console.log('script de activacion');
