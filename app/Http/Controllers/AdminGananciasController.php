@@ -240,7 +240,8 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
+			$query
+				->where('cms_users_id',CRUDBooster::myid());
 	            
 	    }
 
