@@ -241,10 +241,12 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		return $slug;
 	}
 	public function makeSlug($name){
-		$name= preg_replace("/[^a-zA-Z0-9\_\-]+/", "", $name);
 		$names=explode(" ", $name); //array (raul,robledo,maza)
+		foreach($names as &$value){
+			$value=preg_replace("/[^a-zA-Z0-9\_\-]+/", "",$value);
+		}
 		$nombre=$names[0];
-		$apellido= $names[1] ? substr($names[1],3) : '';
+		$apellido= $names[1] ? substr($names[1],0,3) : '';
 		$slug=strtolower($nombre.$apellido);
 		$slug=$this->validarSlug($slug);
 		return $slug;
