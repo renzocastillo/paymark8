@@ -207,11 +207,11 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	}
 	public function registerUser(){
 		$request=Request::all();
-		$name=$request['name'];
+		$name=($request['name']);
 		$whatsapp=$request['whatsapp'];
 		$email=$request['email'];
 		$password=bcrypt($request['password']);
-		$patrocinador=$request['patrocinador'];
+		$patrocinador=$request['patrocinador']; 
 		//$patrocinador=$request['patrocinador'] ? $request['patrocinador'] : NULL ;
 		$slug=$this->makeSlug($name);
 		DB::table('cms_users')
@@ -241,9 +241,9 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		return $slug;
 	}
 	public function makeSlug($name){
-		$names=explode(" ", $name);
+		$names=explode(" ", $name); //array (raul,robledo,maza)
 		$nombre=$names[0];
-		$apellido= $names[1] ? substr($names[0],3) : '';
+		$apellido= $names[1] ? substr($names[1],3) : '';
 		$slug=strtolower($nombre.$apellido);
 		$slug=$this->validarSlug($slug);
 		return $slug;
