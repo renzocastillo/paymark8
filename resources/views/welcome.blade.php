@@ -103,7 +103,7 @@
                         <input type="hidden" name="patrocinador" value="{{$patrocinador->id}}">      
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn-primary btn-lg btn-block">Registrarse</button>
+                        <button id="registrarme" type="submit" class="btn-primary btn-lg btn-block">Registrarse</button>
                     </div>
             
                 </div>

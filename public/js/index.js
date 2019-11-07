@@ -3,6 +3,11 @@ $(window).on('load',function(){
   $('#anuncio').modal('show');
 });
 $(document).ready(function(){
+    $("#registrarme").one('click', function (event) {
+      event.preventDefault();
+      $('#register_form').submit();
+      $(this).prop('disabled', true);
+    });
     $('.carousel').slick({
         arrows:false,
         autoplay: true,
