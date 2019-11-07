@@ -149,7 +149,7 @@
 				console.log(return_url);
 				swal({	
 					title: '¿Estás seguro que quieres solicitar tu pago ?',	
-					text: 'Tu pago se hará efectivo en las próximas 24 hrs',
+					text: 'Asegúrate que tú cuenta Paypal este correctamente digitada en PERFIL / CORREO PAYPAL. A través de este medio se abonarán tus comisiones',
 					type: 'warning', 
 					showCancelButton: true,
 					confirmButtonClass: 'danger',
