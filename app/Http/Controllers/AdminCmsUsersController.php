@@ -37,7 +37,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
 		}
 		//$this->col[] = array("label"=>"Correo","name"=>"email");
-		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
+		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/+".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->col[] = array("label"=>"N° Linkers Actuales","name"=>"(select count(*) from cms_users p where p.cms_users_id=cms_users.id and p.estado=1) as cantidad_reg");
 		$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
