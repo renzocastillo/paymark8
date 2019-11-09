@@ -34,6 +34,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->col[] = array("label"=>"Nombre","name"=>"name");
 		$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
 		if(CRUDBooster::myPrivilegeId()==2){
+			$this->col[] = array("label"=>"Correo Registro","name"=>"email");
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
 		}
 		//$this->col[] = array("label"=>"Correo","name"=>"email");
