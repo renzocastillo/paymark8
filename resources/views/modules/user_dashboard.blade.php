@@ -14,11 +14,9 @@
               <h4>Mi Link</h4>
               <div class="copied"></div>
               <h4 id="link_title">
-                <a title="Tu link de afiliacion" href="{{url('/'.CRUDBooster::me()->slug)}}" target="_blank" > 
                   <span id="link" class="badge badge-blue">
                     {{url('/'.CRUDBooster::me()->slug)}}
                   </span>
-                </a>
               </h4>
               <a id="copy_btn" class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i class="fa fa-files-o" aria-hidden="true"></i></a>
           </div>
