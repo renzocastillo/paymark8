@@ -349,15 +349,21 @@
 			$user=DB::table('cms_users')->where('id',$id)->first();
 			$ganancia_x_vista=DB::table('parametros')->where('name','gvista')->value('content');
 			$ganancia_x_afiliaciones=DB::table('parametros')->where('name','gafiliacion')->value('content');
+			$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
 			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
 			$pago_minimo=DB::table('parametros')->where('name','pmin')->value('content');
+			
 			$afiliaciones_actuales=$user->afiliaciones_actuales;
 			$vistas_actuales=$user->vistas_actuales;
+			$nietos_actuales=$user->nietos_actuales;
+			$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
+			$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
 			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
-			$monto_total=$ganancia_x_vista*$vistas_actuales+$ganancia_x_afiliaciones*$afiliaciones_actuales;
+			
+			$monto_total=$ganancia_x_vista*$vistas_actuales+$ganancia_x_afiliados_actuales+$ganancia_premium;
 			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
 			$vistas_x_cobrar= $vistas_actuales <= $capacidad_de_vistas ? $vistas_actuales : $capacidad_de_vistas;
-			$capacidad_de_retiro=$vistas_x_cobrar*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
+			$capacidad_de_retiro=$vistas_x_cobrar*$ganancia_x_vista+$ganancia_x_afiliados_actuales+$ganancia_premium;
 			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
 
 			$data['user']= $user;

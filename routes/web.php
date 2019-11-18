@@ -21,3 +21,4 @@ Route::get('/admin/configuraciones/save-setting','AdminCmsSettingsController@pos
 Route::get('/admin/configuraciones/delete-file-setting','AdminCmsSettingsController@getDeleteFileSetting')->name('delete-file-setting');
 Route::get('/admin/users/change_user_estado/{id}','AdminCmsUsersController@changeUserEstado')->name('change-user-estado');
 Route::get('/admin/users/change_solicitud_estado/{id}','AdminCmsUsersController@changeSolicitudEstado')->name('change-solicitud-estado');
+Route::get('/admin/users/change_premium_estado/{id}','AdminCmsUsersController@changePremiumEstado')->name('change-premium-estado');

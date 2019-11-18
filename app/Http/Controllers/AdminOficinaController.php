@@ -133,6 +133,7 @@
 			*/
 			$ganancia_x_vista=DB::table('parametros')->where('name','gvista')->value('content');
 			$ganancia_x_afiliaciones=DB::table('parametros')->where('name','gafiliacion')->value('content');
+			$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
 			$pago_minimo=DB::table('parametros')->where('name','pmin')->value('content');
 			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
 			$vistas_totales=DB::table('reproducciones')->where('cms_users_id')->count();
@@ -140,14 +141,17 @@
 			$user=DB::table('cms_users')->where('id',$id)->first();
 			$afiliaciones_actuales=$user->afiliaciones_actuales;
 			$vistas_actuales=$user->vistas_actuales;
-			$ganancia_total_actual=($ganancia_x_vista*$vistas_actuales)+($ganancia_x_afiliaciones*$afiliaciones_actuales);
-			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
-			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
-			$capacidad_de_retiro=$capacidad_de_vistas >= $vistas_actuales ? $vistas_actuales*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones : $capacidad_de_vistas*$ganancia_x_vista+$afiliaciones_actuales*$ganancia_x_afiliaciones;
-			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
-			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales) > 0 ? ($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista : 0;
+			$nietos_actuales=$user->nietos_actuales;
 			$ganancia_x_vistas_actuales=$vistas_actuales*$ganancia_x_vista;
 			$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
+			$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
+			$ganancia_total_actual=$ganancia_x_vistas_actuales+$ganancia_x_afiliados_actuales;
+			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
+			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
+			$capacidad_de_retiro=$capacidad_de_vistas >= $vistas_actuales ? $ganancia_x_vistas_actuales+$ganancia_x_afiliados_actuales+$ganancia_premium : $capacidad_de_vistas*$ganancia_x_vista+$ganancia_x_afiliados_actuales+$ganancia_premium;
+			$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
+			
+			$dolares_x_ganar=($capacidad_de_vistas-$vistas_actuales) > 0 ? ($capacidad_de_vistas-$vistas_actuales)*$ganancia_x_vista : 0;
 			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest()->first();
 			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
 			$vistas_actuales_reales=DB::table('reproducciones')->where('cms_users_id',CRUDBooster::myId())->where('created_at','>',$fecha_solicitud)->count();
@@ -161,7 +165,10 @@
 			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link.','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancia por linkers afiliados actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
-
+			if(CRUDBooster::me()->premium){
+				$this->index_statistic[] = ['label'=>'Ganancia Premium: Ganancia por los linkers de tus linkers','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
+			}
+			
 
 	        /*
 	        | ---------------------------------------------------------------------- 

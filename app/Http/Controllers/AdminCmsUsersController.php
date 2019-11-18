@@ -14,16 +14,17 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->primary_key         = 'id';
 		$this->title_field         = "name";
 		$this->button_action_style = 'button_icon';	
+		//$this->orderby="name,asc";
 		$this->button_bulk_action = true;
 		$this->button_import 	   = FALSE;	
 		$this->button_export 	   = FALSE;
 		$this->button_add = false;
 		$this->button_show = false;
 		$this->button_filter = false;
-		if(CRUDBooster::myPrivilegeId()!=1){
-			$this->button_edit=false;
-		}else{
+		if(CRUDBooster::myPrivilegeId()!=3){
 			$this->button_edit=true;
+		}else{
+			$this->button_edit=false;
 		}
 		//$this->button_bulk_action = false;
 		# END CONFIGURATION DO NOT REMOVE THIS LINE
@@ -34,15 +35,15 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->col[] = array("label"=>"Nombre","name"=>"name");
 		$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
 		if(CRUDBooster::myPrivilegeId()==2){
+			$this->col[] = array("label"=>"Premium","name"=>"premium","callback_php"=>'$row->premium ? "Sí" : "No"');
 			$this->col[] = array("label"=>"Correo Registro","name"=>"email");
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
 		}
 		//$this->col[] = array("label"=>"Correo","name"=>"email");
 		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/+".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
 		if(CRUDBooster::myPrivilegeId()==2){
-			//$this->col[] = array("label"=>"N° Linkers Actuales","name"=>"(select count(*) from cms_users p where p.cms_users_id=cms_users.id and p.estado=1) as cantidad_reg");
 			$this->col[] = array("label"=>"N° Linkers Actuales","name"=>"afiliaciones_actuales");
-		$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
+			$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
 			$this->col[] = array("label"=>"Monto a Pagar", "name"=>"(SELECT IFNULL( (select monto from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as monto");
 			$this->col[] = array("label"=>"Estado Depósito","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? $row->estado_solicitud : "Sin solicitar"');
 			$this->col[] = array("label"=>"Fecha Solicitud","name"=>"(select created_at from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1) as fecha_solicitud","callback_php"=>'$row->fecha_solicitud ? date("d/m/y",strtotime($row->fecha_solicitud)) : "Ninguna"');
@@ -56,21 +57,28 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->form = array(); 		
 		$this->form[] = array("label"=>"Name","name"=>"name",'required'=>true,'validation'=>'required|alpha_spaces|min:3');
 		$this->form[] = array("label"=>"Email","name"=>"email",'required'=>true,'type'=>'email','validation'=>'required|email|unique:cms_users,email,'.CRUDBooster::getCurrentId());
-		$this->form[] = array("label"=>"Paypal Email","name"=>"email_paypal",'required'=>true,'type'=>'email','validation'=>'required|email|unique:cms_users,email_paypal,'.CRUDBooster::getCurrentId());		
+		$this->form[] = array("label"=>"Paypal Email","name"=>"email_paypal",'type'=>'email','validation'=>'email|unique:cms_users,email_paypal,'.CRUDBooster::getCurrentId());		
 		$this->form[] = array("label"=>"Teléfono Whatsapp","name"=>"whatsapp",'required'=>true,'validation'=>'required|min:8');
-		$this->form[] = array("label"=>"Foto","name"=>"photo","type"=>"upload","help"=>"Recommended resolution is 200x200px",'required'=>true,'validation'=>'required|image|max:1000','resize_width'=>90,'resize_height'=>90);											
+		$this->form[] = array("label"=>"Foto","name"=>"photo","type"=>"upload","help"=>"Recommended resolution is 200x200px",'validation'=>'image|max:1000','resize_width'=>90,'resize_height'=>90);											
 		$this->form[] = array("label"=>"Tipo","name"=>"id_cms_privileges","type"=>"select","datatable"=>"cms_privileges,name","datatable_where"=>'id!=1','required'=>true);						
-		$this->form[] = array("label"=>"Password","name"=>"password","type"=>"password","help"=>"Please leave empty if not change");
-		$this->form[] = array("label"=>"Password Confirmation","name"=>"password_confirmation","type"=>"password","help"=>"Please leave empty if not change");
+		$id = CRUDBooster::getCurrentId();
+		$row = CRUDBooster::first($this->table,$id);
+		$arr=['row'=>$row,'field'=>'premium','checked'=>false,'cms_privileges_id'=>2];
+		$custom_element=view('components.toggle',$arr)->render();
+		$this->form[] = array("label"=>"Premium","name"=>"premium","type"=>"custom","html"=>$custom_element);
+		$this->form[] = array("label"=>"Password","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
+		$this->form[] = array("label"=>"Password Confirmation","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
 		# END FORM DO NOT REMOVE THIS LINE
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->addaction[] =['label'=>'','url'=>'#pagar_modal','icon'=>'fa fa-dollar','color'=>'warning','showIf'=>'[estado_solicitud]=="solicitado"'];
 			$this->addaction[] =['label'=>'','url'=>'#activar_modal','icon'=>'fa fa-phone','color'=>'warning','showIf'=>'[estado]==0'];
+			//$this->addaction[] =['label'=>'','url'=>'#premium_modal','icon'=>'fa fa-star','color'=>'warning','showIf'=>'[premium]==0'];
 		}
 		$this->script_js =  "
 							$( document ).ready(function() {
 								$('a[href=\"#activar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-warning' title='Activar al usuario' href='javascript:;' onclick='activado_popup();'>activar </button>\");
 								$('a[href=\"#pagar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-info' title='Marcar el monto como pagado' href='javascript:;' onclick='pagado_popup();'>marcar pagado </button>\");
+								//$('a[href=\"#premium_modal\"]').replaceWith(\"<a class='btn btn-xs btn-warning' title='Hacer premium a este usuario' href='javascript:;' onclick='premium_popup();'><i class='fa fa-star'></i> premium </button>\");
 							});
 							function activado_popup(e){
 								console.log('script de activacion');
@@ -126,10 +134,41 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 									cancelButtonText: 'No', 
 									closeOnConfirm: false },
 									function(){
+										$('.sweet-alert button').prop('disabled', true);
 										location.href=document.location.origin+'/admin/users/change_solicitud_estado/'+id+'?return_url='+return_url+'&estados_id='+estado_pagado;
 									}
 								)
 							};
+							/*function premium_popup(e){
+								console.log('hi');
+								var row=$(event.target).parent().parent().prevAll().toArray();
+								var users= [];
+								$.each(row,function(i,val){
+									users.push(val.innerHTML);
+								});
+								var length=users.length;
+								var estado_pagado=2;
+								var nombre=users[length-2];
+								var html= $.parseHTML(users[length-1]);
+								var id=$(html).val();
+								console.log(id);
+								var return_url= encodeURIComponent($(location).attr('href'));  
+								console.log(return_url);
+								swal({	
+									title: '¿Quieres volver premium a '+nombre+'?',	
+									text: 'Tendrá comisiones extras por los linkers de sus linkers',
+									type: 'warning', 
+									showCancelButton: true,
+									confirmButtonClass: 'danger',
+									confirmButtonText: '¡Sí!',
+									cancelButtonText: 'No', 
+									closeOnConfirm: false },
+									function(){
+										$('.sweet-alert button').prop('disabled', true);
+										location.href=document.location.origin+'/admin/users/change_premium_estado/'+id+'?return_url='+return_url;
+									}
+								)
+							};*/
 							";
 		if(CRUDBooster::myPrivilegeId()==3){
 			$id=CRUDBooster::myId();
@@ -149,9 +188,11 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->index_statistic[] = ['label'=>'N° de Linkers sin Activarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
 			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
 		}
-
+		$this->load_js[] =asset("js/bootstrap-toggle.min.js");
+		$this->load_js[] =asset("js/toggle.js");
 		$this->load_css[] = asset("css/backoffice.css");
-	    $this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
+		$this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
+		$this->load_css []= asset("css/bootstrap-toggle.min.css");
 	}
 
 	public function getProfile() {			
@@ -169,6 +210,9 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	}
 	public function hook_before_edit(&$postdata,$id) { 
 		unset($postdata['password_confirmation']);
+		if(empty($postdata['premium'])){
+			$postdata['premium']=0;
+		}
 	}
 	public function hook_before_add(&$postdata) {      
 	    unset($postdata['password_confirmation']);
@@ -191,12 +235,27 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		//aumentamos la cantidad de afiliados actuales del patrocinador en 1
 		if($user->cms_users_id){
 			DB::table('cms_users')->where('id',$user->cms_users_id)->increment('afiliaciones_actuales',1);
+			$abuelo=$this->getAbuelo($user->cms_users_id);
+			if(!empty($abuelo)){
+				if($abuelo->premium){
+					DB::table('cms_users')->where('id',$abuelo->id)->increment('nietos_actuales',1);
+				}
+			}
 		}
 		//mandamos un email a la cuenta de correo de este usuario
 		$link=url('/'.$user->slug);
 		$data = ['nombre'=>$user->name,'link'=>$link];
 		CRUDBooster::sendEmail(['to'=>$user->email,'data'=>$data,'template'=>'activacion_exitosa']);
 		CRUDBooster::redirect(urldecode($request['return_url']),"Usuario activado con éxito ","success");	
+	}
+	public function getAbuelo($idpadre){
+		$padre=DB::table('cms_users')->where('id',$idpadre)->first();
+		if($padre->cms_users_id){
+			$abuelo=DB::table('cms_users')->where('id',$padre->cms_users_id)->first();
+			return $abuelo;
+		}else{
+			return null;
+		}
 	}
 	public function changeSolicitudEstado($id){
 		$request=Request::all();
@@ -207,6 +266,13 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			->update(['estados_id'=>$request['estados_id'],'updated_at'=>now()]);
 		
 		CRUDBooster::redirect(urldecode($request['return_url']),"Pago registrado con éxito","success");	
+	}
+	public function changePremiumEstado($id){
+		$request=Request::all();
+		DB::table('cms_users')
+			->where('id',$id)
+			->update(['premium'=>1]);
+		CRUDBooster::redirect(urldecode($request['return_url']),"Usuario premium con éxito","success");	
 	}
 	public function registerUser(){
 		$request=Request::all();

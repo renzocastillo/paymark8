@@ -284,6 +284,7 @@
 			$user=DB::table('cms_users')->where('id',$row->cms_users_id)->first();
 			$afiliaciones_actuales=$user->afiliaciones_actuales;
 			$vistas_actuales=$user->vistas_actuales;
+			$nietos_actuales=$user->nietos_actuales;
 			//guardamos en una variable la diferencia entre las vistas cobradas menos las vistas actuales
 			$vistas_a_favor=$user->vistas_actuales - $vistas_cobradas ;
 			//evaluamos si las afiliaciones actuales superan a las requeridas por las vistas. Si es así, generamos la capacidad de vistas a favor
@@ -297,7 +298,7 @@
 			//actualizamos al usuario dejando sus afiliaciones en 0 y sus vistas en la diferencia residual calculada antes
 			DB::table('cms_users')
 				->where('id',$user->id)
-				->update(['vistas_actuales'=>$vistas_a_favor,'afiliaciones_actuales'=>0,'capacidad_vistas_a_favor'=>$capacidad_de_vistas_a_favor]);
+				->update(['vistas_actuales'=>$vistas_a_favor,'afiliaciones_actuales'=>0,'nietos_actuales'=>0,'capacidad_vistas_a_favor'=>$capacidad_de_vistas_a_favor]);
 			
 	    }
 
