@@ -59,7 +59,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->form[] = array("label"=>"Email","name"=>"email",'required'=>true,'type'=>'email','validation'=>'required|email|unique:cms_users,email,'.CRUDBooster::getCurrentId());
 		$this->form[] = array("label"=>"Paypal Email","name"=>"email_paypal",'type'=>'email','validation'=>'email|unique:cms_users,email_paypal,'.CRUDBooster::getCurrentId());		
 		$this->form[] = array("label"=>"Teléfono Whatsapp","name"=>"whatsapp",'required'=>true,'validation'=>'required|min:8');
-		$this->form[] = array("label"=>"Foto","name"=>"photo","type"=>"upload","help"=>"Recommended resolution is 200x200px",'validation'=>'image|max:1000','resize_width'=>90,'resize_height'=>90);											
+		$this->form[] = array("label"=>"Foto","name"=>"photo","type"=>"upload","help"=>"Resolución recomendada: 200x200px",'validation'=>'image|max:10000','resize_width'=>90,'resize_height'=>90);											
 		$this->form[] = array("label"=>"Tipo","name"=>"id_cms_privileges","type"=>"select","datatable"=>"cms_privileges,name","datatable_where"=>'id!=1','required'=>true);						
 		$id = CRUDBooster::getCurrentId();
 		$row = CRUDBooster::first($this->table,$id);
