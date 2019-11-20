@@ -20,7 +20,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->button_export 	   = FALSE;
 		$this->button_add = false;
 		$this->button_show = false;
-		$this->button_filter = false;
+		$this->button_filter = true;
 		if(CRUDBooster::myPrivilegeId()!=3){
 			$this->button_edit=true;
 		}else{
