@@ -48,7 +48,9 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->col[] = array("label"=>"Estado Depósito","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? $row->estado_solicitud : "Sin solicitar"');
 			$this->col[] = array("label"=>"Fecha Solicitud","name"=>"(select created_at from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1) as fecha_solicitud","callback_php"=>'$row->fecha_solicitud ? date("d/m/y",strtotime($row->fecha_solicitud)) : "Ninguna"');
 			$this->col[] = array("label"=>"Patrocinador","name"=>"cms_users_id","join"=>"cms_users,name");
-			$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);	
+			$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);
+			$this->col[] = ["label"=>"Fecha", "name"=>"created_at","callback_php"=>'date("d/m/Y",strtotime($row->created_at))'];
+			$this->col[] = ["label"=>"Hora","name"=>"created_at" ,"callback_php"=>'date("h:i A",strtotime($row->created_at))'];	
 			//$this->col[] = array("label"=>"Tipo","name"=>"id_cms_privileges","join"=>"cms_privileges,name");	
 		}
 		# END COLUMNS DO NOT REMOVE THIS LINE
