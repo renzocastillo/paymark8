@@ -50,6 +50,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->col[] = array("label"=>"Patrocinador","name"=>"cms_users_id","join"=>"cms_users,name");
 			$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);
 			$this->col[] = ["label"=>"Fecha Registro", "name"=>"created_at","callback_php"=>'date("d/m/Y h:i A",strtotime($row->created_at))'];	
+			$this->col[] = ["label"=>"Fecha Activación", "name"=>"activated_at","callback_php"=>'$row->activated_at ? date("d/m/Y h:i A",strtotime($row->activated_at)) : "sin información"'];	
 			//$this->col[] = array("label"=>"Tipo","name"=>"id_cms_privileges","join"=>"cms_privileges,name");	
 		}
 		# END COLUMNS DO NOT REMOVE THIS LINE
@@ -232,7 +233,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		//recuperamos el usuario de la BD
 		$user=DB::table('cms_users')->where('id',$id)->first();
 		//activamos al usuario en la BD cambiándole su estado
-		DB::table('cms_users')->where('id',$id)->update(['estado'=>1]);
+		DB::table('cms_users')->where('id',$id)->update(['estado'=>1,'activated_at'=>now()]);
 		//aumentamos la cantidad de afiliados actuales del patrocinador en 1
 		if($user->cms_users_id){
 			DB::table('cms_users')->where('id',$user->cms_users_id)->increment('afiliaciones_actuales',1);
