@@ -42,10 +42,12 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		//$this->col[] = array("label"=>"Correo","name"=>"email");
 		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/+".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
 		if(CRUDBooster::myPrivilegeId()==2){
-			$this->col[] = array("label"=>"N° Linkers Actuales","name"=>"afiliaciones_actuales");
-			$this->col[] = array("label"=>"N° Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
-			$this->col[] = array("label"=>"Monto a Pagar", "name"=>"(SELECT IFNULL( (select monto from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as monto");
-			$this->col[] = array("label"=>"Estado Depósito","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? $row->estado_solicitud : "Sin solicitar"');
+			$this->col[] = array("label"=>"Linkers Actuales","name"=>"afiliaciones_actuales");
+			$this->col[] = array("label"=>"Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
+			$this->col[] = array("label"=>"Linkers Solicitud","name"=>"(SELECT IFNULL( (select afiliados from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as linkers_solicitados");
+			$this->col[] = array("label"=>"Reprod. Solicitud","name"=>"(SELECT IFNULL( (select vistas from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as vistas_solicitadas");
+			$this->col[] = array("label"=>"Monto Solicitado", "name"=>"(SELECT IFNULL( (select monto from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as monto");
+			$this->col[] = array("label"=>"Estado Solicitud","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? $row->estado_solicitud : "Sin solicitar"');
 			$this->col[] = array("label"=>"Fecha Solicitud","name"=>"(select created_at from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1) as fecha_solicitud","callback_php"=>'$row->fecha_solicitud ? date("d/m/y",strtotime($row->fecha_solicitud)) : "Ninguna"');
 			$this->col[] = array("label"=>"Patrocinador","name"=>"cms_users_id","join"=>"cms_users,name");
 			$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);
