@@ -44,8 +44,9 @@
 			$this->form[] = ['label'=>'Monto','name'=>'monto','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Vistas','name'=>'vistas','type'=>'text','validation'=>'','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Afiliados','name'=>'afiliados','type'=>'text','validation'=>'','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Cms Users Id','name'=>'cms_users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'Estados Id','name'=>'estados_id','type'=>'text','validation'=>'','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nietos','name'=>'nietos','type'=>'hidden','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Cms Users','name'=>'cms_users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
+			$this->form[] = ['label'=>'Estados','name'=>'estados_id','type'=>'text','validation'=>'','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

@@ -112,6 +112,7 @@
     <input type="hidden" name="return_url" value="{{Request::fullUrl()}}">
     <input type="hidden" name="cms_users_id" value="{{CRUDBooster::myid()}}">
     <input type="hidden" name="afiliados" value="{{$user->afiliaciones_actuales }}">
+    <input type="hidden" name="nietos" value="{{$user->nietos_actuales }}">
     <input type="hidden" name="vistas" value="{{$vistas_x_cobrar }}">
     <input type="hidden" name="monto" value="{{$capacidad_de_retiro }}">
     <input type="hidden" name="estados_id" value="1">
