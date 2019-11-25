@@ -74,6 +74,12 @@
  * Skin: Custom
  * ----------
  */
+ .custom-skin a{
+  color:#fff;
+}
+.custom-skin table > tbody > tr > td > a{
+  color:#4070FA;
+}
   .custom-skin h1,h2,h3,h4{
     font-family: Raleway, sans-serif;
     font-weight: 500;

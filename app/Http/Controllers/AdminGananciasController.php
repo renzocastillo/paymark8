@@ -34,6 +34,15 @@
 			$this->col[] = ["label"=>"Estado","name"=>"estados_id","join"=>"estados,nombre"];
 			$this->col[] = ["label"=>"Vistas","name"=>"vistas"];
 			$this->col[] = ["label"=>"Afiliados","name"=>"afiliados"];
+			$request=Request::all();
+			if($request['parent_table']=='cms_users'){
+				$id=$request['parent_id'];
+				$user=DB::table('cms_users')->where('id',$id)->first();
+				if($user->premium){
+					$this->col[] = ["label"=>"Nietos","name"=>"nietos"];
+				}
+			}
+
 			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
 			//$this->col[]= ["label"=>"Fecha Pago", "name"=>"updated_at" , "callback_php"=>'$row->updated_at ? date("d/m/y",strtotime($row->updated_at)) : "Pendiente"'];
 			//$this->col[] = ["label"=>"Users Id","name"=>"cms_users_id","join"=>"cms_users,name"];
@@ -189,7 +198,7 @@
 	        | $this->load_js[] = asset("myfile.js");
 	        |
 	        */
-	        $this->load_js = array();
+	        $this->load_js[] =asset("js/boolean.js");
 	        
 	        
 	        
@@ -241,8 +250,10 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-			$query
-				->where('cms_users_id',CRUDBooster::myid());
+			if(CRUDBooster::myPrivilegeId()==3){
+				$query
+					->where('cms_users_id',CRUDBooster::myid());
+			}
 	            
 	    }
 

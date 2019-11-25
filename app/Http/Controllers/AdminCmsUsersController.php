@@ -43,11 +43,12 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/+".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->col[] = array("label"=>"Linkers Actuales","name"=>"afiliaciones_actuales");
-			$this->col[] = array("label"=>"Reprod. Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
-			$this->col[] = array("label"=>"Linkers Solicitud","name"=>"(SELECT IFNULL( (select afiliados from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as linkers_solicitados");
-			$this->col[] = array("label"=>"Reprod. Solicitud","name"=>"(SELECT IFNULL( (select vistas from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as vistas_solicitadas");
-			$this->col[] = array("label"=>"Monto Solicitado", "name"=>"(SELECT IFNULL( (select monto from solicitudes_de_pago where cms_users_id=cms_users.id and estados_id!=2 order by solicitudes_de_pago.id desc limit 1),0)) as monto");
-			$this->col[] = array("label"=>"Estado Solicitud","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? $row->estado_solicitud : "Sin solicitar"');
+			$this->col[] = array("label"=>"Vistas Actuales","name"=>"vistas_actuales");
+			//$this->col[] = array("label"=>"Vistas Actuales","name"=>"(SELECT count(*) FROM reproducciones where videos_id = (select id from videos order by videos.id desc limit 1) and cms_users_id=cms_users.id) as cantidad_reprod","callback_php"=>'$row->cantidad_reprod ? $row->cantidad_reprod : 0');
+			$this->col[] = array("label"=>"Linkers Solicitud","name"=>"(SELECT IFNULL( (select afiliados from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1),0)) as linkers_solicitados");
+			$this->col[] = array("label"=>"Vistas Solicitud","name"=>"(SELECT IFNULL( (select vistas from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1),0)) as vistas_solicitadas");
+			$this->col[] = array("label"=>"Monto Solicitado", "name"=>"(SELECT IFNULL( (select monto from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1),0)) as monto");
+			$this->col[] = array("label"=>"Estado Solicitud","name"=>"(select nombre from estados where id= ( select estados_id from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1)) as estado_solicitud","callback_php"=>'$row->estado_solicitud ? ( $row->estado_solicitud == 1 ? "<label class=\"label label-info\">$row->estado_solicitud</label>" : "<label class=\"label label-success\">$row->estado_solicitud</label>" ) : "Sin solicitar"');
 			$this->col[] = array("label"=>"Fecha Solicitud","name"=>"(select created_at from solicitudes_de_pago where cms_users_id=cms_users.id order by solicitudes_de_pago.id desc limit 1) as fecha_solicitud","callback_php"=>'$row->fecha_solicitud ? date("d/m/y",strtotime($row->fecha_solicitud)) : "Ninguna"');
 			$this->col[] = array("label"=>"Patrocinador","name"=>"cms_users_id","join"=>"cms_users,name");
 			$this->col[] = array("label"=>"Foto","name"=>"photo","image"=>1);
@@ -76,6 +77,10 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->addaction[] =['label'=>'','url'=>'#pagar_modal','icon'=>'fa fa-dollar','color'=>'warning','showIf'=>'[estado_solicitud]=="solicitado"'];
 			$this->addaction[] =['label'=>'','url'=>'#activar_modal','icon'=>'fa fa-phone','color'=>'warning','showIf'=>'[estado]==0'];
+			$this->sub_module[] = ['label'=>'linkers','path'=>'users','foreign_key'=>'cms_users_id','button_color'=>'info','button_icon'=>'fa fa-group','parent_columns'=>'name,premium','parent_columns_alias'=>'Patrocinador,Premium'];
+			$this->sub_module[] = ['label'=>'pagos','path'=>'ganancias','foreign_key'=>'cms_users_id','button_color'=>'success','button_icon'=>'fa fa-dollar','parent_columns'=>'name,premium','parent_columns_alias'=>'Linker,Premium'];
+			//$this->addaction[] =['label'=>'detalle','url'=>''];
+			//$url_vars=['return_url'=>Request::fullurl(),'parent_table'=>'cms_users','parent_columns'=>'name','parent_columns_alias'=>'patrocinador','parent_id'=>''];
 			//$this->addaction[] =['label'=>'','url'=>'#premium_modal','icon'=>'fa fa-star','color'=>'warning','showIf'=>'[premium]==0'];
 		}
 		$this->script_js =  "
@@ -192,8 +197,57 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->index_statistic[] = ['label'=>'N° de Linkers sin Activarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
 			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
 		}
+		if(CRUDBooster::myPrivilegeId()==2){
+			$request=Request::all();
+			if($request['parent_table']=='cms_users'){
+				$id=$request['parent_id'];
+				$user=DB::table('cms_users')->where('id',$id)->first();
+				//$this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y linkers afiliados hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->where('estados_id',2)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
+				$capacidad_de_retiro=$this->getCapacidadDeRetiro($user->id);
+				$this->index_statistic[] = ['label'=>'Capacidad de Retiro Actual: Monto que puede solicitar el linker actualmente','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
+				if($user->premium){
+					$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
+					$nietos_actuales=$user->nietos_actuales;
+					$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
+					$this->index_statistic[] = ['label'=>'Ganancia Premium Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
+				}
+				$monto_ultima_solicitud=$this->getMontoUltimaSolicitud($user->id);
+				$monto_ultima_solicitud= $monto_ultima_solicitud > 0 ? $monto_ultima_solicitud : 0;
+				$this->index_statistic[] = ['label'=>'Monto última Solicitud: Monto total de la última solicitud de pago del usuario','count'=>' $'.$monto_ultima_solicitud,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
+				$monto_solicitud_premium=$this->getMontoSolicitudPremium($user->id);
+				if($user->premium){
+					$this->index_statistic[] = ['label'=>'Monto Premium Última Solicitud: Monto de la última solicitud ganado por linkers de linkers','count'=>' $'.$monto_solicitud_premium,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
+				}
+			}
+		}
+		if($user->premium){
+			$hijos=$this->getHijos($user->id);
+			$html='';
+			foreach($hijos as $hijo){
+				$nietos=$this->getNietosFromLastSolicitud($hijo->id);
+				if(!empty($nietos)){
+					$html=$html.'<tr><td>Hijo: '.$hijo->name.'</td>';
+					$string_nietos=ucwords(implode(', ',$nietos));
+					$html=$html.'<td>Nietos: '.$string_nietos.'</td></tr>';
+				}
+
+			}
+			$this->pre_index_html ='<div class="box box-solid box-success">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr class="active">
+                        <td colspan="2"><strong><i class="fa fa-bars"></i> Linkers de Linkers Ult. Solicitud</strong></td>
+					</tr>'.
+					$html.'
+                    </tbody>
+                </table>
+            </div>
+        	</div>';
+		}
 		$this->load_js[] =asset("js/bootstrap-toggle.min.js");
 		$this->load_js[] =asset("js/toggle.js");
+		$this->load_js[] =asset("js/boolean.js");
 		$this->load_css[] = asset("css/backoffice.css");
 		$this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
 		$this->load_css []= asset("css/bootstrap-toggle.min.css");
@@ -224,9 +278,21 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	public function hook_query_index(&$query) {
 		if(CRUDBooster::myPrivilegeId()==2){
 			$query->where($this->table.'.id_cms_privileges','=',3);
+			$request= Request::all();
+			if($request['parent_table']=='cms_users'){
+				$query->where($this->table.'.estado','=',1);
+			}
 		}
 		if(CRUDBooster::myPrivilegeId()==3){
 			$query->where($this->table.'.cms_users_id','=',CRUDBooster::myId());
+		}
+
+	}
+	public function hook_before_delete($id) {
+		$request=Request::all();
+		$user=DB::table('cms_users')->where('cms_users_id',$id)->first();
+		if($user->cms_users_id){
+			CRUDBooster::redirect(CRUDBooster::mainpath(),'No se puede eliminar este usuario porque otros depende de éste','warning');
 		}
 
 	}
@@ -333,5 +399,81 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		}else{
 			echo 'true';	
 		}	
+	}
+	public function getCapacidadDeRetiro($id){
+		$user=DB::table('cms_users')->where('id',$id)->first();
+		$ganancia_x_vista=DB::table('parametros')->where('name','gvista')->value('content');
+		$ganancia_x_afiliaciones=DB::table('parametros')->where('name','gafiliacion')->value('content');
+		$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
+		$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
+		$pago_minimo=DB::table('parametros')->where('name','pmin')->value('content');
+		
+		$afiliaciones_actuales=$user->afiliaciones_actuales;
+		$vistas_actuales=$user->vistas_actuales;
+		$nietos_actuales=$user->nietos_actuales;
+		$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
+		$ganancia_x_afiliados_actuales=$afiliaciones_actuales*$ganancia_x_afiliaciones;
+		$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
+		
+		$monto_total=$ganancia_x_vista*$vistas_actuales+$ganancia_x_afiliados_actuales+$ganancia_premium;
+		$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
+		$vistas_x_cobrar= $vistas_actuales <= $capacidad_de_vistas ? $vistas_actuales : $capacidad_de_vistas;
+		$capacidad_de_retiro=$vistas_x_cobrar*$ganancia_x_vista+$ganancia_x_afiliados_actuales+$ganancia_premium;
+		$capacidad_de_retiro= $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
+
+		return $capacidad_de_retiro;
+	}
+	public function getUltimaSolicitud($id){
+		$solicitud=DB::table('solicitudes_de_pago')
+				->where('cms_users_id',$id)
+				->latest()
+				->first();
+		return $solicitud;
+	}
+	public function getPenultimaSolicitud($id){
+		$solicitud=DB::table('solicitudes_de_pago')
+				->where('cms_users_id',$id)
+				->orderby('id','desc')
+				->skip(1)
+				->first();
+		return $solicitud;
+	}
+	public function getMontoUltimaSolicitud($id){
+		$solicitud=DB::table('solicitudes_de_pago')
+				->where('cms_users_id',$id)
+				->latest()
+				->first();
+		return $solicitud->monto;
+	}
+	public function getMontoSolicitudPremium($id){
+		$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
+		$solicitud=DB::table('solicitudes_de_pago')
+				->where('cms_users_id',$id)
+				->latest()
+				->first();
+		return $solicitud->nietos*$ganancia_x_nietos;
+	}
+
+	public function getHijos($id){
+		$hijos=DB::table('cms_users')
+				->where('cms_users_id',$id)
+				->get();
+		return $hijos;
+	}
+	public function getNietosFromLastSolicitud($id){
+		$hijo=DB::table('cms_users')->where('id',$id)->first();
+		$ultima=$this->getUltimaSolicitud($hijo->cms_users_id);
+		$penultima=$this->getPenultimaSolicitud($hijo->cms_users_id);
+		$nietos=DB::table('cms_users')
+					->where('cms_users_id',$id)
+					->whereNotNull('activated_at');
+		if($ultima->id){
+			$nietos->whereDate('activated_at','<',$ultima->created_at);
+			if($penultima->id){
+				$nietos->whereDate('activated_at','>',$penultima->created_at);
+				//dd($penultima->created_at);
+			}
+		}
+		return $nietos->pluck('name')->toArray();									
 	}
 }
