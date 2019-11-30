@@ -157,6 +157,7 @@
 					cancelButtonText: 'No', 
 					closeOnConfirm: false },
 					function(){
+						$('.sweet-alert button').prop('disabled', true);
 						$('#solicitar_pago_form').submit();
 					}
 				)
