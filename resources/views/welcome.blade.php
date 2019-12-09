@@ -116,7 +116,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <h2 class="fixed-header">Únete a {{ strtoupper(CRUDBooster::getSetting('appname')) }}</h2>
+                <h2 class="fixed-header">Únete a {{ ucfirst(CRUDBooster::getSetting('appname')) }}</h2>
             </div>
             <div class="row carousel">
                 @if(CRUDBooster::getSetting('slider_1'))
