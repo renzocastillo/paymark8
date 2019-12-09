@@ -78,7 +78,7 @@
                         @if (isset($patrocinador->id))
                             <p class="text-center">Tu Linker patrocinador es: {{$patrocinador->name}}</p>
                         @else
-                            <p class="text-center">Tu patrocinador es: PAYMARK </p>
+                            <p class="text-center">Tu patrocinador es: {{ strtoupper(CRUDBooster::getSetting('appname')) }} </p>
                         @endif
                         <div class="form-group">
                             <label for="name"><i class="fas fa-user grey-text"></i> Nombre y Apellido:</label>
@@ -116,7 +116,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <h2 class="fixed-header">Únete a Paymark</h2>
+                <h2 class="fixed-header">Únete a {{ strtoupper(CRUDBooster::getSetting('appname')) }}</h2>
             </div>
             <div class="row carousel">
                 @if(CRUDBooster::getSetting('slider_1'))
@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-3 sectexto ">
                         <button data-target="#modalRegistro" data-toggle="modal" type="button" class="button1">REGISTRARME GRATIS</button>
-                        <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con PayMark</div>
+                        <div class="texto show-on-scroll">Comparte esta página y empieza a ganar con {{ CRUDBooster::getSetting('appname') }}</div>
                     </div>
             </div>
         </div>
@@ -221,7 +221,7 @@
         </div>
         <div class="row">        
             <div class="col-sm-6 col-lg-6">
-                <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN PAYMARK8?</span></div>
+                <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN  {{ strtoupper(CRUDBooster::getSetting('appname')) }}?</span></div>
                 <p>Junto a nuestro equipo sabemos que tienes la capacidad de hacer muchos amigos, tu activo social es muy valioso y como cliente satisfecho sabes compartir, unimos ambas habilidades y creamos justo el modelo de negocio que te conviene a ti.</p>
             </div> 
             <div class="col-sm-6 col-lg-5 col-lg-offset-1">
@@ -233,7 +233,7 @@
         <div class="row">
             <div class="col-sm-12">                      
                 <div class="test show-on-scroll">
-                    <p>Empieza a ganar con PayMark8</p>
+                    <p>Empieza a ganar con {{ ucfirst(CRUDBooster::getSetting('appname')) }}</p>
                     <button type="button" data-toggle="modal" data-target="#modalRegistro" class="button1">REGISTRARME GRATIS</button>
                 </div>                        
             </div>
@@ -270,7 +270,7 @@
                <h5 class="text-justify">Cada compra realizada a través de esta plataforma digital, a cualquiera de nuestros proveedores, será en beneficio de PayMark8.com que recibirá una comisión a través del programa de afiliados y los enlaces con los que contamos, esta plataforma tiene como finalidad aportar valor a la comunidad y sobre todo ayudarte en el proceso de creación del proyecto de mayor alcance de tu audiencia en Línea.</h5>
                <br>
                <br>
-               Paymark - Todos los derechos Reservados.
+               {{ CRUDBooster::getSetting('appname') }} - Todos los derechos Reservados.
                <!--Plataforma Digital Desarrollada por <a href="https://www.quaira.com" target="_blank">www.quaira.com</a>--> 
             </p>
         </div>
