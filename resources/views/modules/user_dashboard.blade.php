@@ -99,13 +99,13 @@
     </div>
   </div>
 <br>
-<div class="container-fluid">
+{{--<div class="container-fluid">
   <div class="row multiple-carousel">
     @foreach($empresas as $empresa)
       <img src="{{url($empresa->logo)}}"/>
     @endforeach
   </div> 
-</div>   
+</div> --}}  
 <div class="container">
   <form id="solicitar_pago_form" method="post" enctype="multipart/form-data" action={{CRUDBooster::adminpath('ganancias/add-save')}}>
     {{ csrf_field() }}
