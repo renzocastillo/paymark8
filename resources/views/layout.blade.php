@@ -48,7 +48,9 @@
     @section('footer')
         <footer class="footer-distributed">
                 <div class="footer-left">
-                    <img class="footer-brand" src="{{ CRUDBooster::getSetting('logo') }}">
+                    <a href="{{url('/')}}">
+                        <img class="footer-brand" src="{{ CRUDBooster::getSetting('logo') }}">
+                    </a>
                     <br><br>
                     <a href="{{url('terminos-y-condiciones')}}"><i class="fas fa-book"></i> Términos y Condiciones</a>
                 </div>
