@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/terminos-y-condiciones',function(){
+   return view('terminos');
+});
 Route::get('/', 'WelcomeController@getview')->name('welcome');
 Route::get('/check_email', 'AdminCmsUsersController@checkEmail')->name('check_email');
 Route::post('/registrarme', 'AdminCmsUsersController@registerUser')->name('register');
