@@ -1,53 +1,46 @@
 <?php namespace App\Http\Controllers;
 
-	use Illuminate\Support\Facades\View;
 	use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
 
-	class AdminContactoController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminSubjectsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
-			$this->limit = "20";
+			$this->title_field = "name";
+			$this->limit = "300";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = false;
+			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
-			$this->button_show = false;
+			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "cms_settings";
+			$this->table = "subjects";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Configuración","name"=>"label"];
-			$this->col[] = ["label"=>"Valor","name"=>"content"];
-			$this->col[] = ["label"=>"Descripcion","name"=>"helper"];
+			$this->col[] = ["label"=>"Nombre","name"=>"name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Configuracion','name'=>'label','type'=>'text','validation'=>'required|min:1|max:255','readonly'=>true,'width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Valor','name'=>'content','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nombre','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Titulo","name"=>"titulo","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Contenido","name"=>"contenido","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Url","name"=>"url","type"=>"text","required"=>TRUE,"validation"=>"required|url","placeholder"=>"Introduce una dirección web (URL) válida"];
-			//$this->form[] = ["label"=>"Imagen","name"=>"imagen","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Puedes introducir solo una letra"];
 			# OLD END FORM
 
 			/* 
@@ -321,20 +314,8 @@
 
 	    }
 
-		public function getIndex(){
-			if (! CRUDBooster::myPrivilegeId()==3) {
-				CRUDBooster::insertLog(trans("crudbooster.log_try_view", ['name' => 'Setting', 'module' => 'Setting']));
-				CRUDBooster::redirect(CRUDBooster::adminPath(), trans('crudbooster.denied_access'));
-			}
-	
-			$data['page_title'] = "Atención al Cliente";
-			$data['datos_de_contacto']=DB::table('cms_settings')->where('group_setting','contacto')->get();
 
-			$subjects = DB::table('subjects')->get();
-			View::share('subjects', $subjects);
 
-			$this->cbView('modules.contacto', $data);
-		}
 	    //By the way, you can still create your own method in here... :) 
 
 

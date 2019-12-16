@@ -1,10 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Services\ProductOPGService;
 use CRUDBooster;
 use DB;
 use Illuminate\Support\Facades\View;
 use Request;
 use Session;
+use OpenGraph;
 
 class AdminIframesController extends \crocodicstudio\crudbooster\controllers\CBController
 {
@@ -347,13 +349,18 @@ class AdminIframesController extends \crocodicstudio\crudbooster\controllers\CBC
         if($enterpriseId>0){
             $query->where('enterprise_id', $enterpriseId);
         }
-        $data['iframes'] = $query->orderby('id', 'desc')->Paginate(100);
+        $iframes = $query->orderby('id', 'desc')->Paginate(100);
 
+        foreach ($iframes as &$iframe){
+	        $iframe->ogp = ProductOPGService::getProductInformation($iframe->html);
+        }
+	    $data['iframes'] = $iframes;
         $enterprises = DB::table('empresas')->orderBy('nombre')->get();
         View::share('enterprises', $enterprises);
         View::share('tipo', $data['tipo']);
         //Create a view. Please use `cbView` method instead of view method from laravel.
-        $this->cbView('modules.iframes', $data);
+
+	    $this->cbView('modules.iframes', $data);
         //}
     }
     //By the way, you can still create your own method in here... :)

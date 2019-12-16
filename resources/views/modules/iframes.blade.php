@@ -72,11 +72,24 @@
                     @else
                         <ul class="iframes list-unstyled row">
                             @foreach($iframes as $iframe)
-                                <li class="col-lg-2 col-sm-12 col-xs-6">
+                                <li class="col-lg-6 col-sm-6 col-xs-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"> {{$iframe->title}}</div>
                                         <div class="panel-body">
-                                            {!! $iframe->html !!}
+                                            <div class="attachment-block clearfix">
+                                                <img class="attachment-img" src="{{$iframe->ogp['image']}}" alt="Attachment Image">
+
+                                                <div class="attachment-pushed">
+                                                    <h4 class="attachment-heading"><a href="http://www.lipsum.com/">{{$iframe->title}}</a></h4>
+
+                                                    <div class="attachment-text">
+                                                        {{$iframe->ogp['title']}}
+                                                        <a href="{{$iframe->ogp['url']}}" target="_blank">Más</a>
+                                                    </div>
+                                                    <!-- /.attachment-text -->
+                                                </div>
+                                                <!-- /.attachment-pushed -->
+                                            </div>
                                         </div>
                                         @if(CRUDBooster::myPrivilegeid()==2)
                                             <div class="panel-footer">
