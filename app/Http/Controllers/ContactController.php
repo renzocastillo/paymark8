@@ -14,7 +14,7 @@ class ContactController extends Controller {
 
 	public function create(Request $request ) {
 		$input = $request->all();
-		Notification::route( 'mail', env( 'MAIL_CONTACTO_TO' ) )
+		Notification::route( 'mail', env( 'MAIL_CONTACT_TO' ) )
 		            ->notify( new Contact( $input['subject'], $input['message'] ) );
 
 		return redirect( '/admin/contacto' );
