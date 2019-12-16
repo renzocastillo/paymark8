@@ -20,10 +20,11 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->button_export 	   = FALSE;
 		$this->button_add = false;
 		$this->button_show = false;
-		$this->button_filter = true;
 		if(CRUDBooster::myPrivilegeId()!=3){
+			$this->button_filter = true;
 			$this->button_edit=true;
 		}else{
+			$this->button_filter = false;
 			$this->button_edit=false;
 		}
 		//$this->button_bulk_action = false;
@@ -35,7 +36,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->col[] = array("label"=>"Nombre","name"=>"name");
 		$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
 		if(CRUDBooster::myPrivilegeId()==2){
-			$this->col[] = array("label"=>"Premium","name"=>"premium","callback_php"=>'$row->premium ? "Sí" : "No"');
+			//$this->col[] = array("label"=>"Premium","name"=>"premium","callback_php"=>'$row->premium ? "Sí" : "No"');
 			$this->col[] = array("label"=>"Correo Registro","name"=>"email");
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
 		}
@@ -68,21 +69,21 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->form[] = array("label"=>"Tipo","name"=>"id_cms_privileges","type"=>"select","datatable"=>"cms_privileges,name","datatable_where"=>'id!=1','required'=>true);						
 		$id = CRUDBooster::getCurrentId();
 		$row = CRUDBooster::first($this->table,$id);
-		$arr=['row'=>$row,'field'=>'premium','checked'=>false,'cms_privileges_id'=>2];
-		$custom_element=view('components.toggle',$arr)->render();
-		$this->form[] = array("label"=>"Premium","name"=>"premium","type"=>"custom","html"=>$custom_element);
+		//$arr=['row'=>$row,'field'=>'premium','checked'=>false,'cms_privileges_id'=>2];
+		//$custom_element=view('components.toggle',$arr)->render();
+		//$this->form[] = array("label"=>"Premium","name"=>"premium","type"=>"custom","html"=>$custom_element);
 		$this->form[] = array("label"=>"Password","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
 		$this->form[] = array("label"=>"Password Confirmation","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
 		# END FORM DO NOT REMOVE THIS LINE
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->addaction[] =['label'=>'','url'=>'#pagar_modal','icon'=>'fa fa-dollar','color'=>'warning','showIf'=>'[estado_solicitud]=="solicitado"'];
 			$this->addaction[] =['label'=>'','url'=>'#activar_modal','icon'=>'fa fa-phone','color'=>'warning','showIf'=>'[estado]==0'];
-			$this->sub_module[] = ['label'=>'linkers','path'=>'users','foreign_key'=>'cms_users_id','button_color'=>'info','button_icon'=>'fa fa-group','parent_columns'=>'name,premium','parent_columns_alias'=>'Patrocinador,Premium'];
-			$this->sub_module[] = ['label'=>'pagos','path'=>'ganancias','foreign_key'=>'cms_users_id','button_color'=>'success','button_icon'=>'fa fa-dollar','parent_columns'=>'name,premium','parent_columns_alias'=>'Linker,Premium'];
+			$this->sub_module[] = ['label'=>'pagos','path'=>'ganancias','foreign_key'=>'cms_users_id','button_color'=>'success','button_icon'=>'fa fa-dollar','parent_columns'=>'name','parent_columns_alias'=>'Linker'];
 			//$this->addaction[] =['label'=>'detalle','url'=>''];
 			//$url_vars=['return_url'=>Request::fullurl(),'parent_table'=>'cms_users','parent_columns'=>'name','parent_columns_alias'=>'patrocinador','parent_id'=>''];
 			//$this->addaction[] =['label'=>'','url'=>'#premium_modal','icon'=>'fa fa-star','color'=>'warning','showIf'=>'[premium]==0'];
 		}
+		$this->sub_module[] = ['label'=>'linkers','path'=>'users','foreign_key'=>'cms_users_id','button_color'=>'info','button_icon'=>'fa fa-group','parent_columns'=>'name','parent_columns_alias'=>'Patrocinador'];
 		$this->script_js =  "
 							$( document ).ready(function() {
 								$('a[href=\"#activar_modal\"]').replaceWith(\"<a class='btn btn-xs btn-warning' title='Activar al usuario' href='javascript:;' onclick='activado_popup();'>activar </button>\");
@@ -205,22 +206,23 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 				//$this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y linkers afiliados hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->where('estados_id',2)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
 				$capacidad_de_retiro=$this->getCapacidadDeRetiro($user->id);
 				$this->index_statistic[] = ['label'=>'Capacidad de Retiro Actual: Monto que puede solicitar el linker actualmente','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
-				if($user->premium){
-					$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
-					$nietos_actuales=$user->nietos_actuales;
-					$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
-					$this->index_statistic[] = ['label'=>'Ganancia Premium Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
-				}
+				//if($user->premium){
+				$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
+				$nietos_actuales=$user->nietos_actuales;
+				$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
+				$this->index_statistic[] = ['label'=>'Ganancia Linkers de Linkers Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
+				//}
 				$monto_ultima_solicitud=$this->getMontoUltimaSolicitud($user->id);
 				$monto_ultima_solicitud= $monto_ultima_solicitud > 0 ? $monto_ultima_solicitud : 0;
 				$this->index_statistic[] = ['label'=>'Monto última Solicitud: Monto total de la última solicitud de pago del usuario','count'=>' $'.$monto_ultima_solicitud,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
 				$monto_solicitud_premium=$this->getMontoSolicitudPremium($user->id);
-				if($user->premium){
-					$this->index_statistic[] = ['label'=>'Monto Premium Última Solicitud: Monto de la última solicitud ganado por linkers de linkers','count'=>' $'.$monto_solicitud_premium,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
-				}
+				//if($user->premium){
+					$this->index_statistic[] = ['label'=>'Monto por Linkers de Linkers -> Última Solicitud: Monto ganado en la última solicitud generado por linkers de linkers','count'=>' $'.$monto_solicitud_premium,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
+				//}
 			}
 		}
-		if($user->premium){
+		//if($user->premium){
+		if(CRUDBooster::myPrivilegeId()==3){
 			$hijos=$this->getHijos($user->id);
 			$html='';
 			foreach($hijos as $hijo){
@@ -237,14 +239,15 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
                 <table class="table table-bordered">
                     <tbody>
                     <tr class="active">
-                        <td colspan="2"><strong><i class="fa fa-bars"></i> Linkers de Linkers Ult. Solicitud</strong></td>
+                        <td colspan="2"><strong><i class="fa fa-bars"></i> Linkers de Linkers en las Ganancias de la Última Solicitud</strong></td>
 					</tr>'.
 					$html.'
                     </tbody>
                 </table>
             </div>
-        	</div>';
+			</div>';
 		}
+		//}
 		$this->load_js[] =asset("js/bootstrap-toggle.min.js");
 		$this->load_js[] =asset("js/toggle.js");
 		$this->load_js[] =asset("js/boolean.js");
@@ -268,25 +271,29 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 	}
 	public function hook_before_edit(&$postdata,$id) { 
 		unset($postdata['password_confirmation']);
-		if(empty($postdata['premium'])){
+		/*if(empty($postdata['premium'])){
 			$postdata['premium']=0;
-		}
+		}*/
 	}
 	public function hook_before_add(&$postdata) {      
 	    unset($postdata['password_confirmation']);
 	}
 	public function hook_query_index(&$query) {
+		$request= Request::all();
 		if(CRUDBooster::myPrivilegeId()==2){
 			$query->where($this->table.'.id_cms_privileges','=',3);
-			$request= Request::all();
 			if($request['parent_table']=='cms_users'){
 				$query->where($this->table.'.estado','=',1);
 			}
 		}
 		if(CRUDBooster::myPrivilegeId()==3){
-			$query->where($this->table.'.cms_users_id','=',CRUDBooster::myId());
+			if($request['parent_table']=='cms_users'){
+				$query->where($this->table.'.cms_users_id','=',$request['parent_id']);
+				$query->where($this->table.'.estado','=',1);
+			}else{
+				$query->where($this->table.'.cms_users_id','=',CRUDBooster::myId());
+			}
 		}
-
 	}
 	public function hook_before_delete($id) {
 		$request=Request::all();
@@ -309,9 +316,9 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 				DB::table('cms_users')->where('id',$user->cms_users_id)->increment('afiliaciones_actuales',1);
 				$abuelo=$this->getAbuelo($user->cms_users_id);
 				if(!empty($abuelo)){
-					if($abuelo->premium){
+					//if($abuelo->premium){
 						DB::table('cms_users')->where('id',$abuelo->id)->increment('nietos_actuales',1);
-					}
+					//}
 				}
 			}
 		}

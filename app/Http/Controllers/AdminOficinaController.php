@@ -163,11 +163,11 @@
 			$this->index_statistic[] = ['label'=>'Capacidad de Retiro: 01 Linker afiliado por cada 10 vistas y $20 como mínimo.','count'=>' $'.$capacidad_de_retiro,'icon'=>'fa fa-trophy','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Dólares por Ganar: dólares que ganarías si sólo compartes tu link sin necesidad de afiliar ni un Linker más.','count'=>' $'.$dolares_x_ganar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Ganancia por Vistas Actuales: Dólares generados por compartir tu link.','count'=>' $'.$ganancia_x_vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
-			$this->index_statistic[] = ['label'=>'Ganancia por linkers afiliados actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
+			$this->index_statistic[] = ['label'=>'Ganancia por Linkers Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
-			if(CRUDBooster::me()->premium){
-				$this->index_statistic[] = ['label'=>'Ganancia Premium: Ganancia por los linkers de tus linkers','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
-			}
+			//if(CRUDBooster::me()->premium){
+				$this->index_statistic[] = ['label'=>'Ganancia Linkers de Linkers: Ganancia generada por los linkers de tus linkers','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
+			//}
 			
 
 	        /*

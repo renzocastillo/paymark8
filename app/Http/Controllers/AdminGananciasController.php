@@ -38,9 +38,9 @@
 			if($request['parent_table']=='cms_users'){
 				$id=$request['parent_id'];
 				$user=DB::table('cms_users')->where('id',$id)->first();
-				if($user->premium){
-					$this->col[] = ["label"=>"Nietos","name"=>"nietos"];
-				}
+				//if($user->premium){
+				$this->col[] = ["label"=>"Nietos","name"=>"nietos"];
+				//}
 			}
 
 			$this->col[]= ["label"=>"Fecha Solicitud", "name"=>"created_at" , "callback_php"=>'date("d/m/y",strtotime($row->created_at))'];
