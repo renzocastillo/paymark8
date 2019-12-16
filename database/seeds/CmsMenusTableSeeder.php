@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ContactMenuSeeder extends Seeder
+class CmsMenusTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,11 @@ class ContactMenuSeeder extends Seeder
     {
 	    $id = DB::table( 'cms_menus' )->insertGetId(
 		    [
-			    'name'              => 'Contacto',
-			    'type'              => 'URL',
-			    'path'              => 'contact',
-			    'color'             => null,
-			    'icon'              => 'fa fa-message',
+			    'name'              => 'Tipos de Consultas',
+			    'type'              => 'Module',
+			    'path'              => 'tipos_de_consultas',
+			    'color'             => 'normal',
+			    'icon'              => 'fa fa-comments',
 			    'parent_id'         => 0,
 			    'is_active'         => 1,
 			    'is_dashboard'      => 0,
@@ -30,7 +30,7 @@ class ContactMenuSeeder extends Seeder
 	    DB::table( 'cms_menus_privileges' )->insert(
 		    [
 			    'id_cms_menus' => $id,
-			    'id_cms_privileges'    => 3
+			    'id_cms_privileges'    => 2
 		    ]
 	    );
     }

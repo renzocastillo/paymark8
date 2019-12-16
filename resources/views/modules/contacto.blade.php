@@ -4,24 +4,9 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class='fa fa-phone'></i> {{ucfirst($page_title)}}
+                    <i class='fa fa-comments'></i> Indícanos tu consulta
                 </div>
-                <div class="panel-body">
-                    @foreach($datos_de_contacto as $dato)
-                        <label class="label-setting">{{ $dato->label }} : &nbsp;</label><span>{{$dato->content}}</span>
-                        <br>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class='fa fa-phone'></i> Contacto
-                </div>
-                <form role="form" method="POST" action="/admin/contact">
+                <form role="form" method="POST" action="/admin/contacto">
                     {{ csrf_field() }}
                     <div class="panel-body">
 
@@ -46,6 +31,23 @@
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class='fa fa-envelope'></i> Medios de Contacto
+                </div>
+                <div class="panel-body">
+                    @foreach($datos_de_contacto as $dato)
+                        @if(!empty($dato->content))
+                            <label class="label-setting">{{ $dato->label }} : &nbsp;</label><span>{{$dato->content}}</span>
+                            <br>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
