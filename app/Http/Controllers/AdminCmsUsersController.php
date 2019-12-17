@@ -72,8 +72,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		//$arr=['row'=>$row,'field'=>'premium','checked'=>false,'cms_privileges_id'=>2];
 		//$custom_element=view('components.toggle',$arr)->render();
 		//$this->form[] = array("label"=>"Premium","name"=>"premium","type"=>"custom","html"=>$custom_element);
-		$this->form[] = array("label"=>"Password","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
-		$this->form[] = array("label"=>"Password Confirmation","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
+		$this->form[] = array("label"=>"Contraseña Actual","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
+		$this->form[] = array("label"=>"Repita Contraseña","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
 		# END FORM DO NOT REMOVE THIS LINE
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->addaction[] =['label'=>'','url'=>'#pagar_modal','icon'=>'fa fa-dollar','color'=>'warning','showIf'=>'[estado_solicitud]=="solicitado"'];
@@ -223,14 +223,16 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		}
 		//if($user->premium){
 		if(CRUDBooster::myPrivilegeId()==3){
-			$hijos=$this->getHijos($user->id);
+			$hijos=$this->getHijos(CRUDBooster::myid());
 			$html='';
 			foreach($hijos as $hijo){
-				$nietos=$this->getNietosFromLastSolicitud($hijo->id);
+				$nietos=$this->getNietosFromLastSolicitud($hijo);
 				if(!empty($nietos)){
-					$html=$html.'<tr><td>Hijo: '.$hijo->name.'</td>';
+					$html=$html.'<tr><td>Linkers Directos: '.$hijo->name.'</td>';
 					$string_nietos=ucwords(implode(', ',$nietos));
-					$html=$html.'<td>Nietos: '.$string_nietos.'</td></tr>';
+					$html=$html.'<td>Linkers Indirectos: '.$string_nietos.'</td></tr>';
+				}else{
+					$html='<tr><td>Todavía no has solicitado tu ganancia por primera vez</td></tr>';
 				}
 
 			}
@@ -239,7 +241,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
                 <table class="table table-bordered">
                     <tbody>
                     <tr class="active">
-                        <td colspan="2"><strong><i class="fa fa-bars"></i> Linkers de Linkers en las Ganancias de la Última Solicitud</strong></td>
+                        <td colspan="2"><strong><i class="fa fa-bars"></i> Linkers Directos e Indirectos en la Última Ganancia </strong></td>
 					</tr>'.
 					$html.'
                     </tbody>
@@ -470,20 +472,20 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 				->get();
 		return $hijos;
 	}
-	public function getNietosFromLastSolicitud($id){
-		$hijo=DB::table('cms_users')->where('id',$id)->first();
+	public function getNietosFromLastSolicitud($hijo){
 		$ultima=$this->getUltimaSolicitud($hijo->cms_users_id);
 		$penultima=$this->getPenultimaSolicitud($hijo->cms_users_id);
 		$nietos=DB::table('cms_users')
-					->where('cms_users_id',$id)
-					->whereNotNull('activated_at');
-		if($ultima->id){
-			$nietos->whereDate('activated_at','<',$ultima->created_at);
-			if($penultima->id){
+					->where('cms_users_id',$hijo->id);
+		if($ultima->created_at){
+			$nietos->whereNotNull('activated_at')
+					->whereDate('activated_at','<',$ultima->created_at);
+			if($penultima->created_at){
 				$nietos->whereDate('activated_at','>',$penultima->created_at);
-				//dd($penultima->created_at);
 			}
-		}
-		return $nietos->pluck('name')->toArray();									
+			return $nietos->pluck('name')->toArray();
+		}else{
+			return null;
+		}									
 	}
 }
