@@ -226,16 +226,19 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			if($request['parent_table']=='cms_users'){
 				$hijos=$this->getHijos($request['parent_id']);
 				$html='';
-				foreach($hijos as $hijo){
-					$nietos=$this->getNietosFromLastSolicitud($hijo);
-					if(!empty($nietos)){
-						$html=$html.'<tr><td>Linkers Directos: '.$hijo->name.'</td>';
-						$string_nietos=ucwords(implode(', ',$nietos));
-						$html=$html.'<td>Linkers Indirectos: '.$string_nietos.'</td></tr>';
-					}else{
-						$html='<tr><td>Todavía no has solicitado tu ganancia por primera vez</td></tr>';
+				if(!$hijos->isEmpty()){
+					foreach($hijos as $hijo){
+						$nietos=$this->getNietosFromLastSolicitud($hijo);
+						if(!empty($nietos)){
+							$html=$html.'<tr><td>Linkers Directos: '.$hijo->name.'</td>';
+							$string_nietos=ucwords(implode(', ',$nietos));
+							$html=$html.'<td>Linkers Indirectos: '.$string_nietos.'</td></tr>';
+						}else{
+							$html='<tr><td>Todavía no has solicitado tu ganancia por primera vez</td></tr>';
+						}
 					}
-
+				}else{
+					$html='<tr><td>Todavía no has solicitado tu ganancia por primera vez</td></tr>';
 				}
 				$this->pre_index_html ='<div class="box box-solid box-success">
 				<div class="box-body table-responsive no-padding">
