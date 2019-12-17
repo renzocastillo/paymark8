@@ -342,7 +342,7 @@
 			$asunto=$input['subject'];
 			$mensaje= $input['message'];
 			$email=CRUDBooster::getSetting('correo_consultas');
-			$data = ['nombre' => $user->name, 'email'=>$user->email,  'whatsapp' => $user->email,'asunto'=>$asunto,'mensaje'=>$mensaje];
+			$data = ['nombre' => $user->name, 'email'=>$user->email,  'whatsapp' => $user->whatsapp,'asunto'=>$asunto,'mensaje'=>$mensaje];
 			CRUDBooster::sendEmail(['to' => $email, 'data' => $data, 'template' => 'consulta']);
 			CRUDBooster::redirect(CRUDBooster::mainpath(), 'Mensaje enviado exitosamente','success');
 		}
