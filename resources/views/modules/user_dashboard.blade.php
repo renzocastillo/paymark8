@@ -77,7 +77,7 @@
         <div class="small-box bg-blue">
             <div class="inner">
                 <h3>{{isset($monto_total) ? '$ '.$monto_total : '$ 0'}}</h3>
-                <h4> Ganancia Total</h4>
+                <h4> Ganancia Actual</h4>
             </div>
             <div class="icon">
               <i class="fa fa-trophy"></i>
