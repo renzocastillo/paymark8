@@ -139,8 +139,8 @@
               <div class="col-sm-12 col-lg-4 text-center">
                 <div id="payment_card" class="small-box bg-blue">
                     <div class="inner">
-                      <h3>$4 /mes</h3>
-                      <h4> $48 / anual (60% dcto)</h4>
+                      <h3>$4.99 /mes</h3>
+                      <h4> $59 / anual (50% dcto)</h4>
                       <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                     </div>
                     {!! CRUDBooster::getSetting('boton_paypal') !!}           
