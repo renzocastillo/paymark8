@@ -11,9 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(CountriesSeeder::class);
-	    // $this->call(SubjectsMenuSeeder::class);
-	    // $this->call(ProductAddTypeSeeder::class);
+        $this->call(CountriesTableSeeder::class);
 	    $this->call(ProductTypeSeeder::class);
         $this->call(CmsMenusTableSeeder::class);
         $this->call(CmsEmailTemplatesTableSeeder::class);

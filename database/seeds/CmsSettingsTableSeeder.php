@@ -60,7 +60,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'name' => 'email_sender',
-                'content' => 'server@paymark8.com',
+                'content' => NULL,
                 'content_input_type' => 'text',
                 'dataenum' => NULL,
                 'helper' => NULL,
@@ -73,7 +73,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'name' => 'smtp_driver',
-                'content' => 'smtp',
+                'content' => NULL,
                 'content_input_type' => 'select',
                 'dataenum' => 'smtp,mail,sendmail',
                 'helper' => NULL,
@@ -86,7 +86,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'name' => 'smtp_host',
-                'content' => 'smtp.zoho.com',
+                'content' => NULL,
                 'content_input_type' => 'text',
                 'dataenum' => NULL,
                 'helper' => NULL,
@@ -99,7 +99,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'name' => 'smtp_port',
-                'content' => '465',
+                'content' => NULL,
                 'content_input_type' => 'text',
                 'dataenum' => NULL,
                 'helper' => 'default 25',
@@ -112,7 +112,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'name' => 'smtp_username',
-                'content' => 'server@paymark8.com',
+                'content' => NULL,
                 'content_input_type' => 'text',
                 'dataenum' => NULL,
                 'helper' => NULL,
@@ -125,7 +125,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'name' => 'smtp_password',
-                'content' => 'Quaira2019@',
+                'content' => NULL,
                 'content_input_type' => 'text',
                 'dataenum' => NULL,
                 'helper' => NULL,
@@ -281,7 +281,7 @@ class CmsSettingsTableSeeder extends Seeder
             array (
                 'id' => 21,
                 'name' => 'correo',
-                'content' => 'soporte@paymark8.com',
+                'content' => NULL,
                 'content_input_type' => 'text',
                 'dataenum' => NULL,
                 'helper' => 'Correo',
@@ -354,19 +354,6 @@ class CmsSettingsTableSeeder extends Seeder
                 'updated_at' => NULL,
                 'group_setting' => 'Landing',
                 'label' => 'Imagen del Popup',
-            ),
-            26 => 
-            array (
-                'id' => 28,
-                'name' => 'correo_consultas',
-                'content' => NULL,
-                'content_input_type' => 'email',
-                'dataenum' => NULL,
-                'helper' => 'El correo al cual quieres que lleguen las consultas de Paymark8',
-                'created_at' => '2019-12-16 15:36:50',
-                'updated_at' => NULL,
-                'group_setting' => 'Oficina',
-                'label' => 'Correo para Recepción de Consultas',
             ),
         ));
         
