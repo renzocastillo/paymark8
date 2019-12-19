@@ -23,7 +23,7 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
-			$this->button_show = true;
+			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
@@ -225,7 +225,7 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 		| $this->load_css[] = asset("myfile.css");
 		|
 		*/
-		$this->load_css = array();
+		$this->load_css[]  = asset( "css/backoffice.css" );
 
 
 	}
@@ -367,9 +367,7 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 				}
 			}
 			$data['products'] = $products;
-			$enterprises      = DB::table( 'empresas' )->orderBy( 'nombre' )->get();
-			View::share( 'enterprises', $enterprises );
-			View::share( 'tipo', $data['tipo'] );
+			$data['enterprises']= DB::table( 'empresas' )->orderBy( 'nombre' )->get();
 			//Create a view. Please use `cbView` method instead of view method from laravel.
 
 			$this->cbView( 'modules.products', $data );

@@ -1,3 +1,13 @@
+.iframe-product-container iframe{
+    margin: 0 auto;
+    display:block;
+}
+
+.iframe-product-container {
+    overflow: hidden;
+    position: relative;
+}
+
 .iframes{
     text-align:center;
 }

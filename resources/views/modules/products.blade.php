@@ -30,11 +30,11 @@
                     <ul class="iframes list-unstyled row">
                         @foreach($products as $product)
                             @if($product->product_type_id == 2)
-                                <li class="col-lg-6 col-sm-12 col-xs-12">
+                                <li class="col-lg-3 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"> {{$product->title}}</div>
-                                        <div class="panel-body" style="height: 33vh;overflow-x: auto">
-                                            <div class="iframe-container">
+                                        <div class="panel-body" style="height: 40vh;overflow-x: auto">
+                                            <div class="iframe-product-container">
                                                 {!! $product->value !!}
                                             </div>
                                         </div>

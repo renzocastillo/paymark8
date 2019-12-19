@@ -1,37 +1,312 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CmsMenusTableSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
-	    $id = DB::table( 'cms_menus' )->insertGetId(
-		    [
-			    'name'              => 'Tipos de Consultas',
-			    'type'              => 'Module',
-			    'path'              => 'tipos_de_consultas',
-			    'color'             => 'normal',
-			    'icon'              => 'fa fa-comments',
-			    'parent_id'         => 0,
-			    'is_active'         => 1,
-			    'is_dashboard'      => 0,
-			    'id_cms_privileges' => 1,
-			    'sorting'           => 13,
-		    ]
-	    );
+        
 
-	    DB::table( 'cms_menus_privileges' )->insert(
-		    [
-			    'id_cms_menus' => $id,
-			    'id_cms_privileges'    => 2
-		    ]
-	    );
+        \DB::table('cms_menus')->delete();
+        
+        \DB::table('cms_menus')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'name' => 'Usuarios',
+                'type' => 'Module',
+                'path' => 'users',
+                'color' => 'normal',
+                'icon' => 'fa fa-users',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 1,
+                'id_cms_privileges' => 1,
+                'sorting' => 7,
+                'created_at' => '2019-09-11 16:55:02',
+                'updated_at' => '2019-09-11 17:48:09',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => 'Anuncios',
+                'type' => 'Module',
+                'path' => 'anuncios',
+                'color' => 'normal',
+                'icon' => 'fa fa-buysellads',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 2,
+                'created_at' => '2019-09-11 17:53:08',
+                'updated_at' => '2019-09-11 18:00:41',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Empresas',
+                'type' => 'Module',
+                'path' => 'empresas',
+                'color' => 'normal',
+                'icon' => 'fa fa-building',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 1,
+                'created_at' => '2019-09-11 17:54:19',
+                'updated_at' => '2019-09-11 17:54:30',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => 'Gestor de contenidos',
+                'type' => 'Module',
+                'path' => 'configuraciones',
+                'color' => 'normal',
+                'icon' => 'fa fa-edit',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 8,
+                'created_at' => '2019-09-11 17:56:08',
+                'updated_at' => '2019-09-11 18:31:50',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'Landing Page',
+                'type' => 'URL',
+                'path' => 'configuraciones?group=landing',
+                'color' => 'normal',
+                'icon' => 'fa fa-picture-o',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 3,
+                'created_at' => '2019-09-11 18:07:55',
+                'updated_at' => '2019-09-11 18:19:26',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'name' => 'Sliders',
+                'type' => 'URL',
+                'path' => 'configuraciones?group=sliders',
+                'color' => 'normal',
+                'icon' => 'fa fa-file-picture-o',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 4,
+                'created_at' => '2019-09-11 18:20:26',
+                'updated_at' => '2019-09-11 18:25:42',
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'Contacto',
+                'type' => 'URL',
+                'path' => 'configuraciones?group=contacto',
+                'color' => 'normal',
+                'icon' => 'fa fa-phone',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 5,
+                'created_at' => '2019-09-11 18:22:10',
+                'updated_at' => '2019-09-11 18:26:00',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'Redes Sociales',
+                'type' => 'URL',
+                'path' => 'configuraciones?group=sociales',
+                'color' => 'normal',
+                'icon' => 'fa fa-facebook-f',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 6,
+                'created_at' => '2019-09-11 18:23:35',
+                'updated_at' => '2019-09-11 18:26:13',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'name' => 'Videos',
+                'type' => 'Module',
+                'path' => 'videos',
+                'color' => 'normal',
+                'icon' => 'fa fa-video-camera',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 9,
+                'created_at' => '2019-09-11 18:27:22',
+                'updated_at' => '2019-09-11 18:30:05',
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'name' => 'Tutoriales',
+                'type' => 'URL',
+                'path' => 'iframes?tipo=video',
+                'color' => 'normal',
+                'icon' => 'fa fa-camera',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 10,
+                'created_at' => '2019-09-11 17:28:08',
+                'updated_at' => '2019-09-24 12:21:10',
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'name' => 'Parametros',
+                'type' => 'Module',
+                'path' => 'parametros',
+                'color' => 'normal',
+                'icon' => 'fa fa-gears',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 11,
+                'created_at' => '2019-09-11 18:29:17',
+                'updated_at' => '2019-09-11 18:30:30',
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'name' => 'Resumen',
+                'type' => 'Module',
+                'path' => 'resumen',
+                'color' => 'normal',
+                'icon' => 'fa fa-dashboard',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 1,
+                'id_cms_privileges' => 1,
+                'sorting' => 1,
+                'created_at' => '2019-09-11 18:44:34',
+                'updated_at' => '2019-09-11 18:44:50',
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'name' => 'Oficina',
+                'type' => 'Module',
+                'path' => 'oficina',
+                'color' => 'normal',
+                'icon' => 'fa fa-line-chart',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 4,
+                'created_at' => '2019-09-11 18:48:44',
+                'updated_at' => '2019-09-11 18:51:04',
+            ),
+            13 => 
+            array (
+                'id' => 14,
+                'name' => 'Ganancias',
+                'type' => 'Module',
+                'path' => 'ganancias',
+                'color' => 'normal',
+                'icon' => 'fa fa-dollar',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 5,
+                'created_at' => '2019-09-11 18:49:06',
+                'updated_at' => '2019-09-11 18:51:17',
+            ),
+            14 => 
+            array (
+                'id' => 16,
+                'name' => 'Atencion al Cliente',
+                'type' => 'Module',
+                'path' => 'contacto',
+                'color' => 'normal',
+                'icon' => 'fa fa-phone',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 12,
+                'created_at' => '2019-09-11 18:50:41',
+                'updated_at' => '2019-09-11 18:51:54',
+            ),
+            15 => 
+            array (
+                'id' => 17,
+                'name' => 'Mis Usuarios',
+                'type' => 'Module',
+                'path' => 'users',
+                'color' => 'normal',
+                'icon' => 'fa fa-users',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 6,
+                'created_at' => '2019-09-13 10:40:06',
+                'updated_at' => '2019-09-13 10:40:21',
+            ),
+            16 => 
+            array (
+                'id' => 19,
+                'name' => 'Productos',
+                'type' => 'Module',
+                'path' => 'products',
+                'color' => 'normal',
+                'icon' => 'fa fa-gift',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 2,
+                'created_at' => '2019-12-19 11:04:46',
+                'updated_at' => '2019-12-19 12:14:33',
+            ),
+            17 => 
+            array (
+                'id' => 20,
+                'name' => 'Tipos de Consultas',
+                'type' => 'Module',
+                'path' => 'tipos_de_consultas',
+                'color' => 'normal',
+                'icon' => 'fa fa-comments',
+                'parent_id' => 0,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 13,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+        ));
+        
+        
     }
 }
