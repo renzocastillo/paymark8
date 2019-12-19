@@ -34,8 +34,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->col = array();
 		//$this->col[] = array("label"=>"N°", "name"=>"id");
 		$this->col[] = array("label"=>"Nombre","name"=>"name");
-		$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
 		if(CRUDBooster::myPrivilegeId()==2){
+			$this->col[] = array("label"=>"Estado","name"=>"estado","callback_php"=>'$row->estado ? "Activo" : "Inactivo"');
 			//$this->col[] = array("label"=>"Premium","name"=>"premium","callback_php"=>'$row->premium ? "Sí" : "No"');
 			$this->col[] = array("label"=>"Correo Registro","name"=>"email");
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
@@ -56,6 +56,9 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->col[] = ["label"=>"Fecha Registro", "name"=>"created_at","callback_php"=>'date("d/m/Y h:i A",strtotime($row->created_at))'];	
 			$this->col[] = ["label"=>"Fecha Activación", "name"=>"activated_at","callback_php"=>'$row->activated_at ? date("d/m/Y h:i A",strtotime($row->activated_at)) : "sin información"'];	
 			//$this->col[] = array("label"=>"Tipo","name"=>"id_cms_privileges","join"=>"cms_privileges,name");	
+		}
+		if(CRUDBooster::myPrivilegeId()==3){
+			$this->col[] = array("label"=>"N° Total de Linkers","name"=>"( SELECT COUNT(*) FROM cms_users b where b.cms_users_id=cms_users.id and b.estado=1) as linkers_totales");
 		}
 		# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -181,22 +184,32 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 							};*/
 							";
 		if(CRUDBooster::myPrivilegeId()==3){
-			$id=CRUDBooster::myId();
+			$request=Request::all();
+			if($request['parent_table']=='cms_users'){
+				$id=$request['parent_id'];
+			}else{
+				$id=CRUDBooster::myId();
+			}
+			$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
 			$vistas_x_afiliacion=DB::table('parametros')->where('name','vreg')->value('content');
 			$user=DB::table('cms_users')->where('id',$id)->first();	
 			$solicitud=DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->latest();
 			$fecha_solicitud=$solicitud->created_at ? $solicitud->created_at :'2000-01-01 00:00:00';
 			$vistas_actuales=$user->vistas_actuales;
+			$nietos_actuales=$user->nietos_actuales;
 			$afiliaciones_actuales=$user->afiliaciones_actuales;
 			$capacidad_de_vistas_a_favor=$user->capacidad_vistas_a_favor;
 			$capacidad_de_vistas=$afiliaciones_actuales*$vistas_x_afiliacion+$capacidad_de_vistas_a_favor;
 			$vistas_por_efectuar=$capacidad_de_vistas-$vistas_actuales;
 			$vistas_por_efectuar= $vistas_por_efectuar >= 0 ? $vistas_por_efectuar : 0;
+			$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
 			$this->index_statistic[] = ['label'=>'N° Vistas Totales','count'=>DB::table('reproducciones')->where('cms_users_id',$id)->count(),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-2'];
 			$this->index_statistic[] = ['label'=>'N° Actual de Vistas','count'=>$vistas_actuales,'icon'=>'fa fa-video-camera','color'=>'blue','width'=>'col-sm-2'];
 			$this->index_statistic[] = ['label'=>'N° Actual de Linkers afiliados','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-2'];
+			$this->index_statistic[] = ['label'=>'N° de Linkers Totales','count'=>DB::table($this->table)->where('cms_users_id',$id)->where('estado',1)->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
 			$this->index_statistic[] = ['label'=>'N° de Linkers sin Activarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
-			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
+			//$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
+			$this->index_statistic[] = ['label'=>'Ganancia por Linkers Indirectos Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
 		}
 		if(CRUDBooster::myPrivilegeId()==2){
 			$request=Request::all();
@@ -210,7 +223,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 				$ganancia_x_nietos=DB::table('parametros')->where('name','gnietos')->value('content');
 				$nietos_actuales=$user->nietos_actuales;
 				$ganancia_premium=$ganancia_x_nietos*$nietos_actuales;
-				$this->index_statistic[] = ['label'=>'Ganancia Linkers de Linkers Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
+				$this->index_statistic[] = ['label'=>'Ganancia por Linkers Indirectos Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
 				//}
 				$monto_ultima_solicitud=$this->getMontoUltimaSolicitud($user->id);
 				$monto_ultima_solicitud= $monto_ultima_solicitud > 0 ? $monto_ultima_solicitud : 0;
@@ -296,10 +309,10 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		if(CRUDBooster::myPrivilegeId()==3){
 			if($request['parent_table']=='cms_users'){
 				$query->where($this->table.'.cms_users_id','=',$request['parent_id']);
-				$query->where($this->table.'.estado','=',1);
 			}else{
 				$query->where($this->table.'.cms_users_id','=',CRUDBooster::myId());
 			}
+			$query->where($this->table.'.estado','=',1);
 		}
 	}
 	public function hook_before_delete($id) {

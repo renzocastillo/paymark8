@@ -166,7 +166,7 @@
 			$this->index_statistic[] = ['label'=>'Ganancia por Linkers Afiliados Actuales','count'=>' $'.$ganancia_x_afiliados_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-3 col-lg-6'];
 			$this->index_statistic[] = ['label'=>'Dolares por Efectuarse','count'=>' $'.$dolares_x_efectuarse,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
 			//if(CRUDBooster::me()->premium){
-				$this->index_statistic[] = ['label'=>'Ganancia Linkers de Linkers: Ganancia generada por los linkers de tus linkers','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
+				$this->index_statistic[] = ['label'=>'Ganancia Linkers Indirectos: Ganancia generada por los linkers de tus linkers','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-6'];
 			//}
 			
 
