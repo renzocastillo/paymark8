@@ -133,7 +133,7 @@
                     <h4> $120 / anual</h4>
                     <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                   </div>
-                  <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">PAGAR</a>
+                  <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">COMPRAR</a>
                 </div>
               </div>
               <div class="col-sm-12 col-lg-4 text-center">
@@ -152,7 +152,7 @@
                       <h3>$159 / 2 años</h3>
                       <p> Ganancias ilimitadas, url dos años, servidor de paymark dos años</p>
                   </div>
-                  <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">PAGAR</a>
+                  <a title="pagar" class="btn btn-default payment_btn disabled" data-toggle="modal">COMPRAR</a>
                 </div>
               </div>
             </div>
