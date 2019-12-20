@@ -7,31 +7,13 @@
                     <h3 class="box-title">
 
                     </h3>
-                    <div class="box-tools">
-                        <form method="GET" action="" class="form-horizontal">
-                            <input type="hidden" name="tipo" value="{{$tipo}}">
-                            <div class="input-group input-group-sm hidden-xs" style="width: 200px;">
-                                <select class="form-control pull-right" name="enterpriseId" required>
-                                    <option selected value="0">
-                                        Seleccione una empresa
-                                    </option>
-                                    @foreach($enterprises as $enterprise)
-                                        <option value="{{$enterprise->id}}">{{$enterprise->nombre}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     @if($tipo == 'video')
                         <ul class="iframes list-unstyled video-list-thumbs row">
                             @foreach($iframes as $iframe)
-                                <li class="col-lg-2 col-sm-12 col-xs-6">
+                                <li class="col-lg-4 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             {{$iframe->title}}
@@ -109,7 +91,7 @@
                 @endif
                 <!-- {{ $iframes->appends(['tipo' => $tipo])->links() }} -->
                 </div>
-                <div class="box-footer">
+                {{--<div class="box-footer">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li ><a href="{{$iframes->url(1)}}">«</a></li>
                         @for($i=1; $i<=$iframes->lastPage(); $i++)
@@ -119,7 +101,7 @@
                             <li><a href="{{$iframes->url($iframes->lastPage())}}">»</a></li>
                         @endif
                     </ul>
-                </div>
+                </div>--}}
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
