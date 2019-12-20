@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+	use Illuminate\Support\Facades\View;
 	use Session;
 	use Request;
 	use DB;
@@ -328,7 +329,22 @@
 	
 			$data['page_title'] = "Atención al Cliente";
 			$data['datos_de_contacto']=DB::table('cms_settings')->where('group_setting','contacto')->get();
+
+			$data['subjects'] = DB::table('subjects')->get();
+			//View::share('subjects', $subjects);
+
 			$this->cbView('modules.contacto', $data);
+		}
+
+		public function create() {
+			$input = Request::all();
+			$user=CRUDBooster::me();
+			$asunto=$input['subject'];
+			$mensaje= $input['message'];
+			$email=CRUDBooster::getSetting('correo');
+			$data = ['nombre' => $user->name, 'email'=>$user->email,  'whatsapp' => $user->whatsapp,'asunto'=>$asunto,'mensaje'=>$mensaje];
+			CRUDBooster::sendEmail(['to' => $email, 'data' => $data, 'template' => 'consulta']);
+			CRUDBooster::redirect(CRUDBooster::mainpath(), 'Mensaje enviado exitosamente','success');
 		}
 	    //By the way, you can still create your own method in here... :) 
 

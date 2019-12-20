@@ -103,8 +103,9 @@
         <div class="row">
         <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿QUIÉNES SOMOS?</span></div>
-                <p>Un gran equipo comprometido con brindar una nueva experiencia de compra para nuestros clientes y alcanzar la mayor audiencia referenciados por los mismos. </p>
-            </div>  
+                <p>Un gran equipo comprometido con brindar una nueva experiencia de compra para nuestros clientes y
+                    alcanzar la mayor audiencia referenciados por los mismos. </p>
+            </div>
             <div class="col-sm-6 col-lg-5 col-lg-offset-1">
                 <img src="uploads/4.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
@@ -113,40 +114,48 @@
         <div class="row">
             <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿QUÉ TE OFRECEMOS?</span></div>
-                <p>Una nueva oportunidad de aprovechar tu activo social desde donde estés, a cualquier hora, por compartirnos con más personas, te ayudamos a conseguir ingresos extra.</p>
-            </div>  
+                <p>Una nueva oportunidad de aprovechar tu activo social desde donde estés, a cualquier hora, por
+                    compartirnos con más personas, te ayudamos a conseguir ingresos extra.</p>
+            </div>
             <div class="col-sm-6 col-lg-5 col-lg-offset-1">
                 <img src="uploads/5.jpg" class="inline-photo">
                 <div class="overlay show-on-scroll"></div>
             </div>
         </div>
-        <div class="row">        
+        <div class="row">
             <div class="col-sm-6 col-lg-6">
                 <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ NOSOTROS?</span></div>
-                <p>Porque no existe plataforma virtual similar, con un sistema de afiliaciones tan efectivo y comprobado, estamos preparados para recibir 50 millones de usuarios, somos una empresa seria y estructurada con un modelo de negocio que ha revolucionado el Marketing en todas sus formas.</p>
-            </div> 
+                <p>Porque no existe plataforma virtual similar, con un sistema de afiliaciones tan efectivo y
+                    comprobado, estamos preparados para recibir 50 millones de usuarios, somos una empresa seria y
+                    estructurada con un modelo de negocio que ha revolucionado el Marketing en todas sus formas.</p>
+            </div>
             <div class="col-sm-6 col-lg-5 col-lg-offset-1">
                 <div class="image"><img src="uploads/2.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
-            </div>  
+            </div>
         </div>
-        <div class="row">        
+        <div class="row">
             <div class="col-sm-6 col-lg-6">
-                <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN  {{ strtoupper(CRUDBooster::getSetting('appname')) }}?</span></div>
-                <p>Junto a nuestro equipo sabemos que tienes la capacidad de hacer muchos amigos, tu activo social es muy valioso y como cliente satisfecho sabes compartir, unimos ambas habilidades y creamos justo el modelo de negocio que te conviene a ti.</p>
-            </div> 
+                <div class="titulo show-on-scroll text-center"><span>¿POR QUÉ TE QUEREMOS EN  {{ strtoupper(CRUDBooster::getSetting('appname')) }}?</span>
+                </div>
+                <p>Junto a nuestro equipo sabemos que tienes la capacidad de hacer muchos amigos, tu activo social es
+                    muy valioso y como cliente satisfecho sabes compartir, unimos ambas habilidades y creamos justo el
+                    modelo de negocio que te conviene a ti.</p>
+            </div>
             <div class="col-sm-6 col-lg-5 col-lg-offset-1">
 
                 <div class="image"><img src="uploads/3.jpg" class="inline-photo show-on-scroll"></div>
                 <div class="overlay show-on-scroll"></div>
-            </div>  
+            </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">                      
+            <div class="col-sm-12">
                 <div class="test show-on-scroll">
                     <p>Empieza a ganar con {{ ucfirst(CRUDBooster::getSetting('appname')) }}</p>
-                    <button type="button" data-toggle="modal" data-target="#modalRegistro" class="button1">REGISTRARME GRATIS</button>
-                </div>                        
+                    <button type="button" data-toggle="modal" data-target="#modalRegistro" class="button1">REGISTRARME
+                        GRATIS
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -191,8 +200,18 @@
                     <input type="text" class="form-control" id="name" placeholder="Nombre y Apellido" name="name">
                 </div>
                 <div class="form-group">
+                    <label for="country_id"><i class="fas fa-flag grey-text"></i> País:</label>
+                    <select class="form-control" name="country_id" required>
+                        @foreach($countries as $country)
+                            <option selected hidden>Seleccione una opción</option>
+                            <option value="{{$country->id}}">{{$country->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="whatsapp"><i class="fas fa-phone grey-text"></i> Whatsapp:</label>
-                    <input type="text" class="form-control" id="whatsapp" placeholder="Ej. 51969922331" name="whatsapp">
+                    <input type="text" class="form-control" id="whatsapp" placeholder="Tu número sin tu código de país (Ej. 994735839)"
+                           name="whatsapp">
                 </div>
                 <div class="form-group">
                     <label for="email"><i class="fas fa-envelope grey-text"></i> Email:</label>

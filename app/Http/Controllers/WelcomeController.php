@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\View;
 use Session;
 //use Request;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class WelcomeController extends Controller
         $empresas=DB::table('empresas')->get();
         $anuncios=DB::table('anuncios')->get(); 
         $video=DB::table('videos')->latest()->first(); 
-        $data=array("empresas"=>$empresas,"anuncios"=>$anuncios,"video"=>$video,"patrocinador"=>$patrocinador); 
+        $data=array("empresas"=>$empresas,"anuncios"=>$anuncios,"video"=>$video,"patrocinador"=>$patrocinador);
+
+        $countries = DB::table('countries')->orderBy('name')->get();
+        View::share('countries',$countries);
         return view('welcome',$data);
   }
   public function addReproduccion($user=null,Request $request){

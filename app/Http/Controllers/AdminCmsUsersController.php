@@ -41,7 +41,18 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->col[] = array("label"=>"Correo Paypal","name"=>"email_paypal");
 		}
 		//$this->col[] = array("label"=>"Correo","name"=>"email");
-		$this->col[] = array("label"=>"Whatsapp","name"=>"whatsapp",'callback_php'=>'"<a href=\"https://wa.me/+".$row->whatsapp."\" target=\"_blank\">$row->whatsapp</a>"');
+		$this->col[] = array(
+            "label"        => "Whatsapp",
+            "name"         => "whatsapp",
+            "callback"=>function($row) {
+                $country = DB::table( 'countries' )->where( 'id', $row->country_id )->first();
+                if($country == null){
+                    return '';
+                }
+                return '<a href="https://wa.me/+'.$country->phonecode.$row->whatsapp.'" target="_blank">+'.$country->phonecode.$row->whatsapp.'</a>';
+            }
+        );
+        $this->col[] = [ "label" => "País", "name" => "country_id", "join" => "countries,name" ];
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->col[] = array("label"=>"Linkers Actuales","name"=>"afiliaciones_actuales");
 			$this->col[] = array("label"=>"Vistas Actuales","name"=>"vistas_actuales");
