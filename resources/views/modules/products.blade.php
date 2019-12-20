@@ -30,10 +30,10 @@
                     <ul class="iframes list-unstyled row">
                         @foreach($products as $product)
                             @if($product->product_type_id == 2)
-                                <li class="col-lg-3 col-sm-12 col-xs-12">
+                                <li class="col-lg-3 col-sm-12 col-xs-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"> {{$product->title}}</div>
-                                        <div class="panel-body" style="height: 40vh;overflow-x: auto">
+                                        <div class="panel-body" style="height: 50vh;overflow-x: auto">
                                             <div class="iframe-product-container">
                                                 {!! $product->value !!}
                                             </div>
@@ -65,27 +65,20 @@
                                     </div>
                                 </li>
                             @else
-                                <li class="col-lg-6 col-sm-12 col-xs-12">
+                                <li class="col-lg-3 col-sm-12 col-xs-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"> {{$product->title}}</div>
-                                        <div class="panel-body" style="height: 33vh;overflow-x: auto">
-                                            <div class="attachment-block clearfix">
-                                                <img class="attachment-img" src="{{$product->ogp['image']}}"
-                                                     alt="Attachment Image">
-
-                                                <div class="attachment-pushed">
-                                                    <h4 class="attachment-heading"><a
-                                                                href="http://www.lipsum.com/">{{$product->title}}</a>
-                                                    </h4>
-
-                                                    <div class="attachment-text">
-                                                        {{$product->ogp['title']}}
-                                                        <a href="{{$product->ogp['url']}}" target="_blank">Más</a>
-                                                    </div>
-                                                    <!-- /.attachment-text -->
+                                        <div class="panel-body" style="height: 50vh;overflow-x: auto">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-lg-offset-2">
+                                                    <img class="attachment-img img-responsive" src="{{$product->ogp['image']}}"  />
                                                 </div>
-                                                <!-- /.attachment-pushed -->
                                             </div>
+                                            <p>
+                                                {{$product->ogp['title']}}
+                                            </p>
+                                            <a href="{{$product->ogp['url']}}" target="_blank">Más</a>
+
                                         </div>
                                         @if(CRUDBooster::myPrivilegeid()==2)
                                             <div class="panel-footer">

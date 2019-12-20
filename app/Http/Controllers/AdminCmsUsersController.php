@@ -61,7 +61,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		);
 		$this->col[] = [ "label" => "País", "name" => "country_id", "join" => "countries,name" ];
 		if ( CRUDBooster::myPrivilegeId() == 2 ) {
-			$this->col[] = array( "label" => "N° de Linkers Totales", "name" => "afiliaciones_actuales" );
+			$this->col[] = array( "label" => "N° de Linkers Totales", "name" => "(SELECT count(*) FROM cms_users where cms_users_id=cms_users.id AND cms_users.estado IS NOT NULL) as n_linkers" );
 
 			$this->col[] = array( "label" => "Linkers Actuales", "name" => "afiliaciones_actuales" );
 
@@ -319,6 +319,14 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$vistas_por_efectuar         = $capacidad_de_vistas - $vistas_actuales;
 			$vistas_por_efectuar         = $vistas_por_efectuar >= 0 ? $vistas_por_efectuar : 0;
 			$this->index_statistic[]     = [
+				'label' => 'N° de Linkers Totales',
+				'count' => DB::table( 'cms_users' )->where( 'cms_users_id', $id )->whereNotNull( 'estado' )->count(),
+				'icon'  => 'fa fa-line-chart',
+				'color' => 'blue',
+				'width' => 'col-sm-2'
+			];
+
+			$this->index_statistic[]     = [
 				'label' => 'N° Vistas Totales',
 				'count' => DB::table( 'reproducciones' )->where( 'cms_users_id', $id )->count(),
 				'icon'  => 'fa fa-line-chart',
@@ -346,13 +354,13 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 				'color' => 'blue',
 				'width' => 'col-sm-2'
 			];
-			$this->index_statistic[]     = [
+		/*	$this->index_statistic[]     = [
 				'label' => 'Vistas por Efectuar',
 				'count' => $vistas_por_efectuar,
 				'icon'  => 'fa fa-download',
 				'color' => 'blue',
 				'width' => 'col-sm-2'
-			];
+			];*/
 		}
 		if ( CRUDBooster::myPrivilegeId() == 2 ) {
 			$request = Request::all();
