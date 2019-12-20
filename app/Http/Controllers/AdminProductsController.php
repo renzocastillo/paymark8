@@ -205,7 +205,6 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 		*/
 		$this->load_js = array();
 
-
 		/*
 		| ----------------------------------------------------------------------
 		| Add css style at body
@@ -368,6 +367,7 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 			}
 			$data['products'] = $products;
 			$data['enterprises']= DB::table( 'empresas' )->orderBy( 'nombre' )->get();
+			$data['current_empresa']=DB::table('empresas')->where('id',$enterpriseId)->first();
 			//Create a view. Please use `cbView` method instead of view method from laravel.
 
 			$this->cbView( 'modules.products', $data );

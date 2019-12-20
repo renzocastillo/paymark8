@@ -27,13 +27,19 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+                    @if(!empty($current_empresa->nombre))
+                        <h3 class="box-body text-center">Mostrando <strong>{{$current_empresa->nombre}}</strong></h3>
+                    @else
+                    <h3 class="box-body text-center">Mostrando Todos</h3>
+                    @endif
+                <br>
                     <ul class="iframes list-unstyled row">
                         @foreach($products as $product)
                             @if($product->product_type_id == 2)
-                                <li class="col-lg-3 col-sm-12 col-xs-6">
+                                <li class="col-lg-3 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"> {{$product->title}}</div>
-                                        <div class="panel-body" style="height: 50vh;overflow-x: auto">
+                                        <div class="panel-body">
                                             <div class="iframe-product-container">
                                                 {!! $product->value !!}
                                             </div>
@@ -65,10 +71,10 @@
                                     </div>
                                 </li>
                             @else
-                                <li class="col-lg-3 col-sm-12 col-xs-6">
+                                <li class="col-lg-3 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading"> {{$product->title}}</div>
-                                        <div class="panel-body" style="height: 50vh;overflow-x: auto">
+                                        <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-sm-8 col-lg-offset-2">
                                                     <img class="attachment-img img-responsive" src="{{$product->ogp['image']}}"  />

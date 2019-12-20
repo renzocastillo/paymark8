@@ -31,7 +31,15 @@
     padding-top: 56.25%;
     position: relative;
 }
-
+.iframes .panel-body{
+    height: 35vh;
+    overflow-x: auto;
+}
+@media (max-width:768px) {
+    .iframes .panel-body{
+        height: 50vh;
+    }
+}
 .flyer{
     padding-top:10px;
     padding-bottom:15px;
