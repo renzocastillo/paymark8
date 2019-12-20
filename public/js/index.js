@@ -3,9 +3,7 @@ $(window).on('load',function(){
   $('#anuncio').modal('show');
 });
 $(document).ready(function(){
-    $("#registrarme").one('click', function (event) {
-      event.preventDefault();
-      $('#register_form').submit();
+    $( "#register_form" ).submit(function( event ) {
       $(this).prop('disabled', true);
     });
     $('.carousel').slick({

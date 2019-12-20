@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label for="whatsapp"><i class="fas fa-phone grey-text"></i> Whatsapp:</label>
-                            <input type="text" class="form-control" id="whatsapp" placeholder="Ej. 51969922331"
+                            <input type="text" class="form-control" id="whatsapp" placeholder="Tu número sin tu código de país (Ej. 994735839)"
                                    name="whatsapp">
                         </div>
                         <div class="form-group">

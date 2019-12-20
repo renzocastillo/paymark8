@@ -75,9 +75,10 @@
                                                 </div>
                                             </div>
                                             <p>
-                                                {{$product->ogp['title']}}
+                                                <br>
+                                                <p class="text-primary">{{$product->ogp['title']}}</p>
                                             </p>
-                                            <a href="{{$product->ogp['url']}}" target="_blank">Más</a>
+                                            <a href="{{$product->ogp['url']}}" target="_blank">Ver Más</a>
 
                                         </div>
                                         @if(CRUDBooster::myPrivilegeid()==2)
