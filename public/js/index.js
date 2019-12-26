@@ -1,8 +1,9 @@
 
 $(window).on('load',function(){
-  $('#anuncio').modal('show');
+  //$('#anuncio').modal('show');
 });
 $(document).ready(function(){
+    $('#anuncio').modal('show');
     $( "#register_form" ).submit(function( event ) {
       $(this).prop('disabled', true);
     });
@@ -165,21 +166,27 @@ $("#register_form").validate({
       required: true,
       minlength: 6,
       maxlength: 10,
-    } , 
+    }, 
     cfmPassword: { 
       equalTo: "#password",
       minlength: 6,
       maxlength: 10
+    },
+    terms:{
+      required:true,
     }
 
 
   },
   messages:{
     password: { 
-      required:"el password es requerido"
+      required:"El password es requerido"
     },
     email:{
-      remote:"este email ya existe en nuestra plataforma. Por favor ingresa otro"
+      remote:"Éste email ya existe en nuestra plataforma. Por favor ingresa otro"
+    },
+    terms:{
+      required:" Debes aceptar los términos para poder registrarte en la plataforma"
     }
   }
 });

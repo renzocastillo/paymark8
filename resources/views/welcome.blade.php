@@ -202,8 +202,8 @@
                 <div class="form-group">
                     <label for="country_id"><i class="fas fa-flag grey-text"></i> País:</label>
                     <select class="form-control" name="country_id" required>
+                        <option selected hidden>Seleccione una opción</option>
                         @foreach($countries as $country)
-                            <option selected hidden>Seleccione una opción</option>
                             <option value="{{$country->id}}">{{$country->name}}</option>
                         @endforeach
                     </select>
@@ -224,6 +224,11 @@
                 <div class="form-group">         
                     <label for="pass2"><i class="fas fa-lock prefix grey-text"></i> Repetir contraseña:</label>
                     <input type="password" class="form-control" id="cfmPassword" placeholder="Repetir contraseña" name="cfmPassword">
+                </div>
+                <div class="form-group">      
+                    <p>
+                        <input type="checkbox" name="terms" value="1" id="terms"> Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank >términos y condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
+                    </p>
                 </div>
                 <input type="hidden" name="patrocinador" value="{{$patrocinador->id}}">      
             </div>
