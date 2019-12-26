@@ -183,7 +183,7 @@ $("#register_form").validate({
       required:"El password es requerido"
     },
     email:{
-      remote:"Éste email ya existe en nuestra plataforma. Por favor ingresa otro"
+      remote:"Este email ya existe en nuestra plataforma. Por favor ingresa otro"
     },
     terms:{
       required:" Debes aceptar los términos para poder registrarte en la plataforma"
