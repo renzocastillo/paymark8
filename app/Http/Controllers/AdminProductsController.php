@@ -203,7 +203,8 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 		| $this->load_js[] = asset("myfile.js");
 		|
 		*/
-		$this->load_js = array();
+		$this->load_js[]=asset("js/slick.min.js");
+		$this->load_js[]=asset("js/backoffice.js");
 
 		/*
 		| ----------------------------------------------------------------------
@@ -225,7 +226,8 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 		|
 		*/
 		$this->load_css[]  = asset( "css/backoffice.css" );
-
+		$this->load_css[] = asset("css/slick.css");
+		$this->load_css[] = asset("css/slick-theme.css");
 
 	}
 

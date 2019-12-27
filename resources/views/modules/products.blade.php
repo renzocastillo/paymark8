@@ -1,5 +1,13 @@
 @extends('crudbooster::admin_template')
 @section('content')
+    <div class="container-fluid">
+        <div class="row buttons-carousel">
+        @foreach($enterprises as $enterprise)
+            {{--<img src="{{url($enterprise->logo)}}"/>--}}
+        <a href="{{CRUDBooster::mainpath("?&enterpriseId=".$enterprise->id)}}" class="btn btn-primary">{{$enterprise->nombre}}</a>
+        @endforeach
+        </div> 
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -7,7 +15,7 @@
                     <h3 class="box-title">
 
                     </h3>
-                    <div class="box-tools">
+                    {{--<div class="box-tools">
                         <form method="GET" action="" class="form-horizontal">
                             <div class="input-group input-group-sm" style="width: 200px;">
                                 <select class="form-control pull-right" name="enterpriseId" required>
@@ -23,7 +31,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>--}}
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
