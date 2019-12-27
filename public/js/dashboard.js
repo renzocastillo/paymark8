@@ -1,7 +1,7 @@
 $("#solicitar_pago").click(function () {
     sweetAlert({
-        title: "¡Ingresa tu contraseña!",
-        text: 'Ingrese la contraseña del usuario autenticado',
+        title: "Ingresa tu contraseña",
+        text: 'Ingresa tu contraseña para poder continuar con la solicitud',
         type: 'input',
         inputType: 'password',
         showCancelButton: true,
@@ -19,11 +19,11 @@ $("#solicitar_pago").click(function () {
                     solicitar_popup();
                 } else {
                     sweetAlert({
-                        title: "¡Error!",
+                        title: "¡Ups! Parece que te equivocaste",
                         text: 'La contraseña es incorrecta',
-                        type: "error",
+                        type: "warning",
                         showCancelButton: false,
-                        confirmButtonText: 'Aceptar',
+                        confirmButtonText: 'Ok',
                         closeOnConfirm: true,
                     });
                 }
