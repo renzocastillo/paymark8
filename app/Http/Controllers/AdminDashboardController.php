@@ -1,7 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+	use Illuminate\Http\Request;
+	use Illuminate\Http\Response;
+	use Illuminate\Support\Facades\Hash;
 	use Session;
-	use Request;
 	use DB;
 	use CRUDBooster;
 
@@ -143,34 +145,9 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = "function solicitar_popup(e){
-				console.log('aqui pesh');
-				var return_url= encodeURIComponent($(location).attr('href'));  
-				console.log(return_url);
-				swal({	
-					title: '¿Estás seguro que quieres solicitar tu pago ?',	
-					text: 'Asegúrate que tú cuenta Paypal este correctamente digitada en PERFIL / CORREO PAYPAL. A través de este medio se abonarán tus comisiones',
-					type: 'warning', 
-					showCancelButton: true,
-					confirmButtonClass: 'danger',
-					confirmButtonText: '¡Sí!',
-					cancelButtonText: 'No', 
-					closeOnConfirm: false },
-					function(){
-						$('.sweet-alert button').prop('disabled', true);
-						$('#solicitar_pago_form').submit();
-					}
-				)
-			};
-			function copy_to_clipboard(){
-				console.log('copiando');
-				var temp=$('<input>');
-				$('#link_title').append(temp);
-				temp.val($('#link').text()).select();
-				document.execCommand('copy');
-				temp.remove();
-				$('.copied').text('link copiado!').show().fadeOut(1200);
-			};";
+	        $this->script_js = "
+                window.myId = '".CRUDBooster::myId()."'
+                ";
 
 
             /*
@@ -207,16 +184,17 @@
 	        */
 	        $this->load_js[]=asset("js/slick.min.js");
 	        $this->load_js[]=asset("js/backoffice.js");
-	        
-	        
-	        /*
-	        | ---------------------------------------------------------------------- 
-	        | Add css style at body 
-	        | ---------------------------------------------------------------------- 
-	        | css code in the variable 
-	        | $this->style_css = ".style{....}";
-	        |
-	        */
+		    $this->load_js[] =asset("js/dashboard.js");
+
+
+		    /*
+			| ----------------------------------------------------------------------
+			| Add css style at body
+			| ----------------------------------------------------------------------
+			| css code in the variable
+			| $this->style_css = ".style{....}";
+			|
+			*/
 	        $this->style_css = NULL;
 	        
 	        
@@ -233,7 +211,7 @@
 			$this->load_css[] = asset("css/slick.css");
 			$this->load_css[] = asset("css/slick-theme.css");
 			$this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
-	        
+
 	    }
 
 
@@ -380,4 +358,15 @@
 	    //By the way, you can still create your own method in here... :) 
 
 
+		public function validatePassword(Request $request){
+	    	$input = $request->all();
+	    	if(isset($input['id']) && isset($input['password'])){
+			    $user=DB::table('cms_users')->where('id',$input['id'])->first();
+			    if (Hash::check($input['password'], $user->password)) {
+				    return response()->json(true);
+			    }
+		    }
+			return response()->json(false);
+
+		}
 	}
