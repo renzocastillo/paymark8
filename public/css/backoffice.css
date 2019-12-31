@@ -37,7 +37,7 @@
 }
 @media (max-width:768px) {
     .iframes .panel-body{
-        height: 50vh;
+        height: auto;
     }
 }
 .flyer{
@@ -204,4 +204,9 @@
 #copy_btn{
     position:relative;
     z-index:5;
+}
+.buttons-carousel .btn{
+    margin:0px 5px 10px 5px;
+    background-image: linear-gradient(to right, #4070FA , #1e47bb);
+    border-color:#4070fa00;
 }

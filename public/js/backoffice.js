@@ -36,7 +36,7 @@ $(document).ready(function(){
   $('.buttons-carousel').slick({  
     dots: false,
     infinite: true,
-    speed: 300,
+    speed: 400,
     slidesToShow: 5,
     slidesToScroll: 5,
     autoplay: true,
@@ -54,8 +54,8 @@ $(document).ready(function(){
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToShow: 3,
+          slidesToScroll: 3
         }
       },
       {
