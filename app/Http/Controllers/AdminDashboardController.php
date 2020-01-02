@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+	use CRUDBooster;
+	use DB;
 	use Illuminate\Http\Request;
-	use Illuminate\Http\Response;
 	use Illuminate\Support\Facades\Hash;
 	use Session;
-	use DB;
-	use CRUDBooster;
 
 	class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -351,7 +350,14 @@
 			$data['capacidad_de_retiro']=$capacidad_de_retiro;
 			$data['monto_total']=$monto_total;
 			$data['empresas']=DB::table('empresas')->get();
+			$data['annual_membership_amount'] = $this->formatCurrency( CRUDBooster::getSetting('annual_membership_amount'));
+			$data['monthly_membership_amount'] = $this->formatCurrency( CRUDBooster::getSetting('monthly_membership_amount'));
 			$this->cbView('modules.user_dashboard',$data);
+		}
+
+		public function formatCurrency($value){
+			setlocale(LC_MONETARY, 'en_US.UTF-8');
+			return money_format('%.1n', $value);
 		}
 
 
