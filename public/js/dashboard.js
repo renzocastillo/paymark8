@@ -10,7 +10,7 @@ $("#solicitar_pago").click(function () {
         cancelButtonText: 'Cancelar',
         animation: "slide-from-top"
     }, function (inputValue) {
-        if(inputValue){
+        if (inputValue) {
             $.post("/api/validatePassword", {
                 password: inputValue,
                 id: window.myId
@@ -63,3 +63,54 @@ function copy_to_clipboard() {
     temp.remove();
     $('.copied').text('link copiado!').show().fadeOut(1200);
 };
+
+$('.pay').click(function () {
+    var amount = $(this).attr("data-amount");
+    var userId = window.myId;
+    $.post("/api/visanet/token", {
+        amount: amount,
+        userId: userId
+    }, function (response, status) {
+        if (response && response.success) {
+            console.log(response);
+           /* $('#form-to-pay').append('<script src="'+response.data.script_url+'" ' +
+                'data-sessiontoken="'+response.data.session+'" '  +
+                'data-channel="'+response.data.channel+'" ' +
+                'data-merchantid="'+response.data.merchant_id+'" ' +
+                'data-merchantlogo= \'img/comercio.png\' ' +
+                'data-formbuttoncolor=\'#D80000\' ' +
+                'data-purchasenumber="'+response.data.merchant_id+'" ' +
+                'data-amount="'+response.data.amount+'" ' +
+                'data-expirationminutes=\'5\' ' +
+                'data-timeouturl = \'timeout.html\' ></script>');*/
+            //$('#myModal').modal('show');
+            sweetAlert({
+                title: "¡Ups! Parece que te equivocaste",
+                html: '<script src="'+response.data.script_url+'" ' +
+                    'data-sessiontoken="'+response.data.session+'" '  +
+                    'data-channel="'+response.data.channel+'" ' +
+                    'data-merchantid="'+response.data.merchant_id+'" ' +
+                    'data-merchantlogo= \'img/comercio.png\' ' +
+                    'data-formbuttoncolor=\'#D80000\' ' +
+                    'data-purchasenumber="'+response.data.merchant_id+'" ' +
+                    'data-amount="'+response.data.amount+'" ' +
+                    'data-expirationminutes=\'5\' ' +
+                    'data-timeouturl = \'timeout.html\' ></script>',
+                type: "warning",
+                showCancelButton: false,
+                confirmButtonText: 'Ok',
+                closeOnConfirm: true,
+            });
+
+        } else {
+            sweetAlert({
+                title: "¡Ups! Parece que te equivocaste",
+                text: 'La contraseña es incorrecta',
+                type: "warning",
+                showCancelButton: false,
+                confirmButtonText: 'Ok',
+                closeOnConfirm: true,
+            });
+        }
+    });
+});

@@ -145,11 +145,15 @@
                             <div class="col-sm-12 col-lg-4 text-center">
                                 <div id="payment_card" class="small-box bg-blue">
                                     <div class="inner">
-                                        <h3>{{$monthly_membership_amount}}/mes</h3>
-                                        <h4> {{$annual_membership_amount}}/ anual (50% dcto)</h4>
+                                        <h3>{{$monthly_membership_amount_format}}/mes</h3>
+                                        <h4> {{$annual_membership_amount_format}}/ anual (50% dcto)</h4>
                                         <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                                     </div>
-                                    {!! CRUDBooster::getSetting('boton_paypal') !!}
+                                    {{--
+                                                                        {!! CRUDBooster::getSetting('boton_paypal') !!}
+                                    --}}
+                                    <a title="Pay" class="btn btn-default payment_btn pay"
+                                       data-amount="{{$annual_membership_amount}}">COMPRAR</a>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-4 text-center">
@@ -180,8 +184,11 @@
                         <h4 class="modal-title">Modal Header</h4>
                     </div>
                     <div class="modal-body">
-                        <form action='paginaRespuesta' method='post'>
-                            <script src='https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true'
+                        <form action='paginaRespuesta' method='post' id="form-to-pay">
+                            <input type="checkbox" required name="terms" id="terms"/> Acepto los <a href="{{url("terminos-y-condiciones")}}"
+                                                                                                    target=_blank>términos y condiciones de uso
+                                de {{CRUDBooster::getSetting('appname')}}</a>
+                            <script src='js/checkout.js'
                                     data-sessiontoken='123456ABCD789'
                                     data-channel='web'
                                     data-merchantid='123456789'
