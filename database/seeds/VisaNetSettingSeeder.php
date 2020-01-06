@@ -11,6 +11,28 @@ class VisaNetSettingSeeder extends Seeder {
 	public function run() {
 		\DB::table( 'cms_settings' )->insert( [
 			[
+				'name'               => 'invoice',
+				'content'            => '100000',
+				'content_input_type' => 'number',
+				'created_at'         => \Carbon\Carbon::now(),
+				'updated_at'         => \Carbon\Carbon::now(),
+				'group_setting'      => 'visanet',
+				'label'              => 'Numero base de compra',
+			],
+		] );
+		\DB::table( 'cms_settings' )->insert( [
+			[
+				'name'               => 'api_authorization_url',
+				'content'            => 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/',
+				'content_input_type' => 'text',
+				'created_at'         => \Carbon\Carbon::now(),
+				'updated_at'         => \Carbon\Carbon::now(),
+				'group_setting'      => 'visanet',
+				'label'              => 'Url Api authorización',
+			],
+		] );
+		\DB::table( 'cms_settings' )->insert( [
+			[
 				'name'               => 'api_security_url',
 				'content'            => 'https://apitestenv.vnforapps.com/api.security/v1/security',
 				'content_input_type' => 'text',

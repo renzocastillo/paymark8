@@ -1,6 +1,14 @@
 @extends('crudbooster::admin_template')
 @section('content')
+    <div class="loader-container" style="display: none">
+        <div class="loader"></div>
+    </div>
+    @if (Session::has('purchase'))
+        <script>
+            window.myPurchase = @json(Session::pull('purchase'))
+        </script>
 
+    @endif
     @if(app('request')->input('paypal_complete'))
         <div class="alert alert-warning">
             <strong>Pago concretado!</strong> Dentro de las próximas horas te llegará un correo confirmando tu
@@ -170,8 +178,6 @@
                 </div>
             </div>
         </div>
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
@@ -181,29 +187,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Confirma tu compra</h4>
                     </div>
                     <div class="modal-body">
-                        <form action='paginaRespuesta' method='post' id="form-to-pay">
-                            <input type="checkbox" required name="terms" id="terms"/> Acepto los <a href="{{url("terminos-y-condiciones")}}"
-                                                                                                    target=_blank>términos y condiciones de uso
-                                de {{CRUDBooster::getSetting('appname')}}</a>
-                            <script src='js/checkout.js'
-                                    data-sessiontoken='123456ABCD789'
-                                    data-channel='web'
-                                    data-merchantid='123456789'
+                        <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="code" value="andres">
+                            <div class="form-group">
+                                <p>
+                                    <input type="checkbox" name="terms" value="1" id="terms"> Acepto los <a
+                                            href="{{url("terminos-y-condiciones")}}" target=_blank>términos y
+                                        condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
+                                </p>
+                            </div>
 
-                                    data-merchantlogo= 'img/comercio.png'
-                                    data-formbuttoncolor='#D80000'
-                                    data-purchasenumber='123'
-                                    data-amount='20.98'
-                                    data-expirationminutes='5'
-                                    data-timeouturl = 'timeout.html'
-                            ></script>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 

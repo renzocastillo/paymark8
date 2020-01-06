@@ -26,4 +26,4 @@ Route::get('/admin/users/change_user_estado/{id}','AdminCmsUsersController@chang
 Route::get('/admin/users/change_solicitud_estado/{id}','AdminCmsUsersController@changeSolicitudEstado')->name('change-solicitud-estado');
 Route::get('/admin/users/change_premium_estado/{id}','AdminCmsUsersController@changePremiumEstado')->name('change-premium-estado');
 Route::post('/admin/contacto','AdminContactoController@create');
-Route::get('visanet/frame/{trxId}', 'VisanetController@getIframeView');
+Route::post('visanet/checkout', 'VisanetController@checkout');
