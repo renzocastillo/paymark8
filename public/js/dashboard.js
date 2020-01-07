@@ -10,7 +10,7 @@ $("#solicitar_pago").click(function () {
         cancelButtonText: 'Cancelar',
         animation: "slide-from-top"
     }, function (inputValue) {
-        if(inputValue){
+        if (inputValue) {
             $.post("/api/validatePassword", {
                 password: inputValue,
                 id: window.myId
@@ -63,3 +63,81 @@ function copy_to_clipboard() {
     temp.remove();
     $('.copied').text('link copiado!').show().fadeOut(1200);
 };
+
+$('.pay').click(function () {
+    $('.loader-container').show();
+    $('#pagar_modal').modal('hide');
+    var amount = $(this).attr("data-amount");
+    var userId = window.myId;
+    $.post("/api/visanet/token", {
+        amount: amount,
+        userId: userId
+    }, function (response, status) {
+        if (response && response.success) {
+            console.log(response);
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.onload = function(){
+                $('.start-js-btn').attr('disabled', true);
+            };
+            script.src = response.data.script_url;
+            script.setAttribute('data-sessiontoken',response.data.session);
+            script.setAttribute('data-channel',response.data.channel);
+            script.setAttribute('data-merchantid',response.data.merchant_id);
+            script.setAttribute('data-amount',response.data.amount);
+            script.setAttribute('data-expirationminutes','5');
+            script.setAttribute('data-purchasenumber',response.data.trx_id);
+            script.setAttribute('data-timeouturl','/timeout');
+            script.setAttribute('data-merchantlogo',response.data.logo);
+            script.setAttribute('data-usertoken',response.data.user);
+            document.getElementById('form-to-pay').appendChild(script);
+            $('.loader-container').hide();
+            $('#myModal').modal('show');
+            $('#terms').click(function () {
+                $('.start-js-btn').removeAttr('disabled');
+            })
+
+
+        } else {
+            sweetAlert({
+                title: "¡Ups! Parece que te equivocaste",
+                text: 'La contraseña es incorrecta',
+                type: "warning",
+                showCancelButton: false,
+                confirmButtonText: 'Ok',
+                closeOnConfirm: true,
+            });
+        }
+    });
+});
+if(window.myPurchase){
+    if(window.myPurchase.status == 'failed'){
+        sweetAlert({
+            title: "Ups! Hubo un error al completar el pago",
+            text: 'por favor dirígete al menú Atención al Cliente e indica el problema con este código de referencia ' +window.myPurchase.eci_code,
+            type: "warning",
+            showCancelButton: false,
+            confirmButtonText: 'Ok',
+            closeOnConfirm: true,
+        });
+    }else  if(window.myPurchase.status == 'insufficient_balance'){
+        sweetAlert({
+            title: "Saldo insuficiente",
+            text: 'Su cuenta no posee fondos',
+            type: "warning",
+            showCancelButton: false,
+            confirmButtonText: 'Ok',
+            closeOnConfirm: true,
+        });
+    }else  if(window.myPurchase.status == 'accepted'){
+        sweetAlert({
+            title: "Pago completado exitosamente",
+            type: "success",
+            showCancelButton: false,
+            confirmButtonText: 'Ok',
+            closeOnConfirm: true,
+        });
+    }
+}
+
