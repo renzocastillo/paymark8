@@ -86,8 +86,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		//$arr=['row'=>$row,'field'=>'premium','checked'=>false,'cms_privileges_id'=>2];
 		//$custom_element=view('components.toggle',$arr)->render();
 		//$this->form[] = array("label"=>"Premium","name"=>"premium","type"=>"custom","html"=>$custom_element);
-		$this->form[] = array("label"=>"Contraseña Actual","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
-		$this->form[] = array("label"=>"Repita Contraseña","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
+		$this->form[] = array("label"=>"Nueva Contraseña","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
+		$this->form[] = array("label"=>"Repita Nueva Contraseña","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
 		# END FORM DO NOT REMOVE THIS LINE
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->addaction[] =['label'=>'','url'=>'#pagar_modal','icon'=>'fa fa-dollar','color'=>'warning','showIf'=>'[estado_solicitud]=="solicitado"'];
