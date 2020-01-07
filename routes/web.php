@@ -27,3 +27,4 @@ Route::get('/admin/users/change_solicitud_estado/{id}','AdminCmsUsersController@
 Route::get('/admin/users/change_premium_estado/{id}','AdminCmsUsersController@changePremiumEstado')->name('change-premium-estado');
 Route::post('/admin/contacto','AdminContactoController@create');
 Route::post('visanet/checkout', 'VisanetController@checkout');
+Route::get('visanet/timeout', 'VisanetController@timeout');

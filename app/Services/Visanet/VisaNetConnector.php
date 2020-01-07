@@ -16,6 +16,7 @@ class VisaNetConnector {
 	private static $CHANNEL = 'web';
 	private static $CACHE_EXPIRATION = 1800;
 
+
 	private $merchantId;
 	private $user;
 	private $password;
@@ -63,13 +64,14 @@ class VisaNetConnector {
 	}
 
 	public function getSession( $amount, $clientIp, $userId ) {
-		$url      = CRUDBooster::getSetting( 'api_url' ) . $this->merchantId;
-		$token    = $this->getTokenSecurity();
-		$number   = rand( 0, 1000000000 );
-		$headers  = [
+		$lastPurchase = $this->getLastPurchaseByUserId( $userId );
+		$url          = CRUDBooster::getSetting( 'api_url' ) . $this->merchantId;
+		$token        = $this->getTokenSecurity();
+		$number       = rand( 0, 1000000000 );
+		$headers      = [
 			'Authorization' => $token
 		];
-		$body     = [
+		$body         = [
 			'amount'              => number_format( $amount, 2, '.', '' ),
 			'antifraud'           => [
 				'clientIp'           => $clientIp,
@@ -85,16 +87,21 @@ class VisaNetConnector {
 			'channel'             => VisaNetConnector::$CHANNEL,
 			'recurrenceMaxAmount' => number_format( $amount, 2, '.', '' )
 		];
-		$response = json_decode( ClientHttp::makePost( $url, $headers, $body ) );
+		$response     = json_decode( ClientHttp::makePost( $url, $headers, $body ) );
+		if ( $lastPurchase != null ) {
+			$id = $lastPurchase['purchase_id'];
 
-		$id      = DB::table( 'purchases' )->insertGetId(
-			[
-				'user_id'    => $userId,
-				'amount'     => $amount,
-				'created_at' => \Carbon\Carbon::now(),
-				'updated_at' => \Carbon\Carbon::now(),
-			]
-		);
+		} else {
+			$id = DB::table( 'purchases' )->insertGetId(
+				[
+					'user_id'    => $userId,
+					'amount'     => $amount,
+					'created_at' => \Carbon\Carbon::now(),
+					'updated_at' => \Carbon\Carbon::now(),
+				]
+			);
+		}
+
 		$invoice = intval( CRUDBooster::getSetting( 'invoice' ) ) + $id;
 		Cache::put( 'purchase_' . $invoice, [
 			'channel'     => VisaNetConnector::$CHANNEL,
@@ -103,6 +110,9 @@ class VisaNetConnector {
 			'purchase_id' => $id,
 		], VisaNetConnector::$CACHE_EXPIRATION );
 
+		$startDate = Carbon::now()->toDateString();
+		$endDate   = Carbon::now()->addYear( 1 )->toDateString();
+
 		return [
 			'session'     => $response->sessionKey,
 			'channel'     => VisaNetConnector::$CHANNEL,
@@ -110,8 +120,11 @@ class VisaNetConnector {
 			'amount'      => number_format( $amount, 2, '.', '' ),
 			'trx_id'      => $invoice,
 			'script_url'  => CRUDBooster::getSetting( 'script_url' ),
-			'logo'        => CRUDBooster::getSetting( 'logo' ),
-			'user'        => md5( VisaNetConnector::$USER_UUID_SEED . $userId )
+			'logo'        => asset( CRUDBooster::getSetting( 'logo' ) ),
+			'user'        => md5( VisaNetConnector::$USER_UUID_SEED . $userId ),
+			'start_date'  => $startDate,
+			'end_date'    => $endDate,
+			'url_timeout' => url( '/visanet/timeout' )
 		];
 	}
 
@@ -129,7 +142,7 @@ class VisaNetConnector {
 				'countable'   => true,
 				'order'       => [
 					'amount'         => $amount,
-					'currency'       => 'USD',
+					'currency'       => CRUDBooster::getSetting( 'currency_visanet' ),
 					'purchaseNumber' => $invoice,
 					'tokenId'        => $tokenId
 				]
@@ -188,7 +201,7 @@ class VisaNetConnector {
 		  ->where( 'id', $userId )
 		  ->update( [
 			  'activated_at' => Carbon::now(),
-			  'estado' => 1
+			  'estado'       => 1
 		  ] );
 		$user = DB::table( 'cms_users' )
 		          ->where( 'id', $userId )

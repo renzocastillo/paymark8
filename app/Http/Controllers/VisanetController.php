@@ -42,6 +42,12 @@ class VisanetController extends Controller {
 	}
 
 
+	public function timeout() {
+		Session::put( 'timeout',true );
+		return redirect( 'admin/resumen' );
+
+	}
+
 	public function checkout( Request $request ) {
 		$input    = $request->all();
 		$token    = $input['transactionToken'];
