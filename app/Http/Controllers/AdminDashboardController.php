@@ -358,8 +358,8 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
         $data['monto_total'] = $monto_total;
         $data['empresas'] = DB::table('empresas')->get();
         $data['annual_membership_amount'] = CRUDBooster::getSetting('annual_membership_amount');
-        $data['annual_membership_amount_format'] = $this->formatCurrency(CRUDBooster::getSetting('annual_membership_amount'));
-        $data['monthly_membership_amount_format'] = $this->formatCurrency(CRUDBooster::getSetting('monthly_membership_amount'));
+        $data['annual_membership_amount_format'] = number_format(CRUDBooster::getSetting('annual_membership_amount'),2);
+        $data['monthly_membership_amount_format'] =number_format(CRUDBooster::getSetting('monthly_membership_amount',2));
         $this->cbView('modules.user_dashboard', $data);
     }
 

@@ -192,12 +192,10 @@
                     <div class="modal-body">
                         <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
                             {{ csrf_field() }}
-                            <input type="hidden" name="code" value="andres">
                             <div class="form-group">
                                 <p>
-                                    <input type="checkbox" name="terms" value="1" id="terms"> Acepto los <a
-                                            href="{{url("terminos-y-condiciones")}}" target=_blank>términos y
-                                        condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
+                                    <input type="checkbox" name="terms" value="1" id="terms">
+                                    Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank>términos y condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
                                 </p>
                             </div>
 

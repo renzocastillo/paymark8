@@ -12,7 +12,7 @@ class VisaNetSettingSeeder extends Seeder {
 		\DB::table( 'cms_settings' )->insert( [
 			[
 				'name'               => 'invoice',
-				'content'            => '100000',
+				'content'            => '3000',
 				'content_input_type' => 'number',
 				'created_at'         => \Carbon\Carbon::now(),
 				'updated_at'         => \Carbon\Carbon::now(),

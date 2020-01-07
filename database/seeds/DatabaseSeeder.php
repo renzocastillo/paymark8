@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CmsMenusPrivilegesTableSeeder::class);
         $this->call(CmsPrivilegesRolesTableSeeder::class);
         $this->call(CmsModulsTableSeeder::class);
-        $this->call(CmsSettingsTableSeeder::class);
-	    $this->call(PaymentSettingsSeeder::class);*/
+        $this->call(CmsSettingsTableSeeder::class);*/
+	    $this->call(PaymentSettingsSeeder::class);
 	    $this->call(VisaNetSettingSeeder::class);
     }
 }

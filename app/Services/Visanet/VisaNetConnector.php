@@ -129,7 +129,7 @@ class VisaNetConnector {
 				'countable'   => true,
 				'order'       => [
 					'amount'         => $amount,
-					'currency'       => 'PEN',
+					'currency'       => 'USD',
 					'purchaseNumber' => $invoice,
 					'tokenId'        => $tokenId
 				]

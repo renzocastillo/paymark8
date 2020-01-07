@@ -86,7 +86,6 @@ $('.pay').click(function () {
             script.setAttribute('data-channel',response.data.channel);
             script.setAttribute('data-merchantid',response.data.merchant_id);
             script.setAttribute('data-amount',response.data.amount);
-            script.setAttribute('data-purchasenumber',12);
             script.setAttribute('data-expirationminutes','5');
             script.setAttribute('data-purchasenumber',response.data.trx_id);
             script.setAttribute('data-timeouturl','/timeout');
