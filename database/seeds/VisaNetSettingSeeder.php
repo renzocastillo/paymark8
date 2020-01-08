@@ -101,5 +101,7 @@ class VisaNetSettingSeeder extends Seeder {
 				'label'              => 'Contraseña',
 			],
 		] );
+
+
 	}
 }

@@ -9,6 +9,12 @@
         </script>
 
     @endif
+    @if(Session::has('timeout'))
+        {{Session::pull('timeout')}}
+        <div class="alert alert-danger">
+            <strong>Tiempo agotado!</strong> Se ha agotado el tiempo de espera
+        </div>
+    @endif
     @if(app('request')->input('paypal_complete'))
         <div class="alert alert-warning">
             <strong>Pago concretado!</strong> Dentro de las próximas horas te llegará un correo confirmando tu
@@ -190,12 +196,18 @@
                         <h4 class="modal-title">Confirma tu compra</h4>
                     </div>
                     <div class="modal-body">
+                        <ul>
+                            <li>Fecha de inicio membresia: <span id="pay-startDate"></span></li>
+                            <li>Fecha de fin membresia: <span id="pay-endDate"></span></li>
+                            <li>Monto a pagar: <span id="pay-amount"></span></li>
+                        </ul>
                         <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <p>
                                     <input type="checkbox" name="terms" value="1" id="terms">
-                                    Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank>términos y condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
+                                    Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank>términos y
+                                        condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
                                 </p>
                             </div>
 

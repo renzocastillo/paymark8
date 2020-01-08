@@ -88,14 +88,22 @@ $('.pay').click(function () {
             script.setAttribute('data-amount',response.data.amount);
             script.setAttribute('data-expirationminutes','5');
             script.setAttribute('data-purchasenumber',response.data.trx_id);
-            script.setAttribute('data-timeouturl','/timeout');
+            script.setAttribute('data-timeouturl',response.data.url_timeout);
             script.setAttribute('data-merchantlogo',response.data.logo);
             script.setAttribute('data-usertoken',response.data.user);
             document.getElementById('form-to-pay').appendChild(script);
+            $('#pay-startDate').html(response.data.start_date);
+            $('#pay-endDate').html(response.data.end_date);
+            $('#pay-amount').html(response.data.amount);
             $('.loader-container').hide();
             $('#myModal').modal('show');
             $('#terms').click(function () {
-                $('.start-js-btn').removeAttr('disabled');
+                var value =$('#terms').is(":checked");
+                if(value){
+                    $('.start-js-btn').removeAttr('disabled');
+                }else{
+                    $('.start-js-btn').attr('disabled', true);
+                }
             })
 
 

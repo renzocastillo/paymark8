@@ -365,8 +365,7 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
 
     public function formatCurrency($value)
     {
-        setlocale(LC_MONETARY, 'en_US.UTF-8');
-        return money_format('%.1n', $value);
+        return '$ '.number_format( $value, 2, '.', '' );
     }
 
 
