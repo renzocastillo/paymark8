@@ -37,13 +37,11 @@ class DeactivateUsers extends Command {
 	 */
 	public function handle() {
 		$now = Carbon::now();
-		$now = $now->addDay( 1 );
 		$now = $now->subYear( 1 );
 		DB::table( 'cms_users' )
-		  ->where( 'activated_at', '<=', $now )
+		  ->where( 'activated_at', '<', $now )
 		  ->update( [
 			  'estado' => null
 		  ] );
-
 	}
 }
