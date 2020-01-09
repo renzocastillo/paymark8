@@ -37,7 +37,7 @@ class DeactivateUsers extends Command {
 	 * @return mixed
 	 */
 	public function handle() {
-		Log::info('Empezó desactivación de usuarios');
+		//Log::info('Empezó desactivación de usuarios');
 		$now = Carbon::now();
 		$now = $now->subYear( 1 );
 		DB::table( 'cms_users' )
@@ -45,6 +45,6 @@ class DeactivateUsers extends Command {
 		->update( [
 			'estado' => null
 		] );
-	 	Log::info('Terminó desactivación de usuarios');
+	 	//Log::info('Terminó desactivación de usuarios');
 	}
 }
