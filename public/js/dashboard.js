@@ -148,4 +148,10 @@ if(window.myPurchase){
         });
     }
 }
-
+var boton = "button";
+swal({
+    title: "HTML <small>Title</small>!",
+    text: '<ul><li>1</li><li>2</li><li>3</li></ul>',
+    html: true,
+    type: "success",
+});
