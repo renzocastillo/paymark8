@@ -36,12 +36,14 @@ class DeactivateUsers extends Command {
 	 * @return mixed
 	 */
 	public function handle() {
+		Log::info('Empezó desactivación de usuarios');
 		$now = Carbon::now();
 		$now = $now->subYear( 1 );
 		DB::table( 'cms_users' )
-		  ->where( 'activated_at', '<', $now )
-		  ->update( [
-			  'estado' => null
-		  ] );
+		->where( 'activated_at', '<', $now )
+		->update( [
+			'estado' => null
+		] );
+	 	Log::info('Terminó desactivación de usuarios');
 	}
 }
