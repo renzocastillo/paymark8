@@ -62,7 +62,7 @@ class VisanetController extends Controller
         $data = $this->connector->getLastPurchaseByUserId($userId);
         $purchase = $this->connector->authorize($channel, $data['amount'], $data['purchase_id'], $token);
         if ($purchase->status == 'accepted') {
-            $this->connector->activateUser( $userId );
+            //$this->connector->activateUser( $userId );
         }
         Session::put('purchase', $purchase);
         return redirect('admin/resumen');
