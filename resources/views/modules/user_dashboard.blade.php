@@ -14,7 +14,7 @@
     @if(Session::has('timeout'))
         {{Session::pull('timeout')}}
         <div class="alert alert-danger">
-            <strong>Tiempo agotado!</strong> Se ha agotado el tiempo de espera
+            <strong>Se agoto el tiempo de espera para tu compra</strong> Intenta nuevamente 
         </div>
     @endif
     @if(app('request')->input('paypal_complete'))
@@ -168,8 +168,8 @@
                                     {{--
                                                                         {!! CRUDBooster::getSetting('boton_paypal') !!}
                                     --}}
-                                    <a title="Pay" class="btn btn-default payment_btn pay"
-                                       data-amount="{{$annual_membership_amount}}">COMPRAR</a>
+                                    <a title="Pay" class="btn btn-warning btn-md payment_btn pay" data-amount="{{$annual_membership_amount}}">COMPRAR</a>
+                                    <br><br>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-4 text-center">
@@ -207,7 +207,7 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <p>
-                                    <input type="checkbox" name="terms" value="1" id="terms">
+                                    <input type="checkbox" name="terms" value="1" id="terms" autocomplete="off">
                                     Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank>términos y
                                         condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
                                 </p>

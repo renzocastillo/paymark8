@@ -109,13 +109,10 @@ $('.pay').click(function () {
                     $('.start-js-btn').attr('disabled', true);
                 }
             });
-
-
-
         } else {
             sweetAlert({
-                title: "¡Ups! Parece que te equivocaste",
-                text: 'La contraseña es incorrecta',
+                title: "¡Ups! Por favor intenta nuevamente",
+                text: 'Algo falló al conectarnos con Visanet',
                 type: "warning",
                 showCancelButton: false,
                 confirmButtonText: 'Ok',
@@ -169,7 +166,8 @@ if (window.myPurchase) {
                 '<li><b>Fecha y hora del pedido:</b>  ' + window.myPurchase.transaction_date + '</li>' +
                 '<li><b>Importe de la transacción:</b>  ' + window.myPurchase.transaction_amount + '</li>' +
                 '<li><b>Tipo de moneda:</b>  ' + window.myPurchase.transaction_currency + '</li>' +
-                '<li><b>Producto:</b>  Ganancias ilimitadas, url un año, servidor de paymark un año</li>' +
+                '<li><b>Producto: </b>  Afiliación a Plataforma Paymark8</li>' +
+                '<li><b>Descripción: </b>  Ganancias ilimitadas, url un año, servidor de paymark un año</li>' +
                 '</ul>' +
                 '<a href="' + window.termsAndConditions + '" >Terminos y condiciones</a>' +
                 '<a title="Imprimir" class="btn btn-primary " target="_blank" href="/visanet/transaction/' + window.myPurchase.id + '/print">Imprimir</a></div> ',
@@ -180,11 +178,20 @@ if (window.myPurchase) {
         })
     }
 }
-/*
-var boton = "button";
-swal({
-    title: "HTML <small>Title</small>!",
-    text: '<ul><li>1</li><li>2</li><li>3</li></ul>',
-    html: true,
-    type: "success",
-});*/
+/*$(window).load(function() {
+    $('.loader-container').show();
+    $('.loader-container').fadeOut("slow");
+});
+$(window).on('load', function() {
+    // do something 
+	console.log("aqui");
+	var iframe = document.getElementById("visaNetJS");
+	console.log(iframe);
+	var frm = iframe.contentWindow.document.getElementsByClassName("sky-form secure-form center");
+	frm[0].id = "frmVisa";
+});
+$('.sky-form secure-form center show').on('submit', function(){
+    alert('form submitted');
+    // other code
+});
+*/
