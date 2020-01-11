@@ -2,7 +2,7 @@
 @section('content')
     <div class="loader-container" style="display: none">
         <div class="loader"></div>
-        <h3 >Espera un momento por favor. No recargues la página</h3>
+        <h3 class="loader-processing" style="display: none">Espera un momento por favor. No recargues la página</h3>
     </div>
     @if (Session::has('purchase'))
         <script>
