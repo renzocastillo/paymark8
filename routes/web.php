@@ -28,3 +28,4 @@ Route::get('/admin/users/change_premium_estado/{id}','AdminCmsUsersController@ch
 Route::post('/admin/contacto','AdminContactoController@create');
 Route::post('visanet/checkout', 'VisanetController@checkout');
 Route::get('visanet/timeout', 'VisanetController@timeout');
+Route::get('visanet/transaction/{transactionId}/print', 'VisanetController@print');

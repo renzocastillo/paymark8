@@ -5,6 +5,7 @@ namespace App\Services\Visanet;
 
 use Carbon\Carbon;
 use crocodicstudio\crudbooster\helpers\CRUDBooster;
+use DateTime;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -166,11 +167,12 @@ class VisaNetConnector
                     'eci_code' => $response->dataMap->ECI,
                     'eci_description' => $response->dataMap->ECI_DESCRIPTION,
                     'transaction_id' => $response->dataMap->TRANSACTION_ID,
-                    'transaction_date' => Carbon::parse($response->order->transactionDate),
+                    'transaction_date' => DateTime::createFromFormat('U', $response->order->transactionDate),
                     'transaction_amount' => $response->order->amount,
                     'transaction_currency' => $response->order->currency,
                     'signature' => $response->dataMap->SIGNATURE,
-                    'status' => $status
+                    'status' => $status,
+                    'transaction_invoice' => $response->order->purchaseNumber
                 ]);
 
         } catch (ClientException $exception) {
@@ -188,7 +190,9 @@ class VisaNetConnector
                         'eci_description' => $body->data->ECI_DESCRIPTION ? $body->data->ECI_DESCRIPTION : $body->data->ACTION_DESCRIPTION,
                         'transaction_id' => $body->data->TRANSACTION_ID,
                         'signature' => $body->data->SIGNATURE,
-                        'status' => $status
+                        'status' => $status,
+                        'transaction_date' => DateTime::createFromFormat('U', $body->data->TRANSACTION_DATE),
+                        'transaction_invoice' => $invoice
                     ]);
             }
         } catch (\Exception $exception) {
@@ -200,7 +204,9 @@ class VisaNetConnector
                 ]);
         }
 
-        return DB::table('purchases')->where('id', $purchaseId)
+        return DB::table('purchases')->where('purchases.id', $purchaseId)
+            ->join('cms_users', 'cms_users.id', '=', 'purchases.user_id')
+            ->select('purchases.*', 'cms_users.name')
             ->get()
             ->first();
     }

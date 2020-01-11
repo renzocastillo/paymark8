@@ -14,6 +14,7 @@ class AlterPurchasesTable8 extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
+            $table->string('transaction_invoice')->nullable();
             $table->dateTime('transaction_date')->nullable();
             $table->string('transaction_currency')->nullable();
             $table->decimal('transaction_amount', 10, 2)->nullable();
@@ -28,6 +29,7 @@ class AlterPurchasesTable8 extends Migration
     public function down()
     {
         Schema::table('purchases', function (Blueprint $table) {
+            $table->dropColumn('transaction_invoice');
             $table->dropColumn('transaction_date');
             $table->dropColumn('transaction_currency');
             $table->dropColumn('transaction_amount');

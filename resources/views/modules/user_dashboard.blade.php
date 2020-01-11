@@ -2,9 +2,11 @@
 @section('content')
     <div class="loader-container" style="display: none">
         <div class="loader"></div>
+        <h3 >Espera mientras procesamos tu pago. No recargues la página</h3>
     </div>
     @if (Session::has('purchase'))
         <script>
+            window.termsAndConditions =  '{{url("terminos-y-condiciones")}}';
             window.myPurchase = @json(Session::pull('purchase'))
         </script>
 

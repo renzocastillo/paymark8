@@ -78,19 +78,23 @@ $('.pay').click(function () {
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.async = true;
-            script.onload = function(){
+            script.onload = function () {
                 $('.start-js-btn').attr('disabled', true);
+                $('.start-js-btn').click(function () {
+                    $('#myModal').modal('hide');
+                    $('.loader-container').show();
+                })
             };
             script.src = response.data.script_url;
-            script.setAttribute('data-sessiontoken',response.data.session);
-            script.setAttribute('data-channel',response.data.channel);
-            script.setAttribute('data-merchantid',response.data.merchant_id);
-            script.setAttribute('data-amount',response.data.amount);
-            script.setAttribute('data-expirationminutes','5');
-            script.setAttribute('data-purchasenumber',response.data.trx_id);
-            script.setAttribute('data-timeouturl',response.data.url_timeout);
-            script.setAttribute('data-merchantlogo',response.data.logo);
-            script.setAttribute('data-usertoken',response.data.user);
+            script.setAttribute('data-sessiontoken', response.data.session);
+            script.setAttribute('data-channel', response.data.channel);
+            script.setAttribute('data-merchantid', response.data.merchant_id);
+            script.setAttribute('data-amount', response.data.amount);
+            script.setAttribute('data-expirationminutes', '5');
+            script.setAttribute('data-purchasenumber', response.data.trx_id);
+            script.setAttribute('data-timeouturl', response.data.url_timeout);
+            script.setAttribute('data-merchantlogo', response.data.logo);
+            script.setAttribute('data-usertoken', response.data.user);
             document.getElementById('form-to-pay').appendChild(script);
             $('#pay-startDate').html(response.data.start_date);
             $('#pay-endDate').html(response.data.end_date);
@@ -98,13 +102,14 @@ $('.pay').click(function () {
             $('.loader-container').hide();
             $('#myModal').modal('show');
             $('#terms').click(function () {
-                var value =$('#terms').is(":checked");
-                if(value){
+                var value = $('#terms').is(":checked");
+                if (value) {
                     $('.start-js-btn').removeAttr('disabled');
-                }else{
+                } else {
                     $('.start-js-btn').attr('disabled', true);
                 }
-            })
+            });
+
 
 
         } else {
@@ -119,39 +124,67 @@ $('.pay').click(function () {
         }
     });
 });
-if(window.myPurchase){
-    if(window.myPurchase.status == 'failed'){
-        sweetAlert({
+if (window.myPurchase) {
+    if (window.myPurchase.status == 'failed') {
+        swal({
             title: "Ups! Hubo un error al completar el pago",
-            text: 'por favor dirígete al menú Atención al Cliente e indica el problema con este código de referencia ' +window.myPurchase.eci_code,
+            text: '<div class="receipt">' +
+                '<ul style="text-align: left"><li><b>Número de pedido:</b>  ' + window.myPurchase.transaction_invoice + '</li>' +
+                '<li><b>Nombre y apellido del comprador:</b>  ' + window.myPurchase.name + '</li>' +
+                '<li><b>Fecha y hora del pedido:</b>  ' + window.myPurchase.transaction_date + '</li>' +
+                '<li><b>Descripcion:</b>  ' + window.myPurchase.eci_description + '</li>' +
+                '<li><b>Codigo de error:</b>  ' + window.myPurchase.eci_code + '</li>' +
+                '</ul>' +
+                '<a href="' + window.termsAndConditions + '" >Terminos y condiciones</a>' +
+                '<a title="Imprimir" class="btn btn-primary " target="_blank" href="/visanet/transaction/' + window.myPurchase.id + '/print">Imprimir</a></div> ',
+            html: true,
             type: "warning",
-            showCancelButton: false,
             confirmButtonText: 'Ok',
             closeOnConfirm: true,
-        });
-    }else  if(window.myPurchase.status == 'insufficient_balance'){
-        sweetAlert({
+        })
+    } else if (window.myPurchase.status == 'insufficient_balance') {
+        swal({
             title: "Saldo insuficiente",
-            text: 'Su cuenta no posee fondos',
+            text: '<div class="receipt">' +
+                '<ul style="text-align: left"><li><b>Número de pedido:</b>  ' + window.myPurchase.transaction_invoice + '</li>' +
+                '<li><b>Nombre y apellido del comprador:</b>  ' + window.myPurchase.name + '</li>' +
+                '<li><b>Fecha y hora del pedido:</b>  ' + window.myPurchase.transaction_date + '</li>' +
+                '<li><b>Descripcion:</b>  Su cuenta no posee fondos</li>' +
+                '<li><b>Codigo de error:</b>  ' + window.myPurchase.eci_code + '</li>' +
+                '</ul>' +
+                '<a href="' + window.termsAndConditions + '" >Terminos y condiciones</a>' +
+                '<a title="Imprimir" class="btn btn-primary " target="_blank" href="/visanet/transaction/' + window.myPurchase.id + '/print" >Imprimir</a></div> ',
+            html: true,
             type: "warning",
-            showCancelButton: false,
             confirmButtonText: 'Ok',
             closeOnConfirm: true,
-        });
-    }else  if(window.myPurchase.status == 'accepted'){
-        sweetAlert({
+        })
+
+    } else if (window.myPurchase.status == 'accepted') {
+        swal({
             title: "Pago completado exitosamente",
+            text: '<div class="receipt">' +
+                '<ul style="text-align: left"><li><b>Número de pedido:</b>  ' + window.myPurchase.transaction_invoice + '</li>' +
+                '<li><b>Nombre y apellido del comprador:</b>  ' + window.myPurchase.name + '</li>' +
+                '<li><b>Fecha y hora del pedido:</b>  ' + window.myPurchase.transaction_date + '</li>' +
+                '<li><b>Importe de la transacción:</b>  ' + window.myPurchase.transaction_amount + '</li>' +
+                '<li><b>Tipo de moneda:</b>  ' + window.myPurchase.transaction_currency + '</li>' +
+                '<li><b>Producto:</b>  Ganancias ilimitadas, url un año, servidor de paymark un año</li>' +
+                '</ul>' +
+                '<a href="' + window.termsAndConditions + '" >Terminos y condiciones</a>' +
+                '<a title="Imprimir" class="btn btn-primary " target="_blank" href="/visanet/transaction/' + window.myPurchase.id + '/print">Imprimir</a></div> ',
+            html: true,
             type: "success",
-            showCancelButton: false,
             confirmButtonText: 'Ok',
             closeOnConfirm: true,
-        });
+        })
     }
 }
+/*
 var boton = "button";
 swal({
     title: "HTML <small>Title</small>!",
     text: '<ul><li>1</li><li>2</li><li>3</li></ul>',
     html: true,
     type: "success",
-});
+});*/

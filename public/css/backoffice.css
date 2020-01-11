@@ -243,3 +243,20 @@
     background-color: rgba(0,0,0,0.7);
     padding-top: 20%;
 }
+
+.receipt a{
+    color: #000000 !important;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.receipt .btn{
+    display: block;
+    width: 100%;
+    color: #ffffff !important;
+}
+.loader-container h3{
+    text-align: center;
+    color: #ffffff;
+}
