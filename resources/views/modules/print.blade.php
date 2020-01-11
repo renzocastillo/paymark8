@@ -1,8 +1,10 @@
 <html>
-<header>
-</header>
+<head>
+    <link href="{{asset("css/app.css")}}" rel="stylesheet">
+    <script src="{{asset("js/app.js")}}"></script>
+</head>
 <body>
-<img src="{{$logo}}" style="display: block;margin: auto">
+<img class="img-responsive" src="{{$logo}}" style="max-width:300px;">
 @if($transaction->status == 'accepted')
     <ul style="text-align: left">
         <li><b>Número de pedido:</b> {{$transaction->transaction_invoice}} </li>
