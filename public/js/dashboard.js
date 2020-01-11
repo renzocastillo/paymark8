@@ -82,8 +82,7 @@ $('.pay').click(function () {
                 $('.start-js-btn').attr('disabled', true);
                 $('.start-js-btn').click(function () {
                     $('#myModal').modal('hide');
-                    $('.loader-container').show();
-                    $('.loader-processing').show();
+                    //$('.loader-container').show();
                 })
             };
             script.src = response.data.script_url;
