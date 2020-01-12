@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CmsModulsTableSeeder::class);
         $this->call(CmsSettingsTableSeeder::class);
 	    $this->call(PaymentSettingsSeeder::class);
-	    $this->call(VisaNetSettingSeeder::class);*/
-	    $this->call(CurrencyVisanetSeeder::class);
+	    $this->call(VisaNetSettingSeeder::class);
+        $this->call(CurrencyVisanetSeeder::class);*/
+        $this->call(LogoCheckoutSetting::class);
 
     }
 }
