@@ -47,7 +47,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
             "callback"=>function($row) {
                 $country = DB::table( 'countries' )->where( 'id', $row->country_id )->first();
                 if($country == null){
-                    return '';
+                    return '<a href="https://wa.me/+'.$row->whatsapp.'" target="_blank">'.$row->whatsapp.'</a>';
                 }
                 return '<a href="https://wa.me/+'.$country->phonecode.$row->whatsapp.'" target="_blank">+'.$country->phonecode.$row->whatsapp.'</a>';
             }
