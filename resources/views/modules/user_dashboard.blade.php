@@ -23,44 +23,64 @@
             activación.
         </div>
     @endif
-    <div class="row">
         @if(CRUDBooster::me()->estado)
-            <div class="col-sm-4 col-lg-7">
-                <div class="small-box bg-blue">
-                    <div class="inner">
-                        <h4>Mi Link</h4>
-                        <div class="copied"></div>
-                        <h4 id="link_title">
-                  <span id="link" class="badge badge-blue">
-                    {{url('/'.CRUDBooster::me()->slug)}}
-                  </span>
-                        </h4>
-                        <a id="copy_btn" class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i
-                                    class="fa fa-files-o" aria-hidden="true"></i></a>
+            <div class="row">
+                <div class="col-sm-4 col-lg-7">
+                    <div class="small-box bg-blue">
+                        <div class="inner">
+                            <h4>Mi Link</h4>
+                            <div class="copied"></div>
+                            <h4 id="link_title">
+                    <span id="link" class="badge badge-blue">
+                        {{url('/'.CRUDBooster::me()->slug)}}
+                    </span>
+                            </h4>
+                            <a id="copy_btn" class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i
+                                        class="fa fa-files-o" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user"></i>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="fa fa-user"></i>
+                </div>
+                <div class="col-sm-4 col-lg-5">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-5">
+                                    <h4> Suscripción Activa </h4>
+                                    <h5>Desde {{$fecha_de_activacion}}</h5>
+                                </div>
+                                <div class="col-sm-12 col-lg-5">
+                                    <h4>Tienes {{$dias_left}} días para usar {{CRUDBooster::getSetting('appname')}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-check"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         @else
-            <div class="col-sm-4 col-lg-7">
-                <div class="small-box bg-blue">
-                    <div class="inner">
-                        <h4>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</h4>
-                        <a id="boton_paypal" title="pagar" class="btn btn-default" href="#pagar_modal"
-                           data-toggle="modal">
-                            <i class="fa fa-dollar"></i>
-                            Pagar ahora
-                        </a>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-video-camera"></i>
+            <div class="row">
+                <div class="col-sm-4 col-lg-7">
+                    <div class="small-box bg-blue">
+                        <div class="inner">
+                            <h4>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</h4>
+                            <a id="boton_paypal" title="pagar" class="btn btn-default" href="#pagar_modal"
+                            data-toggle="modal">
+                                <i class="fa fa-dollar"></i>
+                                Pagar ahora
+                            </a>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-video-camera"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         @endif
-    </div>
     @if(CRUDBooster::getSetting('oficina_video_youtube'))
         <div class="row">
             <div class="col-sm-12 col-lg-7">

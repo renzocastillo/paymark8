@@ -5,7 +5,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Session;
-
+use Carbon\Carbon;
 class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\CBController
 {
 
@@ -360,6 +360,9 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
         $data['annual_membership_amount'] = CRUDBooster::getSetting('annual_membership_amount');
         $data['annual_membership_amount_format'] = number_format(CRUDBooster::getSetting('annual_membership_amount'),2);
         $data['monthly_membership_amount_format'] =number_format(CRUDBooster::getSetting('monthly_membership_amount',2));
+        $fecha_de_activacion=new Carbon($user->activated_at);
+        $data['fecha_de_activacion']=$fecha_de_activacion->format('d/m/Y');
+        $data['dias_left']=$fecha_de_activacion->addYear()->diffInDays(Carbon::now());
         $this->cbView('modules.user_dashboard', $data);
     }
 

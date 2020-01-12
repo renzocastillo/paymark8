@@ -86,7 +86,7 @@ class VisanetController extends Controller
         }
 
         return view('modules.print')
-            ->with('logo', asset(CRUDBooster::getSetting('logo')))
+            ->with('logo', asset(CRUDBooster::getSetting('logo_checkout')))
             ->with('transaction', $transaction);
 
     }

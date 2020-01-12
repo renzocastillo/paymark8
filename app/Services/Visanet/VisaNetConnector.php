@@ -113,7 +113,7 @@ class VisaNetConnector {
 			'amount'      => number_format( $amount, 2, '.', '' ),
 			'trx_id'      => $invoice,
 			'script_url'  => CRUDBooster::getSetting( 'script_url' ),
-			'logo'        => asset( CRUDBooster::getSetting( 'logo' ) ),
+			'logo'        => asset( CRUDBooster::getSetting( 'logo_checkout' ) ),
 			'user'        => md5( VisaNetConnector::$USER_UUID_SEED . $userId ),
 			'start_date'  => $startDate,
 			'end_date'    => $endDate,
