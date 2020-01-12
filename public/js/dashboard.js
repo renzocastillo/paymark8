@@ -83,7 +83,12 @@ $('.pay').click(function () {
                 $('.start-js-btn').click(function () {
                     $('#myModal').modal('hide');
                     //$('.loader-container').show();
+                    $(window).on('beforeunload', function(){
+                        $('.loader-container').show();
+                    });
                 })
+
+
             };
             script.src = response.data.script_url;
             script.setAttribute('data-sessiontoken', response.data.session);
