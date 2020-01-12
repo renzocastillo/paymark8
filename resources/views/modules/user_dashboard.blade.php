@@ -161,8 +161,8 @@
                             <div class="col-sm-12 col-lg-4 text-center">
                                 <div id="payment_card" class="small-box bg-blue">
                                     <div class="inner">
-                                        <h3>{{$monthly_membership_amount_format}}/mes</h3>
-                                        <h4> {{$annual_membership_amount_format}}/ anual (50% dcto)</h4>
+                                        <h3>$ {{$monthly_membership_amount_format}}/mes</h3>
+                                        <h4>$ {{$annual_membership_amount_format}}/ anual (50% dcto)</h4>
                                         <p> Ganancias ilimitadas, url un año, servidor de paymark un año</p>
                                     </div>
                                     {{--
