@@ -83,7 +83,7 @@ $('.pay').click(function () {
                 $('.start-js-btn').click(function () {
                     $('#myModal').modal('hide');
                     //$('.loader-container').show();
-                    $(window).on('beforeunload', function(){
+                    $(window).on('beforeunload', function () {
                         $('.loader-container').show();
                     });
                 })
@@ -134,7 +134,7 @@ if (window.myPurchase) {
                 '<ul style="text-align: left"><li><b>Número de pedido:</b>  ' + window.myPurchase.transaction_invoice + '</li>' +
                 '<li><b>Nombre y apellido del comprador:</b>  ' + window.myPurchase.name + '</li>' +
                 '<li><b>Fecha y hora del pedido:</b>  ' + window.myPurchase.transaction_date + '</li>' +
-                '<li><b>Descripcion:</b>  ' + window.myPurchase.eci_description + '</li>' +
+                '<li><b>Descripcion:</b>  ' + window.myPurchase.action_description + '</li>' +
                 '<li><b>Codigo de error:</b>  ' + window.myPurchase.eci_code + '</li>' +
                 '</ul>' +
                 '<a href="' + window.termsAndConditions + '" >Terminos y condiciones</a>' +
@@ -171,6 +171,7 @@ if (window.myPurchase) {
                 '<li><b>Fecha y hora del pedido:</b>  ' + window.myPurchase.transaction_date + '</li>' +
                 '<li><b>Importe de la transacción:</b>  ' + window.myPurchase.transaction_amount + '</li>' +
                 '<li><b>Tipo de moneda:</b>  ' + window.myPurchase.transaction_currency + '</li>' +
+                '<li><b>Tarjeta:</b>  ' + window.myPurchase.card + '</li>' +
                 '<li><b>Producto: </b>  Afiliación a Plataforma Paymark8</li>' +
                 '<li><b>Descripción: </b>  Ganancias ilimitadas, url un año, servidor de paymark un año</li>' +
                 '</ul>' +

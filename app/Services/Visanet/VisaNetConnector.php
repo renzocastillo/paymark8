@@ -158,7 +158,9 @@ class VisaNetConnector {
 				  'transaction_currency' => $response->order->currency,
 				  'signature'            => $response->dataMap->SIGNATURE,
 				  'status'               => $status,
-				  'transaction_invoice'  => $response->order->purchaseNumber
+				  'transaction_invoice'  => $response->order->purchaseNumber,
+				  'card'                 => $response->dataMap->CARD,
+				  'action_description'   => $response->dataMap->ACTION_DESCRIPTION,
 			  ] );
 
 		} catch ( ClientException $exception ) {
@@ -178,7 +180,9 @@ class VisaNetConnector {
 					  'signature'           => $body->data->SIGNATURE,
 					  'status'              => $status,
 					  'transaction_date'    => Carbon::createFromTimestamp( $body->header->ecoreTransactionDate / 1000 ),
-					  'transaction_invoice' => $invoice
+					  'transaction_invoice' => $invoice,
+					  'card'                => $body->data->CARD,
+					  'action_description'  => $body->data->ACTION_DESCRIPTION,
 				  ] );
 			}
 		} catch ( \Exception $exception ) {
