@@ -203,7 +203,7 @@ class VisaNetConnector {
 
 	public function activateUser( $id ) {
 		$user = DB::table( 'cms_users' )
-				->where( 'id', $userId )
+				->where( 'id', $id )
 				->get()
 				->first();
 		//evaluamos si el usuario está inactivo para según eso activarlo o no
@@ -220,11 +220,11 @@ class VisaNetConnector {
 					//}
 				}
 			}
+			//mandamos un email a la cuenta de correo de este usuario
+			$link = url( '/' . $user->slug );
+			$data = [ 'nombre' => $user->name, 'link' => $link ];
+			CRUDBooster::sendEmail( [ 'to' => $user->email, 'data' => $data, 'template' => 'activacion_exitosa' ] );
 		}
-		//mandamos un email a la cuenta de correo de este usuario
-		$link=url('/'.$user->slug);
-		$data = ['nombre'=>$user->name,'link'=>$link];
-		CRUDBooster::sendEmail(['to'=>$user->email,'data'=>$data,'template'=>'activacion_exitosa']);
 	}
 	
 	public function getAbuelo($idpadre){
