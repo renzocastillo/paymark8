@@ -222,9 +222,9 @@ class VisaNetConnector {
 			}
 		}
 		//mandamos un email a la cuenta de correo de este usuario
-		$link = url( '/' . $user->slug );
-		$data = [ 'nombre' => $user->name, 'link' => $link ];
-		CRUDBooster::sendEmail( [ 'to' => $user->email, 'data' => $data, 'template' => 'activacion_exitosa' ] );
+		$link=url('/'.$user->slug);
+		$data = ['nombre'=>$user->name,'link'=>$link];
+		CRUDBooster::sendEmail(['to'=>$user->email,'data'=>$data,'template'=>'activacion_exitosa']);
 	}
 	
 	public function getAbuelo($idpadre){
