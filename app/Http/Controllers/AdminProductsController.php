@@ -42,9 +42,9 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->form[] = [ 'label'       => 'Titulo',
 		                  'name'        => 'title',
 		                  'type'        => 'text',
-		                  'validation'  => 'required|string|min:3|max:70',
+		                  'validation'  => 'string|min:3|max:70',
 		                  'width'       => 'col-sm-10',
-		                  'placeholder' => 'Puedes introducir solo una letra'
+		                  'placeholder' => 'Puedes omitir llenar un título y se cargará el título por defecto del enlace'
 		];
 		$this->form[] = [ 'label'      => 'Valor',
 		                  'name'       => 'value',
