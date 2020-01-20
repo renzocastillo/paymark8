@@ -81,7 +81,7 @@
                             @else
                                 <li class="col-lg-3 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading"> {{$product->title}}</div>
+                                        <div class="panel-heading"> {{$product->title ? : substr($product->ogp['title'],0,strpos($product->ogp['title'],' ',strlen($product->ogp['title'])/2)) }}</div>
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-sm-8 col-lg-offset-2">
