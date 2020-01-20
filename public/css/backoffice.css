@@ -1,3 +1,6 @@
+.iframes.list-unstyled.row li{
+    height: 35vh;
+}
 .iframe-product-container iframe{
     margin: 0 auto;
     display:block;
@@ -32,7 +35,6 @@
     position: relative;
 }
 .iframes .panel-body{
-    height: 35vh;
     overflow-x: auto;
 }
 @media (max-width:768px) {
