@@ -86,8 +86,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		//$arr=['row'=>$row,'field'=>'premium','checked'=>false,'cms_privileges_id'=>2];
 		//$custom_element=view('components.toggle',$arr)->render();
 		//$this->form[] = array("label"=>"Premium","name"=>"premium","type"=>"custom","html"=>$custom_element);
-		$this->form[] = array("label"=>"Contraseña Actual","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
-		$this->form[] = array("label"=>"Repita Contraseña","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
+		$this->form[] = array("label"=>"Nueva Contraseña","name"=>"password","type"=>"password","help"=>"Dejar vacío si no se cambiará la contraseña");
+		$this->form[] = array("label"=>"Repita Nueva Contraseña","name"=>"password_confirmation","type"=>"password","help"=>"Dejar vacío si no se cambiará la contrasñea");
 		# END FORM DO NOT REMOVE THIS LINE
 		if(CRUDBooster::myPrivilegeId()==2){
 			$this->addaction[] =['label'=>'','url'=>'#pagar_modal','icon'=>'fa fa-dollar','color'=>'warning','showIf'=>'[estado_solicitud]=="solicitado"'];
@@ -219,7 +219,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->index_statistic[] = ['label'=>'N° Actual de Linkers afiliados','count'=>$afiliaciones_actuales,'icon'=>'fa fa-users','color'=>'blue','width'=>'col-sm-2'];
 			$this->index_statistic[] = ['label'=>'N° de Linkers Totales','count'=>DB::table($this->table)->where('cms_users_id',$id)->where('estado',1)->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
 			$this->index_statistic[] = ['label'=>'N° de Linkers sin Activarse','count'=>DB::table($this->table)->where('cms_users_id',$id)->whereNull('estado')->count(),'icon'=>'fa fa-user-times','color'=>'blue','width'=>'col-sm-2'];					
-			//$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
+			$this->index_statistic[] = ['label'=>'Vistas por Efectuar','count'=>$vistas_por_efectuar,'icon'=>'fa fa-download','color'=>'blue','width'=>'col-sm-2'];					
 			$this->index_statistic[] = ['label'=>'Ganancia por Linkers Indirectos Actual: Ganancia generada por los linkers de sus linkers actualmente','count'=>' $'.$ganancia_premium,'icon'=>'fa fa-usd','color'=>'blue','width'=>'col-sm-2 col-lg-3'];
 		}
 		if(CRUDBooster::myPrivilegeId()==2){

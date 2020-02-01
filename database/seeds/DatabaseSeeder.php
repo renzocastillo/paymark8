@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(CountriesTableSeeder::class);
+       /* $this->call(CountriesTableSeeder::class);
 	    $this->call(ProductTypeSeeder::class);
         $this->call(CmsMenusTableSeeder::class);
         $this->call(CmsEmailTemplatesTableSeeder::class);
@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(CmsPrivilegesRolesTableSeeder::class);
         $this->call(CmsModulsTableSeeder::class);
         $this->call(CmsSettingsTableSeeder::class);
+	    $this->call(PaymentSettingsSeeder::class);
+	    $this->call(VisaNetSettingSeeder::class);
+        $this->call(CurrencyVisanetSeeder::class);*/
+        $this->call(LogoCheckoutSetting::class);
+
     }
 }
