@@ -90,9 +90,9 @@
                                             </div>
                                             <p>
                                                 <br>
-                                                <p class="text-primary">{{strlen($product->ogp['title']) >= 120 ? substr($product->ogp['title'],0,120)." ..." : $product->ogp['title'] }}</p>
+                                                <p class="text-primary">{{ strlen($product->ogp['title']) >= 120 ? substr($product->ogp['title'],0,120)." ..." : $product->ogp['title'] }}</p>
                                             </p>
-                                            <a href="{{$product->ogp['url']}}" target="_blank">Ver Más</a>
+                                            <a href="{{$product->value}}" target="_blank">Ver Más</a>
 
                                         </div>
                                         @if(CRUDBooster::myPrivilegeid()==2)

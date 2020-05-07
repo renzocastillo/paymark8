@@ -12,3 +12,4 @@ yarn-error.log
 .env
 public/uploadss
 !/public/vendor/crudbooster/assets/css/main.css
+*.code-workspace
