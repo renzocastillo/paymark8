@@ -285,6 +285,25 @@
       border-radius:7px;
     }
 
+    .custom-skin .btn-danger{
+      margin: 0px 5px 10px 5px;
+      background-image: linear-gradient(to right, #f32e0f , #e00000);
+      border-color: #fa404000;
+      border-radius: 7px;
+    }
+
+    .custom-skin .btn-warning{
+      margin: 0px 5px 10px 5px;
+      background-image: linear-gradient(to right, #f3c20f , #f39c12);
+      border-color: #fac14000;
+      border-radius: 7px;
+    }
+
+    .custom-skin .btn-default{
+      margin: 0px 5px 10px 5px;
+      border-radius: 7px;
+    }
+
     @media (max-width: 767px){
       .custom-skin .small-box .icon {
         display: block;
