@@ -12,14 +12,11 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">
-                        @if(!empty($current_empresa->nombre))
+                    @if(!empty($current_empresa->nombre))
                         <h3 class="box-body text-center">Mostrando <strong>{{$current_empresa->nombre}}</strong></h3>
                     @else
-                    <h3 class="box-body text-center">Mostrando Todos</h3>
+                        <h3 class="box-body text-center">Mostrando Todos</h3>
                     @endif
-                    <br>
-                    </h3>
                     {{--<div class="box-tools">
                         <form method="GET" action="" class="form-horizontal">
                             <div class="input-group input-group-sm" style="width: 200px;">
