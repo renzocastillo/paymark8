@@ -276,18 +276,18 @@ class CmsMenusTableSeeder extends Seeder
             16 => 
             array (
                 'id' => 19,
-                'name' => 'Productos',
+                'name' => 'Cursos',
                 'type' => 'Module',
                 'path' => 'products',
                 'color' => 'normal',
-                'icon' => 'fa fa-gift',
+                'icon' => 'fa fa-graduation-cap',
                 'parent_id' => 0,
                 'is_active' => 1,
                 'is_dashboard' => 0,
                 'id_cms_privileges' => 1,
                 'sorting' => 2,
                 'created_at' => '2019-12-19 11:04:46',
-                'updated_at' => '2019-12-19 12:14:33',
+                'updated_at' => '2020-05-19 16:21:18',
             ),
             17 => 
             array (
@@ -304,6 +304,22 @@ class CmsMenusTableSeeder extends Seeder
                 'sorting' => 13,
                 'created_at' => NULL,
                 'updated_at' => NULL,
+            ),
+            18 => 
+            array (
+                'id' => 21,
+                'name' => 'Afiliaciones',
+                'type' => 'URL',
+                'path' => 'configuraciones?group=afiliacion',
+                'color' => 'normal',
+                'icon' => 'fa fa-usd',
+                'parent_id' => 4,
+                'is_active' => 1,
+                'is_dashboard' => 0,
+                'id_cms_privileges' => 1,
+                'sorting' => 7,
+                'created_at' => '2020-01-06 15:45:36',
+                'updated_at' => '2020-01-06 15:45:36',
             ),
         ));
         

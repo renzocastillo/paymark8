@@ -359,7 +359,7 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 			if ( $data['tipo'] == 'video' ) {
 				$data['page_title'] = 'Tutoriales';
 			} else {
-				$data['page_title'] = 'Productos';
+				$data['page_title'] = 'Cursos';
 			}
 			$query = DB::table( 'products' );
 

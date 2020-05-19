@@ -2,16 +2,17 @@
 @section('content')
     <div class="container-fluid">
         <div class="row buttons-carousel">
-        @foreach($enterprises as $enterprise)
-            {{--<img src="{{url($enterprise->logo)}}"/>--}}
-        <a href="{{CRUDBooster::mainpath("?&enterpriseId=".$enterprise->id)}}" class="btn btn-primary {{Request::get('enterpriseId')==$enterprise->id ? "active" : "" }}">{{$enterprise->nombre}}</a>
-        @endforeach
+            <a href="{{CRUDBooster::mainpath("")}}" class="btn btn-primary {{  Request::get('enterpriseId') ? "" : "active" }}">Todos</a>
+            @foreach($enterprises as $enterprise)
+                {{--<img src="{{url($enterprise->logo)}}"/>--}}
+                <a href="{{CRUDBooster::mainpath("?&enterpriseId=".$enterprise->id)}}" class="btn btn-primary {{Request::get('enterpriseId')==$enterprise->id ? "active" : "" }}">{{$enterprise->nombre}}</a>
+            @endforeach
         </div> 
     </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
+                {{--<div class="box-header">
                     @if(!empty($current_empresa->nombre))
                         <h3 class="box-body text-center">Mostrando <strong>{{$current_empresa->nombre}}</strong></h3>
                     @else
@@ -33,8 +34,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>--}}
-                </div>
+                    </div
+                </div>>--}}
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <ul class="products list-unstyled row">
