@@ -2,9 +2,9 @@
 
 use App\Services\ProductOPGService;
 use CRUDBooster;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use Request;
+use Illuminate\Support\Facades\Request;
 use Session;
 
 class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
@@ -50,6 +50,12 @@ class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CB
 		                  'name'       => 'value',
 		                  'type'       => 'textarea',
 		                  'validation' => 'required|string|min:5|max:5000',
+		                  'width'      => 'col-sm-10'
+		];
+		$this->form[] = [ 'label'      => 'Imagen',
+		                  'name'       => 'image',
+		                  'type'       => 'upload',
+		                  'validation' => '',
 		                  'width'      => 'col-sm-10'
 		];
 		$this->form[] = [ 'label'      => 'Tipo',

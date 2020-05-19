@@ -270,7 +270,21 @@
       box-shadow:0 5px 20px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.10);
       border:none;
     }
-  
+    
+    .custom-skin .btn-success{
+      margin:0px 5px 10px 5px;
+      background-image: linear-gradient(to right, rgb(39, 187, 160) , #08b37c);
+      border-color:#0568e200;
+      border-radius:7px;
+    }
+
+    .custom-skin .btn-primary{
+      margin:0px 5px 10px 5px;
+      background-image: linear-gradient(to right, #4070fa , #2e68d4);
+      border-color:#4070fa00;
+      border-radius:7px;
+    }
+
     @media (max-width: 767px){
       .custom-skin .small-box .icon {
         display: block;

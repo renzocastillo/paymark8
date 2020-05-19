@@ -1,22 +1,59 @@
-.iframes.list-unstyled.row li{
-    height: 45vh;
-    overflow: auto;
-}
-.iframe-product-container iframe{
-    margin: 0 auto;
-    display:block;
-}
-
-.iframe-product-container {
-    overflow: hidden;
-    position: relative;
+.products.list-unstyled.row li{
+    /*overflow: auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 0 auto;*/
+    min-width: 300px;
 }
 
-.iframes{
+.products{
     text-align:center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 0 auto;
+    align-items: center;
+    justify-content: start;
 }
-.iframes .panel-default,.iframes .panel-footer{
-    
+.products .panel{
+    display: flex;
+   flex-direction:column;
+   align-content:stretch; 
+}
+
+.products .panel-body{
+    overflow-x: auto;
+    display: contents;
+}
+
+.products .panel-footer{
+    padding: 20px 10px 0px 10px;
+}
+.products img{
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width:768px) {
+    .products .panel-body{
+        height: auto;
+    }
+    .box-header{
+        display:none;
+    }
+    .products img{
+        height: 20vh;
+        width:100%;
+    }
+    .products.list-unstyled.row li{
+        min-width: 100%;
+    }
+
 }
 .iframe-container iframe{
     border: 0;
@@ -35,14 +72,16 @@
     padding-top: 56.25%;
     position: relative;
 }
-.iframes .panel-body{
-    overflow-x: auto;
+.iframe-product-container iframe{
+    margin: 0 auto;
+    display:block;
 }
-@media (max-width:768px) {
-    .iframes .panel-body{
-        height: auto;
-    }
+
+.iframe-product-container {
+    overflow: hidden;
+    position: relative;
 }
+
 .flyer{
     padding-top:10px;
     padding-bottom:15px;
@@ -150,11 +189,13 @@
     left: 1% !important;
     z-index: 1;
     color:#fff !important;
+    padding-bottom:30px !important;
 }
 .slick-next {
     right: 1% !important;
     z-index: 1;
     color:#fff !important;
+    padding-bottom:30px !important;
 }
 .modal-content{
     background-color:#000032 ;
@@ -210,8 +251,14 @@
 }
 .buttons-carousel .btn{
     margin:0px 5px 10px 5px;
-    background-image: linear-gradient(to right, #4070FA , #1e47bb);
+    background-image: linear-gradient(to right, #4070FA , #3955a7);
     border-color:#4070fa00;
+}
+
+.buttons-carousel .btn.active{
+    margin:0px 5px 10px 5px;
+    background-image: linear-gradient(to right, rgb(39, 187, 160) , #08b37c);
+    border-color:#0568e200;
 }
 
 
@@ -263,3 +310,4 @@
     text-align: center;
     color: #ffffff;
 }
+
