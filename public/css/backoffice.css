@@ -6,23 +6,18 @@
     text-align:center;
 }
 .products .panel{
-    height: 35vh;
+    height: 40vh;
 }
-
+.products .panel .panel-heading{
+    height: 8vh;
+}
 .products .panel-body{
     overflow-x: auto;
     display: contents;
 }
 
 .products .panel-footer{
-    padding: 20px 10px 0px 10px;
-}
-
-.products .panel-footer a{
-    position: absolute;
-    left: 34%;
-    bottom: 8%;
-    display: block;
+    padding: 10px;
 }
 
 .products img{
@@ -33,9 +28,7 @@
 }
 
 @media (max-width:768px) {
-    .products .panel-body{
-        height: auto;
-    }
+
     .box-header{
         display:none;
     }
@@ -43,12 +36,12 @@
         height: 20vh;
         width:100%;
     }
-    .products.list-unstyled.row li{
-        min-width: 100%;
-    }
 
-    .products .panel-footer a{
-        bottom: 5%;
+    .products .panel .panel-heading{
+        height: auto;
+    }
+    .products .panel{
+        height: auto;
     }
 
 }
