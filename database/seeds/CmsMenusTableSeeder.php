@@ -52,18 +52,18 @@ class CmsMenusTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Empresas',
+                'name' => 'Categorías de Cursos',
                 'type' => 'Module',
                 'path' => 'empresas',
                 'color' => 'normal',
-                'icon' => 'fa fa-building',
+                'icon' => 'fa fa-creative-commons',
                 'parent_id' => 4,
                 'is_active' => 1,
                 'is_dashboard' => 0,
                 'id_cms_privileges' => 1,
                 'sorting' => 1,
                 'created_at' => '2019-09-11 17:54:19',
-                'updated_at' => '2019-09-11 17:54:30',
+                'updated_at' => '2020-05-24 23:04:51',
             ),
             3 => 
             array (
@@ -328,14 +328,14 @@ class CmsMenusTableSeeder extends Seeder
                 'type' => 'URL',
                 'path' => 'configuraciones?group=oficina',
                 'color' => 'normal',
-                'icon' => 'fa fa-signal',
+                'icon' => 'fa fa-area-chart',
                 'parent_id' => 4,
                 'is_active' => 1,
                 'is_dashboard' => 0,
                 'id_cms_privileges' => 1,
                 'sorting' => 4,
                 'created_at' => '2020-05-23 16:15:55',
-                'updated_at' => NULL,
+                'updated_at' => '2020-05-24 23:05:25',
             ),
         ));
         

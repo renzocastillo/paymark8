@@ -7,8 +7,8 @@ use Session;
 
 //use Request;
 use Illuminate\Http\Request;
-use DB;
-use CRUDBooster;
+use Illuminate\Support\Facades\DB;
+use crocodicstudio\crudbooster\helpers\CRUDBooster;
 
 class WelcomeController extends Controller
 {
@@ -18,7 +18,7 @@ class WelcomeController extends Controller
             $patrocinador = DB::table('cms_users')->where('slug', $user)->first();
         }
         $empresas = DB::table('empresas')->get();
-        $anuncios = DB::table('anuncios')->get();
+        $anuncios = DB::table('anuncios')->where('publico',1)->get();
         $video = DB::table('videos')->latest()->first();
         $data = array(
             "empresas" => $empresas,
