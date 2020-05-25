@@ -91,18 +91,18 @@
                 @endif
                 <!-- {{ $iframes->appends(['tipo' => $tipo])->links() }} -->
                 </div>
-                {{--<div class="box-footer">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li ><a href="{{$iframes->url(1)}}">«</a></li>
-                        @for($i=1; $i<=$iframes->lastPage(); $i++)
-                            <li class="{{ $iframes->currentPage()==$i?'active':''}}"><a href="{{$iframes->url($i)}}">{{$i}}</a></li>
-                        @endfor
-                        @if($iframes->lastPage()>1)
-                            <li><a href="{{$iframes->url($iframes->lastPage())}}">»</a></li>
-                        @endif
-                    </ul>
-                </div>--}}
-                <!-- /.box-body -->
+            {{--<div class="box-footer">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li ><a href="{{$iframes->url(1)}}">«</a></li>
+                    @for($i=1; $i<=$iframes->lastPage(); $i++)
+                        <li class="{{ $iframes->currentPage()==$i?'active':''}}"><a href="{{$iframes->url($i)}}">{{$i}}</a></li>
+                    @endfor
+                    @if($iframes->lastPage()>1)
+                        <li><a href="{{$iframes->url($iframes->lastPage())}}">»</a></li>
+                    @endif
+                </ul>
+            </div>--}}
+            <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>

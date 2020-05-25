@@ -145,15 +145,27 @@ class CmsMenusPrivilegesTableSeeder extends Seeder
             ),
             21 => 
             array (
-                'id' => 61,
-                'id_cms_menus' => 19,
+                'id' => 63,
+                'id_cms_menus' => 21,
                 'id_cms_privileges' => 2,
             ),
             22 => 
             array (
-                'id' => 62,
+                'id' => 64,
+                'id_cms_menus' => 19,
+                'id_cms_privileges' => 2,
+            ),
+            23 => 
+            array (
+                'id' => 65,
                 'id_cms_menus' => 19,
                 'id_cms_privileges' => 3,
+            ),
+            24 => 
+            array (
+                'id' => 66,
+                'id_cms_menus' => 22,
+                'id_cms_privileges' => 2,
             ),
         ));
         

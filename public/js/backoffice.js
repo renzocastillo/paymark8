@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    if($.fn.bootstrapToggle){
+        $('.checkboxtoggle').bootstrapToggle({
+            on: 'SI',
+            off: 'NO'
+        });
+        console.log('dentro de funcion toggle');
+        $('.checkboxtoggle').change(function() {
+            cb = $(this);
+            cb.val(cb.prop('checked') ? 1 : 0 );
+        });
+    }
     $('.multiple-carousel').slick({
         dots: false,
         infinite: true,
@@ -67,7 +78,4 @@ $(document).ready(function () {
             }
         ]
     });
-
-
-
 });

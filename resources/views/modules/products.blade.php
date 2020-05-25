@@ -76,25 +76,27 @@
                                                 @endif
                                             </div>
                                             @if(CRUDBooster::myPrivilegeid()==2)
-                                                <a class="btn btn-success btn-edit" title="Editar"
-                                                   href="{{CRUDBooster::mainpath("edit/".$product->id."?return_url=".urlencode(Request::fullUrl()))}}"><i
-                                                            class="fa fa-pencil"></i> Editar</a>
-                                                <a class="btn btn-danger btn-delete" title="Eliminar"
-                                                   href="javascript:;" onclick="swal({
-                                                        title: 'Estás Seguro?',
-                                                        text: 'No podrás recuperar estos datos!',
-                                                        type: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#ff0000',
-                                                        confirmButtonText: '¡Sí!',
-                                                        cancelButtonText: 'No',
-                                                        closeOnConfirm: false
-                                                        },
-                                                        function(){
-                                                        location.href= '{{CRUDBooster::mainpath('delete/'.$product->id)}}';
-                                                        });">
-                                                    <i class="fa fa-times"></i> Eliminar
-                                                </a>
+                                                <div class="row">
+                                                    <a class="btn btn-success btn-edit" title="Editar"
+                                                    href="{{CRUDBooster::mainpath("edit/".$product->id."?return_url=".urlencode(Request::fullUrl()))}}"><i
+                                                                class="fa fa-pencil"></i> Editar</a>
+                                                    <a class="btn btn-danger btn-delete" title="Eliminar"
+                                                    href="javascript:;" onclick="swal({
+                                                            title: 'Estás Seguro?',
+                                                            text: 'No podrás recuperar estos datos!',
+                                                            type: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#ff0000',
+                                                            confirmButtonText: '¡Sí!',
+                                                            cancelButtonText: 'No',
+                                                            closeOnConfirm: false
+                                                            },
+                                                            function(){
+                                                            location.href= '{{CRUDBooster::mainpath('delete/'.$product->id)}}';
+                                                            });">
+                                                        <i class="fa fa-times"></i> Eliminar
+                                                    </a>
+                                                </div>
                                             @endif
                                         </div>
                                     </div>

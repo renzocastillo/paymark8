@@ -1,14 +1,24 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use CRUDBooster;
-use DB;
+namespace App\Http\Controllers;
+
+use crocodicstudio\crudbooster\helpers\CRUDBooster;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use Carbon\Carbon;
+use App\Http\Controllers\CompensacionesController;
+
 class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\CBController
 {
+    public $compensaciones;
 
+    public function __construct()
+    {
+        $this->compensaciones=new CompensacionesController();
+    }
+    
     public function cbInit()
     {
 
@@ -33,14 +43,34 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
 
         # START COLUMNS DO NOT REMOVE THIS LINE
         $this->col = [];
-        $this->col[] = ["label" => "Imagen", "name" => "imagen", "image" => true];
-        $this->col[] = ["label" => "Url", "name" => "url"];
+        $this->col[] = [
+            "label" => "Imagen",
+            "name" => "imagen",
+            "image" => true
+        ];
+        $this->col[] = [
+            "label" => "Url",
+            "name" => "url"
+        ];
         # END COLUMNS DO NOT REMOVE THIS LINE
 
         # START FORM DO NOT REMOVE THIS LINE
         $this->form = [];
-        $this->form[] = ['label' => 'Imagen', 'name' => 'imagen', 'type' => 'upload', 'validation' => 'required|min:1|max:255', 'width' => 'col-sm-10'];
-        $this->form[] = ['label' => 'Url', 'name' => 'url', 'type' => 'text', 'validation' => 'required|url', 'width' => 'col-sm-10', 'placeholder' => 'Please enter a valid URL'];
+        $this->form[] = [
+            'label' => 'Imagen',
+            'name' => 'imagen',
+            'type' => 'upload',
+            'validation' => 'required|min:1|max:255',
+            'width' => 'col-sm-10'
+        ];
+        $this->form[] = [
+            'label' => 'Url',
+            'name' => 'url',
+            'type' => 'text',
+            'validation' => 'required|url',
+            'width' => 'col-sm-10',
+            'placeholder' => 'Please enter a valid URL'
+        ];
         # END FORM DO NOT REMOVE THIS LINE
 
         # OLD START FORM
@@ -206,7 +236,6 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
         $this->load_css[] = asset("css/slick.css");
         $this->load_css[] = asset("css/slick-theme.css");
         $this->load_css[] = "https://fonts.googleapis.com/css?family=Raleway:400,500,600&display=swap";
-
     }
 
 
@@ -330,45 +359,36 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
 
     public function getIndex()
     {
-        $id = CRUDBooster::myId();
-        $user = DB::table('cms_users')->where('id', $id)->first();
-        $ganancia_x_vista = DB::table('parametros')->where('name', 'gvista')->value('content');
-        $ganancia_x_afiliaciones = DB::table('parametros')->where('name', 'gafiliacion')->value('content');
-        $ganancia_x_nietos = DB::table('parametros')->where('name', 'gnietos')->value('content');
-        $vistas_x_afiliacion = DB::table('parametros')->where('name', 'vreg')->value('content');
-        $pago_minimo = DB::table('parametros')->where('name', 'pmin')->value('content');
+        $anuncios=DB::table('anuncios')->where('publico',0)->get();
+        $user=CRUDBooster::me();
+        $capacidad_de_retiro=$this->compensaciones->getCapacidadDeRetiro($user);
+        $vistas_x_cobrar=$this->compensaciones->getVistasPorCobrar($user);
+        $vistas_cobrables=$this->compensaciones->getVistasCobrables($user);
+        $vistas_acumuladas=$this->compensaciones->getVistasAcumuladas($user);
+        $fecha_de_activacion = new Carbon($user->activated_at);
+        $data=
+        [
+            'anuncios'=>$anuncios,
+            'user'=>$user,
+            'page_title'=>'Comparte tu link y empieza a ganar Ahora!',
+            'capacidad_de_retiro'=>$capacidad_de_retiro,
+            'vistas_cobrables'=>$vistas_cobrables,
+            'vistas_x_cobrar'=>$vistas_x_cobrar,
+            'vistas_acumuladas' => $vistas_acumuladas,
+            'empresas'=>DB::table('empresas')->get(),
+            'annual_membership_amount'=>CRUDBooster::getSetting('annual_membership_amount'),
+            'annual_membership_amount_format'=>number_format(CRUDBooster::getSetting('annual_membership_amount'), 2),
+            'monthly_membership_amount_format'=>number_format(CRUDBooster::getSetting('monthly_membership_amount', 2)),
+            'fecha_de_activacion'=>$fecha_de_activacion->format('d/m/Y'),
+            'dias_left'=>$fecha_de_activacion->addYear()->diffInDays(Carbon::now()),            
+        ];
 
-        $afiliaciones_actuales = $user->afiliaciones_actuales;
-        $vistas_actuales = $user->vistas_actuales;
-        $nietos_actuales = $user->nietos_actuales;
-        $ganancia_premium = $ganancia_x_nietos * $nietos_actuales;
-        $ganancia_x_afiliados_actuales = $afiliaciones_actuales * $ganancia_x_afiliaciones;
-        $capacidad_de_vistas_a_favor = $user->capacidad_vistas_a_favor;
-
-        $monto_total = $ganancia_x_vista * $vistas_actuales + $ganancia_x_afiliados_actuales + $ganancia_premium;
-        $capacidad_de_vistas = $afiliaciones_actuales * $vistas_x_afiliacion + $capacidad_de_vistas_a_favor;
-        $vistas_x_cobrar = $vistas_actuales <= $capacidad_de_vistas ? $vistas_actuales : $capacidad_de_vistas;
-        $capacidad_de_retiro = $vistas_x_cobrar * $ganancia_x_vista + $ganancia_x_afiliados_actuales + $ganancia_premium;
-        $capacidad_de_retiro = $capacidad_de_retiro >= $pago_minimo ? $capacidad_de_retiro : 0;
-
-        $data['user'] = $user;
-        $data['page_title'] = 'Comparte tu link y empieza a ganar Ahora!';
-        $data['vistas_x_cobrar'] = $vistas_x_cobrar;
-        $data['capacidad_de_retiro'] = $capacidad_de_retiro;
-        $data['monto_total'] = $monto_total;
-        $data['empresas'] = DB::table('empresas')->get();
-        $data['annual_membership_amount'] = CRUDBooster::getSetting('annual_membership_amount');
-        $data['annual_membership_amount_format'] = number_format(CRUDBooster::getSetting('annual_membership_amount'),2);
-        $data['monthly_membership_amount_format'] =number_format(CRUDBooster::getSetting('monthly_membership_amount',2));
-        $fecha_de_activacion=new Carbon($user->activated_at);
-        $data['fecha_de_activacion']=$fecha_de_activacion->format('d/m/Y');
-        $data['dias_left']=$fecha_de_activacion->addYear()->diffInDays(Carbon::now());
         $this->cbView('modules.user_dashboard', $data);
     }
 
     public function formatCurrency($value)
     {
-        return '$ '.number_format( $value, 2, '.', '' );
+        return '$ ' . number_format($value, 2, '.', '');
     }
 
 
@@ -385,6 +405,5 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
             }
         }
         return response()->json(false);
-
     }
 }

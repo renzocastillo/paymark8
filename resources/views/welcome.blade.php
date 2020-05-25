@@ -77,15 +77,15 @@
         </div>
     </div>
     <!-- Sección logos empresas -->
-    {{--<div class="container-fluid">
+    <div class="container-fluid">
             <div class="row multiple-carousel">
             @foreach($empresas as $empresa)
                 <img src="{{url($empresa->logo)}}"/>
             @endforeach
             </div>
-    </div> --}}
+    </div>
     <div class="container-fluid anuncios">
-        <h2 class="text-center">Asociados</h2>
+        <h2 class="text-center">{{CRUDBooster::getSetting("cabecera_anuncios")}}</h2>
         <div class="row">
             @foreach($anuncios as $anuncio)
                 <div class="col-sm-12 col-lg-3">
@@ -100,6 +100,7 @@
             @endforeach
         </div>
     </div>
+
 
     <!-- Sección Acerca de la empresa -->
     <section id="featured">

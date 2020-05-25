@@ -58,7 +58,8 @@
                     <i class='fa fa-cog'></i> {{ucfirst($page_title)}}
                 </div>
                 <div class="panel-body">
-                    <form method='post' id="form" enctype="multipart/form-data" action='{{CRUDBooster::mainpath("save-setting?group_setting=$page_title")}}'>
+                    <form method='post' id="form" enctype="multipart/form-data"
+                          action='{{CRUDBooster::mainpath("save-setting?group_setting=$page_title")}}'>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">
                             <?php
@@ -67,7 +68,7 @@
 
                             $value = $s->content;
 
-                            if (! $s->label) {
+                            if (!$s->label) {
                                 $label = ucwords(str_replace('_', ' ', $s->name));
                                 DB::table('cms_settings')->where('id', $s->id)->update(['label' => $label]);
                                 $s->label = $label;
@@ -101,9 +102,9 @@
                                     case 'upload':
                                     case 'upload_image':
                                         if ($value) {
-                                            echo "<p><a href='".asset($value)."' target='_blank' title='Download the file of $s->label'><i class='fa fa-download'></i> Download the File  of $s->label</a></p>";
+                                            echo "<p><a href='" . asset($value) . "' target='_blank' title='Download the file of $s->label'><i class='fa fa-download'></i> Download the File  of $s->label</a></p>";
                                             echo "<input type='hidden' name='$s->name' value='$value'/>";
-                                            echo "<div class='pull-right'><a class='btn btn-danger btn-xs' onclick='if(confirm(\"Are you sure want to delete ?\")) location.href=\"".CRUDBooster::mainpath("delete-file-setting?id=$s->id")."\"' title='Click here to delete'><i class='fa fa-trash'></i></a></div>";
+                                            echo "<div class='pull-right'><a class='btn btn-danger btn-xs' onclick='if(confirm(\"Are you sure want to delete ?\")) location.href=\"" . CRUDBooster::mainpath("delete-file-setting?id=$s->id") . "\"' title='Click here to delete'><i class='fa fa-trash'></i></a></div>";
                                         } else {
                                             echo "<input type='file' name='$s->name' class='form-control'/>";
                                         }
@@ -111,9 +112,9 @@
                                         break;
                                     case 'upload_file':
                                         if ($value) {
-                                            echo "<p><a href='".asset($value)."' target='_blank' title='Download the file of $s->label'><i class='fa fa-download'></i> Download the File  of $s->label</a></p>";
+                                            echo "<p><a href='" . asset($value) . "' target='_blank' title='Download the file of $s->label'><i class='fa fa-download'></i> Download the File  of $s->label</a></p>";
                                             echo "<input type='hidden' name='$s->name' value='$value'/>";
-                                            echo "<div class='pull-right'><a class='btn btn-danger btn-xs' onclick='if(confirm(\"Are you sure want to delete ?\")) location.href=\"".CRUDBooster::mainpath("delete-file-setting?id=$s->id")."\"' title='Click here to delete'><i class='fa fa-trash'></i></a></div>";
+                                            echo "<div class='pull-right'><a class='btn btn-danger btn-xs' onclick='if(confirm(\"Are you sure want to delete ?\")) location.href=\"" . CRUDBooster::mainpath("delete-file-setting?id=$s->id") . "\"' title='Click here to delete'><i class='fa fa-trash'></i></a></div>";
                                         } else {
                                             echo "<input type='file' name='$s->name' class='form-control'/>";
                                         }
@@ -128,7 +129,7 @@
                                             foreach ($dataenum as $enum) {
                                                 $checked = ($enum == $value) ? "checked" : "";
                                                 echo "<label class='radio-inline'>";
-                                                echo "<input type='radio' name='".$s->name."' value='$enum' $checked > $enum";
+                                                echo "<input type='radio' name='" . $s->name . "' value='$enum' $checked > $enum";
                                                 echo "</label>";
                                             }
                                         endif;

@@ -6,7 +6,7 @@
     </div>
     @if (Session::has('purchase'))
         <script>
-            window.termsAndConditions =  '{{url("terminos-y-condiciones")}}';
+            window.termsAndConditions = '{{url("terminos-y-condiciones")}}';
             window.myPurchase = @json(Session::pull('purchase'))
         </script>
 
@@ -14,7 +14,7 @@
     @if(Session::has('timeout'))
         {{Session::pull('timeout')}}
         <div class="alert alert-danger">
-            <strong>Se agoto el tiempo de espera para tu compra</strong> Intenta nuevamente 
+            <strong>Se agoto el tiempo de espera para tu compra</strong> Intenta nuevamente
         </div>
     @endif
     @if(app('request')->input('paypal_complete'))
@@ -23,73 +23,73 @@
             activación.
         </div>
     @endif
-        @if(CRUDBooster::me()->estado)
-            <div class="row">
-                <div class="col-sm-4 col-lg-7">
-                    <div class="small-box bg-blue">
-                        <div class="inner">
-                            <h4>Mi Link</h4>
-                            <div class="copied"></div>
-                            <h4 id="link_title">
+    @if(CRUDBooster::me()->estado)
+        <div class="row">
+            <div class="col-sm-4 col-lg-6">
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h4>Mi Link</h4>
+                        <div class="copied"></div>
+                        <h4 id="link_title">
                     <span id="link" class="badge badge-blue">
                         {{url('/'.CRUDBooster::me()->slug)}}
                     </span>
-                            </h4>
-                            <a id="copy_btn" class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i
-                                        class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-user"></i>
-                        </div>
+                        </h4>
+                        <a id="copy_btn" class="btn btn-default" href="#" onclick="copy_to_clipboard()"><i
+                                    class="fa fa-files-o" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user"></i>
                     </div>
                 </div>
-                <div class="col-sm-4 col-lg-5">
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-5">
-                                    <h4> Suscripción Activa </h4>
-                                    <h5>Desde {{$fecha_de_activacion}}</h5>
-                                </div>
-                                <div class="col-sm-12 col-lg-5">
-                                    <h4>Tienes {{$dias_left}} días para usar {{CRUDBooster::getSetting('appname')}}</h4>
-                                </div>
+            </div>
+            <div class="col-sm-4 col-lg-5 col-lg-offset-1">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-5">
+                                <h4> Suscripción Activa </h4>
+                                <h5>Desde {{$fecha_de_activacion}}</h5>
+                            </div>
+                            <div class="col-sm-12 col-lg-5">
+                                <h4>Tienes {{$dias_left}} días para usar {{CRUDBooster::getSetting('appname')}}</h4>
                             </div>
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-check"></i>
-                        </div>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-check"></i>
                     </div>
                 </div>
             </div>
-        @else
-            <div class="row">
-                <div class="col-sm-4 col-lg-7">
-                    <div class="small-box bg-blue">
-                        <div class="inner">
-                            <h4>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</h4>
-                            <a id="boton_paypal" title="pagar" class="btn btn-default" href="#pagar_modal"
-                            data-toggle="modal">
-                                <i class="fa fa-dollar"></i>
-                                Pagar ahora
-                            </a>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-video-camera"></i>
-                        </div>
+        </div>
+    @else
+        <div class="row">
+            <div class="col-sm-4 col-lg-6">
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h4>Genera tu link y empieza a ganar con {{CRUDBooster::getsetting('appname')}}</h4>
+                        <a id="boton_paypal" title="pagar" class="btn btn-default" href="#pagar_modal"
+                           data-toggle="modal">
+                            <i class="fa fa-dollar"></i>
+                            Pagar ahora
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-video-camera"></i>
                     </div>
                 </div>
             </div>
-        @endif
+        </div>
+    @endif
     @if(CRUDBooster::getSetting('oficina_video_youtube'))
         <div class="row">
-            <div class="col-sm-12 col-lg-7">
+            <div class="col-sm-12 col-lg-6">
                 <div class="iframe-container">
                     {!! CRUDBooster::getSetting('oficina_video_youtube') !!}
                 </div>
             </div>
             @endif
-            <div class="col-sm-4 col-lg-5">
+            <div class="col-sm-4 col-lg-5 col-lg-offset-1">
                 <div class="container-fluid">
                     <div class="row">
                         <div id="cardborde" class="small-box bg-blue">
@@ -117,8 +117,8 @@
                     <div class="row">
                         <div class="small-box bg-blue">
                             <div class="inner">
-                                <h3>{{isset($monto_total) ? '$ '.$monto_total : '$ 0'}}</h3>
-                                <h4> Ganancia Actual</h4>
+                                <h3>{{ $vistas_x_cobrar }}</h3>
+                                <h4> Vistas por Cobrar</h4>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-trophy"></i>
@@ -128,8 +128,8 @@
                     <div class="row">
                         <div class="small-box bg-blue">
                             <div class="inner">
-                                <h3>{{isset($user->vistas_actuales) ? $user->vistas_actuales : 0}}</h3>
-                                <h4> N° Vistas Actuales </h4>
+                                <h3>{{$vistas_acumuladas}}</h3>
+                                <h4> Vistas Acumuladas </h4>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-video-camera"></i>
@@ -140,13 +140,13 @@
             </div>
         </div>
         <br>
-        {{--<div class="container-fluid">
-          <div class="row multiple-carousel">
-            @foreach($empresas as $empresa)
-              <img src="{{url($empresa->logo)}}"/>
-            @endforeach
-          </div>
-        </div> --}}
+        <div class="container-fluid">
+            <div class="row multiple-carousel">
+                @foreach($anuncios as $anuncio)
+                    <img src="{{url($anuncio->imagen)}}"/>
+                @endforeach
+            </div>
+        </div>
         <div class="container">
             <form id="solicitar_pago_form" method="post" enctype="multipart/form-data"
                   action={{CRUDBooster::adminpath('ganancias/add-save')}}>
@@ -155,7 +155,7 @@
                 <input type="hidden" name="cms_users_id" value="{{CRUDBooster::myid()}}">
                 <input type="hidden" name="afiliados" value="{{$user->afiliaciones_actuales }}">
                 <input type="hidden" name="nietos" value="{{$user->nietos_actuales }}">
-                <input type="hidden" name="vistas" value="{{$vistas_x_cobrar }}">
+                <input type="hidden" name="vistas" value="{{$vistas_cobrables }}">
                 <input type="hidden" name="monto" value="{{$capacidad_de_retiro }}">
                 <input type="hidden" name="estados_id" value="1">
             </form>
@@ -188,7 +188,8 @@
                                     {{--
                                                                         {!! CRUDBooster::getSetting('boton_paypal') !!}
                                     --}}
-                                    <a title="Pay" class="btn btn-warning btn-md payment_btn pay" data-amount="{{$annual_membership_amount}}">COMPRAR</a>
+                                    <a title="Pay" class="btn btn-warning btn-md payment_btn pay"
+                                       data-amount="{{$annual_membership_amount}}">COMPRAR</a>
                                     <br><br>
                                 </div>
                             </div>

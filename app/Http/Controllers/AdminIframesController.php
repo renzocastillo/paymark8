@@ -35,16 +35,48 @@ class AdminIframesController extends \crocodicstudio\crudbooster\controllers\CBC
 
         # START COLUMNS DO NOT REMOVE THIS LINE
         $this->col = [];
-        $this->col[] = ["label" => "Titulo", "name" => "title"];
-        $this->col[] = ["label" => "Código del Iframe", "name" => "html"];
+        $this->col[] = [
+            "label" => "Titulo",
+            "name" => "title"
+        ];
+        $this->col[] = [
+            "label" => "Código del Iframe",
+            "name" => "html"
+        ];
         # END COLUMNS DO NOT REMOVE THIS LINE
 
         # START FORM DO NOT REMOVE THIS LINE
         $this->form = [];
-        $this->form[] = ['label' => 'Titulo', 'name' => 'title', 'type' => 'text', 'width' => 'col-sm-10'];
-        $this->form[] = ['label' => 'Empresa', 'name' => 'enterprise_id', 'type' => 'select', 'datatable' => 'empresas,nombre', 'validation' => 'required', 'width' => 'col-sm-10'];
-        $this->form[] = ['label' => 'Código del Iframe', 'name' => 'html', 'type' => 'text', 'validation' => 'required', 'width' => 'col-sm-10', 'placeholder' => 'Entra al video de Youtube, presiona compartir, luego incorporar,luego copiar, y pega aquí'];
-        $this->form[] = ['label' => 'Tipo de Iframe', 'name' => 'tipos_de_iframe_id', 'type' => 'select', 'datatable' => 'tipos_de_iframe,nombre', 'validation' => 'required', 'width' => 'col-sm-10'];
+        $this->form[] = [
+            'label' => 'Titulo',
+            'name' => 'title',
+            'type' => 'text',
+            'width' => 'col-sm-10'
+        ];
+        $this->form[] = [
+            'label' => 'Empresa',
+            'name' => 'enterprise_id',
+            'type' => 'select',
+            'datatable' => 'empresas,nombre',
+            'validation' => 'required',
+            'width' => 'col-sm-10'
+        ];
+        $this->form[] = [
+            'label' => 'Código del Iframe',
+            'name' => 'html',
+            'type' => 'text',
+            'validation' => 'required',
+            'width' => 'col-sm-10',
+            'placeholder' => 'Entra al video de Youtube, presiona compartir, luego incorporar,luego copiar, y pega aquí'
+        ];
+        $this->form[] = [
+            'label' => 'Tipo de Iframe',
+            'name' => 'tipos_de_iframe_id',
+            'type' => 'select',
+            'datatable' => 'tipos_de_iframe,nombre',
+            'validation' => 'required',
+            'width' => 'col-sm-10'
+        ];
         # END FORM DO NOT REMOVE THIS LINE
 
         # OLD START FORM
@@ -346,21 +378,21 @@ class AdminIframesController extends \crocodicstudio\crudbooster\controllers\CBC
         $tipos_de_iframe_id = DB::table('tipos_de_iframe')->where('slug', $data['tipo'])->value('id');
         $query = DB::table('iframes')
             ->where('tipos_de_iframe_id', $tipos_de_iframe_id);
-        if($enterpriseId>0){
+        if ($enterpriseId > 0) {
             $query->where('enterprise_id', $enterpriseId);
         }
         $iframes = $query->orderby('id', 'desc')->Paginate(100);
 
-        foreach ($iframes as &$iframe){
-	        $iframe->ogp = ProductOPGService::getProductInformation($iframe->html);
+        foreach ($iframes as &$iframe) {
+            $iframe->ogp = ProductOPGService::getProductInformation($iframe->html);
         }
-	    $data['iframes'] = $iframes;
+        $data['iframes'] = $iframes;
         $enterprises = DB::table('empresas')->orderBy('nombre')->get();
         View::share('enterprises', $enterprises);
         View::share('tipo', $data['tipo']);
         //Create a view. Please use `cbView` method instead of view method from laravel.
 
-	    $this->cbView('modules.iframes', $data);
+        $this->cbView('modules.iframes', $data);
         //}
     }
     //By the way, you can still create your own method in here... :)

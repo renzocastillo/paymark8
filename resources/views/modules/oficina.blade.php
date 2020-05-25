@@ -1,6 +1,6 @@
 @extends('crudbooster::admin_template')
 @section('content')
-@if($index_statistic)
+    @if($index_statistic)
         <div id='box-statistic' class='row'>
             @foreach($index_statistic as $stat)
                 <div class="{{ ($stat['width'])?:'col-sm-3' }}">
@@ -16,6 +16,6 @@
                 </div>
             @endforeach
         </div>
-@endif
-@include('crudbooster::statistic_builder.index',['id_cms_statistics'=>1])
+    @endif
+    @include('crudbooster::statistic_builder.index',['id_cms_statistics'=>1])
 @endsection
