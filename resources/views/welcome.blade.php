@@ -78,13 +78,14 @@
     </div>
     <!-- Sección logos empresas -->
     <div class="container-fluid">
-            <div class="row multiple-carousel">
+        <h2 class="text-center">{{CRUDBooster::getSetting("cabecera_carrusel")}}</h2>
+        <div class="row multiple-carousel">
             @foreach($empresas as $empresa)
                 @if($empresa->logo)
                     <img src="{{url($empresa->logo)}}"/>
                 @endif
             @endforeach
-            </div>
+        </div>
     </div>
     <div class="container-fluid anuncios">
         <h2 class="text-center">{{CRUDBooster::getSetting("cabecera_anuncios")}}</h2>
@@ -107,7 +108,18 @@
     <!-- Sección Acerca de la empresa -->
     <section id="featured">
         <div class="container">
-            @for ($i = 1; $i < 5; $i++)
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="titulo show-on-scroll text-center">
+                        <span>{{CRUDBooster::getSetting("section_1_header")}}</span></div>
+                    {!!CRUDBooster::getSetting("section_1_content")!!}
+                </div>
+                <div class="col-sm-12 col-lg-6 col-lg-offset-3">
+                    <img src="{{CRUDBooster::getSetting("section_1_image")}}" class="inline-photo">
+                    <div class="overlay show-on-scroll"></div>
+                </div>
+            </div>
+            @for ($i = 2; $i < 5; $i++)
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
                         <div class="titulo show-on-scroll text-center">
