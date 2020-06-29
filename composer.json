@@ -14,18 +14,22 @@
     "require": {
         "php": ">=7.0.0",
         "crocodicstudio/crudbooster": "dev-custom-5.4",
+        "doctrine/dbal": "^2.10",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "6.*",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "orangehill/iseed": "^2.6",
-        "shweshi/opengraph": "^1.0",
-        "guzzlehttp/guzzle": "6.*"
+        "reliese/laravel": "^0.0.16",
+        "shweshi/opengraph": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
+        "laracasts/generators": "^1.1",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~6.0",
+        "xethron/migrations-generator": "^2.0"
     },
     "autoload": {
         "classmap": [

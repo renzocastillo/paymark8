@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Session;
 use Carbon\Carbon;
 use App\Http\Controllers\CompensacionesController;
+use App\Models\CourseCategory;
 
 class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\CBController
 {
@@ -375,7 +376,7 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
             'vistas_cobrables'=>$vistas_cobrables,
             'vistas_x_cobrar'=>$vistas_x_cobrar,
             'vistas_acumuladas' => $vistas_acumuladas,
-            'empresas'=>DB::table('empresas')->get(),
+            'course_categories'=>CourseCategory::all(),
             'annual_membership_amount'=>CRUDBooster::getSetting('annual_membership_amount'),
             'annual_membership_amount_format'=>number_format(CRUDBooster::getSetting('annual_membership_amount'), 2),
             'monthly_membership_amount_format'=>number_format(CRUDBooster::getSetting('monthly_membership_amount', 2)),

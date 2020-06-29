@@ -80,9 +80,9 @@
     <div class="container-fluid">
         <h2 class="text-center">{{CRUDBooster::getSetting("cabecera_carrusel")}}</h2>
         <div class="row multiple-carousel">
-            @foreach($empresas as $empresa)
-                @if($empresa->logo)
-                    <img src="{{url($empresa->logo)}}"/>
+            @foreach($categories as $category)
+                @if($category->logo)
+                    <img src="{{url($category->logo)}}"/>
                 @endif
             @endforeach
         </div>

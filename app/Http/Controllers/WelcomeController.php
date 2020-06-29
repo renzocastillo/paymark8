@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
 use Session;
+use App\Models\CourseCategory;
 
 //use Request;
 use Illuminate\Http\Request;
@@ -17,11 +18,11 @@ class WelcomeController extends Controller
         if (isset($user)) {
             $patrocinador = DB::table('cms_users')->where('slug', $user)->first();
         }
-        $empresas = DB::table('empresas')->get();
+        $categories = CourseCategory::all();
         $anuncios = DB::table('anuncios')->where('publico',1)->get();
         $video = DB::table('videos')->latest()->first();
         $data = array(
-            "empresas" => $empresas,
+            "categories" => $categories,
             "anuncios" => $anuncios,
             "video" => $video,
             "patrocinador" => $patrocinador

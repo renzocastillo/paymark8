@@ -202,11 +202,11 @@ class CmsModulsTableSeeder extends Seeder
             13 => 
             array (
                 'id' => 14,
-                'name' => 'Iframes',
+                'name' => 'Tutoriales',
                 'icon' => 'fa fa-flag-o',
-                'path' => 'iframes',
+                'path' => 'tutoriales',
                 'table_name' => 'iframes',
-                'controller' => 'AdminIframesController',
+                'controller' => 'AdminTutorialesController',
                 'is_protected' => 0,
                 'is_active' => 1,
                 'created_at' => '2019-09-11 12:10:07',
@@ -272,11 +272,11 @@ class CmsModulsTableSeeder extends Seeder
             18 => 
             array (
                 'id' => 19,
-                'name' => 'Empresas',
+                'name' => 'Categorias de Curso',
                 'icon' => 'fa fa-flag-o',
-                'path' => 'empresas',
-                'table_name' => 'empresas',
-                'controller' => 'AdminEmpresasController',
+                'path' => 'categorias',
+                'table_name' => 'course_categories',
+                'controller' => 'AdminCourseCategoriesController',
                 'is_protected' => 0,
                 'is_active' => 1,
                 'created_at' => '2019-09-11 13:10:07',
@@ -328,11 +328,11 @@ class CmsModulsTableSeeder extends Seeder
             22 => 
             array (
                 'id' => 23,
-                'name' => 'products',
-                'icon' => 'fa fa-gift',
-                'path' => 'products',
-                'table_name' => 'products',
-                'controller' => 'AdminProductsController',
+                'name' => 'Cursos',
+                'icon' => 'fa fa-flag-o',
+                'path' => 'cursos',
+                'table_name' => 'courses',
+                'controller' => 'AdminCoursesController',
                 'is_protected' => 0,
                 'is_active' => 0,
                 'created_at' => '2019-12-19 11:04:46',
