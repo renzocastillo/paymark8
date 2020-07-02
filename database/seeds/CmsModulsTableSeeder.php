@@ -353,6 +353,62 @@ class CmsModulsTableSeeder extends Seeder
                 'updated_at' => NULL,
                 'deleted_at' => NULL,
             ),
+            24 => 
+            array (
+                'id' => 25,
+                'name' => 'Galería del Curso',
+                'icon' => 'fa fa-flag-o',
+                'path' => 'course_galleries',
+                'table_name' => 'course_galleries',
+                'controller' => 'AdminCourseGalleriesController',
+                'is_protected' => 0,
+                'is_active' => 0,
+                'created_at' => '2020-07-02 09:53:41',
+                'updated_at' => NULL,
+                'deleted_at' => NULL,
+            ),
+            25 => 
+            array (
+                'id' => 26,
+                'name' => 'Archivos del Módulo',
+                'icon' => 'fa fa-glass',
+                'path' => 'module_files',
+                'table_name' => 'module_files',
+                'controller' => 'AdminModuleFilesController',
+                'is_protected' => 0,
+                'is_active' => 0,
+                'created_at' => '2020-07-02 09:55:10',
+                'updated_at' => NULL,
+                'deleted_at' => NULL,
+            ),
+            26 => 
+            array (
+                'id' => 27,
+                'name' => 'Videos del Módulo',
+                'icon' => 'fa fa-glass',
+                'path' => 'module_videos',
+                'table_name' => 'module_videos',
+                'controller' => 'AdminModuleVideosController',
+                'is_protected' => 0,
+                'is_active' => 0,
+                'created_at' => '2020-07-02 09:55:40',
+                'updated_at' => NULL,
+                'deleted_at' => NULL,
+            ),
+            27 => 
+            array (
+                'id' => 28,
+                'name' => 'Modulos del Curso',
+                'icon' => 'fa fa-glass',
+                'path' => 'modules',
+                'table_name' => 'modules',
+                'controller' => 'AdminModulesController',
+                'is_protected' => 0,
+                'is_active' => 0,
+                'created_at' => '2020-07-02 09:56:40',
+                'updated_at' => NULL,
+                'deleted_at' => NULL,
+            ),
         ));
         
         

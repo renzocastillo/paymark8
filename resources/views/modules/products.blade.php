@@ -3,11 +3,11 @@
     <div class="container-fluid">
         <div class="row buttons-carousel">
             <a href="{{CRUDBooster::mainpath("")}}"
-               class="btn btn-primary {{  Request::get('enterpriseId') ? "" : "active" }}">Todos</a>
-            @foreach($enterprises as $enterprise)
-                {{--<img src="{{url($enterprise->logo)}}"/>--}}
-                <a href="{{CRUDBooster::mainpath("?&enterpriseId=".$enterprise->id)}}"
-                   class="btn btn-primary {{Request::get('enterpriseId')==$enterprise->id ? "active" : "" }}">{{$enterprise->nombre}}</a>
+               class="btn btn-primary {{  Request::get('category_id') ? "" : "active" }}">Todos</a>
+            @foreach($categories as $category)
+                {{--<img src="{{url($category->logo)}}"/>--}}
+                <a href="{{CRUDBooster::mainpath("?&category_id=".$category->id)}}"
+                   class="btn btn-primary {{Request::get('category_id')==$category->id ? "active" : "" }}">{{$category->nombre}}</a>
             @endforeach
         </div>
     </div>

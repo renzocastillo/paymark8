@@ -39,14 +39,13 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             "name" => "title"
         ];
         $this->col[] = [
-            "label" => "Tipo",
-            "name" => "product_type_id",
-            "join" => "product_types,name"
+            "label" => "Categoría",
+            "name" => "category_id",
+            "join" => "course_categories,nombre"
         ];
         $this->col[] = [
-            "label" => "Empresa",
-            "name" => "enterprise_id",
-            "join" => "course_categories,nombre"
+            "label" => "Author",
+            "name" => "author"
         ];
         # END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -56,39 +55,53 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             'label' => 'Titulo',
             'name' => 'title',
             'type' => 'text',
-            'validation' => 'string|min:3|max:70',
+            'validation' => 'required|string|min:3|max:70',
             'width' => 'col-sm-10',
-            'placeholder' => 'Puedes omitir llenar un título y se cargará el título por defecto del enlace'
+            'placeholder' => ''
         ];
         $this->form[] = [
-            'label' => 'Valor',
-            'name' => 'value',
+            'label' => 'Descripción',
+            'name' => 'description',
             'type' => 'textarea',
             'validation' => 'required|string|min:5|max:5000',
             'width' => 'col-sm-10'
         ];
+
         $this->form[] = [
-            'label' => 'Imagen',
-            'name' => 'image',
-            'type' => 'upload',
-            'validation' => '',
-            'width' => 'col-sm-10'
-        ];
-        $this->form[] = [
-            'label' => 'Tipo',
-            'name' => 'product_type_id',
-            'type' => 'select2',
-            'validation' => 'required|integer|min:0',
-            'width' => 'col-sm-10',
-            'datatable' => 'product_types,name'
-        ];
-        $this->form[] = [
-            'label' => 'Empresa',
-            'name' => 'enterprise_id',
+            'label' => 'Categoría',
+            'name' => 'course_category_id',
             'type' => 'select2',
             'validation' => 'required|integer|min:0',
             'width' => 'col-sm-10',
             'datatable' => 'course_categories,nombre'
+        ];
+
+        $this->form[] = [
+            'label' => 'Autor',
+            'name' => 'author',
+            'type' => 'text',
+            'validation' => 'required|string|min:3|max:70',
+            'width' => 'col-sm-10',
+            'placeholder' => ''
+        ];
+
+        $this->form[] = [
+            'label' => 'Precio',
+            'name' => 'price',
+            'type' => 'number',
+            'decimal'=>2,
+            'validation' => 'required|min:3|max:70',
+            'width' => 'col-sm-10',
+            'placeholder' => ''
+        ];
+
+        $this->form[] = [
+            'label' => 'Duración',
+            'name' => 'duration',
+            'type' => 'number',
+            'validation' => 'required|integer|min:3|max:70',
+            'width' => 'col-sm-10',
+            'placeholder' => 'Número de horas que durará el curso'
         ];
         # END FORM DO NOT REMOVE THIS LINE
 
@@ -376,11 +389,8 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
 
     public function getIndex()
     {
-        //if(CRUDBooster::myPrivilegeId()==3){
-        //First, Add an auth
 
-
-        $enterpriseId = Request::get('enterpriseId', 0);
+        $category_id = Request::get('category_id', 0);
         //Create your own query
         $data = [];
         $data['tipo'] = Request::get('tipo');
@@ -391,20 +401,14 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         }
         $query = DB::table('courses');
 
-        if ($enterpriseId > 0) {
-            $query->where('enterprise_id', $enterpriseId);
+        if ($category_id > 0) {
+            $query->where('course_category_id', $category_id);
         }
         $courses = $query->orderby('id', 'desc')->Paginate(100);
 
-        foreach ($courses as &$course) {
-            if ($course->product_type_id == 1) {
-                $course->ogp = ProductOPGService::getProductInformation($course->value);
-            }
-        }
         $data['products'] = $courses;
-        $data['enterprises'] = DB::table('course_categories')->orderBy('nombre')->get();
-        $data['current_empresa'] = DB::table('course_categories')->where('id', $enterpriseId)->first();
-        //Create a view. Please use `cbView` method instead of view method from laravel.
+        $data['categories'] = DB::table('course_categories')->orderBy('nombre')->get();
+        $data['current_empresa'] = DB::table('course_categories')->where('id', $category_id)->first();
 
         $this->cbView('modules.products', $data);
 
