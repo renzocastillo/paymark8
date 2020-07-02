@@ -78,4 +78,13 @@ $(document).ready(function () {
             }
         ]
     });
+    $('.detail-carousel').slick({
+        dots: false,
+        infinite: true,
+        speed: 400,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
 });
