@@ -416,5 +416,12 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
 
     //By the way, you can still create your own method in here... :)
 
-
+    public function getDetail ($id){
+        $data=
+        [
+            'enterprises'=> DB::table('empresas')->orderBy('nombre')->get(),
+            'product'=>DB::table('products')->where('id',$id)->first(),
+        ];
+        $this->cbView('modules.cursos.detail', $data);
+    }
 }

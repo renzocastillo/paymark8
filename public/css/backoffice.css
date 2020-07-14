@@ -1,3 +1,5 @@
+
+
 .products.list-unstyled.row li{
 
 }
@@ -6,8 +8,95 @@
     text-align:center;
 }
 .products .panel{
-    height: 40vh;
+   
 }
+/*nuevas clases para el card de cursos*/
+.cardspace{
+ padding: 10px;
+}
+
+.titulo{
+    text-align: left;
+}
+
+.precio{
+    text-align: left;
+}
+.price{
+    padding-top: 20px ;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+/*nuevas clases para el detalle de curso*/
+.overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    white-space: initial;
+}
+
+.divpadding{
+    padding-top: 30px;
+}
+
+.padding-panel{
+    padding: 15px 30px 15px 30px;
+}
+
+
+.pleft{
+    padding-left: 0px !important;
+}
+
+.rowpadding{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.padding-bottom{
+    padding-bottom: 20px;
+}
+
+.content-style h4{
+    text-align: justify;
+    line-height: 1.466;
+}
+
+.buttonrigth{
+    float: right;
+}
+
+.equal{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.detail-carousel img{
+    height: 55vh;
+    object-fit: cover;
+    object-position: top;
+}
+
+@media (max-width:768px) {
+    .detail-carousel img{
+        height: 50vw;
+    }
+}
+
+.total-height{
+    height: 100%;
+}
+
+.slim-margin{
+    margin-bottom: 10px;
+}
+/*nuevas clases para la vista de módulos y videos*/
+.overflow-modulos{
+    overflow-y: scroll;
+    height: 350px;
+}
+
+/*otras clases*/
 .products .panel .panel-heading{
     height: 8vh;
 }
@@ -301,3 +390,7 @@
     color: #ffffff;
 }
 
+.vcenter {
+    display: flex;
+    align-items: center;
+}

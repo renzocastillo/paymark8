@@ -2,16 +2,17 @@
  * Skin: Custom
  * ----------
  */
+
+
  .custom-skin p a{
     color:#fff;
   }
   .custom-skin table > tbody > tr > td > a{
-    color:#4070FA;
+    /*color:#4070FA;*/
   }
     .custom-skin h1,h2,h3,h4{
       font-family: Raleway, sans-serif;
       font-weight: 500;
-      letter-spacing: 1px;
     }
     .custom-skin p{
       font-family: Raleway, sans-serif;
@@ -183,6 +184,10 @@
       box-shadow:0 5px 20px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.10);
       border-top:none;border-radius: 6px;
     }
+
+    .custom-skin .box.box-solid.box-primary>.box-header{
+        background-color: #3c6ef3;
+    }
   
     .custom-skin .table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tbody>tr>td.active, .table>tbody>tr>th.active, .table>tfoot>tr.active>td, .table>tfoot>tr.active>th, .table>tfoot>tr>td.active, .table>tfoot>tr>th.active, .table>thead>tr.active>td, .table>thead>tr.active>th, .table>thead>tr>td.active, .table>thead>tr>th.active {
       background-color:#fff;
@@ -256,12 +261,15 @@
     .custom-skin .bg-purple{
       background-color: #9e40e6 !important;
     }
+    .custom-skin .box .padding{
+      padding:15px 5% 15px 5% !important;
+    }
     .custom-skin .box .no-padding{
       padding:15px !important;
     }
     .custom-skin .panel-default>.panel-heading {
       color:  #ffffff;
-      background-color:#000032;
+      background-color:#3c6ef3;
       border-color: #ddd;
       font-size: 1.2em;
     }
