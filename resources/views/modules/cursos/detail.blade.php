@@ -3,11 +3,11 @@
 <div class="container-fluid">
     <div class="row buttons-carousel">
         <a href="{{CRUDBooster::mainpath("")}}"
-           class="btn btn-primary {{  Request::get('enterpriseId') ? "" : "active" }}">Todos</a>
-        @foreach($enterprises as $enterprise)
-            {{--<img src="{{url($enterprise->logo)}}"/>--}}
-            <a href="{{CRUDBooster::mainpath("?&enterpriseId=".$enterprise->id)}}"
-               class="btn btn-primary {{Request::get('enterpriseId')==$enterprise->id ? "active" : "" }}">{{$enterprise->nombre}}</a>
+           class="btn btn-primary {{  Request::get('categoryId') ? "" : "active" }}">Todos</a>
+        @foreach($categories as $category)
+            {{--<img src="{{url($category->logo)}}"/>--}}
+            <a href="{{CRUDBooster::mainpath("?&categoryId=".$category->id)}}"
+               class="btn btn-primary {{Request::get('categoryId')==$category->id ? "active" : "" }}">{{$category->nombre}}</a>
         @endforeach
     </div>
 </div>
@@ -16,14 +16,14 @@
         <div class="box">
             <div class="box-body table-responsive padding">
                 <div class="row padding-bottom">
-                    <h2><i class="fa fa-arrow-left" aria-hidden="true" style="color:#3c6ef3;"></i> {{$product->title}}</h2>
+                    <h2><i class="fa fa-arrow-left" aria-hidden="true" style="color:#3c6ef3;"></i> {{$course->title}}</h2>
                     <p style="text-align: left">Un curso de Ana Santos</p>
                 </div>
                 <div class="row equal ">
                     <div class="col-lg-8 col-sm-12 col-xs-12 pleft" >                        
-                        <div class="detail-carousel">               
-                                <img class="attachment-img img-responsive" src="{{url($product->image)}}"/>
-                                <img class="attachment-img img-responsive" src="{{url($product->image)}}"/>
+                       <div class="detail-carousel">               
+                                <img class="attachment-img img-responsive" src="{{url($course->featured_image)}}"/>
+                                <img class="attachment-img img-responsive" src="{{url($course->featured_image)}}"/>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-12 col-xs-12" >
@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-xs-6 vcenter" >
                                         @if(CRUDBooster::me()->estado || CRUDBooster::myPrivilegeid()!=3)
-                                            <a href="{{$product->value}}" target="_blank"
+                                            <a href="{{$course->value}}" target="_blank"
                                                 class="btn btn-primary text-center">Ver
                                                     el curso</a>
                                         @else

@@ -90,7 +90,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             'name' => 'price',
             'type' => 'number',
             'decimal'=>2,
-            'validation' => 'required|min:3|max:70',
+            'validation' => 'required',
             'width' => 'col-sm-10',
             'placeholder' => ''
         ];
@@ -102,6 +102,15 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             'validation' => 'required|integer|min:3|max:70',
             'width' => 'col-sm-10',
             'placeholder' => 'Número de horas que durará el curso'
+        ];
+
+        $this->form[] = [
+            'label' => 'Imagen del card',
+            'name' => 'featured_image',
+            'type' => 'upload',
+            'validation' => 'required',
+            'width' => 'col-sm-10',
+            'placeholder' => 'Seleccionar imagen'
         ];
         # END FORM DO NOT REMOVE THIS LINE
 
@@ -419,8 +428,8 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
     public function getDetail ($id){
         $data=
         [
-            'enterprises'=> DB::table('empresas')->orderBy('nombre')->get(),
-            'product'=>DB::table('products')->where('id',$id)->first(),
+            'categories'=> DB::table('course_categories')->orderBy('nombre')->get(),
+            'course'=>DB::table('courses')->where('id',$id)->first(),
         ];
         $this->cbView('modules.cursos.detail', $data);
     }

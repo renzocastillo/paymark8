@@ -19,7 +19,7 @@
                         @foreach($products as $product)
                             @component('components.curso',
                             [
-                                'product'=>$product,
+                                'course'=>$product,
                             ])
                             @endcomponent
                         @endforeach
