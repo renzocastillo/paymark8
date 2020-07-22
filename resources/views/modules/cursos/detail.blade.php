@@ -15,20 +15,24 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-body table-responsive padding">
-                <div class="row padding-bottom">
-                    <h2><i class="fa fa-arrow-left" aria-hidden="true" style="color:#3c6ef3;"></i> {{$course->title}}</h2>
-                    <p style="text-align: left">Un curso de Ana Santos</p>
-                </div>
+                <div class="row padding-bottom">  
+                    <p>cursos / <b>{{$course->title}}</b></p>
+                </div>       
                 <div class="row equal ">
-                    <div class="col-lg-8 col-sm-12 col-xs-12 pleft" >                        
-                       <div class="detail-carousel">               
-                                <img class="attachment-img img-responsive" src="{{url($course->featured_image)}}"/>
-                                <img class="attachment-img img-responsive" src="{{url($course->featured_image)}}"/>
+                    <div class="col-lg-8 col-sm-12 col-xs-12 pleft" >
+                       <div>
+                            <h2 style="margin-top:0px;">{{$course->title}}</h2>
+                            <p style="text-align: left">Un curso de {{$course->author}}</p>
+                       </div>                        
+                       <div class="detail-carousel">
+                            @foreach($galleryimages as $galleryimage)               
+                                <img class="attachment-img img-responsive" src="{{url($galleryimage->url)}}"/>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-12 col-xs-12" >
-                        <div class="panel panel-default total-height">
-                            <div class="panel-body padding-panel">
+                        <div class="panel panel-default total-height padding-panel">
+                            <div class="panel-body ">
                                 <div class="row price">
                                     <div class="col-lg-6 col-sm-6 col-xs-6 vcenter" >
                                         <h3>$20</h3>
@@ -44,21 +48,30 @@
                                         @endif
                                     </div>
                                 </div>
-                                <h4><i class="fa fa-volume-up" aria-hidden="true"></i> Audio en español</h4>
-                                <h4><i class="fa fa-sign-in" aria-hidden="true"></i> Acceso para siempre</h4>
-                                <h4><i class="fa fa-clock-o" aria-hidden="true"></i> A tu ritmo</h4>
-                                <h4><i class="fa fa-mobile" aria-hidden="true"></i> Adaptado a móviles</h4>
-                                <div class="divpadding"><a href="{{CRUDBooster::adminpath('resumen')}}"
-                                                class="btn btn-primary text-center overflow">Se Linker y obtén acceso a todos los cursos a un solo precio</a>
-                                </div>
+                                <ul class="features">
+                                        <li class="list-item">
+                                            <i class="fa fa-volume-up"></i> Audio en español                
+                                        </li>
+                                        <li class="list-item">
+                                            <i class="fa fa-sign-in"></i> Acceso para siempre                                        
+                                        </li>
+                                        <li class="list-item">
+                                            <i class="fa fa-clock-o"></i>A tu ritmo
+                                        </li>
+                                        <li class="list-item">
+                                            <i class="fa fa-mobile"></i> Adaptado a móviles                                        
+                                        </li>
+                                </ul>
+                            </div>
+                            <div class="divpadding"><a href="{{CRUDBooster::adminpath('resumen')}}"
+                                class="btn btn-primary text-center overflow">Se Linker y obtén acceso a todos los cursos a un solo precio</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row rowpadding content-style">
-                    <h3>Acerca del Curso</h3>
-                    <br>
-                    <h4>Una vez que hayas realizado tus fotografías, pasarás a editarlas. Mina te hablará de las herramientas que ella suele utilizar para retocar sus imágenes con el móvil. Una vez estén listas, aprenderás a organizar tus redes sociales, planificando cuándo vas a publicar cada fotografía y programando los posts.Por último, Mina te explicará cómo sacar el máximo partido a Instagram Stories, la herramienta que permite compartir vídeos cortos y efímeros en Instagram.</h4>
+                    <h3>A cerca del curso</h3>
+                    <p>Una vez que hayas realizado tus fotografías, pasarás a editarlas. Mina te hablará de las herramientas que ella suele utilizar para retocar sus imágenes con el móvil. Una vez estén listas, aprenderás a organizar tus redes sociales, planificando cuándo vas a publicar cada fotografía y programando los posts.Por último, Mina te explicará cómo sacar el máximo partido a Instagram Stories, la herramienta que permite compartir vídeos cortos y efímeros en Instagram.</p>
                 </div>
                 <div class="panel panel-default table-responsive">
                     <!-- Default panel contents -->
@@ -69,26 +82,13 @@
                     <!-- Table -->
                     <table class="table table-hover">
                         <tbody>
+                            @foreach($course->modules as $key=>$module)
                             <tr>
-                              <td>1</td>
-                              <td>Presentación</td>
-                              <td class="buttonrigth"><a href="/admin/module/1" class="btn btn-primary text-center">Ver Contenido</a></td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Creación de contenido</td>
-                              <td class="buttonrigth"><a href="{{CRUDBooster::adminpath('resumen')}}" class="btn btn-primary text-center">Ver Contenido</a></td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Maquetación de Stories</td>
-                              <td class="buttonrigth"><a href="{{CRUDBooster::adminpath('resumen')}}" class="btn btn-primary text-center">Ver Contenido</a></td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td>Edición del contenido</td>
-                              <td class="buttonrigth"><a href="{{CRUDBooster::adminpath('resumen')}}" class="btn btn-primary text-center">Ver Contenido</a></td>
-                            </tr>
+                              <td>{{++$key}}</td>
+                              <td>{{$module->title}}</td>
+                              <td class="buttonrigth"><a href="{{ CRUDBooster::mainpath('content/'.$course->id.'?module_id='.$module->id) }}" class="btn btn-primary text-center">Ver Contenido</a></td>
+                            </tr> 
+                            @endforeach
                         </tbody>
                     </table>
                   </div>

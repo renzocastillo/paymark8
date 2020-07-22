@@ -13,9 +13,6 @@
 Route::get('/terminos-y-condiciones',function(){
    return view('terminos');
 });
-Route::get('/admin/module/1',function(){
-   return view('modules.cursos.content');
-});
 Route::get('/', 'WelcomeController@getview')->name('welcome');
 Route::get('/check_email', 'AdminCmsUsersController@checkEmail')->name('check_email');
 Route::post('/registrarme', 'AdminCmsUsersController@registerUser')->name('register');
@@ -32,3 +29,4 @@ Route::post('/admin/contacto','AdminContactoController@create');
 Route::post('visanet/checkout', 'VisanetController@checkout');
 Route::get('visanet/timeout', 'VisanetController@timeout');
 Route::get('visanet/transaction/{transactionId}/print', 'VisanetController@print');
+Route::get('/admin/courses/content/{$id}','AdminCoursesController@getContent');

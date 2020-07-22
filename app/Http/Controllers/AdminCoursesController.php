@@ -5,6 +5,7 @@ use CRUDBooster;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Request;
+use App\Models\Course;
 use Session;
 
 class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBController
@@ -111,6 +112,27 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             'validation' => 'required',
             'width' => 'col-sm-10',
             'placeholder' => 'Seleccionar imagen'
+        ];
+        
+        $columns[] = ['label'=>'Url','name'=>'url','type'=>'upload','required'=>true];
+        $this->form[] = [
+            'label'=>'Galería de imágenes',
+            'name'=>'course_galleries',
+            'type'=>'child',
+            'columns'=>$columns,
+            'table'=>'course_galleries',
+            'foreign_key'=>'course_id'
+        ];
+
+        $columns2[] = ['label'=>'Título','name'=>'title','type'=>'text','required'=>true];
+        $columns2[] = ['label'=>'Descripción','name'=>'description','type'=>'textarea','required'=>true];
+        $this->form[] = [
+            'label'=>'Módulos',
+            'name'=>'modules',
+            'type'=>'child',
+            'columns'=>$columns2,
+            'table'=>'modules',
+            'foreign_key'=>'course_id'
         ];
         # END FORM DO NOT REMOVE THIS LINE
 
@@ -238,8 +260,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         | $this->post_index_html = "<p>test</p>";
         |
         */
-        $this->post_index_html = null;
-
+        $this->post_index_html = view('modules.cursos.action_buttons')->render(); 
 
         /*
         | ----------------------------------------------------------------------
@@ -429,8 +450,19 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         $data=
         [
             'categories'=> DB::table('course_categories')->orderBy('nombre')->get(),
-            'course'=>DB::table('courses')->where('id',$id)->first(),
-        ];
+            'course'=>Course::find($id), 
+            'galleryimages'=>DB::table('course_galleries')->where('course_id',$id)->get(),
+        ];        
         $this->cbView('modules.cursos.detail', $data);
     }
+
+    public function getContent ($id){
+        $data=
+        [
+            'open_module'=>Request::input('module_id'),
+            'course'=>Course::find($id), 
+        ];
+        $this->cbView('modules.cursos.content',$data);
+    }
 }
+

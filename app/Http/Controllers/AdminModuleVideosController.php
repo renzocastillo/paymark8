@@ -31,15 +31,14 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Title","name"=>"title"];
-			$this->col[] = ["label"=>"Url","name"=>"url"];
-			$this->col[] = ["label"=>"Modules Id","name"=>"modules_id","join"=>"modules,title"];
+			$this->col[] = ["label"=>"Url","name"=>"url"];	
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
-			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','validation'=>'required|url','width'=>'col-sm-10','placeholder'=>'Introduce una dirección web (URL) válida'];
-			$this->form[] = ['label'=>'Modules Id','name'=>'modules_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'modules,title'];
+			$this->form[] = ['label'=>'Título','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
+			$this->form[] = ['label'=>'Archivo de video','name'=>'url','type'=>'upload','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Módulo','name'=>'modules_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'modules,title'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
