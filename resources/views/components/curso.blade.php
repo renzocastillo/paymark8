@@ -1,7 +1,7 @@
 <li class="col-lg-3 col-sm-12 col-xs-12">
     <div class="panel panel-default">
         <div class="panel-body">
-            <img class="attachment-img img-responsive" src="{{ url($course->featured_image) }}" />
+            <img class="attachment-img img-responsive" src="{{ $course->featured_image ? url($course->featured_image) : '' }}" />
             <div class="cardspace">
                 <a href="{{ CRUDBooster::mainpath("detail/$course->id") }}">
                     <h4 class="text-primary titulo">
@@ -18,8 +18,8 @@
                             <a href="{{ $course->value }}" target="_blank" class="btn btn-primary text-center">Ver
                                 el curso</a>
                         @else
-                            <a href="{{ CRUDBooster::adminpath('resumen') }}"
-                                class="btn btn-primary text-center">COMPRAR</a>
+                            <a href="#" data-amount="{{$course->price}}" data-type="2" data-name="{{$course->title}}" data-id="{{$course->id}}"
+                                class="btn btn-primary text-center pay">COMPRAR</a>
                         @endif
                     </div>
                 </div>

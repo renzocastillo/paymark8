@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 
 
 use App\Services\Visanet\VisaNetConnector;
+use App\Http\Controllers\SubscriptionController;
+use App\Models\CmsUser;
+use App\Models\Course;
 use crocodicstudio\crudbooster\helpers\CRUDBooster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +18,7 @@ class VisanetController extends Controller
 {
 
     private $connector;
+    private $subscription;
 
     /**
      * VisanetController constructor.
@@ -24,13 +28,14 @@ class VisanetController extends Controller
     public function __construct()
     {
         $this->connector = new VisaNetConnector();
+        $this->subscription = new SubscriptionController();
     }
 
 
     public function getToken(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'amount' => 'required',
+            'item' => 'required',
             'userId' => 'required',
         ]);
         if ($validator->fails()) {
@@ -41,7 +46,7 @@ class VisanetController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $this->connector->getSession($request->get('amount'), $request->getClientIp(), $request->get('userId'))
+            'data' => $this->connector->getSession($request->getClientIp(), $request->get('userId'),$request->get('item'))
         ]);
     }
 
@@ -58,11 +63,18 @@ class VisanetController extends Controller
         $input = $request->all();
         $token = $input['transactionToken'];
         $channel = $input['channel'];
+        $item= $input['item'];
         $userId = CRUDBooster::myId();
         $data = $this->connector->getLastPurchaseByUserId($userId);
         $purchase = $this->connector->authorize($channel, $data['amount'], $data['purchase_id'], $token);
         if ($purchase->status == 'accepted') {
-            $this->connector->activateUser($userId);
+            if($item['type'] == 1){
+                $this->subscription->activateUser($userId);
+            }else{
+                $course= Course::find($item['id']);
+                $user  = CmsUser::find($userId);
+                $course->cms_users()->attach($user);       
+            }
         }
         Session::put('purchase', $purchase);
         return redirect('admin/resumen');

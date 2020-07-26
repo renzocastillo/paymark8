@@ -31,7 +31,7 @@ class VisaNetConnector
         $this->password = CRUDBooster::getSetting('password');
     }
 
-    public function getSession($amount, $clientIp, $userId)
+    public function getSession($clientIp, $userId,$item)
     {
         $lastPurchase = $this->getLastPurchaseByUserId($userId);
         $url = CRUDBooster::getSetting('api_url') . $this->merchantId;
@@ -41,7 +41,7 @@ class VisaNetConnector
             'Authorization' => $token
         ];
         $body = [
-            'amount' => number_format($amount, 2, '.', ''),
+            'amount' => number_format($item['amount'], 2, '.', ''),
             'antifraud' => [
                 'clientIp' => $clientIp,
                 'merchantDefineData' => [
@@ -54,7 +54,7 @@ class VisaNetConnector
                 'userToken' => md5(VisaNetConnector::$USER_UUID_SEED . $userId)
             ],
             'channel' => VisaNetConnector::$CHANNEL,
-            'recurrenceMaxAmount' => number_format($amount, 2, '.', '')
+            'recurrenceMaxAmount' => number_format($item['amount'], 2, '.', '')
         ];
         $response = json_decode(ClientHttp::makePost($url, $headers, $body));
         if ($lastPurchase != null) {
@@ -63,7 +63,7 @@ class VisaNetConnector
             $id = DB::table('purchases')->insertGetId(
                 [
                     'user_id' => $userId,
-                    'amount' => $amount,
+                    'amount' => $item['amount'],
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now(),
                 ]
@@ -71,20 +71,24 @@ class VisaNetConnector
         }
 
         $invoice = intval(CRUDBooster::getSetting('invoice')) + $id;
-        $startDate = Carbon::now()->toDateString();
-        $endDate = Carbon::now()->addYear(1)->toDateString();
+        if($item['type']=="1"){
+            $item['details']=
+            [
+                'startDate' => Carbon::now()->toDateString(),
+                'endDate' => Carbon::now()->addYear(1)->toDateString(),
+            ];
+        }
 
         return [
             'session' => $response->sessionKey,
             'channel' => VisaNetConnector::$CHANNEL,
             'merchant_id' => $this->merchantId,
-            'amount' => number_format($amount, 2, '.', ''),
+            'amount' => number_format($item['amount'], 2, '.', ''),
             'trx_id' => $invoice,
             'script_url' => CRUDBooster::getSetting('script_url'),
             'logo' => asset(CRUDBooster::getSetting('logo_checkout')),
             'user' => md5(VisaNetConnector::$USER_UUID_SEED . $userId),
-            'start_date' => $startDate,
-            'end_date' => $endDate,
+            'item'=> $item,
             'url_timeout' => url('/visanet/timeout')
         ];
     }
@@ -205,54 +209,6 @@ class VisaNetConnector
             ->select('purchases.*', 'cms_users.name')
             ->get()
             ->first();
-    }
-
-    public function activateUser($id)
-    {
-        $user = DB::table('cms_users')
-            ->where('id', $id)
-            ->get()
-            ->first();
-        //evaluamos si el usuario está inactivo para según eso activarlo o no
-        if (!$user->estado) {
-            //activamos al usuario en la BD cambiándole su estado
-            DB::table('cms_users')->where('id', $id)->update([
-                'estado' => 1,
-                'activated_at' => now()
-            ]);
-            //aumentamos la cantidad de afiliados actuales del patrocinador en 1
-            if ($user->cms_users_id) {
-                DB::table('cms_users')->where('id', $user->cms_users_id)->increment('afiliaciones_actuales', 1);
-                $abuelo = $this->getAbuelo($user->cms_users_id);
-                if (!empty($abuelo)) {
-                    //if($abuelo->premium){
-                    DB::table('cms_users')->where('id', $abuelo->id)->increment('nietos_actuales', 1);
-                    //}
-                }
-            }
-            //mandamos un email a la cuenta de correo de este usuario
-            $link = url('/' . $user->slug);
-            $data = [
-                'nombre' => $user->name,
-                'link' => $link
-            ];
-            CRUDBooster::sendEmail([
-                'to' => $user->email,
-                'data' => $data,
-                'template' => 'activacion_exitosa'
-            ]);
-        }
-    }
-
-    public function getAbuelo($idpadre)
-    {
-        $padre = DB::table('cms_users')->where('id', $idpadre)->first();
-        if ($padre->cms_users_id) {
-            $abuelo = DB::table('cms_users')->where('id', $padre->cms_users_id)->first();
-            return $abuelo;
-        } else {
-            return null;
-        }
     }
 
 }

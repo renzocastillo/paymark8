@@ -1,5 +1,10 @@
 @extends('crudbooster::admin_template')
 @section('content')
+    @component('components.checkout',
+    [
+        'itemType'=>'2'
+    ]) 
+    @endcomponent
     <div class="container-fluid">
         <div class="row buttons-carousel">
             <a href="{{CRUDBooster::mainpath("")}}"

@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Services\ProductOPGService;
-use CRUDBooster;
+use crocodicstudio\crudbooster\helpers\CRUDBooster;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Request;
@@ -216,7 +216,9 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         | $this->script_js = "function() { ... }";
         |
         */
-        $this->script_js = null;
+        $this->script_js = "
+                window.myId = '" . CRUDBooster::myId() . "'
+                ";
 
 
         /*
@@ -249,8 +251,12 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         | $this->load_js[] = asset("myfile.js");
         |
         */
-        $this->load_js[] = asset("js/slick.min.js");
-        $this->load_js[] = asset("js/backoffice.js");
+        $this->load_js = 
+        [
+            asset("js/slick.min.js"),
+            asset("js/backoffice.js"),
+            asset("js/checkout.js")
+        ];
 
         /*
         | ----------------------------------------------------------------------

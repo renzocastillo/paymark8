@@ -1,28 +1,10 @@
 @extends('crudbooster::admin_template')
 @section('content')
-    <div class="loader-container" style="display: none">
-        <div class="loader"></div>
-        <h3>Espera un momento por favor. No recargues la página</h3>
-    </div>
-    @if (Session::has('purchase'))
-        <script>
-            window.termsAndConditions = '{{url("terminos-y-condiciones")}}';
-            window.myPurchase = @json(Session::pull('purchase'))
-        </script>
-
-    @endif
-    @if(Session::has('timeout'))
-        {{Session::pull('timeout')}}
-        <div class="alert alert-danger">
-            <strong>Se agoto el tiempo de espera para tu compra</strong> Intenta nuevamente
-        </div>
-    @endif
-    @if(app('request')->input('paypal_complete'))
-        <div class="alert alert-warning">
-            <strong>Pago concretado!</strong> Dentro de las próximas horas te llegará un correo confirmando tu
-            activación.
-        </div>
-    @endif
+    @component('components.checkout',
+    [
+        'itemType'=>'1'
+    ]) 
+    @endcomponent
     @if(CRUDBooster::me()->estado)
         <div class="row">
             <div class="col-sm-4 col-lg-6">
@@ -189,7 +171,7 @@
                                                                         {!! CRUDBooster::getSetting('boton_paypal') !!}
                                     --}}
                                     <a title="Pay" class="btn btn-warning btn-md payment_btn pay"
-                                       data-amount="{{$annual_membership_amount}}">COMPRAR</a>
+                                       data-amount="{{$annual_membership_amount}}" data-type="1" data-name="Membresía Paymark8 1 año">COMPRAR</a>
                                     <br><br>
                                 </div>
                             </div>
@@ -205,41 +187,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Confirma tu compra</h4>
-                    </div>
-                    <div class="modal-body">
-                        <ul>
-                            <li>Fecha de inicio membresia: <span id="pay-startDate"></span></li>
-                            <li>Fecha de fin membresia: <span id="pay-endDate"></span></li>
-                            <li>Monto a pagar: <span id="pay-amount"></span></li>
-                        </ul>
-                        <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <p>
-                                    <input type="checkbox" name="terms" value="1" id="terms" autocomplete="off">
-                                    Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank>términos y
-                                        condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
-                                </p>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-
             </div>
         </div>
 @endsection

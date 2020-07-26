@@ -209,9 +209,15 @@ class AdminDashboardController extends \crocodicstudio\crudbooster\controllers\C
         | $this->load_js[] = asset("myfile.js");
         |
         */
-        $this->load_js[] = asset("js/slick.min.js");
-        $this->load_js[] = asset("js/backoffice.js");
-        $this->load_js[] = asset("js/dashboard.js");
+
+        $this->load_js = 
+        [
+            asset("js/slick.min.js"),
+            asset("js/backoffice.js"),
+            asset("js/dashboard.js"),
+            asset("js/checkout.js")
+        ];
+
 
 
         /*
