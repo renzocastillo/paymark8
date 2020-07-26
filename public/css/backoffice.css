@@ -12,7 +12,7 @@
 }
 /*nuevas clases para el card de cursos*/
 .cardspace{
- padding: 10px;
+ padding: 15px;
 }
 
 .titulo{
@@ -23,7 +23,6 @@
     text-align: left;
 }
 .price{
-    padding-top: 20px ;
     padding-bottom: 10px;
     display: flex;
     flex-direction: row;
@@ -49,7 +48,7 @@
 }
 
 .rowpadding{
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 50px;
 }
 
@@ -90,6 +89,28 @@
 .slim-margin{
     margin-bottom: 10px;
 }
+
+.list-item{
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+}
+
+.list-item i{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.28571429em;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.features{
+    margin-bottom: 0;
+    list-style-type: none;
+    font-size: 1.7rem;
+    padding: 0px;
+}
 /*nuevas clases para la vista de módulos y videos*/
 .overflow-modulos{
     overflow-y: scroll;
@@ -114,6 +135,8 @@
     object-position: center;
     width: 100%;
     height: 20vh;
+    border-radius: 6px 6px 0px 0px;
+
 }
 
 @media (max-width:768px) {

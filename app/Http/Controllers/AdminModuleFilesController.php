@@ -36,8 +36,8 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','validation'=>'required|url','width'=>'col-sm-10','placeholder'=>'Introduce una dirección web (URL) válida'];
-			$this->form[] = ['label'=>'Modules Id','name'=>'modules_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'modules,title'];
+			$this->form[] = ['label'=>'Archivo','name'=>'url','type'=>'upload','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nombre del módulo','name'=>'modules_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'modules,title'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
