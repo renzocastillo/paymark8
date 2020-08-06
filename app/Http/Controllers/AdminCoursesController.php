@@ -272,6 +272,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         */
         $this->load_js[] = asset("js/slick.min.js");
         $this->load_js[] = asset("js/backoffice.js");
+        $this->load_js[] = asset("js/content-courses.js");
 
         /*
         | ----------------------------------------------------------------------
