@@ -91,7 +91,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             'name' => 'price',
             'type' => 'number',
             'decimal'=>2,
-            'validation' => 'required',
+            'validation' => '',
             'width' => 'col-sm-10',
             'placeholder' => ''
         ];
@@ -100,7 +100,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             'label' => 'Duración',
             'name' => 'duration',
             'type' => 'number',
-            'validation' => 'required|integer|min:3|max:70',
+            'validation' => 'integer|max:70',
             'width' => 'col-sm-10',
             'placeholder' => 'Número de horas que durará el curso'
         ];
@@ -125,7 +125,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         ];
 
         $columns2[] = ['label'=>'Título','name'=>'title','type'=>'text','required'=>true];
-        $columns2[] = ['label'=>'Descripción','name'=>'description','type'=>'textarea','required'=>true];
+        //$columns2[] = ['label'=>'Descripción','name'=>'description','type'=>'textarea','required'=>true];
         $this->form[] = [
             'label'=>'Módulos',
             'name'=>'modules',
@@ -272,6 +272,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         */
         $this->load_js[] = asset("js/slick.min.js");
         $this->load_js[] = asset("js/backoffice.js");
+        $this->load_js[] = asset("js/content-courses.js");
 
         /*
         | ----------------------------------------------------------------------
