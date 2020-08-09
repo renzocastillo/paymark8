@@ -69,18 +69,23 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
             "label" => "Whatsapp",
             "name" => "whatsapp",
             "callback" => function ($row) {
-                $country = DB::table('countries')->where('id', $row->country_id)->first();
-                if ($country == null) {
-                    return '<a href="https://wa.me/+' . $row->whatsapp . '" target="_blank">' . $row->whatsapp . '</a>';
-                }
-                return '<a href="https://wa.me/+' . $country->phonecode . $row->whatsapp . '" target="_blank">+' . $country->phonecode . $row->whatsapp . '</a>';
+                /*$country = DB::table('countries')->where('id', $row->country_id)->first();
+                $html='';
+                if (! $country->id) {
+                    $html= '<a href="https://wa.me/' . $row->whatsapp . '" target="_blank">' . $row->whatsapp . '</a>';
+                }else{
+                    $html='<a href="https://wa.me/' . $country->phonecode . $row->whatsapp . '" target="_blank">+' . $country->phonecode . $row->whatsapp . '</a>';
+                }*/
+
+                $html= '<a href="https://wa.me/' . $row->whatsapp . '" target="_blank">' . $row->whatsapp . '</a>';
+                return $html;
             },
         );
         $this->col[] = [
             "label" => "País",
             "name" => "country_id",
             "join" => "countries,name",
-            "callback_php"=>'$row->coutries_name ? : "Indefinido"',
+            "callback_php"=>'$row->countries_name ? : "Indefinido"',
         ];
         if (CRUDBooster::myPrivilegeId() == 2) {
             $this->col[] = array(
