@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{url('/')}}">
-                <img src="{{ CRUDBooster::getSetting('logo') }}">
+                <img src="{{ url(CRUDBooster::getSetting('logo')) }}">
             </a>
         </div>
         <div id="navbar7" class="navbar-collapse collapse">
@@ -49,7 +49,7 @@
     <footer class="footer-distributed">
         <div class="footer-left">
             <a href="{{url('/')}}">
-                <img class="footer-brand" src="{{ CRUDBooster::getSetting('logo') }}">
+                <img class="footer-brand" src="{{ url(CRUDBooster::getSetting('logo')) }}">
             </a>
             <br><br>
             <a href="{{url('terminos-y-condiciones')}}"><i class="fas fa-book"></i> Términos y Condiciones</a>
