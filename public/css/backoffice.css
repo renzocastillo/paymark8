@@ -117,6 +117,18 @@
     height: 350px;
 }
 
+.list-courses li{
+    padding: 10px 0px 10px 0px;
+}
+
+.list-courses i{
+padding-right: 0.5em;
+}
+
+.title-course-content{
+margin-top:0px;margin-bottom:20px
+}
+
 /*otras clases*/
 .products .panel .panel-heading{
     height: 8vh;

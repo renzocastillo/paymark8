@@ -6,9 +6,12 @@
             <div class="box-body table-responsive padding">
                 <div class="row">
                     <div class="col-lg-8 col-sm-12 col-xs-12 pleft" >
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/BcUeUs72O7Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <h2 class="title-course-content">{{$course->title}}</h2>
+                        <video width="95%" id="video" autoplay controls>
+                            <source src="" id="source-video">
+                        </video>                    
                     </div>
-                    <div class="col-lg-4 col-sm-12 col-xs-12 pleft overflow-modulos" style="overflow-y:scroll; height:350px;" >
+                    <div class="col-lg-4 col-sm-12 col-xs-12 pleft overflow-modulos" style="overflow-y:scroll; height:100vh;" >
                         @foreach($course->modules as $module)
                             <div class="box box-primary {{ $module->id == $open_module ? '' : 'collapsed-box'}} box-solid slim-margin" style="margin-bottom: 10px;">
                                 <div class="box-header with-border">
@@ -20,13 +23,13 @@
                                 <!-- /.box-tools -->
                                 </div>
                                 <!-- /.box-header -->
-                                <div class="box-body">
+                                <div class="box-body list-courses">
                                     <ul class="nav nav-stacked">
                                         @foreach($module->module_videos as $video)
-                                            <li><i class="fa fa-play-circle" aria-hidden="true"></i> {{  $video->title }}</a></li>
+                                            <li><a href="/{{ $video->url }}" class="linkvid"><i class="fa fa-play-circle" aria-hidden="true"></i> {{  $video->title }}</a></li>
                                         @endforeach
                                         @foreach($module->module_files as $file)
-                                            <li><a href={{ $file->url }}><i class="fa fa-download" aria-hidden="true"></i>{{  $file->url }}</a></li>
+                                            <li><a href="/{{ $file->url }}"><i class="fa fa-download" aria-hidden="true"></i>{{  $file->url }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>

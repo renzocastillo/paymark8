@@ -1,7 +1,7 @@
 <li class="col-lg-3 col-sm-12 col-xs-12">
     <div class="panel panel-default">
         <div class="panel-body">
-            <img class="attachment-img img-responsive" src="{{ $course->featured_image ? url($course->featured_image) : '' }}" />
+            <img class="attachment-img img-responsive" src="{{$course->featured_image? url($course->featured_image) : ''}}" />
             <div class="cardspace">
                 <a href="{{ CRUDBooster::mainpath("detail/$course->id") }}">
                     <h4 class="text-primary titulo">
