@@ -6,14 +6,17 @@ use crocodicstudio\crudbooster\helpers\CRUDBooster;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\CompensacionesController;
+use App\Http\Controllers\ParametrosController;
 
 class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CBController
 {
     public $compensaciones;
+    public $parametros;
 
     public function __construct()
     {
         $this->compensaciones=new CompensacionesController();
+        $this->parametros= new ParametrosController();
     }
     public function cbInit()
     {
@@ -66,17 +69,23 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
             "label" => "Whatsapp",
             "name" => "whatsapp",
             "callback" => function ($row) {
-                $country = DB::table('countries')->where('id', $row->country_id)->first();
-                if ($country == null) {
-                    return '<a href="https://wa.me/+' . $row->whatsapp . '" target="_blank">' . $row->whatsapp . '</a>';
-                }
-                return '<a href="https://wa.me/+' . $country->phonecode . $row->whatsapp . '" target="_blank">+' . $country->phonecode . $row->whatsapp . '</a>';
+                /*$country = DB::table('countries')->where('id', $row->country_id)->first();
+                $html='';
+                if (! $country->id) {
+                    $html= '<a href="https://wa.me/' . $row->whatsapp . '" target="_blank">' . $row->whatsapp . '</a>';
+                }else{
+                    $html='<a href="https://wa.me/' . $country->phonecode . $row->whatsapp . '" target="_blank">+' . $country->phonecode . $row->whatsapp . '</a>';
+                }*/
+
+                $html= '<a href="https://wa.me/' . $row->whatsapp . '" target="_blank">' . $row->whatsapp . '</a>';
+                return $html;
             },
         );
         $this->col[] = [
             "label" => "País",
             "name" => "country_id",
-            "join" => "countries,name"
+            "join" => "countries,name",
+            "callback_php"=>'$row->countries_name ? : "Indefinido"',
         ];
         if (CRUDBooster::myPrivilegeId() == 2) {
             $this->col[] = array(
@@ -398,7 +407,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
                 $id = $request['parent_id'];
                 $user = DB::table('cms_users')->where('id', $id)->first();
                 //$this->index_statistic[] = ['label'=>'Total Histórico de Ganancias: Dólares ganados en vistas y linkers afiliados hasta la fecha.','count'=>' $'.DB::table('solicitudes_de_pago')->where('cms_users_id',$id)->where('estados_id',2)->sum('monto'),'icon'=>'fa fa-line-chart','color'=>'blue','width'=>'col-sm-3 col-lg-3'];
-                $capacidad_de_retiro = $this->getCapacidadDeRetiro($user->id);
+                $capacidad_de_retiro = $this->compensaciones->getCapacidadDeRetiro($user->id);
                 $this->index_statistic[] = [
                     'label' => 'Capacidad de Retiro Actual: Monto que puede solicitar el linker actualmente',
                     'count' => ' $' . $capacidad_de_retiro,
@@ -408,12 +417,12 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
                 ];
                 //if($user->premium){
                 //$ganancia_x_nietos=DB::table('compensaciones')->where('name','gnietos')->value('content');
-                $vistas_x_nietos = $this->compensaciones->getCapacidadDeVistasPorNieto();
+                $vistas_x_nietos = $this->parametros->getCapacidadDeVistasPorNieto();
                 $nietos_actuales = $user->nietos_actuales;
                 //$ganancia_premium = $ganancia_x_nietos * $nietos_actuales;
                 //$this->index_statistic[] = ['label' => 'Ganancia por Linkers Indirectos Actual: Ganancia generada por los linkers de sus linkers actualmente', 'count' => ' $' . $ganancia_premium, 'icon' => 'fa fa-usd', 'color' => 'blue', 'width' => 'col-sm-2 col-lg-3'];
                 //}
-                $monto_ultima_solicitud = $this->compensacione->getMontoUltimaSolicitud($user->id);
+                $monto_ultima_solicitud = $this->compensaciones->getMontoUltimaSolicitud($user->id);
                 $monto_ultima_solicitud = $monto_ultima_solicitud > 0 ? $monto_ultima_solicitud : 0;
                 $this->index_statistic[] = [
                     'label' => 'Monto última Solicitud: Monto total de la última solicitud de pago del usuario',
