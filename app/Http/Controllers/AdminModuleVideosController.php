@@ -8,6 +8,7 @@
 	class AdminModuleVideosController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
+            $request = \Illuminate\Support\Facades\Request::all();
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "title";
@@ -170,7 +171,7 @@
 	        | $this->post_index_html = "<p>test</p>";
 	        |
 	        */
-	        $this->post_index_html = null;
+	        $this->post_index_html = '<form method="post" enctype="multipart/form-data" action="'.url('/api/multi-upload?moduleId='.$request['parent_id']).'" class="dropzone" id="my-awesome-dropzone"></form>';
 	        
 	        
 	        
@@ -204,7 +205,9 @@
 	        | $this->load_js[] = asset("myfile.js");
 	        |
 	        */
-	        $this->load_js = array();
+	        $this->load_js = array(
+	            asset('js/dropzone-5.7.0/dist/min/dropzone.min.js')
+            );
 	        
 	        
 	        
@@ -228,7 +231,9 @@
 	        | $this->load_css[] = asset("myfile.css");
 	        |
 	        */
-	        $this->load_css = array();
+	        $this->load_css = array(
+                asset('js/dropzone-5.7.0/dist/min/dropzone.min.css')
+            );
 	        
 	        
 	    }
