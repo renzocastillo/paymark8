@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-6 vcenter">
                         @if(CRUDBooster::me()->estado || CRUDBooster::myPrivilegeid()!=3)
-                            <a href="{{ $course->value }}" target="_blank" class="btn btn-primary text-center">Ver
+                            <a href="{{ CRUDBooster::mainpath("detail/$course->id") }}" class="btn btn-primary text-center">Ver
                                 el curso</a>
                         @else
                             <a href="#" data-amount="{{$course->price}}" data-type="2" data-name="{{$course->title}}" data-id="{{$course->id}}"

@@ -6,6 +6,7 @@ $(document).ready(function () {
             $('#source-video').attr('src',$(this).attr('href'));
             $('#video')[0].load();
             console.log("click");
+            $('#title-video').text($(this).text());
         }
     });
 })
