@@ -9,13 +9,14 @@
                         <h2 class="title-course-content">{{$course->title}}</h2>
                         <video width="95%" id="video" autoplay controls>
                             <source src="" id="source-video">
-                        </video>                    
+                        </video> 
+                        <h3 class="title-course-content" id="title-video"></h3>                  
                     </div>
                     <div class="col-lg-4 col-sm-12 col-xs-12 pleft overflow-modulos" style="overflow-y:scroll; height:100vh;" >
-                        @foreach($course->modules as $module)
+                        @foreach($course->modules as $key=>$module)
                             <div class="box box-primary {{ $module->id == $open_module ? '' : 'collapsed-box'}} box-solid slim-margin" style="margin-bottom: 10px;">
                                 <div class="box-header with-border">
-                                <h3 class="box-title">{{ $module->title }}</h3>
+                                <h3 class="box-title">{{ ++$key.'. '.$module->title }}</h3>
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                                     </button>
