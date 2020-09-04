@@ -70,8 +70,8 @@
                     </div>
                 </div>
                 <div class="row rowpadding content-style">
-                    <h3>A cerca del curso</h3>
-                    <p>Una vez que hayas realizado tus fotografías, pasarás a editarlas. Mina te hablará de las herramientas que ella suele utilizar para retocar sus imágenes con el móvil. Una vez estén listas, aprenderás a organizar tus redes sociales, planificando cuándo vas a publicar cada fotografía y programando los posts.Por último, Mina te explicará cómo sacar el máximo partido a Instagram Stories, la herramienta que permite compartir vídeos cortos y efímeros en Instagram.</p>
+                    <h3>Acerca del curso</h3>
+                    <p>{{ $course->description }}</p>
                 </div>
                 <div class="panel panel-default table-responsive">
                     <!-- Default panel contents -->
@@ -82,7 +82,7 @@
                     <!-- Table -->
                     <table class="table table-hover">
                         <tbody>
-                            @foreach($course->modules as $key=>$module)
+                            @foreach($course->modules->sortBy('id') as $key=>$module)
                             <tr>
                               <td>{{++$key}}</td>
                               <td>{{$module->title}}</td>
