@@ -35,23 +35,21 @@
             <div class="modal-body">
                 <ul>
                     @if($itemType == "1")
-                            <li>Fecha de inicio membresia: <span id="pay-startDate"></span></li>
-                            <li>Fecha de fin membresia: <span id="pay-endDate"></span></li>
+                         
                             <li>Producto: <span id="pay-name"></span></li>
                     @else
                             <li>Nombre del Curso: <span id="pay-name"></span></li>
-                            
                     @endif
                             <li>Monto a pagar: <span id="pay-amount"></span></li>
                 </ul>
-            <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
+                <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <p>
-
                         <input type="checkbox" name="terms" value="1" id="terms" autocomplete="off">
-                        <input type="hidden" name="item['type']" value="{{$itemType}}">
-                        <input id="pay-id" type="hidden" name="item['id']" value="">
+                        <input type="hidden" name="itemtype" value="{{$itemType}}">
+                        {{-- <input type="hidden" name="item['type']" value="{{$itemType}}"> --}}
+                        <input id="pay-id" type="hidden" name="item['id']" value="3">
                             Acepto los <a href="{{url("terminos-y-condiciones")}}" target=_blank>términos y
                                 condiciones de uso de {{CRUDBooster::getSetting('appname')}}</a>
                         </p>
