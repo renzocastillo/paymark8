@@ -271,7 +271,8 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
             asset("js/slick.min.js"),
             asset("js/backoffice.js"),
             asset("js/checkout.js"),
-            asset("js/content-courses.js"),
+            asset("js/modules/courses/content.js"),
+            asset("js/modules/courses/add-to-favorite.js"),
         ];
    
 
