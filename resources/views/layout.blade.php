@@ -94,4 +94,5 @@
 @show
 </body>
 <script type="text/javascript" src="{{asset("js/index.js")}}"></script>
+
 </html>
