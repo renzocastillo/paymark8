@@ -31,11 +31,4 @@ class ParametrosController extends Controller
     {
         return DB::table('parametros')->where('name', 'cvhijo')->value('content');
     }
-    
- 
-    
-    public function getPercentageCurso()
-    {
-        return DB::table('parametros')->where('name', 'pcurso')->value('content');
-    }
 }

@@ -6,10 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Request;
 use App\Models\Course;
-use App\Models\CmsUserCourse;
-use App\Models\FavoriteUserCourse;
-
-
 use Session;
 
 class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBController
@@ -37,14 +33,24 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         $this->table = "courses";
         # END CONFIGURATION DO NOT REMOVE THIS LINE
 
-			# START COLUMNS DO NOT REMOVE THIS LINE
-			$this->col = [];
-			$this->col[] = ["label"=>"Titulo","name"=>"title"];
-			$this->col[] = ["label"=>"Categoría","name"=>"category_id","join"=>"course_categories,nombre"];
-			$this->col[] = ["label"=>"Author","name"=>"author"];
-			# END COLUMNS DO NOT REMOVE THIS LINE
+        # START COLUMNS DO NOT REMOVE THIS LINE
+        $this->col = [];
+        $this->col[] = [
+            "label" => "Titulo",
+            "name" => "title"
+        ];
+        $this->col[] = [
+            "label" => "Categoría",
+            "name" => "category_id",
+            "join" => "course_categories,nombre"
+        ];
+        $this->col[] = [
+            "label" => "Author",
+            "name" => "author"
+        ];
+        # END COLUMNS DO NOT REMOVE THIS LINE
 
-			# START FORM DO NOT REMOVE THIS LINE
+        # START FORM DO NOT REMOVE THIS LINE
         $this->form = [];
         $this->form[] = [
             'label' => 'Titulo',
@@ -419,7 +425,7 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
 
     }
 
-    public function getMyIndex()
+    public function getIndex()
     {
 
         $category_id = Request::get('category_id', 0);
@@ -431,75 +437,18 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         } else {
             $data['page_title'] = 'Cursos';
         }
-        $query = CmsUserCourse::with('course')->where('cms_user_id',CRUDBooster :: myid ());
+        $query = DB::table('courses');
 
-                $courses = $query->Paginate(100);
+        if ($category_id > 0) {
+            $query->where('course_category_id', $category_id);
+        }
+        $courses = $query->orderby('id', 'desc')->Paginate(100);
+
         $data['products'] = $courses;
         $data['categories'] = DB::table('course_categories')->orderBy('nombre')->get();
         $data['current_empresa'] = DB::table('course_categories')->where('id', $category_id)->first();
 
-        $this->cbView('modules.myproducts', $data);
-
-    }
-    public function ajaxMyCouseAdded(Request $req)
-    {
-        $course_id = Request::get('course_id', 0);
-        $course = FavoriteUserCourse::where([['cms_user_id',CRUDBooster :: myid ()],['course_id',$course_id]]);
-        if($course->get()->count())
-            $course->delete();
-        else
-            $query = FavoriteUserCourse::create(['cms_user_id'=>CRUDBooster :: myid (),'course_id'=>$course_id]);
-        
-    }
-    
-    public function getIndex()
-    {
-
-        $category_id = Request::get('category_id', 0);
-        $favourite = Request::get('my_favourite');
-        if(isset($favourite))
-        {
-    
-            //Create your own query
-            $data = [];
-            $data['tipo'] = Request::get('tipo');
-            if ($data['tipo'] == 'video') {
-                $data['page_title'] = 'Tutoriales';
-            } else {
-                $data['page_title'] = 'Cursos';
-            }
-            $query = FavoriteUserCourse::with('course')->where('cms_user_id',CRUDBooster :: myid ());
-    
-                    $courses = $query->Paginate(100);
-            $data['products'] = $courses;
-            $data['categories'] = DB::table('course_categories')->orderBy('nombre')->get();
-            // $data['current_empresa'] = DB::table('course_categories')->where('id', $category_id)->first();
-    
-            $this->cbView('modules.myproducts', $data);
-        }
-        else
-        {
-            //Create your own query
-            $data = [];
-            $data['tipo'] = Request::get('tipo');
-            if ($data['tipo'] == 'video') {
-                $data['page_title'] = 'Tutoriales';
-            } else {
-                $data['page_title'] = 'Cursos';
-            }
-            $query = DB::table('courses');
-
-            if ($category_id > 0) {
-                $query->where('course_category_id', $category_id);
-            }
-            $courses = $query->orderby('id', 'desc')->Paginate(100);
-
-            $data['products'] = $courses;
-            $data['categories'] = DB::table('course_categories')->orderBy('nombre')->get();
-            $data['current_empresa'] = DB::table('course_categories')->where('id', $category_id)->first();
-
-            $this->cbView('modules.products', $data);
-        }
+        $this->cbView('modules.products', $data);
 
     }
 
@@ -508,9 +457,6 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
     public function getDetail ($id){
         $data=
         [
-            'annual_membership_amount'=>CRUDBooster::getSetting('annual_membership_amount'),
-            'annual_membership_amount_format'=>number_format(CRUDBooster::getSetting('annual_membership_amount'), 2),
-            'monthly_membership_amount_format'=>number_format(CRUDBooster::getSetting('monthly_membership_amount', 2)),
             'categories'=> DB::table('course_categories')->orderBy('nombre')->get(),
             'course'=>Course::find($id), 
             'galleryimages'=>DB::table('course_galleries')->where('course_id',$id)->get(),
@@ -527,3 +473,4 @@ class AdminCoursesController extends \crocodicstudio\crudbooster\controllers\CBC
         $this->cbView('modules.cursos.content',$data);
     }
 }
+

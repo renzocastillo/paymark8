@@ -31,13 +31,13 @@ class AdminModuleVideosController extends \crocodicstudio\crudbooster\controller
         $this->table = "module_videos";
         # END CONFIGURATION DO NOT REMOVE THIS LINE
 
-			# START COLUMNS DO NOT REMOVE THIS LINE
-			$this->col = [];
-			$this->col[] = ["label"=>"Title","name"=>"title"];
-			$this->col[] = ["label"=>"Url","name"=>"url"];
-			# END COLUMNS DO NOT REMOVE THIS LINE
+        # START COLUMNS DO NOT REMOVE THIS LINE
+        $this->col = [];
+        $this->col[] = ["label" => "Title", "name" => "title"];
+        $this->col[] = ["label" => "Url", "name" => "url"];
+        # END COLUMNS DO NOT REMOVE THIS LINE
 
-			# START FORM DO NOT REMOVE THIS LINE
+        # START FORM DO NOT REMOVE THIS LINE
         $this->form = [];
         $this->form[] = ['label' => 'Título', 'name' => 'title', 'type' => 'text', 'validation' => 'required|string|min:3|max:70', 'width' => 'col-sm-10', 'placeholder' => 'Puedes introducir solo una letra'];
         $this->form[] = ['label' => 'Archivo de video', 'name' => 'url', 'type' => 'upload', 'validation' => 'required', 'width' => 'col-sm-10'];
