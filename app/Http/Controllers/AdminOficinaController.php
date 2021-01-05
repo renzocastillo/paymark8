@@ -215,6 +215,13 @@ class AdminOficinaController extends \crocodicstudio\crudbooster\controllers\CBC
             'color' => 'blue',
             'width' => 'col-sm-2 col-lg-6'
         ];
+        $this->index_statistic[] = [
+            'label' => CRUDBooster::getSetting('estadistica_oficina_9'),
+            'count' => ' $' . $this->compensaciones->getGinanciaporCourses($user),
+            'icon' => 'fa fa-usd',
+            'color' => 'blue',
+            'width' => 'col-sm-2 col-lg-6'
+        ];
         //}
 
 
@@ -413,6 +420,7 @@ class AdminOficinaController extends \crocodicstudio\crudbooster\controllers\CBC
 
 
     //By the way, you can still create your own method in here... :)
+
 
 
 }
