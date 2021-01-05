@@ -30,7 +30,4 @@ Route::post('/admin/contacto','AdminContactoController@create');
 Route::post('visanet/checkout', 'VisanetController@checkout');
 Route::get('visanet/timeout', 'VisanetController@timeout');
 Route::get('visanet/transaction/{transactionId}/print', 'VisanetController@print');
-
 Route::get('/admin/courses/content/{$id}','AdminCoursesController@getContent');
-
-Route::post('/admin/cursos/detail/ajaxfavoriteadd','AdminCoursesController@ajaxMyCouseAdded')->name('ajax.favorite.mycourse');

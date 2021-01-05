@@ -40,15 +40,13 @@
                             <li>Producto: <span id="pay-name"></span></li>
                     @else
                             <li>Nombre del Curso: <span id="pay-name"></span></li>
-                            
                     @endif
                             <li>Monto a pagar: <span id="pay-amount"></span></li>
                 </ul>
-            <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
+                <form action="{{url('/visanet/checkout')}}" method='POST' id="form-to-pay">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <p>
-
                         <input type="checkbox" name="terms" value="1" id="terms" autocomplete="off">
                         <input type="hidden" name="item['type']" value="{{$itemType}}">
                         <input id="pay-id" type="hidden" name="item['id']" value="">

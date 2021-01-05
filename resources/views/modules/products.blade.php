@@ -9,8 +9,6 @@
         <div class="row buttons-carousel">
             <a href="{{CRUDBooster::mainpath("")}}"
                class="btn btn-primary {{  Request::get('category_id') ? "" : "active" }}">Todos</a>
-               <a href="{{CRUDBooster::mainpath("?my_favourite=0")}}"
-           class="btn btn-primary {{  Request::get('my_favourite')==0 ? "" : "active" }}">My Favorite Courses</a>
             @foreach($categories as $category)
                 {{--<img src="{{url($category->logo)}}"/>--}}
                 <a href="{{CRUDBooster::mainpath("?&category_id=".$category->id)}}"
