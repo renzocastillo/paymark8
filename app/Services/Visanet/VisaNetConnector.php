@@ -19,7 +19,7 @@ class VisaNetConnector
     private $merchantId;
     private $user;
     private $password;
-
+  
     /**
      * VisaNetConnector constructor.
      *
@@ -61,15 +61,17 @@ class VisaNetConnector
             $id = $lastPurchase['purchase_id'];
         } else {
             $id = DB::table('purchases')->insertGetId(
-                [
-                    'user_id' => $userId,
-                    'amount' => $item['amount'],
-                    'created_at' => \Carbon\Carbon::now(),
-                    'updated_at' => \Carbon\Carbon::now(),
-                ]
+            [
+                'user_id' => $userId,
+                'amount' => $item['amount'],
+                'item_id' => $item['id'],
+                'item_type' => $item['type'],
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ]
             );
         }
-
+       
         $invoice = intval(CRUDBooster::getSetting('invoice')) + $id;
         if($item['type']=="1"){
             $item['details']=
@@ -132,6 +134,7 @@ class VisaNetConnector
 
     public function authorize($channel, $amount, $purchaseId, $tokenId)
     {
+        
         try {
             $token = $this->getTokenSecurity();
             $url = CRUDBooster::getSetting('api_authorization_url') . $this->merchantId;
@@ -148,6 +151,7 @@ class VisaNetConnector
                     'currency' => CRUDBooster::getSetting('currency_visanet'),
                     'purchaseNumber' => $invoice,
                     'tokenId' => $tokenId
+                    
                 ]
 
             ];
@@ -200,15 +204,17 @@ class VisaNetConnector
             DB::table('purchases')
                 ->where('id', $purchaseId)
                 ->update([
-                    'status' => 'failed'
+                    'status' => 'faileddd',
+                    'action_description'=>$exception,
                 ]);
         }
 
-        return DB::table('purchases')->where('purchases.id', $purchaseId)
-            ->join('cms_users', 'cms_users.id', '=', 'purchases.user_id')
-            ->select('purchases.*', 'cms_users.name')
-            ->get()
-            ->first();
+        $result = DB::table('purchases')->where('purchases.id', $purchaseId)
+        ->join('cms_users', 'cms_users.id', '=', 'purchases.user_id')
+        ->select('purchases.*', 'cms_users.name')
+        ->get()
+        ->first();
+        
+        return $result;
     }
-
 }

@@ -440,6 +440,15 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
                     'color' => 'blue',
                     'width' => 'col-sm-3 col-lg-3'
                 ];
+                $ginanciaporCourses = $this->compensaciones->getGinanciaporCourses($user);
+                //if($user->erning){
+                $this->index_statistic[] = [
+                    'label' => 'It is the percentage profit that a sponsor linker has for the purchase of a course by their children.',
+                    'count' => ' $' . $ginanciaporCourses,
+                    'icon' => 'fa fa-trophy',
+                    'color' => 'blue',
+                    'width' => 'col-sm-3 col-lg-3'
+                ];
                 //}
             }
         }

@@ -8,9 +8,9 @@
     <div class="container-fluid">
         <div class="row buttons-carousel">
             <a href="{{CRUDBooster::mainpath("")}}"
-               class="btn btn-primary {{  Request::get('category_id') ? "" : "active" }}">Todos</a>
+               class="btn btn-primary {{  Request::get('category_id') && Request::get('my_favourite') ? "" : "activ" }}">Todos</a>
                <a href="{{CRUDBooster::mainpath("?my_favourite=0")}}"
-           class="btn btn-primary {{  Request::get('my_favourite')==0 ? "" : "active" }}">My Favorite Courses</a>
+               class="btn btn-primary {{  Request::get('my_favourite')>=0 ? "active" : "" }}">My Favorite Courses</a>
             @foreach($categories as $category)
                 {{--<img src="{{url($category->logo)}}"/>--}}
                 <a href="{{CRUDBooster::mainpath("?&category_id=".$category->id)}}"
@@ -24,7 +24,7 @@
                 <div class="box-body table-responsive no-padding">
                     <ul class="products list-unstyled row">
                         @foreach($products as $product)
-                            @component('components.curso',
+                            @component('components.mycurso',
                             [
                                 'course'=>$product,
                             ])

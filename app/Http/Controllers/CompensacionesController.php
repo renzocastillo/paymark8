@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ParametrosController;
+use App\Models\CmsUserCourse;
+use App\Models\Course;
+
 
 class CompensacionesController extends Controller
 {
@@ -12,16 +15,18 @@ class CompensacionesController extends Controller
 
     public function __construct()
     {
-        $this->parametros=new ParametrosController();
+        $this->parametros = new ParametrosController();
     }
    
     public function getCapacidadDeRetiro($user){
         
         $pago_minimo = $this->parametros->getPagoMinimo();
+        $course_commition = $this->getGinanciaporCourseswithdraw($user);
         $ganancia_x_vista = $this->parametros->getGananciaPorVista();
         $vistas_cobrables= $this->getVistasCobrables($user);
+       
         $capacidad_de_retiro=
-            $this->getGananciaPorAfiliadosActuales($user)+
+            $this->getGananciaPorAfiliadosActuales($user)+ $course_commition+
             $vistas_cobrables*$ganancia_x_vista;
         $capacidad_de_retiro= $capacidad_de_retiro > $pago_minimo ? $capacidad_de_retiro : 0;
 
@@ -157,6 +162,59 @@ class CompensacionesController extends Controller
                 'afiliaciones_actuales' => 0,
                 'nietos_actuales' => 0
             ]);
+        
+    }
+
+    public function getGinanciaporCourseswithdraw($user){
+
+        $percentage = $this->parametros->getPercentageCurso();
+        
+        $last_withdraw = DB::table('solicitudes_de_pago')
+            ->where('cms_users_id',$user->id)
+            ->orderBy('created_at','desc')->get();
+        
+        $cusers = DB::table('cms_users')
+            ->where('cms_users_id',$user->id)
+            ->get();
+        $courses = 0;
+        foreach($cusers as $cuser)
+        {
+            $cmscourses =  CmsUserCourse::where('cms_user_id',$cuser->id);
+            if($last_withdraw->count()>0)
+            {
+                $cmscourses->where('created_at','>',$last_withdraw[0]->created_at);
+            }
+            $ccget = $cmscourses->get();
+            foreach($ccget as $cmscourse)
+            {
+
+                $courses = $courses + Course::where('id',$cmscourse->course_id)->first()->price;
+            }
+        }
+        $result  = $courses* $percentage / 100;
+
+        return $result;
+    }
+
+    
+    public function getGinanciaporCourses($user){
+
+        $percentage = $this->parametros->getPercentageCurso();
+        $cusers = DB::table('cms_users')
+            ->where('cms_users_id',$user->id)
+            ->get();
+        $courses = 0;
+        foreach($cusers as $cuser)
+        {
+            $cmscourses =  CmsUserCourse::where('cms_user_id',$cuser->id)->get();
+            foreach($cmscourses as $cmscourse)
+            {
+
+                $courses = $courses + Course::where('id',$cmscourse->course_id)->first()->price;
+            }
+        }
+        $result  = $courses* $percentage / 100;
+        return $result;
     }
 
 }

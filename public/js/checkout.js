@@ -1,7 +1,9 @@
+var itemtype ;
 $('.pay').click(function (e) {
     e.preventDefault();
     $('.loader-container').show();
     $('#pagar_modal').modal('hide');
+    itemtype =  $(this).attr("data-type");
     var item    = 
     {
         'type'  : $(this).attr("data-type"),
@@ -125,6 +127,16 @@ if (window.myPurchase) {
         })
 
     } else if (window.myPurchase.status == 'accepted') {
+        var type = ' ';
+        if(itemtype==1)
+        {
+         type =  '<li><b>Producto: </b>  Afiliación a Plataforma Paymark8</li>' +
+            '<li><b>Descripción: </b>  Ganancias ilimitadas, url un año, servidor de paymark un año</li>' ;
+        }
+        else
+        {
+            type =  '<li><b>Producto: </b>  course</li>';
+        }
         swal({
             title: "Pago completado exitosamente",
             text: '<div class="receipt">' +
@@ -134,8 +146,7 @@ if (window.myPurchase) {
                 '<li><b>Importe de la transacción:</b>  ' + window.myPurchase.transaction_amount + '</li>' +
                 '<li><b>Tipo de moneda:</b>  ' + window.myPurchase.transaction_currency + '</li>' +
                 '<li><b>Tarjeta:</b>  ' + window.myPurchase.card + '</li>' +
-                '<li><b>Producto: </b>  Afiliación a Plataforma Paymark8</li>' +
-                '<li><b>Descripción: </b>  Ganancias ilimitadas, url un año, servidor de paymark un año</li>' +
+              type+
                 '</ul>' +
                 '<a href="' + window.termsAndConditions + '" >Terminos y condiciones</a>' +
                 '<a title="Imprimir" class="btn btn-primary " target="_blank" href="/visanet/transaction/' + window.myPurchase.id + '/print">Imprimir</a></div> ',

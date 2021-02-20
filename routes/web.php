@@ -20,6 +20,7 @@ if(!Request::is('admin/*')) {
    Route::get('/{user}', 'WelcomeController@getview')->name('welcome');
    Route::post('/{user}/add_reprod', 'WelcomeController@addReproduccion')->name('add-reproduccion');
 }
+
 Route::get('/admin/configuraciones/save-setting','AdminCmsSettingsController@postSaveSetting')->name('save-setting');
 Route::get('/admin/configuraciones/delete-file-setting','AdminCmsSettingsController@getDeleteFileSetting')->name('delete-file-setting');
 Route::get('/admin/users/change_user_estado/{id}','AdminCmsUsersController@changeUserEstado')->name('change-user-estado');
@@ -29,4 +30,7 @@ Route::post('/admin/contacto','AdminContactoController@create');
 Route::post('visanet/checkout', 'VisanetController@checkout');
 Route::get('visanet/timeout', 'VisanetController@timeout');
 Route::get('visanet/transaction/{transactionId}/print', 'VisanetController@print');
+
 Route::get('/admin/courses/content/{$id}','AdminCoursesController@getContent');
+
+Route::post('/admin/cursos/detail/ajaxfavoriteadd','AdminCoursesController@ajaxMyCouseAdded')->name('ajax.favorite.mycourse');

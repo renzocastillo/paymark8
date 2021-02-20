@@ -14,11 +14,11 @@ $(document).ready(function(){
 			$('.addad-to-favorite').text('Added in Favorite');
 			$('.addad-to-favorite').show().fadeOut(1800);;
 		}
-		
+		var route = $('#favorite-route').text();
 		var id = $('#ajax-fevorite').attr('data-courseid')
 		var token = $("meta[name=csrf-token]").attr("content");  
 		$.ajax({
-			url:'/admin/courses/ajaxfavoriteadd',
+			url:route,
 			data:{course_id:id,'_token':token},
 			type:"POST",
 			success:function(data){
